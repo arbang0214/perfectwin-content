@@ -1,0 +1,13 @@
+{
+  "name": "perfectwin-content",
+  "version": "1.0.0",
+  "description": "PerfecTwin 콘텐츠 자동화 파이프라인",
+  "private": true,
+  "scripts": {
+    "generate": "node scripts/generate-content.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "dotenv": "^16.4.7"
+  }
+}
