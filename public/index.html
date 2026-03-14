@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PerfecTwin Content Generator</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', -apple-system, sans-serif;
+    background: #F8FAFC;
+    color: #1E293B;
+    min-height: 100vh;
+  }
+  .container { max-width: 960px; margin: 0 auto; padding: 32px 24px; }
+
+  /* Header */
+  header { text-align: center; margin-bottom: 40px; }
+  header h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; color: #0F172A; }
+  header h1 span { color: #2563EB; }
+  header p { color: #64748B; margin-top: 8px; font-size: 14px; }
+
+  /* Steps indicator */
+  .steps { display: flex; justify-content: center; gap: 12px; margin-bottom: 32px; }
+  .step-dot {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 600;
+    background: #E2E8F0; color: #94A3B8; transition: all .2s;
+  }
+  .step-dot.active { background: #2563EB; color: #fff; }
+  .step-dot.done { background: #059669; color: #fff; }
+  .step-line { width: 40px; height: 2px; background: #E2E8F0; align-self: center; }
+
+  /* Categories */
+  .categories { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+  .category { border-radius: 12px; padding: 16px; background: #fff; border: 1px solid #E2E8F0; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+  .category h3 { font-size: 13px; font-weight: 600; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .cat-a h3 { color: #DC2626; }
+  .cat-b h3 { color: #2563EB; }
+  .cat-c h3 { color: #EA580C; }
+  .cat-d h3 { color: #059669; }
+
+  .topic-btn {
+    display: block; width: 100%; text-align: left;
+    padding: 10px 12px; margin-bottom: 8px;
+    background: #F8FAFC; border: 1px solid #E2E8F0;
+    border-radius: 8px; color: #475569;
+    font-size: 13px; line-height: 1.4; cursor: pointer; transition: all .15s;
+  }
+  .topic-btn:last-child { margin-bottom: 0; }
+  .topic-btn:hover { border-color: #93C5FD; background: #EFF6FF; }
+  .topic-btn.selected { border-color: #2563EB; background: #EFF6FF; color: #1E40AF; font-weight: 500; }
+  .topic-btn .topic-id { font-weight: 700; margin-right: 6px; opacity: 0.4; }
+
+  /* Custom input */
+  .custom-input-section {
+    margin-bottom: 24px; padding: 16px;
+    background: #fff; border: 1px dashed #CBD5E1; border-radius: 12px;
+  }
+  .custom-input-section summary { cursor: pointer; color: #64748B; font-size: 14px; }
+  .custom-input-section input {
+    width: 100%; margin-top: 12px; padding: 10px 12px;
+    background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px;
+    color: #1E293B; font-size: 14px; outline: none;
+  }
+  .custom-input-section input:focus { border-color: #2563EB; box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+
+  /* Step 2 form */
+  .form-group { margin-bottom: 20px; }
+  .form-group label {
+    display: block; font-size: 13px; font-weight: 600;
+    color: #64748B; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .form-group input, .form-group textarea {
+    width: 100%; padding: 10px 12px;
+    background: #fff; border: 1px solid #E2E8F0; border-radius: 8px;
+    color: #1E293B; font-size: 14px; outline: none;
+  }
+  .form-group textarea { resize: vertical; min-height: 60px; }
+  .form-group input:focus, .form-group textarea:focus { border-color: #2563EB; box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+
+  /* Content toggles */
+  .toggles { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+  .toggle-chip {
+    padding: 6px 14px; border-radius: 20px;
+    font-size: 13px; cursor: pointer; border: 1px solid #E2E8F0;
+    background: #fff; color: #94A3B8; transition: all .15s; user-select: none;
+  }
+  .toggle-chip.on { background: #EFF6FF; border-color: #2563EB; color: #2563EB; }
+
+  /* Buttons */
+  .btn-row { display: flex; gap: 12px; justify-content: center; margin-top: 24px; }
+  .btn {
+    padding: 12px 32px; border: none; border-radius: 10px;
+    font-size: 15px; font-weight: 600; cursor: pointer; transition: all .15s;
+  }
+  .btn-primary { background: #2563EB; color: #fff; }
+  .btn-primary:hover { background: #1d4ed8; }
+  .btn-primary:disabled { background: #CBD5E1; color: #94A3B8; cursor: not-allowed; }
+  .btn-secondary { background: #fff; color: #64748B; border: 1px solid #E2E8F0; }
+  .btn-secondary:hover { border-color: #93C5FD; color: #2563EB; }
+
+  /* Log area */
+  .log-area {
+    background: #fff; border: 1px solid #E2E8F0; border-radius: 12px;
+    padding: 20px; font-family: 'Consolas', 'Fira Code', monospace;
+    font-size: 13px; line-height: 1.8; min-height: 200px;
+    max-height: 400px; overflow-y: auto; white-space: pre-wrap;
+    display: none;
+  }
+  .log-area .log-line { color: #059669; }
+  .log-area .error-line { color: #DC2626; }
+  .log-area .status-line { color: #2563EB; font-weight: 600; }
+
+  /* Spinner */
+  .spinner {
+    display: inline-block; width: 18px; height: 18px;
+    border: 2px solid #E2E8F0; border-top-color: #2563EB;
+    border-radius: 50%; animation: spin .7s linear infinite;
+    vertical-align: middle; margin-right: 8px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Progress tracker */
+  .progress-tracker {
+    background: #fff; border: 1px solid #E2E8F0; border-radius: 12px;
+    padding: 20px 24px; margin-bottom: 16px;
+  }
+  .progress-header {
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;
+  }
+  .progress-header .elapsed { font-size: 13px; color: #64748B; font-family: 'Consolas', monospace; }
+  .progress-steps { display: flex; flex-direction: column; gap: 10px; }
+  .p-step {
+    display: flex; align-items: center; gap: 12px; font-size: 14px; color: #94A3B8;
+  }
+  .p-step.active { color: #2563EB; font-weight: 600; }
+  .p-step.done { color: #059669; }
+  .p-step-icon {
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; flex-shrink: 0;
+    background: #F1F5F9; color: #94A3B8;
+  }
+  .p-step.active .p-step-icon { background: #EFF6FF; color: #2563EB; }
+  .p-step.done .p-step-icon { background: #ECFDF5; color: #059669; }
+  .p-step-spinner {
+    width: 28px; height: 28px; border-radius: 50%;
+    border: 2px solid #E2E8F0; border-top-color: #2563EB;
+    animation: spin .7s linear infinite; flex-shrink: 0;
+  }
+
+  /* Results */
+  .results { display: none; margin-top: 24px; }
+  .results h3 { font-size: 16px; margin-bottom: 12px; color: #059669; }
+  .file-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .file-card {
+    padding: 12px 16px; background: #fff; border: 1px solid #E2E8F0;
+    border-radius: 8px; cursor: pointer; transition: all .15s;
+    font-size: 13px; box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  }
+  .file-card:hover { border-color: #93C5FD; background: #EFF6FF; }
+  .file-card .file-name { font-weight: 600; color: #1E293B; }
+  .file-card .file-desc { color: #64748B; font-size: 12px; margin-top: 2px; }
+
+  /* Preview modal */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.4); z-index: 100;
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.show { display: flex; }
+  .modal {
+    background: #fff; border: 1px solid #E2E8F0; border-radius: 16px;
+    width: 90%; max-width: 720px; max-height: 80vh;
+    display: flex; flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  }
+  .modal-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 20px; border-bottom: 1px solid #E2E8F0;
+  }
+  .modal-header h3 { font-size: 15px; color: #0F172A; }
+  .modal-close {
+    background: none; border: none; color: #94A3B8;
+    font-size: 20px; cursor: pointer;
+  }
+  .modal-close:hover { color: #1E293B; }
+  .modal-body {
+    padding: 20px; overflow-y: auto; flex: 1;
+    font-family: 'Segoe UI', -apple-system, sans-serif; font-size: 14px;
+    line-height: 1.7; color: #334155;
+  }
+  .modal-body.raw {
+    font-family: 'Consolas', monospace; font-size: 13px; white-space: pre-wrap;
+  }
+  .modal-body h1 { font-size: 22px; font-weight: 700; margin: 24px 0 12px; color: #0F172A; border-bottom: 1px solid #E2E8F0; padding-bottom: 8px; }
+  .modal-body h2 { font-size: 18px; font-weight: 700; margin: 20px 0 10px; color: #1E293B; }
+  .modal-body h3 { font-size: 15px; font-weight: 600; margin: 16px 0 8px; color: #334155; }
+  .modal-body h4 { font-size: 14px; font-weight: 600; margin: 12px 0 6px; color: #475569; }
+  .modal-body p { margin: 8px 0; }
+  .modal-body ul, .modal-body ol { margin: 8px 0; padding-left: 24px; }
+  .modal-body li { margin: 4px 0; }
+  .modal-body strong { font-weight: 600; color: #1E293B; }
+  .modal-body em { font-style: italic; }
+  .modal-body hr { border: none; border-top: 1px solid #E2E8F0; margin: 20px 0; }
+  .modal-body blockquote { border-left: 3px solid #2563EB; padding: 8px 16px; margin: 12px 0; background: #F8FAFC; color: #475569; }
+  .modal-body pre { background: #F1F5F9; border-radius: 8px; padding: 12px 16px; overflow-x: auto; font-family: 'Consolas', monospace; font-size: 13px; margin: 12px 0; }
+  .modal-body code { background: #F1F5F9; padding: 2px 6px; border-radius: 4px; font-family: 'Consolas', monospace; font-size: 13px; }
+  .modal-body pre code { background: none; padding: 0; }
+  .modal-tabs { display: flex; gap: 0; border-bottom: 1px solid #E2E8F0; }
+  .modal-tab {
+    padding: 8px 16px; font-size: 13px; cursor: pointer; border: none; background: none;
+    color: #64748B; border-bottom: 2px solid transparent; font-weight: 500;
+  }
+  .modal-tab.active { color: #2563EB; border-bottom-color: #2563EB; }
+
+  /* History */
+  .history { margin-top: 48px; border-top: 1px solid #E2E8F0; padding-top: 32px; }
+  .history h3 { font-size: 16px; margin-bottom: 16px; color: #64748B; }
+  .history-weeks { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .history-week-btn {
+    padding: 8px 16px; background: #fff; border: 1px solid #E2E8F0;
+    border-radius: 8px; cursor: pointer; transition: all .15s;
+    font-size: 14px; font-weight: 600; color: #475569;
+  }
+  .history-week-btn:hover { border-color: #93C5FD; color: #2563EB; }
+  .history-week-btn.active { border-color: #2563EB; background: #EFF6FF; color: #2563EB; }
+  .history-files { display: none; }
+  .history-files.show { display: block; }
+
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>PerfecTwin <span>Content Generator</span></h1>
+    <p>Enter a topic to generate a full week of marketing content</p>
+  </header>
+
+  <!-- Step indicators -->
+  <div class="steps">
+    <div class="step-dot active" id="dot1">1</div>
+    <div class="step-line"></div>
+    <div class="step-dot" id="dot2">2</div>
+    <div class="step-line"></div>
+    <div class="step-dot" id="dot3">3</div>
+  </div>
+
+  <!-- STEP 1: Topic selection -->
+  <div id="step1">
+    <div class="categories">
+      <div class="category cat-a">
+        <h3>A. S/4HANA Migration</h3>
+        <button class="topic-btn" data-topic="S/4HANA 마이그레이션에서 테스트가 실패하는 5가지 이유" data-keywords="SAP S/4HANA migration testing" data-angle="Data Extractor로 실거래 데이터 기반 테스트">
+          <span class="topic-id">A1</span>S/4HANA 마이그레이션에서 테스트가 실패하는 5가지 이유
+        </button>
+        <button class="topic-btn" data-topic="ECC 지원 종료 2027: 테스트 관점에서 지금 준비해야 할 것" data-keywords="SAP ECC end of support testing" data-angle="마이그레이션 테스트 자동화 필요성">
+          <span class="topic-id">A2</span>ECC 지원 종료 2027: 테스트 관점에서 지금 준비해야 할 것
+        </button>
+        <button class="topic-btn" data-topic="S/4HANA 마이그레이션 테스트 체크리스트 (실무 가이드)" data-keywords="S/4HANA testing checklist" data-angle="Pre-built 비즈니스 프로세스 템플릿">
+          <span class="topic-id">A3</span>S/4HANA 마이그레이션 테스트 체크리스트 (실무 가이드)
+        </button>
+        <button class="topic-btn" data-topic="마이그레이션 후 리그레션 테스트: 수동 vs 자동화 비교" data-keywords="SAP regression testing automation" data-angle="50배 빠른 백엔드 직접 전송">
+          <span class="topic-id">A4</span>마이그레이션 후 리그레션 테스트: 수동 vs 자동화 비교
+        </button>
+      </div>
+
+      <div class="category cat-b">
+        <h3>B. Test Automation</h3>
+        <button class="topic-btn" data-topic="SAP 테스트 자동화 시작 가이드" data-keywords="SAP test automation guide" data-angle="No-code 드래그앤드롭 시나리오 생성">
+          <span class="topic-id">B1</span>SAP 테스트 자동화 시작 가이드
+        </button>
+        <button class="topic-btn" data-topic="SAP 테스트 데이터 관리의 숨겨진 복잡성" data-keywords="SAP test data management" data-angle="Data Extractor로 실 프로덕션 데이터 추출">
+          <span class="topic-id">B2</span>SAP 테스트 데이터 관리의 숨겨진 복잡성
+        </button>
+        <button class="topic-btn" data-topic="Order-to-Cash 프로세스 테스트 자동화 완전 가이드" data-keywords="SAP order to cash testing" data-angle="Pre-built O2C 템플릿">
+          <span class="topic-id">B3</span>Order-to-Cash 프로세스 테스트 자동화 완전 가이드
+        </button>
+        <button class="topic-btn" data-topic="SAP 테스트 자동화 도구 선택 기준 (2026 업데이트)" data-keywords="SAP test automation tools comparison" data-angle="PerfecTwin 포지셔닝 (간접 비교)">
+          <span class="topic-id">B4</span>SAP 테스트 자동화 도구 선택 기준 (2026 업데이트)
+        </button>
+      </div>
+
+      <div class="category cat-c">
+        <h3>C. Competitor Pain Points</h3>
+        <button class="topic-btn" data-topic="SAP 테스트 자동화 비용을 줄이는 5가지 방법" data-keywords="SAP test automation cost reduction" data-angle="가격 경쟁력 (Tosca 대비)">
+          <span class="topic-id">C1</span>SAP 테스트 자동화 비용을 줄이는 5가지 방법
+        </button>
+        <button class="topic-btn" data-topic="UI Replay vs Backend Direct: SAP 테스트 실행 방식 비교" data-keywords="SAP test execution speed" data-angle="50배 속도 차이 (아키텍처 우위)">
+          <span class="topic-id">C2</span>UI Replay vs Backend Direct: SAP 테스트 실행 방식 비교
+        </button>
+        <button class="topic-btn" data-topic="No-Code SAP 테스트 자동화가 필요한 진짜 이유" data-keywords="no-code SAP testing" data-angle="드래그앤드롭 UX">
+          <span class="topic-id">C3</span>No-Code SAP 테스트 자동화가 필요한 진짜 이유
+        </button>
+        <button class="topic-btn" data-topic="SAP 테스트 도구를 바꿔야 할 5가지 신호" data-keywords="SAP testing tool switch" data-angle="전환 CTA">
+          <span class="topic-id">C4</span>SAP 테스트 도구를 바꿔야 할 5가지 신호
+        </button>
+      </div>
+
+      <div class="category cat-d">
+        <h3>D. Trends</h3>
+        <button class="topic-btn" data-topic="2026 SAP 테스트 자동화 트렌드: AI, No-Code, Cloud" data-keywords="SAP testing trends 2026" data-angle="클라우드 버전 런칭 예고">
+          <span class="topic-id">D1</span>2026 SAP 테스트 자동화 트렌드: AI, No-Code, Cloud
+        </button>
+        <button class="topic-btn" data-topic="SAP Fiori 테스트: 왜 기존 자동화 도구로는 부족한가" data-keywords="SAP Fiori testing automation" data-angle="크로스 플랫폼 테스트 지원">
+          <span class="topic-id">D2</span>SAP Fiori 테스트: 왜 기존 자동화 도구로는 부족한가
+        </button>
+        <button class="topic-btn" data-topic="CI/CD 파이프라인에 SAP 테스트를 통합하는 방법" data-keywords="SAP testing CI/CD integration" data-angle="DevOps 연동 가능성">
+          <span class="topic-id">D3</span>CI/CD 파이프라인에 SAP 테스트를 통합하는 방법
+        </button>
+        <button class="topic-btn" data-topic="SAP 테스트 자동화 ROI 계산법 (경영진 설득용)" data-keywords="SAP test automation ROI" data-angle="TCO 비교 프레임워크">
+          <span class="topic-id">D4</span>SAP 테스트 자동화 ROI 계산법 (경영진 설득용)
+        </button>
+      </div>
+    </div>
+
+    <details class="custom-input-section">
+      <summary>Or enter a custom topic</summary>
+      <input type="text" id="customTopic" placeholder="Enter your topic...">
+      <input type="text" id="customKeywords" placeholder="SEO keywords (comma separated)" style="margin-top:8px">
+      <input type="text" id="customAngle" placeholder="PerfecTwin connection point" style="margin-top:8px">
+    </details>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" id="toStep2" disabled>Next: Configure</button>
+    </div>
+  </div>
+
+  <!-- STEP 2: Configure -->
+  <div id="step2" class="hidden">
+    <div class="form-group">
+      <label>Selected Topic</label>
+      <input type="text" id="fTopic" readonly style="opacity:0.7">
+    </div>
+    <div class="form-group">
+      <label>SEO Keywords</label>
+      <input type="text" id="fKeywords">
+    </div>
+    <div class="form-group">
+      <label>PerfecTwin Connection Point</label>
+      <input type="text" id="fAngle">
+    </div>
+    <div class="form-group">
+      <label>Additional Intel (optional)</label>
+      <input type="text" id="fIntel" placeholder="Trends, stats, competitor data...">
+    </div>
+
+    <label style="font-size:13px;font-weight:600;color:#64748B;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:8px">
+      Content Types
+    </label>
+    <div class="toggles">
+      <span class="toggle-chip on" data-type="blog-ko">Blog KO</span>
+      <span class="toggle-chip on" data-type="blog-en">Blog EN</span>
+      <span class="toggle-chip on" data-type="linkedin-company">LinkedIn Company</span>
+      <span class="toggle-chip on" data-type="linkedin-personal">LinkedIn Personal</span>
+      <span class="toggle-chip on" data-type="x-posts">X Posts</span>
+      <span class="toggle-chip on" data-type="seo-meta">SEO Meta</span>
+      <span class="toggle-chip on" data-type="utm-links">UTM Links</span>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" id="backToStep1">Back</button>
+      <button class="btn btn-primary" id="startGenerate">Generate Content</button>
+    </div>
+  </div>
+
+  <!-- STEP 3: Generation -->
+  <div id="step3" class="hidden">
+    <div class="progress-tracker" id="progressTracker">
+      <div class="progress-header">
+        <strong style="font-size:15px" id="genStatus">Generating content...</strong>
+        <span class="elapsed" id="elapsed">0:00</span>
+      </div>
+      <div class="progress-steps" id="progressSteps">
+        <div class="p-step" data-step="1"><div class="p-step-icon">1</div><span>Korean blog (blog-ko.md)</span></div>
+        <div class="p-step" data-step="2"><div class="p-step-icon">2</div><span>English blog (blog-en.md)</span></div>
+        <div class="p-step" data-step="3"><div class="p-step-icon">3</div><span>Social posts — LinkedIn + X (parallel)</span></div>
+        <div class="p-step" data-step="4"><div class="p-step-icon">4</div><span>Image prompts — Thumbnail + LinkedIn</span></div>
+        <div class="p-step" data-step="5"><div class="p-step-icon">5</div><span>Summary + metadata</span></div>
+      </div>
+    </div>
+    <div class="log-area" id="logArea" style="display:block"></div>
+    <div class="results" id="results">
+      <h3>Generated Files</h3>
+      <div class="file-list" id="fileList"></div>
+    </div>
+    <div class="btn-row" id="doneActions" style="display:none">
+      <button class="btn btn-secondary" id="newGenerate">Generate Another</button>
+    </div>
+  </div>
+
+  <!-- History -->
+  <div class="history" id="history">
+    <h3>Previous Results</h3>
+    <div class="history-weeks" id="historyWeeks"></div>
+    <div class="history-files" id="historyFiles">
+      <div class="file-list" id="historyFileList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Preview modal -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modalTitle">File Preview</h3>
+      <button class="modal-close" id="modalClose">&times;</button>
+    </div>
+    <div class="modal-tabs" id="modalTabs" style="display:none">
+      <button class="modal-tab active" data-tab="preview">Preview</button>
+      <button class="modal-tab" data-tab="raw">Raw</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+const FILE_DESC = {
+  'blog-ko.md': 'Korean blog post',
+  'blog-en.md': 'English blog post',
+  'linkedin-company.md': 'LinkedIn company posts (2)',
+  'linkedin-personal.md': 'LinkedIn personal posts (2)',
+  'x-posts.md': 'X/Twitter posts (5) + thread',
+  'seo-meta.json': 'SEO metadata & OG tags',
+  'utm-links.json': 'UTM tracking links',
+  'blog-thumbnail.md': 'Blog thumbnail image prompt',
+  'linkedin-images.md': 'LinkedIn image prompts (2)',
+  'summary.md': 'Weekly summary & checklist',
+};
+
+let selected = { topic: '', keywords: '', angle: '' };
+
+// Step 1: Topic selection
+document.querySelectorAll('.topic-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.topic-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    selected.topic = btn.dataset.topic;
+    selected.keywords = btn.dataset.keywords;
+    selected.angle = btn.dataset.angle;
+    document.getElementById('toStep2').disabled = false;
+    document.getElementById('customTopic').value = '';
+    document.getElementById('customKeywords').value = '';
+    document.getElementById('customAngle').value = '';
+  });
+});
+
+// Custom topic input
+['customTopic','customKeywords','customAngle'].forEach(id => {
+  document.getElementById(id).addEventListener('input', () => {
+    const t = document.getElementById('customTopic').value.trim();
+    const k = document.getElementById('customKeywords').value.trim();
+    const a = document.getElementById('customAngle').value.trim();
+    if (t && k && a) {
+      document.querySelectorAll('.topic-btn').forEach(b => b.classList.remove('selected'));
+      selected = { topic: t, keywords: k, angle: a };
+      document.getElementById('toStep2').disabled = false;
+    }
+  });
+});
+
+// Navigation
+function showStep(n) {
+  document.getElementById('step1').classList.toggle('hidden', n !== 1);
+  document.getElementById('step2').classList.toggle('hidden', n !== 2);
+  document.getElementById('step3').classList.toggle('hidden', n !== 3);
+  document.getElementById('dot1').className = 'step-dot ' + (n === 1 ? 'active' : 'done');
+  document.getElementById('dot2').className = 'step-dot ' + (n === 2 ? 'active' : n > 2 ? 'done' : '');
+  document.getElementById('dot3').className = 'step-dot ' + (n === 3 ? 'active' : '');
+}
+
+document.getElementById('toStep2').addEventListener('click', () => {
+  document.getElementById('fTopic').value = selected.topic;
+  document.getElementById('fKeywords').value = selected.keywords;
+  document.getElementById('fAngle').value = selected.angle;
+  showStep(2);
+});
+
+document.getElementById('backToStep1').addEventListener('click', () => showStep(1));
+
+// Content type toggles
+document.querySelectorAll('.toggle-chip').forEach(chip => {
+  chip.addEventListener('click', () => chip.classList.toggle('on'));
+});
+
+// Generate
+let elapsedTimer = null;
+
+function updateProgressStep(stepNum, state) {
+  const steps = document.querySelectorAll('#progressSteps .p-step');
+  steps.forEach(s => {
+    const n = parseInt(s.dataset.step);
+    if (n < stepNum) {
+      s.className = 'p-step done';
+      s.querySelector('.p-step-icon, .p-step-spinner').outerHTML = '<div class="p-step-icon">&#10003;</div>';
+    } else if (n === stepNum && state === 'active') {
+      s.className = 'p-step active';
+      s.querySelector('.p-step-icon').outerHTML = '<div class="p-step-spinner"></div>';
+    } else if (n === stepNum && state === 'done') {
+      s.className = 'p-step done';
+      const el = s.querySelector('.p-step-icon, .p-step-spinner');
+      if (el) el.outerHTML = '<div class="p-step-icon">&#10003;</div>';
+    }
+  });
+}
+
+function resetProgressSteps() {
+  const container = document.getElementById('progressSteps');
+  container.innerHTML = `
+    <div class="p-step" data-step="1"><div class="p-step-icon">1</div><span>Korean blog (blog-ko.md)</span></div>
+    <div class="p-step" data-step="2"><div class="p-step-icon">2</div><span>English blog (blog-en.md)</span></div>
+    <div class="p-step" data-step="3"><div class="p-step-icon">3</div><span>Social posts — LinkedIn + X (parallel)</span></div>
+    <div class="p-step" data-step="4"><div class="p-step-icon">4</div><span>Image prompts — Thumbnail + LinkedIn</span></div>
+    <div class="p-step" data-step="5"><div class="p-step-icon">5</div><span>Summary + metadata</span></div>
+  `;
+}
+
+document.getElementById('startGenerate').addEventListener('click', () => {
+  const topic = document.getElementById('fTopic').value;
+  const keywords = document.getElementById('fKeywords').value;
+  const angle = document.getElementById('fAngle').value;
+  const intel = document.getElementById('fIntel').value;
+
+  showStep(3);
+  const logArea = document.getElementById('logArea');
+  const results = document.getElementById('results');
+  const genStatus = document.getElementById('genStatus');
+  const doneActions = document.getElementById('doneActions');
+  const elapsedEl = document.getElementById('elapsed');
+
+  logArea.innerHTML = '';
+  logArea.style.display = 'block';
+  results.style.display = 'none';
+  doneActions.style.display = 'none';
+  genStatus.textContent = 'Generating content...';
+  genStatus.style.color = '';
+  resetProgressSteps();
+
+  // Elapsed timer
+  const startTime = Date.now();
+  if (elapsedTimer) clearInterval(elapsedTimer);
+  elapsedTimer = setInterval(() => {
+    const sec = Math.floor((Date.now() - startTime) / 1000);
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    elapsedEl.textContent = `${m}:${String(s).padStart(2,'0')}`;
+  }, 1000);
+
+  // Step 1: Start the job
+  fetch('/api/generate', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ topic, keywords, angle, intel }),
+  })
+  .then(r => r.json())
+  .then(({ jobId }) => {
+    // Step 2: Connect to SSE stream for this job
+    const evtSource = new EventSource(`/api/generate/${jobId}/stream`);
+
+    evtSource.onmessage = (e) => {
+      try {
+        const evt = JSON.parse(e.data);
+        if (evt.type === 'log') {
+          if (evt.data.includes('[1/5]')) updateProgressStep(1, 'active');
+          else if (evt.data.includes('[2/5]')) { updateProgressStep(1, 'done'); updateProgressStep(2, 'active'); }
+          else if (evt.data.includes('[3/5]')) { updateProgressStep(2, 'done'); updateProgressStep(3, 'active'); }
+          else if (evt.data.includes('[4/5]')) { updateProgressStep(3, 'done'); updateProgressStep(4, 'active'); }
+          else if (evt.data.includes('[5/5]')) { updateProgressStep(4, 'done'); updateProgressStep(5, 'active'); }
+
+          const div = document.createElement('div');
+          div.className = evt.data.startsWith('[') || evt.data.startsWith('===') ? 'status-line' : 'log-line';
+          div.textContent = evt.data;
+          logArea.appendChild(div);
+          logArea.scrollTop = logArea.scrollHeight;
+        } else if (evt.type === 'error') {
+          const div = document.createElement('div');
+          div.className = 'error-line';
+          div.textContent = evt.data;
+          logArea.appendChild(div);
+          logArea.scrollTop = logArea.scrollHeight;
+        } else if (evt.type === 'done') {
+          clearInterval(elapsedTimer);
+          evtSource.close();
+          updateProgressStep(5, 'done');
+          genStatus.innerHTML = '&#10003; Content generation complete!';
+          genStatus.style.color = '#059669';
+          logArea.style.display = 'none';
+          showContentFiles(evt.data.folder, evt.data.structure, 'fileList');
+          doneActions.style.display = 'flex';
+          loadHistory();
+        }
+      } catch (err) {}
+    };
+
+    evtSource.onerror = () => {
+      clearInterval(elapsedTimer);
+      evtSource.close();
+    };
+  })
+  .catch(err => {
+    clearInterval(elapsedTimer);
+    genStatus.textContent = 'Error: ' + err.message;
+    genStatus.style.color = '#DC2626';
+  });
+});
+
+// Show only content/ files as flat list
+function showContentFiles(folder, structure, listId) {
+  const results = document.getElementById('results');
+  const fileList = document.getElementById(listId);
+  if (results) results.style.display = 'block';
+  fileList.innerHTML = '';
+
+  const files = structure.content || [];
+  files.forEach(file => {
+    const card = document.createElement('div');
+    card.className = 'file-card';
+    card.innerHTML = `<div class="file-name">${file}</div><div class="file-desc">${FILE_DESC[file] || ''}</div>`;
+    card.addEventListener('click', () => previewFile(folder, `content/${file}`, file));
+    fileList.appendChild(card);
+  });
+}
+
+// Simple markdown to HTML renderer
+function renderMarkdown(md) {
+  let html = md
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    // Code blocks first (before other rules)
+    .replace(/```(\w*)\n([\s\S]*?)```/g, (_, lang, code) => `<pre><code>${code.trim()}</code></pre>`)
+    // Headers
+    .replace(/^#### (.+)$/gm, '<h4>$1</h4>')
+    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+    .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+    // HR
+    .replace(/^---+$/gm, '<hr>')
+    // Blockquote
+    .replace(/^&gt; (.+)$/gm, '<blockquote>$1</blockquote>')
+    // Bold & italic
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    // Inline code
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    // Checkboxes
+    .replace(/^- \[ \] (.+)$/gm, '<li style="list-style:none"><input type="checkbox" disabled> $1</li>')
+    .replace(/^- \[x\] (.+)$/gm, '<li style="list-style:none"><input type="checkbox" checked disabled> $1</li>')
+    // Unordered list
+    .replace(/^- (.+)$/gm, '<li>$1</li>')
+    // Links
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" style="color:#2563EB">$1</a>')
+    // Paragraphs (lines that aren't already HTML)
+    .replace(/^(?!<[hluopba]|<\/|<hr|<li|<pre|<block)(.+)$/gm, '<p>$1</p>');
+
+  // Wrap consecutive <li> in <ul>
+  html = html.replace(/((?:<li[^>]*>.*<\/li>\s*)+)/g, '<ul style="list-style:none;padding-left:8px">$1</ul>');
+  // Merge consecutive blockquotes
+  html = html.replace(/<\/blockquote>\s*<blockquote>/g, '<br>');
+
+  return html;
+}
+
+// File preview modal
+let currentRawContent = '';
+
+function previewFile(folder, filePath, displayName) {
+  const modal = document.getElementById('modal');
+  const title = document.getElementById('modalTitle');
+  const body = document.getElementById('modalBody');
+  const tabs = document.getElementById('modalTabs');
+
+  title.textContent = `${folder} / ${filePath}`;
+  body.innerHTML = '<p style="color:#94A3B8">Loading...</p>';
+  body.classList.remove('raw');
+  modal.classList.add('show');
+
+  const name = displayName || filePath;
+  const isMd = name.endsWith('.md');
+  tabs.style.display = isMd ? 'flex' : 'none';
+  // Reset tabs
+  document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
+  document.querySelector('.modal-tab[data-tab="preview"]').classList.add('active');
+
+  fetch(`/api/output/${folder}/${filePath}`)
+    .then(r => name.endsWith('.json') ? r.json() : r.text())
+    .then(data => {
+      if (typeof data === 'object') {
+        body.classList.add('raw');
+        body.textContent = JSON.stringify(data, null, 2);
+        currentRawContent = '';
+      } else if (isMd) {
+        currentRawContent = data;
+        body.innerHTML = renderMarkdown(data);
+      } else {
+        body.classList.add('raw');
+        body.textContent = data;
+        currentRawContent = '';
+      }
+    })
+    .catch(err => { body.textContent = 'Error loading file: ' + err.message; });
+}
+
+// Modal tab switching
+document.querySelectorAll('.modal-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const body = document.getElementById('modalBody');
+    document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    if (tab.dataset.tab === 'raw' && currentRawContent) {
+      body.classList.add('raw');
+      body.textContent = currentRawContent;
+    } else if (tab.dataset.tab === 'preview' && currentRawContent) {
+      body.classList.remove('raw');
+      body.innerHTML = renderMarkdown(currentRawContent);
+    }
+  });
+});
+
+document.getElementById('modalClose').addEventListener('click', () => {
+  document.getElementById('modal').classList.remove('show');
+});
+document.getElementById('modal').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('modal'))
+    document.getElementById('modal').classList.remove('show');
+});
+
+// New generate
+document.getElementById('newGenerate').addEventListener('click', () => {
+  showStep(1);
+  document.querySelectorAll('.topic-btn').forEach(b => b.classList.remove('selected'));
+  document.getElementById('toStep2').disabled = true;
+  document.getElementById('fIntel').value = '';
+  if (elapsedTimer) clearInterval(elapsedTimer);
+});
+
+// History — week buttons on top, file list below
+function loadHistory() {
+  fetch('/api/outputs').then(r => r.json()).then(data => {
+    const weeks = document.getElementById('historyWeeks');
+    const filesArea = document.getElementById('historyFiles');
+    weeks.innerHTML = '';
+    filesArea.classList.remove('show');
+
+    if (!data.length) {
+      weeks.innerHTML = '<p style="color:#94A3B8;font-size:13px">No previous results yet</p>';
+      return;
+    }
+
+    data.forEach(item => {
+      const btn = document.createElement('button');
+      btn.className = 'history-week-btn';
+      btn.textContent = item.folder;
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.history-week-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const fileList = document.getElementById('historyFileList');
+        fileList.innerHTML = '';
+        const files = item.structure.content || [];
+        files.forEach(file => {
+          const card = document.createElement('div');
+          card.className = 'file-card';
+          card.innerHTML = `<div class="file-name">${file}</div><div class="file-desc">${FILE_DESC[file] || ''}</div>`;
+          card.addEventListener('click', () => previewFile(item.folder, `content/${file}`, file));
+          fileList.appendChild(card);
+        });
+        filesArea.classList.add('show');
+      });
+      weeks.appendChild(btn);
+    });
+  });
+}
+
+loadHistory();
+</script>
+</body>
+</html>

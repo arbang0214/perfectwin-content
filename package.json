@@ -4,10 +4,12 @@
   "description": "PerfecTwin 콘텐츠 자동화 파이프라인",
   "private": true,
   "scripts": {
-    "generate": "node scripts/generate-content.js"
+    "generate": "node scripts/generate-content.js",
+    "server": "node server.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",
-    "dotenv": "^16.4.7"
+    "dotenv": "^16.4.7",
+    "express": "^5.2.1"
   }
 }

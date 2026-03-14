@@ -71,6 +71,8 @@ For each post, generate both a **carousel version** and a **single image version
 
 ## Output Format
 
+Generate the English version first, then provide a Korean translation of each post for internal review.
+
 ```
 ## Post A: [highlight summary]
 
@@ -83,6 +85,9 @@ Caption: ...
 - Image text: ...
 Body: ...
 
+### 🇰🇷 Korean Review (Post A)
+(Full Korean translation of Post A for internal review. This is NOT published — review only.)
+
 ---
 
 ## Post B: [highlight summary]
@@ -92,4 +97,7 @@ Body: ...
 
 ### Option 2: Single Image
 ...
+
+### 🇰🇷 Korean Review (Post B)
+(Full Korean translation of Post B for internal review. This is NOT published — review only.)
 ```

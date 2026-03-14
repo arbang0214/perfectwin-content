@@ -102,4 +102,27 @@ Suggested day: Fri
 [Body]
 
 ...
+
+---
+
+## 🇰🇷 Korean Review
+(Full Korean translation of all 5 standalone posts and the thread for internal review. This is NOT published — review only.)
+
+### Post 1
+[Korean translation]
+
+### Post 2
+[Korean translation]
+
+### Post 3
+[Korean translation]
+
+### Post 4
+[Korean translation]
+
+### Post 5
+[Korean translation]
+
+### Thread
+[Korean translation of each tweet]
 ```

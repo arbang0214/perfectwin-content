@@ -66,11 +66,15 @@ function ensureDir(dirPath) {
   if (!fs.existsSync(dirPath)) fs.mkdirSync(dirPath, { recursive: true });
 }
 
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 // ─── Claude API call ────────────────────────────────────────
 async function callClaude(client, systemPrompt, userMessage) {
   const response = await client.messages.create({
     model: "claude-sonnet-4-20250514",
-    max_tokens: 4096,
+    max_tokens: 8192,
     messages: [{ role: "user", content: userMessage }],
     system: systemPrompt,
   });
@@ -134,8 +138,15 @@ async function main() {
 
   const client = new Anthropic();
   const brandGuide = readFile("config/brand-guide.md");
-  const weekDir = path.join(ROOT, "output", `week-${todayStamp()}`);
-  ensureDir(weekDir);
+  const stamp = todayStamp();
+  const weekDir = path.join(ROOT, "output", `week-${stamp}`);
+  const contentDir = path.join(weekDir, "content");
+  const imagePromptsDir = path.join(weekDir, "image-prompts");
+  const metaDir = path.join(weekDir, "meta");
+
+  ensureDir(contentDir);
+  ensureDir(imagePromptsDir);
+  ensureDir(metaDir);
 
   console.log(`\n=== PerfecTwin Content Generator ===`);
   console.log(`Topic: ${args.topic}`);
@@ -150,13 +161,11 @@ async function main() {
     perfectwin_angle: args.angle,
     weekly_intel: args.intel || "없음",
   });
-  const blogKo = await callClaude(
-    client,
-    brandGuide,
-    blogKoSystem
-  );
-  fs.writeFileSync(path.join(weekDir, "blog-ko.md"), blogKo, "utf-8");
-  console.log("  -> blog-ko.md saved");
+  const blogKo = await callClaude(client, brandGuide, blogKoSystem);
+  fs.writeFileSync(path.join(contentDir, "blog-ko.md"), blogKo, "utf-8");
+  console.log("  -> content/blog-ko.md saved");
+
+  await delay(5000);
 
   // ── Step 2: 영문 블로그 ───────────────────────────────────
   console.log("[2/5] Generating English blog...");
@@ -165,66 +174,77 @@ async function main() {
     blog_ko: blogKo,
     seo_keywords: args.keywords,
   });
-  const blogEn = await callClaude(
-    client,
-    brandGuide,
-    blogEnSystem
-  );
-  fs.writeFileSync(path.join(weekDir, "blog-en.md"), blogEn, "utf-8");
-  console.log("  -> blog-en.md saved");
+  const blogEn = await callClaude(client, brandGuide, blogEnSystem);
+  fs.writeFileSync(path.join(contentDir, "blog-en.md"), blogEn, "utf-8");
+  console.log("  -> content/blog-en.md saved");
 
   // Extract metadata & build UTM links
   const slug = extractSlug(blogEn) || extractSlug(blogKo);
   const utmLinks = buildUtmLinks(slug);
   const seoMeta = extractMeta(blogKo, blogEn);
 
-  // ── Step 3: LinkedIn 회사 포스트 ──────────────────────────
-  console.log("[3/5] Generating LinkedIn company posts...");
+  await delay(5000);
+
+  // ── Step 3: LinkedIn + X 포스트 (병렬 실행) ─────────────
+  console.log("[3/5] Generating social posts (parallel)...");
+
   const linkedinCompanyPrompt = readFile("prompts/linkedin-company.md");
-  const linkedinCompanySystem = fillTemplate(linkedinCompanyPrompt, {
-    blog_content: blogEn,
-    blog_url: `https://perfectwin.io/blog/${slug}`,
-    utm_params: `utm_source=linkedin-company&utm_medium=social&utm_campaign=${slug}`,
-  });
-  const linkedinCompany = await callClaude(
-    client,
-    brandGuide,
-    linkedinCompanySystem
-  );
-  fs.writeFileSync(path.join(weekDir, "linkedin-company.md"), linkedinCompany, "utf-8");
-  console.log("  -> linkedin-company.md saved");
-
-  // ── Step 4: LinkedIn 개인 포스트 ──────────────────────────
-  console.log("[4/5] Generating LinkedIn personal posts...");
   const linkedinPersonalPrompt = readFile("prompts/linkedin-personal.md");
-  const linkedinPersonalSystem = fillTemplate(linkedinPersonalPrompt, {
-    blog_content: blogEn,
-    blog_url: `https://perfectwin.io/blog/${slug}`,
-    utm_params: `utm_source=linkedin-personal&utm_medium=social&utm_campaign=${slug}`,
-  });
-  const linkedinPersonal = await callClaude(
-    client,
-    brandGuide,
-    linkedinPersonalSystem
-  );
-  fs.writeFileSync(path.join(weekDir, "linkedin-personal.md"), linkedinPersonal, "utf-8");
-  console.log("  -> linkedin-personal.md saved");
-
-  // ── Step 5: X 포스트 ──────────────────────────────────────
-  console.log("[5/5] Generating X posts...");
   const xPostsPrompt = readFile("prompts/x-posts.md");
-  const xPostsSystem = fillTemplate(xPostsPrompt, {
-    blog_content: blogEn,
-    blog_url: `https://perfectwin.io/blog/${slug}`,
-    utm_params: `utm_source=x-twitter&utm_medium=social&utm_campaign=${slug}`,
-  });
-  const xPosts = await callClaude(
-    client,
-    brandGuide,
-    xPostsSystem
-  );
-  fs.writeFileSync(path.join(weekDir, "x-posts.md"), xPosts, "utf-8");
-  console.log("  -> x-posts.md saved");
+
+  const [linkedinCompany, linkedinPersonal, xPosts] = await Promise.all([
+    callClaude(client, brandGuide, fillTemplate(linkedinCompanyPrompt, {
+      blog_content: blogEn,
+      blog_url: `https://perfectwin.io/blog/${slug}`,
+      utm_params: `utm_source=linkedin-company&utm_medium=social&utm_campaign=${slug}`,
+    })),
+    callClaude(client, brandGuide, fillTemplate(linkedinPersonalPrompt, {
+      blog_content: blogEn,
+      blog_url: `https://perfectwin.io/blog/${slug}`,
+      utm_params: `utm_source=linkedin-personal&utm_medium=social&utm_campaign=${slug}`,
+    })),
+    callClaude(client, brandGuide, fillTemplate(xPostsPrompt, {
+      blog_content: blogEn,
+      blog_url: `https://perfectwin.io/blog/${slug}`,
+      utm_params: `utm_source=x-twitter&utm_medium=social&utm_campaign=${slug}`,
+    })),
+  ]);
+
+  fs.writeFileSync(path.join(contentDir, "linkedin-company.md"), linkedinCompany, "utf-8");
+  console.log("  -> content/linkedin-company.md saved");
+  fs.writeFileSync(path.join(contentDir, "linkedin-personal.md"), linkedinPersonal, "utf-8");
+  console.log("  -> content/linkedin-personal.md saved");
+  fs.writeFileSync(path.join(contentDir, "x-posts.md"), xPosts, "utf-8");
+  console.log("  -> content/x-posts.md saved");
+
+  await delay(5000);
+
+  // ── Step 4: 이미지 프롬프트 생성 ──────────────────────────
+  console.log("[4/5] Generating image prompts...");
+
+  const blogThumbnailPrompt = readFile("prompts/image-blog-thumbnail.md");
+  const linkedinImagePrompt = readFile("prompts/image-linkedin.md");
+
+  const blogTitle = seoMeta.en.title || seoMeta.ko.title || args.topic;
+  const topicSummary = `${args.topic} — ${args.angle}`;
+
+  const [blogThumbnail, linkedinImages] = await Promise.all([
+    callClaude(client, brandGuide, fillTemplate(blogThumbnailPrompt, {
+      blog_title_en: blogTitle,
+      blog_title_ko: seoMeta.ko.title || args.topic,
+      topic_summary: topicSummary,
+    })),
+    callClaude(client, brandGuide, fillTemplate(linkedinImagePrompt, {
+      linkedin_content: linkedinCompany,
+      blog_title_en: blogTitle,
+      topic_summary: topicSummary,
+    })),
+  ]);
+
+  fs.writeFileSync(path.join(imagePromptsDir, "blog-thumbnail.md"), blogThumbnail, "utf-8");
+  console.log("  -> image-prompts/blog-thumbnail.md saved");
+  fs.writeFileSync(path.join(imagePromptsDir, "linkedin-images.md"), linkedinImages, "utf-8");
+  console.log("  -> image-prompts/linkedin-images.md saved");
 
   // ── Save metadata files ───────────────────────────────────
   seoMeta.og = {
@@ -235,20 +255,87 @@ async function main() {
     "og:site_name": "PerfecTwin",
   };
   fs.writeFileSync(
-    path.join(weekDir, "seo-meta.json"),
+    path.join(metaDir, "seo-meta.json"),
     JSON.stringify(seoMeta, null, 2),
     "utf-8"
   );
-  console.log("  -> seo-meta.json saved");
+  console.log("  -> meta/seo-meta.json saved");
 
   fs.writeFileSync(
-    path.join(weekDir, "utm-links.json"),
+    path.join(metaDir, "utm-links.json"),
     JSON.stringify(utmLinks, null, 2),
     "utf-8"
   );
-  console.log("  -> utm-links.json saved");
+  console.log("  -> meta/utm-links.json saved");
 
-  console.log(`\n=== Done! 7 files generated in ${weekDir} ===\n`);
+  // ── Step 5: Summary 생성 ──────────────────────────────────
+  console.log("[5/5] Generating summary...");
+
+  const utmSummary = Object.entries(utmLinks)
+    .map(([key, url]) => `- **${key}**: ${url}`)
+    .join("\n");
+
+  const summaryMd = `# Weekly Content Summary — ${stamp}
+
+## Topic
+${args.topic}
+
+## Blog
+- **Slug**: ${slug}
+- **URL**: https://perfectwin.io/blog/${slug}
+- **SEO Keywords**: ${args.keywords}
+
+## Generated Files
+
+### Content
+- [ ] blog-ko.md — Korean blog post
+- [ ] blog-en.md — English blog post
+- [ ] linkedin-company.md — LinkedIn company posts (2)
+- [ ] linkedin-personal.md — LinkedIn personal posts (2)
+- [ ] x-posts.md — X/Twitter standalone posts (5) + thread (1)
+
+### Image Prompts
+- [ ] blog-thumbnail.md — Blog OG image prompt
+- [ ] linkedin-images.md — LinkedIn post image prompts (2)
+
+### Meta
+- [ ] seo-meta.json — SEO metadata & OG tags
+- [ ] utm-links.json — UTM tracking links
+
+## Publishing Checklist
+
+### Blog
+- [ ] Review blog-ko.md (Korean)
+- [ ] Review blog-en.md (English)
+- [ ] Generate blog thumbnail image (use blog-thumbnail.md prompt)
+- [ ] Publish to Framer CMS
+- [ ] Verify OG tags
+
+### LinkedIn Company
+- [ ] Review linkedin-company.md Post A
+- [ ] Review linkedin-company.md Post B
+- [ ] Create/generate images (use linkedin-images.md)
+- [ ] Schedule via Buffer (Post A: Tue, Post B: Thu)
+
+### LinkedIn Personal (ARUM)
+- [ ] Review linkedin-personal.md Post A
+- [ ] Review linkedin-personal.md Post B
+- [ ] Schedule via Buffer (Post A: Wed, Post B: Fri)
+
+### X (Twitter)
+- [ ] Review x-posts.md standalone posts (5)
+- [ ] Review x-posts.md thread
+- [ ] Schedule via Buffer (Mon–Fri, 1 per day)
+- [ ] Schedule thread (Tue or Thu)
+
+## UTM Links
+${utmSummary}
+`;
+
+  fs.writeFileSync(path.join(weekDir, "summary.md"), summaryMd, "utf-8");
+  console.log("  -> summary.md saved");
+
+  console.log(`\n=== Done! Files generated in ${weekDir} ===\n`);
 }
 
 main().catch((err) => {

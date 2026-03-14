@@ -59,14 +59,22 @@ Each post should draw personal insights from a different angle of the blog.
 
 ## Output Format
 
+Generate the English version first, then provide a Korean translation of each post for internal review.
+
 ```
 ## Post A: [angle summary]
 
 [Body]
+
+### 🇰🇷 Korean Review (Post A)
+(Full Korean translation of Post A for internal review. This is NOT published — review only.)
 
 ---
 
 ## Post B: [angle summary]
 
 [Body]
+
+### 🇰🇷 Korean Review (Post B)
+(Full Korean translation of Post B for internal review. This is NOT published — review only.)
 ```
