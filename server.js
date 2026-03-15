@@ -15,7 +15,7 @@ const jobs = new Map();
 
 // ─── POST /api/generate — start generation, return job ID ──
 app.post("/api/generate", (req, res) => {
-  const { topic, keywords, angle, intel } = req.body;
+  const { topic, keywords, angle, intel, contentTypes } = req.body;
 
   if (!topic || !keywords || !angle) {
     return res.status(400).json({ error: "topic, keywords, angle are required" });
@@ -32,6 +32,9 @@ app.post("/api/generate", (req, res) => {
     "--angle", angle,
   ];
   if (intel) args.push("--intel", intel);
+  if (contentTypes && Array.isArray(contentTypes) && contentTypes.length > 0) {
+    args.push("--types", contentTypes.join(","));
+  }
 
   const child = spawn(process.execPath, args, {
     cwd: __dirname,

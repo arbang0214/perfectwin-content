@@ -80,14 +80,36 @@
   .form-group textarea { resize: vertical; min-height: 60px; }
   .form-group input:focus, .form-group textarea:focus { border-color: #2563EB; box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
 
-  /* Content toggles */
-  .toggles { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-  .toggle-chip {
-    padding: 6px 14px; border-radius: 20px;
-    font-size: 13px; cursor: pointer; border: 1px solid #E2E8F0;
-    background: #fff; color: #94A3B8; transition: all .15s; user-select: none;
+  /* Content type groups */
+  .type-groups { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+  .type-group { border: 1px solid #E2E8F0; border-radius: 10px; overflow: hidden; }
+  .type-group-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 14px; background: #F8FAFC;
+    font-size: 13px; font-weight: 600; color: #475569;
   }
+  .type-group-header.meta { color: #94A3B8; }
+  .cat-toggle {
+    font-size: 12px; padding: 3px 10px; border-radius: 12px;
+    border: 1px solid #CBD5E1; background: #fff; color: #64748B;
+    cursor: pointer; transition: all .15s;
+  }
+  .cat-toggle:hover { border-color: #2563EB; color: #2563EB; }
+  .meta-badge {
+    font-size: 11px; padding: 2px 8px; border-radius: 10px;
+    background: #F1F5F9; color: #94A3B8; font-weight: 500;
+  }
+  .toggles { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 14px; }
+  .toggle-chip {
+    padding: 5px 12px; border-radius: 16px;
+    font-size: 12px; cursor: pointer; border: 1px solid #E2E8F0;
+    background: #fff; color: #94A3B8; transition: all .15s; user-select: none;
+    display: flex; flex-direction: column; gap: 1px;
+  }
+  .toggle-chip .chip-label { font-weight: 600; }
+  .toggle-chip .chip-desc { font-size: 11px; opacity: 0.75; }
   .toggle-chip.on { background: #EFF6FF; border-color: #2563EB; color: #2563EB; }
+  .toggle-chip.disabled { background: #F8FAFC; border-color: #E2E8F0; color: #CBD5E1; cursor: default; }
 
   /* Buttons */
   .btn-row { display: flex; gap: 12px; justify-content: center; margin-top: 24px; }
@@ -137,6 +159,7 @@
   }
   .p-step.active { color: #2563EB; font-weight: 600; }
   .p-step.done { color: #059669; }
+  .p-step.skip { color: #CBD5E1; }
   .p-step-icon {
     width: 28px; height: 28px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
@@ -145,6 +168,7 @@
   }
   .p-step.active .p-step-icon { background: #EFF6FF; color: #2563EB; }
   .p-step.done .p-step-icon { background: #ECFDF5; color: #059669; }
+  .p-step.skip .p-step-icon { background: #F8FAFC; color: #CBD5E1; }
   .p-step-spinner {
     width: 28px; height: 28px; border-radius: 50%;
     border: 2px solid #E2E8F0; border-top-color: #2563EB;
@@ -338,11 +362,11 @@
     </div>
     <div class="form-group">
       <label>SEO Keywords</label>
-      <input type="text" id="fKeywords">
+      <textarea id="fKeywords" rows="3" placeholder="예: SAP S/4HANA migration testing&#10;관련 키워드를 여러 줄로 상세하게 입력할수록 SEO에 최적화된 콘텐츠가 생성됩니다"></textarea>
     </div>
     <div class="form-group">
       <label>PerfecTwin Connection Point</label>
-      <input type="text" id="fAngle">
+      <textarea id="fAngle" rows="4" placeholder="예: Data Extractor로 실 프로덕션 데이터를 추출해서 테스트에 활용.&#10;경쟁사 대비 차별점, 구체적 기능, 고객 가치 등을 상세하게 작성할수록&#10;더 설득력 있는 콘텐츠가 생성됩니다"></textarea>
     </div>
     <div class="form-group">
       <label>Additional Intel (optional)</label>
@@ -352,14 +376,67 @@
     <label style="font-size:13px;font-weight:600;color:#64748B;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:8px">
       Content Types
     </label>
-    <div class="toggles">
-      <span class="toggle-chip on" data-type="blog-ko">Blog KO</span>
-      <span class="toggle-chip on" data-type="blog-en">Blog EN</span>
-      <span class="toggle-chip on" data-type="linkedin-company">LinkedIn Company</span>
-      <span class="toggle-chip on" data-type="linkedin-personal">LinkedIn Personal</span>
-      <span class="toggle-chip on" data-type="x-posts">X Posts</span>
-      <span class="toggle-chip on" data-type="seo-meta">SEO Meta</span>
-      <span class="toggle-chip on" data-type="utm-links">UTM Links</span>
+    <div class="type-groups">
+      <!-- 📄 발행 콘텐츠 -->
+      <div class="type-group">
+        <div class="type-group-header">
+          <span>📄 발행 콘텐츠</span>
+          <button class="cat-toggle" data-cat="publish">전체 해제</button>
+        </div>
+        <div class="toggles">
+          <span class="toggle-chip on" data-type="blog-ko" data-cat="publish">
+            <span class="chip-label">Blog KO</span>
+            <span class="chip-desc">한글 블로그 (1,200~1,800단어)</span>
+          </span>
+          <span class="toggle-chip on" data-type="blog-en" data-cat="publish">
+            <span class="chip-label">Blog EN</span>
+            <span class="chip-desc">영어 블로그 (로컬라이제이션)</span>
+          </span>
+          <span class="toggle-chip on" data-type="linkedin-company" data-cat="publish">
+            <span class="chip-label">LinkedIn Company</span>
+            <span class="chip-desc">회사 포스트 2개 (캐러셀/이미지)</span>
+          </span>
+          <span class="toggle-chip on" data-type="linkedin-personal" data-cat="publish">
+            <span class="chip-label">LinkedIn Personal</span>
+            <span class="chip-desc">개인 포스트 2개 (PM 인사이트)</span>
+          </span>
+          <span class="toggle-chip on" data-type="x-posts" data-cat="publish">
+            <span class="chip-label">X Posts</span>
+            <span class="chip-desc">포스트 5개 + 스레드 1개</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- 🖼️ 이미지 프롬프트 -->
+      <div class="type-group">
+        <div class="type-group-header">
+          <span>🖼️ 이미지 프롬프트</span>
+          <button class="cat-toggle" data-cat="image">전체 해제</button>
+        </div>
+        <div class="toggles">
+          <span class="toggle-chip on" data-type="img-blog-thumbnail" data-cat="image">
+            <span class="chip-label">블로그 썸네일</span>
+            <span class="chip-desc">OG 썸네일 Ideogram 프롬프트</span>
+          </span>
+          <span class="toggle-chip on" data-type="img-linkedin-company" data-cat="image">
+            <span class="chip-label">LinkedIn 이미지</span>
+            <span class="chip-desc">회사 포스트 이미지 가이드 2개</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- ⚙️ 메타데이터 (항상 자동 생성) -->
+      <div class="type-group">
+        <div class="type-group-header meta">
+          <span>⚙️ 메타데이터</span>
+          <span class="meta-badge">항상 자동 생성</span>
+        </div>
+        <div class="toggles">
+          <span class="toggle-chip disabled"><span class="chip-label">SEO Meta</span></span>
+          <span class="toggle-chip disabled"><span class="chip-label">UTM Links</span></span>
+          <span class="toggle-chip disabled"><span class="chip-label">Summary</span></span>
+        </div>
+      </div>
     </div>
 
     <div class="btn-row">
@@ -477,14 +554,36 @@ document.getElementById('toStep2').addEventListener('click', () => {
   document.getElementById('fTopic').value = selected.topic;
   document.getElementById('fKeywords').value = selected.keywords;
   document.getElementById('fAngle').value = selected.angle;
+  // Reset all publish/image chips to on when entering step 2
+  document.querySelectorAll('.toggle-chip[data-cat]').forEach(c => c.classList.add('on'));
+  document.querySelectorAll('.cat-toggle').forEach(btn => btn.textContent = '전체 해제');
   showStep(2);
 });
 
 document.getElementById('backToStep1').addEventListener('click', () => showStep(1));
 
-// Content type toggles
-document.querySelectorAll('.toggle-chip').forEach(chip => {
-  chip.addEventListener('click', () => chip.classList.toggle('on'));
+// Content type toggles (only non-disabled chips)
+document.querySelectorAll('.toggle-chip[data-cat]').forEach(chip => {
+  chip.addEventListener('click', () => {
+    chip.classList.toggle('on');
+    // Update category toggle button label
+    const cat = chip.dataset.cat;
+    const catChips = document.querySelectorAll(`.toggle-chip[data-cat="${cat}"]`);
+    const allOn = [...catChips].every(c => c.classList.contains('on'));
+    const btn = document.querySelector(`.cat-toggle[data-cat="${cat}"]`);
+    if (btn) btn.textContent = allOn ? '전체 해제' : '전체 선택';
+  });
+});
+
+// Category select/deselect all
+document.querySelectorAll('.cat-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const cat = btn.dataset.cat;
+    const chips = document.querySelectorAll(`.toggle-chip[data-cat="${cat}"]`);
+    const allOn = [...chips].every(c => c.classList.contains('on'));
+    chips.forEach(c => c.classList.toggle('on', !allOn));
+    btn.textContent = allOn ? '전체 선택' : '전체 해제';
+  });
 });
 
 // Generate
@@ -494,16 +593,22 @@ function updateProgressStep(stepNum, state) {
   const steps = document.querySelectorAll('#progressSteps .p-step');
   steps.forEach(s => {
     const n = parseInt(s.dataset.step);
-    if (n < stepNum) {
+    if (n < stepNum && s.className.indexOf('skip') === -1) {
       s.className = 'p-step done';
-      s.querySelector('.p-step-icon, .p-step-spinner').outerHTML = '<div class="p-step-icon">&#10003;</div>';
+      const el = s.querySelector('.p-step-icon, .p-step-spinner');
+      if (el) el.outerHTML = '<div class="p-step-icon">&#10003;</div>';
     } else if (n === stepNum && state === 'active') {
       s.className = 'p-step active';
-      s.querySelector('.p-step-icon').outerHTML = '<div class="p-step-spinner"></div>';
+      const el = s.querySelector('.p-step-icon, .p-step-spinner');
+      if (el) el.outerHTML = '<div class="p-step-spinner"></div>';
     } else if (n === stepNum && state === 'done') {
       s.className = 'p-step done';
       const el = s.querySelector('.p-step-icon, .p-step-spinner');
       if (el) el.outerHTML = '<div class="p-step-icon">&#10003;</div>';
+    } else if (n === stepNum && state === 'skip') {
+      s.className = 'p-step skip';
+      const el = s.querySelector('.p-step-icon, .p-step-spinner');
+      if (el) el.outerHTML = '<div class="p-step-icon">—</div>';
     }
   });
 }
@@ -550,11 +655,15 @@ document.getElementById('startGenerate').addEventListener('click', () => {
     elapsedEl.textContent = `${m}:${String(s).padStart(2,'0')}`;
   }, 1000);
 
+  // Collect selected content types (exclude disabled meta chips)
+  const contentTypes = [...document.querySelectorAll('.toggle-chip.on[data-type]')]
+    .map(chip => chip.dataset.type);
+
   // Step 1: Start the job
   fetch('/api/generate', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ topic, keywords, angle, intel }),
+    body: JSON.stringify({ topic, keywords, angle, intel, contentTypes }),
   })
   .then(r => r.json())
   .then(({ jobId }) => {
@@ -565,11 +674,21 @@ document.getElementById('startGenerate').addEventListener('click', () => {
       try {
         const evt = JSON.parse(e.data);
         if (evt.type === 'log') {
-          if (evt.data.includes('[1/5]')) updateProgressStep(1, 'active');
-          else if (evt.data.includes('[2/5]')) { updateProgressStep(1, 'done'); updateProgressStep(2, 'active'); }
-          else if (evt.data.includes('[3/5]')) { updateProgressStep(2, 'done'); updateProgressStep(3, 'active'); }
-          else if (evt.data.includes('[4/5]')) { updateProgressStep(3, 'done'); updateProgressStep(4, 'active'); }
-          else if (evt.data.includes('[5/5]')) { updateProgressStep(4, 'done'); updateProgressStep(5, 'active'); }
+          if (evt.data.includes('[1/5]')) {
+            updateProgressStep(1, evt.data.includes('Skipping') ? 'skip' : 'active');
+          } else if (evt.data.includes('[2/5]')) {
+            updateProgressStep(1, 'done');
+            updateProgressStep(2, evt.data.includes('Skipping') ? 'skip' : 'active');
+          } else if (evt.data.includes('[3/5]')) {
+            updateProgressStep(2, document.querySelector('#progressSteps .p-step[data-step="2"]')?.classList.contains('skip') ? 'skip' : 'done');
+            updateProgressStep(3, evt.data.includes('Skipping') ? 'skip' : 'active');
+          } else if (evt.data.includes('[4/5]')) {
+            updateProgressStep(3, document.querySelector('#progressSteps .p-step[data-step="3"]')?.classList.contains('skip') ? 'skip' : 'done');
+            updateProgressStep(4, evt.data.includes('Skipping') ? 'skip' : 'active');
+          } else if (evt.data.includes('[5/5]')) {
+            updateProgressStep(4, document.querySelector('#progressSteps .p-step[data-step="4"]')?.classList.contains('skip') ? 'skip' : 'done');
+            updateProgressStep(5, 'active');
+          }
 
           const div = document.createElement('div');
           div.className = evt.data.startsWith('[') || evt.data.startsWith('===') ? 'status-line' : 'log-line';
