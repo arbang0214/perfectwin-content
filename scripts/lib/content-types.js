@@ -1,0 +1,77 @@
+const CONTENT_TYPES = {
+  "blog-ko": {
+    category: "content",
+    label: "한글 블로그",
+    prompt: "blog-ko.md",
+    outputFolder: "content",
+    outputFile: "blog-ko.md",
+  },
+  "blog-en": {
+    category: "content",
+    label: "영어 블로그",
+    prompt: "blog-en.md",
+    outputFolder: "content",
+    outputFile: "blog-en.md",
+  },
+  "linkedin-company": {
+    category: "content",
+    label: "LinkedIn 회사",
+    prompt: "linkedin-company.md",
+    outputFolder: "content",
+    outputFile: "linkedin-company.md",
+  },
+  "linkedin-personal": {
+    category: "content",
+    label: "LinkedIn 개인",
+    prompt: "linkedin-personal.md",
+    outputFolder: "content",
+    outputFile: "linkedin-personal.md",
+  },
+  "x-posts": {
+    category: "content",
+    label: "X 포스트",
+    prompt: "x-posts.md",
+    outputFolder: "content",
+    outputFile: "x-posts.md",
+  },
+  "img-blog-thumbnail": {
+    category: "image",
+    label: "블로그 썸네일",
+    prompt: "image-blog-thumbnail.md",
+    outputFolder: "image-prompts",
+    outputFile: "blog-thumbnail.md",
+  },
+  "img-linkedin-company": {
+    category: "image",
+    label: "LinkedIn 회사 이미지",
+    prompt: "image-linkedin.md",
+    outputFolder: "image-prompts",
+    outputFile: "linkedin-images.md",
+  },
+  "seo-meta": {
+    category: "meta",
+    label: "SEO 메타",
+    prompt: null,
+    alwaysGenerate: true,
+    outputFolder: "meta",
+    outputFile: "seo-meta.json",
+  },
+  "utm-links": {
+    category: "meta",
+    label: "UTM 링크",
+    prompt: null,
+    alwaysGenerate: true,
+    outputFolder: "meta",
+    outputFile: "utm-links.json",
+  },
+  summary: {
+    category: "meta",
+    label: "주간 요약",
+    prompt: null,
+    alwaysGenerate: true,
+    outputFolder: "",
+    outputFile: "summary.md",
+  },
+};
+
+module.exports = { CONTENT_TYPES };
