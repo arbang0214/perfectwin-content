@@ -3,7 +3,7 @@ import { showToast } from "../components/toast.js";
 // 주차별 발행 아이템 (고정 목록)
 const PUBLISH_ITEMS = [
   { id: "blog-en",           icon: "📄", label: "영어 블로그",          channel: "inblog",   route: "blog-en" },
-  { id: "blog-ko",           icon: "📄", label: "한글 블로그",           channel: "inblog",   route: null },
+  { id: "blog-ko",           icon: "📄", label: "한글 블로그",           channel: "inblog",   route: "blog-ko" },
   { id: "linkedin-company",  icon: "💼", label: "LinkedIn 회사 포스트", channel: "LinkedIn", route: null },
   { id: "linkedin-personal", icon: "🤝", label: "LinkedIn 개인 포스트", channel: "LinkedIn", route: null },
   { id: "x-posts",           icon: "🐦", label: "X 포스트 (5개)",       channel: "X",        route: null },
@@ -22,6 +22,8 @@ export function renderDashboard(container, subroute) {
       const contentRoute = subroute.slice(slashIdx + 1);
       if (contentRoute === "blog-en") {
         renderBlogEnPublish(container, weekId);
+      } else if (contentRoute === "blog-ko") {
+        renderBlogKoPublish(container, weekId);
       } else {
         renderWeekDetail(container, weekId);
       }
@@ -548,6 +550,232 @@ async function renderBlogEnPublish(container, weekId) {
         </div>`;
       showToast("inblog 발행 완료!", "success");
       if (result.framer?.success) showToast("홈페이지 게시 완료!", "success");
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = "📝 inblog에 발행";
+      statusEl.innerHTML = `
+        <div style="color:var(--error);font-size:13px;padding:10px;background:#FEF2F2;border-radius:6px;border:1px solid #FECACA">
+          ✕ 발행 실패: ${esc(err.message)}
+        </div>`;
+    }
+  };
+}
+
+// ─── Screen 5: blog-ko publish page ──────────────────────────────────────────
+async function renderBlogKoPublish(container, weekId) {
+  container.innerHTML = `
+    <button class="db-back" id="btnBack">← ${weekId} 상세로</button>
+    <div id="publishBody"><div style="text-align:center;padding:40px;color:var(--text-muted)">콘텐츠 불러오는 중...</div></div>
+  `;
+  container.querySelector("#btnBack").onclick = () => { location.hash = `#dashboard/${weekId}`; };
+
+  let blogData;
+  try {
+    const res = await fetch(`/api/publish/week/${weekId}/content/blog-ko`);
+    if (!res.ok) throw new Error((await res.json()).error);
+    blogData = await res.json();
+  } catch (err) {
+    container.querySelector("#publishBody").innerHTML = `<p style="color:var(--error);padding:16px">blog-ko.md를 찾을 수 없습니다: ${err.message}</p>`;
+    return;
+  }
+
+  let existingState = null;
+  try {
+    const res = await fetch(`/api/publish/week/${weekId}`);
+    if (res.ok) {
+      const data = await res.json();
+      existingState = data.contents?.find(c => c.id === "blog-ko");
+    }
+  } catch { /* ignore */ }
+
+  const isPublished = existingState?.status === "published";
+  const publishedUrl = existingState?.publishedUrl;
+  const blogUrl = blogData.blogUrl || "https://ko.blog.perfectwin.ai";
+
+  const statusBadge = isPublished
+    ? `<span class="item-badge published" style="margin-left:10px">🟢 발행 완료</span>`
+    : `<span class="item-badge draft" style="margin-left:10px">⚪ 이전</span>`;
+
+  const el = container.querySelector("#publishBody");
+  el.innerHTML = `
+    <div style="max-width:720px">
+      <div style="margin-bottom:28px">
+        <h1 class="page-title" style="display:inline">한글 블로그 발행</h1>${statusBadge}
+        <p class="page-subtitle" style="margin-top:6px">${weekId} · inblog으로 발행</p>
+      </div>
+
+      ${isPublished && publishedUrl ? `
+        <div class="publish-result show" style="margin-bottom:20px">
+          <h4>✓ 이미 발행된 포스트입니다</h4>
+          <a href="${publishedUrl}" target="_blank">${publishedUrl}</a>
+        </div>` : ""}
+
+      <div class="form-group">
+        <label>제목</label>
+        <input type="text" id="pubTitle" value="${esc(blogData.title)}" placeholder="블로그 제목을 입력하세요" />
+      </div>
+
+      <div class="form-group">
+        <label>슬러그 (URL)</label>
+        <input type="text" id="pubSlug" value="${esc(blogData.slug)}" placeholder="url-slug" />
+        <div class="slug-preview-line">${blogUrl}/<span id="slugPreview">${esc(blogData.slug)}</span></div>
+      </div>
+
+      <div class="form-group">
+        <label>서브텍스트 (Description)</label>
+        <textarea id="pubDesc" rows="3" placeholder="SEO 설명 (최대 160자)">${esc(blogData.description)}</textarea>
+        <div class="char-counter" id="descCounter">${(blogData.description || "").length}/160</div>
+      </div>
+
+      <div class="form-group">
+        <label>본문</label>
+        <div class="publish-preview">
+          <div class="preview-tabs">
+            <button class="preview-tab active" data-tab="preview">미리보기</button>
+            <button class="preview-tab" data-tab="edit">편집</button>
+          </div>
+          <div class="preview-body" id="previewHtml" style="min-height:400px;max-height:400px"></div>
+          <textarea class="preview-body raw hidden" id="previewRaw" style="min-height:400px;max-height:400px;resize:vertical">${esc(blogData.markdown)}</textarea>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>썸네일 이미지</label>
+        <input type="file" id="thumbInput" accept="image/png,image/jpeg,image/webp" style="display:none">
+        <div id="thumbZone" class="thumb-drop-zone">
+          ${blogData.hasThumbnail
+            ? `<img src="${blogData.thumbnailUrl}?t=${Date.now()}" class="thumb-drop-img" id="thumbImg">`
+            : `<div id="thumbEmpty" class="thumb-drop-empty">
+                <div style="font-size:36px;margin-bottom:8px">🖼️</div>
+                <div>이미지를 드래그하거나 클릭해서 업로드</div>
+                <div style="font-size:11px;color:var(--text-muted);margin-top:4px">PNG, JPG, WebP · 최대 10MB · 권장: 1200×630</div>
+               </div>`}
+        </div>
+        ${blogData.hasThumbnail ? `<button class="btn-sm btn-secondary" id="btnChangeThumb" style="margin-top:8px">이미지 변경</button>` : ""}
+      </div>
+
+      <div class="pub-action-area">
+        <button class="btn-inblog" id="btnPublish" ${isPublished ? "disabled" : ""}>
+          ${isPublished ? "✓ 발행 완료" : "📝 inblog에 발행"}
+        </button>
+        <p class="pub-helper-text">발행하면 ${blogUrl}에 즉시 게시됩니다</p>
+        <div id="publishStatus"></div>
+      </div>
+    </div>
+  `;
+
+  const previewHtml = el.querySelector("#previewHtml");
+  const previewRaw = el.querySelector("#previewRaw");
+  renderMarkdownPreview(previewHtml, blogData.markdown);
+
+  el.querySelectorAll(".preview-tab").forEach(tab => {
+    tab.onclick = () => {
+      el.querySelectorAll(".preview-tab").forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+      const isPreview = tab.dataset.tab === "preview";
+      previewHtml.classList.toggle("hidden", !isPreview);
+      previewRaw.classList.toggle("hidden", isPreview);
+      if (isPreview) renderMarkdownPreview(previewHtml, previewRaw.value);
+    };
+  });
+
+  const titleInput = el.querySelector("#pubTitle");
+  const slugInput = el.querySelector("#pubSlug");
+  const slugPreview = el.querySelector("#slugPreview");
+  titleInput.oninput = () => {
+    const auto = autoSlug(titleInput.value);
+    slugInput.value = auto;
+    slugPreview.textContent = auto;
+  };
+  slugInput.oninput = () => { slugPreview.textContent = slugInput.value; };
+
+  const descTa = el.querySelector("#pubDesc");
+  const descCounter = el.querySelector("#descCounter");
+  descTa.oninput = () => {
+    const len = descTa.value.length;
+    descCounter.textContent = `${len}/160`;
+    descCounter.classList.toggle("over", len > 160);
+  };
+
+  const thumbInput = el.querySelector("#thumbInput");
+  let currentThumbFile = null;
+
+  function setThumb(url) {
+    el.querySelector("#thumbZone").innerHTML = `<img src="${url}" class="thumb-drop-img" id="thumbImg">`;
+  }
+
+  thumbInput.onchange = async () => {
+    const file = thumbInput.files[0];
+    if (!file) return;
+    const fd = new FormData();
+    fd.append("file", file);
+    try {
+      const res = await fetch(`/api/publish/week/${weekId}/upload-thumbnail`, { method: "POST", body: fd });
+      if (!res.ok) throw new Error();
+      const data = await res.json();
+      currentThumbFile = data.filename;
+      setThumb(data.url + `?t=${Date.now()}`);
+      showToast("썸네일 업로드 완료", "success");
+    } catch { showToast("썸네일 업로드 실패", "error"); }
+  };
+
+  el.querySelector("#thumbZone").onclick = () => thumbInput.click();
+  el.querySelector("#btnChangeThumb")?.addEventListener("click", (e) => { e.stopPropagation(); thumbInput.click(); });
+
+  const thumbZone = el.querySelector("#thumbZone");
+  thumbZone.ondragover = (e) => { e.preventDefault(); thumbZone.classList.add("drag-over"); };
+  thumbZone.ondragleave = () => thumbZone.classList.remove("drag-over");
+  thumbZone.ondrop = (e) => {
+    e.preventDefault();
+    thumbZone.classList.remove("drag-over");
+    const file = e.dataTransfer.files[0];
+    if (!file) return;
+    const dt = new DataTransfer();
+    dt.items.add(file);
+    thumbInput.files = dt.files;
+    thumbInput.dispatchEvent(new Event("change"));
+  };
+
+  el.querySelector("#btnPublish").onclick = async () => {
+    const btn = el.querySelector("#btnPublish");
+    const statusEl = el.querySelector("#publishStatus");
+    const markdown = previewRaw.classList.contains("hidden") ? blogData.markdown : previewRaw.value;
+
+    btn.disabled = true;
+    btn.innerHTML = `<div class="btn-spinner"></div> 발행 중...`;
+    statusEl.innerHTML = "";
+
+    let thumbnailPath = null;
+    if (currentThumbFile) {
+      thumbnailPath = `images/${currentThumbFile}`;
+    } else if (blogData.hasThumbnail) {
+      thumbnailPath = "images/blog-thumbnail.png";
+    }
+
+    try {
+      const res = await fetch("/api/publish/inblog-ko", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          weekId,
+          title: el.querySelector("#pubTitle").value,
+          slug: el.querySelector("#pubSlug").value,
+          description: descTa.value,
+          contentMarkdown: markdown,
+          thumbnailPath,
+          publishNow: true,
+        }),
+      });
+      const result = await res.json();
+      if (!result.success) throw new Error(result.error);
+
+      btn.textContent = "✓ 발행 완료";
+      statusEl.innerHTML = `
+        <div class="publish-result show">
+          <h4>✓ 발행이 완료되었습니다!</h4>
+          <a href="${result.publishedUrl}" target="_blank">${result.publishedUrl}</a>
+        </div>`;
+      showToast("inblog 발행 완료!", "success");
     } catch (err) {
       btn.disabled = false;
       btn.textContent = "📝 inblog에 발행";

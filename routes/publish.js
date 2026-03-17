@@ -215,6 +215,54 @@ function inblogRequest(method, urlPath, body, apiKey) {
   });
 }
 
+// ─── GET /api/publish/week/:weekId/content/blog-ko ──────────────────────────
+router.get("/week/:weekId/content/blog-ko", (req, res) => {
+  const { weekId } = req.params;
+  const weekPath = path.join(OUTPUT_DIR, weekId);
+
+  let mdPath = null;
+  for (const p of ["content/blog-ko.md", "blog-ko.md"]) {
+    const fp = path.join(weekPath, p);
+    if (fs.existsSync(fp)) { mdPath = fp; break; }
+  }
+  if (!mdPath) return res.status(404).json({ error: "blog-ko.md not found" });
+
+  const markdown = fs.readFileSync(mdPath, "utf-8");
+
+  // Parse meta section: **제목**, **URL 슬러그**, **메타 디스크립션**
+  const metaTitleMatch = markdown.match(/\*\*제목\*\*:\s*(.+)/);
+  const metaSlugMatch  = markdown.match(/\*\*URL 슬러그\*\*:\s*(.+)/);
+  const metaDescMatch  = markdown.match(/\*\*메타 디스크립션\*\*:\s*(.+)/);
+  // Fallback: first # heading
+  const headingMatch   = markdown.match(/^#\s+(.+)$/m);
+
+  const title = (metaTitleMatch ? metaTitleMatch[1] : headingMatch ? headingMatch[1] : "").trim();
+  const slug  = metaSlugMatch ? metaSlugMatch[1].trim() : slugify(title);
+  const description = metaDescMatch ? metaDescMatch[1].trim() : "";
+
+  // Extract body after ## 본문
+  const bodyMatch = markdown.match(/^##\s+본문\s*\n([\s\S]*)/m);
+  const bodyMarkdown = bodyMatch ? bodyMatch[1].trim() : markdown;
+
+  const thumbPath = path.join(weekPath, "images", "blog-thumbnail.png");
+  const thumbJpg  = path.join(weekPath, "images", "blog-thumbnail.jpg");
+  const thumbWebp = path.join(weekPath, "images", "blog-thumbnail.webp");
+  let thumbnailFilename = null;
+  if (fs.existsSync(thumbPath))      thumbnailFilename = "blog-thumbnail.png";
+  else if (fs.existsSync(thumbJpg))  thumbnailFilename = "blog-thumbnail.jpg";
+  else if (fs.existsSync(thumbWebp)) thumbnailFilename = "blog-thumbnail.webp";
+
+  res.json({
+    title,
+    slug: slug || "untitled",
+    description,
+    markdown: bodyMarkdown,
+    hasThumbnail: !!thumbnailFilename,
+    thumbnailUrl: thumbnailFilename ? `/api/publish/week/${weekId}/file/${thumbnailFilename}` : null,
+    blogUrl: process.env.INBLOG_KO_BLOG_URL || "https://ko.blog.perfectwin.ai",
+  });
+});
+
 // ─── GET /api/publish/week/:weekId/content/blog-en ──────────────────────────
 router.get("/week/:weekId/content/blog-en", (req, res) => {
   const { weekId } = req.params;
@@ -266,19 +314,8 @@ router.get("/week/:weekId/content/blog-en", (req, res) => {
   });
 });
 
-// ─── POST /api/publish/inblog ────────────────────────────────────────────────
-router.post("/inblog", async (req, res) => {
-  const {
-    weekId, title, slug, description, contentMarkdown, thumbnailPath, publishNow,
-    publishToFramer, framerTitle, framerSubtitle, framerFeatured,
-  } = req.body;
-  const apiKey = process.env.INBLOG_API_KEY;
-  const subdomain = process.env.INBLOG_BLOG_SUBDOMAIN;
-
-  if (!apiKey) return res.status(500).json({ success: false, error: "INBLOG_API_KEY not configured" });
-  if (!weekId || !title || !contentMarkdown) return res.status(400).json({ success: false, error: "weekId, title, contentMarkdown required" });
-
-  // Resolve thumbnail absolute path
+// ─── Shared inblog publish helper ────────────────────────────────────────────
+async function inblogPublish({ apiKey, subdomain, blogUrl, weekId, contentId, title, slug, description, contentMarkdown, thumbnailPath, publishNow }) {
   let thumbAbsPath = null;
   if (thumbnailPath) {
     thumbAbsPath = thumbnailPath.startsWith("/")
@@ -287,86 +324,101 @@ router.post("/inblog", async (req, res) => {
     if (!fs.existsSync(thumbAbsPath)) thumbAbsPath = null;
   }
 
-  try {
-    const contentHtml = markdownToHtml(contentMarkdown);
+  const contentHtml = markdownToHtml(contentMarkdown);
 
-    // Load thumbnail as base64 for inblog
-    let imageData = null;
-    if (thumbAbsPath) {
-      const buf = fs.readFileSync(thumbAbsPath);
-      const ext = path.extname(thumbAbsPath).slice(1).toLowerCase();
-      const mime = ext === "jpg" ? "image/jpeg" : `image/${ext}`;
-      imageData = `data:${mime};base64,${buf.toString("base64")}`;
-    }
+  let imageData = null;
+  if (thumbAbsPath) {
+    const buf = fs.readFileSync(thumbAbsPath);
+    const ext = path.extname(thumbAbsPath).slice(1).toLowerCase();
+    const mime = ext === "jpg" ? "image/jpeg" : `image/${ext}`;
+    imageData = `data:${mime};base64,${buf.toString("base64")}`;
+  }
 
-    // Step 1: Create draft post
-    function buildCreateBody(withImage) {
-      return {
-        jsonapi: { version: "1.0" },
-        data: {
-          type: "posts",
-          attributes: {
-            title, slug, description,
-            content_html: contentHtml,
-            published: false,
-            ...(withImage && imageData ? { image: imageData } : {}),
-          },
+  function buildCreateBody(withImage) {
+    return {
+      jsonapi: { version: "1.0" },
+      data: {
+        type: "posts",
+        attributes: {
+          title, slug, description,
+          content_html: contentHtml,
+          published: false,
+          ...(withImage && imageData ? { image: imageData } : {}),
         },
-      };
+      },
+    };
+  }
+
+  let createRes = await inblogRequest("POST", "/api/v1/posts", buildCreateBody(true), apiKey);
+  if (createRes.status >= 500 && imageData) {
+    console.log("[inblog] 5xx with image, retrying without image...");
+    createRes = await inblogRequest("POST", "/api/v1/posts", buildCreateBody(false), apiKey);
+  }
+  if (createRes.status >= 400) {
+    const detail = typeof createRes.body === "object" ? JSON.stringify(createRes.body) : String(createRes.body);
+    throw new Error(`inblog 오류 (${createRes.status}): ${detail}`);
+  }
+
+  const postId = createRes.body?.data?.id;
+  console.log("[inblog] create response:", JSON.stringify(createRes.body?.data?.attributes || createRes.body, null, 2));
+  if (!postId) throw new Error("inblog post creation failed: No post ID in response");
+
+  let publishedSlug = slug;
+  let finalStatus = "draft";
+
+  if (publishNow !== false) {
+    const publishRes = await inblogRequest("PATCH", `/api/v1/posts/${postId}/publish`, {
+      jsonapi: { version: "1.0" },
+      data: { type: "publish_action", attributes: { action: "publish" } },
+    }, apiKey);
+    console.log("[inblog] publish response:", JSON.stringify(publishRes.body?.data?.attributes || publishRes.body, null, 2));
+    if (publishRes.status >= 400) throw new Error(`inblog publish failed (${publishRes.status})`);
+    const attrs = publishRes.body?.data?.attributes || {};
+    publishedSlug = attrs.slug || slug;
+    // Use the actual blog URL from the response if available
+    const actualBlogUrl = attrs.blog_url || attrs.blogUrl || attrs.blog?.url || null;
+    blogUrl = actualBlogUrl || blogUrl || `https://inblog.ai/${subdomain}`;
+    finalStatus = "published";
+  }
+
+  const resolvedBlogUrl = blogUrl || `https://inblog.ai/${subdomain}`;
+  const publishedUrl = `${resolvedBlogUrl}/${publishedSlug}`;
+
+  const data = readPublishData(weekId);
+  if (data) {
+    const idx = data.contents.findIndex(c => c.id === contentId);
+    if (idx !== -1) {
+      data.contents[idx].status = finalStatus;
+      data.contents[idx].publishedAt = new Date().toISOString();
+      data.contents[idx].publishedUrl = publishedUrl;
+      data.contents[idx].inblogPostId = postId;
     }
+    writePublishData(weekId, data);
+  }
 
-    let createRes = await inblogRequest("POST", "/api/v1/posts", buildCreateBody(true), apiKey);
-    // 5xx + 이미지 있으면 이미지 없이 재시도
-    if (createRes.status >= 500 && imageData) {
-      console.log("[inblog] 5xx with image, retrying without image...");
-      createRes = await inblogRequest("POST", "/api/v1/posts", buildCreateBody(false), apiKey);
-    }
-    if (createRes.status >= 400) {
-      const detail = typeof createRes.body === "object" ? JSON.stringify(createRes.body) : String(createRes.body);
-      return res.status(502).json({ success: false, error: `inblog 오류 (${createRes.status}): ${detail}` });
-    }
+  return { postId, publishedUrl, finalStatus, thumbAbsPath };
+}
 
-    const postId = createRes.body?.data?.id;
-    if (!postId) return res.status(502).json({ success: false, error: "No post ID in response", details: createRes.body });
+// ─── POST /api/publish/inblog ────────────────────────────────────────────────
+router.post("/inblog", async (req, res) => {
+  const {
+    weekId, title, slug, description, contentMarkdown, thumbnailPath, publishNow,
+    publishToFramer, framerTitle, framerSubtitle, framerFeatured,
+  } = req.body;
+  const apiKey = process.env.INBLOG_API_KEY;
+  if (!apiKey) return res.status(500).json({ success: false, error: "INBLOG_API_KEY not configured" });
+  if (!weekId || !title || !contentMarkdown) return res.status(400).json({ success: false, error: "weekId, title, contentMarkdown required" });
 
-    let publishedSlug = slug;
-    let finalStatus = "draft";
+  try {
+    const { postId, publishedUrl, finalStatus, thumbAbsPath } = await inblogPublish({
+      apiKey, subdomain: process.env.INBLOG_BLOG_SUBDOMAIN, blogUrl: process.env.INBLOG_BLOG_URL,
+      weekId, contentId: "blog-en", title, slug, description, contentMarkdown, thumbnailPath, publishNow,
+    });
 
-    // Step 2: Publish
-    if (publishNow !== false) {
-      const publishRes = await inblogRequest("PATCH", `/api/v1/posts/${postId}/publish`, {
-        jsonapi: { version: "1.0" },
-        data: { type: "publish_action", attributes: { action: "publish" } },
-      }, apiKey);
-
-      if (publishRes.status >= 400) {
-        return res.status(502).json({ success: false, error: "inblog publish failed", details: publishRes.body });
-      }
-      publishedSlug = publishRes.body?.data?.attributes?.slug || slug;
-      finalStatus = "published";
-    }
-
-    const blogUrl = process.env.INBLOG_BLOG_URL || `https://inblog.ai/${subdomain}`;
-    const publishedUrl = `${blogUrl}/${publishedSlug}`;
-
-    // Update publish-data.json
-    const data = readPublishData(weekId);
-    if (data) {
-      const idx = data.contents.findIndex(c => c.id === "blog-en");
-      if (idx !== -1) {
-        data.contents[idx].status = finalStatus;
-        data.contents[idx].publishedAt = new Date().toISOString();
-        data.contents[idx].publishedUrl = publishedUrl;
-        data.contents[idx].inblogPostId = postId;
-      }
-      writePublishData(weekId, data);
-    }
-
-    // Step 3: Framer CMS
     let framerResult = null;
     if (publishToFramer && process.env.FRAMER_CMS_API_TOKEN) {
       framerResult = await publishToFramerCms({
-        thumbAbsPath, publishedUrl, publishedSlug,
+        thumbAbsPath, publishedUrl, publishedSlug: slug,
         title: framerTitle || title,
         subtitle: framerSubtitle || description,
         featured: framerFeatured || false,
@@ -376,6 +428,24 @@ router.post("/inblog", async (req, res) => {
     }
 
     res.json({ success: true, postId, publishedUrl, status: finalStatus, framer: framerResult });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// ─── POST /api/publish/inblog-ko ─────────────────────────────────────────────
+router.post("/inblog-ko", async (req, res) => {
+  const { weekId, title, slug, description, contentMarkdown, thumbnailPath, publishNow } = req.body;
+  const apiKey = process.env.INBLOG_KO_API_KEY || process.env.INBLOG_API_KEY;
+  if (!apiKey) return res.status(500).json({ success: false, error: "INBLOG_KO_API_KEY not configured" });
+  if (!weekId || !title || !contentMarkdown) return res.status(400).json({ success: false, error: "weekId, title, contentMarkdown required" });
+
+  try {
+    const { postId, publishedUrl, finalStatus } = await inblogPublish({
+      apiKey, subdomain: process.env.INBLOG_KO_BLOG_SUBDOMAIN, blogUrl: process.env.INBLOG_KO_BLOG_URL,
+      weekId, contentId: "blog-ko", title, slug, description, contentMarkdown, thumbnailPath, publishNow,
+    });
+    res.json({ success: true, postId, publishedUrl, status: finalStatus });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }
