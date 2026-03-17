@@ -13,6 +13,7 @@ app.use("/api/generate", require("./routes/generate"));
 app.use("/api", require("./routes/output"));
 app.use("/api/publish", require("./routes/publish"));
 app.use("/api/topics", require("./routes/topics"));
+app.use("/api/buffer", require("./routes/buffer"));
 
 // Error handler
 app.use((err, _req, res, _next) => {
@@ -22,4 +23,10 @@ app.use((err, _req, res, _next) => {
 
 app.listen(PORT, () => {
   console.log(`\n  PerfecTwin Content Engine  →  http://localhost:${PORT}\n`);
+
+  // Auto-fetch Buffer channels on startup
+  if (process.env.BUFFER_API_KEY) {
+    const { loadChannels } = require("./routes/buffer");
+    loadChannels().catch(() => {});
+  }
 });

@@ -430,6 +430,317 @@ async function publishToFramerCms({ thumbAbsPath, publishedUrl, publishedSlug, t
   }
 }
 
+// ─── LinkedIn post parsing ────────────────────────────────────────────────────
+
+function parseLinkedinPosts(markdown) {
+  const posts = [];
+  // Try ## Post A / ## Post B headers first
+  const headerPattern = /^##\s+Post\s+([AB])[:\s]*(.*)/gm;
+  const headers = [];
+  let m;
+  while ((m = headerPattern.exec(markdown)) !== null) {
+    headers.push({ label: m[1], title: m[2].trim(), index: m.index });
+  }
+
+  if (headers.length >= 2) {
+    for (let i = 0; i < headers.length; i++) {
+      const start = headers[i].index;
+      const end = i + 1 < headers.length ? headers[i + 1].index : markdown.length;
+      const body = markdown.slice(start, end).replace(/^##\s+Post\s+[AB][:\s]*.*\n/, "").trim();
+      // Strip Korean review section
+      const koreanIdx = body.indexOf("### \uD83C\uDDF0\uD83C\uDDF7");
+      const cleaned = koreanIdx !== -1 ? body.slice(0, koreanIdx).trim() : body;
+      posts.push({ num: i + 1, title: headers[i].title, text: cleaned });
+    }
+    return posts;
+  }
+
+  // Fallback: split by --- separator
+  const sections = markdown.split(/^---$/m).filter(s => s.trim());
+  let num = 1;
+  for (const section of sections) {
+    const trimmed = section.trim();
+    if (!trimmed || trimmed.startsWith("# ")) continue; // skip title section
+    const titleMatch = trimmed.match(/^##?\s+(.+)/);
+    const title = titleMatch ? titleMatch[1].trim() : `Post ${num}`;
+    posts.push({ num, title, text: trimmed });
+    num++;
+  }
+  return posts;
+}
+
+// GET /api/publish/week/:weekId/content/linkedin-company/:postNum
+router.get("/week/:weekId/content/linkedin-company/:postNum", (req, res) => {
+  const { weekId, postNum } = req.params;
+  const num = parseInt(postNum, 10);
+  const weekPath = path.join(OUTPUT_DIR, weekId);
+
+  let mdPath = null;
+  for (const p of ["content/linkedin-company.md", "linkedin-company.md"]) {
+    const fp = path.join(weekPath, p);
+    if (fs.existsSync(fp)) { mdPath = fp; break; }
+  }
+  if (!mdPath) return res.status(404).json({ error: "linkedin-company.md not found" });
+
+  const markdown = fs.readFileSync(mdPath, "utf-8");
+  const posts = parseLinkedinPosts(markdown);
+  const post = posts.find(p => p.num === num);
+  if (!post) return res.status(404).json({ error: `Post ${num} not found (${posts.length} posts parsed)` });
+
+  // Check for images
+  const imgName = `linkedin-company-${num}`;
+  let imageUrl = null;
+  for (const ext of ["png", "jpg", "webp"]) {
+    if (fs.existsSync(path.join(weekPath, "images", `${imgName}.${ext}`))) {
+      imageUrl = `/api/publish/week/${weekId}/file/${imgName}.${ext}`;
+      break;
+    }
+  }
+
+  res.json({ text: post.text, title: post.title, hasImage: !!imageUrl, imageUrl });
+});
+
+// GET /api/publish/week/:weekId/content/linkedin-personal/:postNum
+router.get("/week/:weekId/content/linkedin-personal/:postNum", (req, res) => {
+  const { weekId, postNum } = req.params;
+  const num = parseInt(postNum, 10);
+  const weekPath = path.join(OUTPUT_DIR, weekId);
+
+  let mdPath = null;
+  for (const p of ["content/linkedin-personal.md", "linkedin-personal.md"]) {
+    const fp = path.join(weekPath, p);
+    if (fs.existsSync(fp)) { mdPath = fp; break; }
+  }
+  if (!mdPath) return res.status(404).json({ error: "linkedin-personal.md not found" });
+
+  const markdown = fs.readFileSync(mdPath, "utf-8");
+  const posts = parseLinkedinPosts(markdown);
+  const post = posts.find(p => p.num === num);
+  if (!post) return res.status(404).json({ error: `Post ${num} not found (${posts.length} posts parsed)` });
+
+  let imageUrl = null;
+  const imgName = `linkedin-personal-${num}`;
+  for (const ext of ["png", "jpg", "webp"]) {
+    if (fs.existsSync(path.join(weekPath, "images", `${imgName}.${ext}`))) {
+      imageUrl = `/api/publish/week/${weekId}/file/${imgName}.${ext}`;
+      break;
+    }
+  }
+
+  res.json({ text: post.text, title: post.title, hasImage: !!imageUrl, imageUrl });
+});
+
+// ─── X post parsing ──────────────────────────────────────────────────────────
+
+function parseXPosts(markdown) {
+  const standaloneSection = markdown.match(/##\s*Standalone Posts\s*\n([\s\S]*?)(?=\n##\s*Thread|\n##\s*🇰🇷|$)/i);
+  const threadSection = markdown.match(/##\s*Thread[^\n]*\n([\s\S]*?)(?=\n---\s*\n##\s*🇰🇷|\n##\s*🇰🇷|$)/i);
+
+  const posts = [];
+
+  // Parse standalone posts: ### Post 1 (type: Empathy)
+  if (standaloneSection) {
+    const postPattern = /###\s*Post\s+(\d+)[^\n]*\n([\s\S]*?)(?=\n###\s*Post\s+\d+|$)/gi;
+    let m;
+    while ((m = postPattern.exec(standaloneSection[1])) !== null) {
+      const num = parseInt(m[1], 10);
+      let body = m[2].trim();
+      // Remove "Suggested day:" line
+      body = body.replace(/^Suggested day:.*$/gm, "").trim();
+      posts.push({ num, type: "standalone", text: body });
+    }
+  }
+
+  // Parse thread: ### Tweet 1, ### Tweet 2, ...
+  const tweets = [];
+  if (threadSection) {
+    const tweetPattern = /###\s*Tweet\s+(\d+)\s*\n([\s\S]*?)(?=\n###\s*Tweet\s+\d+|$)/gi;
+    let m;
+    while ((m = tweetPattern.exec(threadSection[1])) !== null) {
+      tweets.push({ num: parseInt(m[1], 10), text: m[2].trim() });
+    }
+  }
+
+  return { posts, thread: tweets };
+}
+
+// GET /api/publish/week/:weekId/content/x-post/:postNum
+router.get("/week/:weekId/content/x-post/:postNum", (req, res) => {
+  const { weekId, postNum } = req.params;
+  const num = parseInt(postNum, 10);
+  const weekPath = path.join(OUTPUT_DIR, weekId);
+
+  let mdPath = null;
+  for (const p of ["content/x-posts.md", "x-posts.md"]) {
+    const fp = path.join(weekPath, p);
+    if (fs.existsSync(fp)) { mdPath = fp; break; }
+  }
+  if (!mdPath) return res.status(404).json({ error: "x-posts.md not found" });
+
+  const markdown = fs.readFileSync(mdPath, "utf-8");
+  const { posts } = parseXPosts(markdown);
+  const post = posts.find(p => p.num === num);
+  if (!post) return res.status(404).json({ error: `Post ${num} not found (${posts.length} standalone posts parsed)` });
+
+  let imageUrl = null;
+  const imgName = `x-post-${num}`;
+  for (const ext of ["png", "jpg", "webp"]) {
+    if (fs.existsSync(path.join(weekPath, "images", `${imgName}.${ext}`))) {
+      imageUrl = `/api/publish/week/${weekId}/file/${imgName}.${ext}`;
+      break;
+    }
+  }
+
+  res.json({ text: post.text, hasImage: !!imageUrl, imageUrl });
+});
+
+// GET /api/publish/week/:weekId/content/x-thread
+router.get("/week/:weekId/content/x-thread", (req, res) => {
+  const { weekId } = req.params;
+  const weekPath = path.join(OUTPUT_DIR, weekId);
+
+  let mdPath = null;
+  for (const p of ["content/x-posts.md", "x-posts.md"]) {
+    const fp = path.join(weekPath, p);
+    if (fs.existsSync(fp)) { mdPath = fp; break; }
+  }
+  if (!mdPath) return res.status(404).json({ error: "x-posts.md not found" });
+
+  const markdown = fs.readFileSync(mdPath, "utf-8");
+  const { thread } = parseXPosts(markdown);
+  if (!thread.length) return res.status(404).json({ error: "Thread not found in x-posts.md" });
+
+  res.json({ tweets: thread });
+});
+
+// ─── POST /api/publish/buffer — Publish to Buffer (GraphQL) ────────────────────
+router.post("/buffer", async (req, res) => {
+  const { week, contentType, postNum, text, channelId, mode, dueAt, imageUrl } = req.body;
+
+  if (!text || !channelId) return res.status(400).json({ success: false, error: "text and channelId required" });
+
+  const { createBufferPost } = require("../lib/buffer-client");
+
+  // Map frontend mode names to Buffer GraphQL mode values
+  const modeMap = { now: "shareNow", scheduled: "customSchedule", queue: "queue" };
+  const bufferMode = modeMap[mode] || mode || "queue";
+
+  try {
+    const result = await createBufferPost({
+      channelId,
+      text,
+      mode: bufferMode,
+      dueAt: bufferMode === "customSchedule" ? dueAt : null,
+      imageUrl: imageUrl || null,
+    });
+
+    const bufferId = result.id;
+    const status = mode === "now" ? "sent" : mode === "scheduled" ? "scheduled" : "buffer";
+
+    // Update publish-data.json
+    if (week && contentType) {
+      const weekId = week.startsWith("week-") ? week : week;
+      const data = readPublishData(weekId);
+      if (data) {
+        const contentId = postNum ? `${contentType}-${postNum}` : contentType;
+        const labelMap = {
+          "linkedin-company": "LinkedIn Company",
+          "linkedin-personal": "LinkedIn Personal",
+          "x-post": "X Post",
+          "x-thread": "X Thread",
+        };
+        let idx = data.contents.findIndex(c => c.id === contentId);
+        if (idx === -1) {
+          data.contents.push({
+            id: contentId,
+            label: `${labelMap[contentType] || contentType} ${postNum || ""}`.trim(),
+            category: "content",
+            file: contentType.startsWith("x-") ? "content/x-posts.md" : `content/${contentType}.md`,
+            status: "published",
+            publishedAt: new Date().toISOString(),
+            bufferId,
+            bufferStatus: status,
+            scheduledAt: dueAt || null,
+            notes: "",
+          });
+        } else {
+          data.contents[idx].status = "published";
+          data.contents[idx].publishedAt = new Date().toISOString();
+          data.contents[idx].bufferId = bufferId;
+          data.contents[idx].bufferStatus = status;
+          data.contents[idx].scheduledAt = dueAt || null;
+        }
+        writePublishData(weekId, data);
+      }
+    }
+
+    res.json({ success: true, bufferId, status, scheduledAt: dueAt || null });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// POST /api/publish/buffer/thread — Publish X thread (sequential posts)
+router.post("/buffer/thread", async (req, res) => {
+  const { week, tweets, channelId, mode, dueAt } = req.body;
+
+  if (!tweets || !tweets.length || !channelId) {
+    return res.status(400).json({ success: false, error: "tweets array and channelId required" });
+  }
+
+  const { createBufferPost } = require("../lib/buffer-client");
+  const modeMap = { now: "shareNow", scheduled: "customSchedule", queue: "queue" };
+  const bufferMode = modeMap[mode] || mode || "queue";
+
+  try {
+    const results = [];
+    for (let i = 0; i < tweets.length; i++) {
+      const tweetDueAt = bufferMode === "customSchedule" && dueAt
+        ? new Date(new Date(dueAt).getTime() + i * 60000).toISOString() // 1 min apart
+        : null;
+
+      const result = await createBufferPost({
+        channelId,
+        text: tweets[i],
+        mode: bufferMode,
+        dueAt: tweetDueAt,
+      });
+      results.push({ num: i + 1, bufferId: result.id });
+    }
+
+    // Update publish-data.json
+    if (week) {
+      const weekId = week.startsWith("week-") ? week : week;
+      const data = readPublishData(weekId);
+      if (data) {
+        let idx = data.contents.findIndex(c => c.id === "x-thread");
+        const entry = {
+          id: "x-thread",
+          label: "X Thread",
+          category: "content",
+          file: "content/x-posts.md",
+          status: "published",
+          publishedAt: new Date().toISOString(),
+          bufferId: results.map(r => r.bufferId).join(","),
+          bufferStatus: mode === "now" ? "sent" : mode === "scheduled" ? "scheduled" : "buffer",
+          scheduledAt: dueAt || null,
+          notes: `${tweets.length} tweets`,
+        };
+        if (idx === -1) {
+          data.contents.push(entry);
+        } else {
+          data.contents[idx] = { ...data.contents[idx], ...entry };
+        }
+        writePublishData(weekId, data);
+      }
+    }
+
+    res.json({ success: true, results, status: mode === "now" ? "sent" : mode === "scheduled" ? "scheduled" : "buffer" });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 // POST /api/publish/week/:weekId/upload-thumbnail  (always saves as blog-thumbnail.{ext})
 const thumbUpload = multer({
   storage: multer.diskStorage({
