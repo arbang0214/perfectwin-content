@@ -638,6 +638,71 @@ body {
 .publish-status-badge.draft { background: var(--border-light); color: var(--text-muted); }
 .publish-status-badge.published { background: var(--success-light); color: #15803D; }
 
+/* ─── Buffer / LinkedIn publish ────────────────────── */
+.btn-buffer {
+  width: 100%; padding: 13px; border: none; border-radius: var(--radius);
+  font-size: 15px; font-weight: 700; cursor: pointer; transition: all .15s; font-family: inherit;
+  background: #0A66C2; color: #fff; display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.btn-buffer:hover:not(:disabled) { background: #004182; }
+.btn-buffer:disabled { background: var(--border); color: var(--text-muted); cursor: not-allowed; }
+.btn-buffer .btn-spinner {
+  width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite;
+}
+
+.buffer-profile-info {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 14px; background: var(--bg); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); font-size: 14px; font-weight: 500; color: var(--text);
+}
+.buffer-profile-info.buffer-no-profile {
+  color: var(--text-muted); font-weight: 400; font-size: 13px;
+}
+.buffer-avatar {
+  width: 32px; height: 32px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border);
+}
+.buffer-profile-type {
+  font-size: 12px; color: var(--text-muted); font-weight: 400;
+  padding: 2px 8px; background: var(--border-light); border-radius: 8px;
+}
+
+.li-image-zone { min-height: 120px; }
+.li-image-preview { width: 100%; max-height: 400px; object-fit: contain; display: block; }
+
+/* ─── X / Twitter publish ─────────────────────────── */
+.btn-x {
+  width: 100%; padding: 13px; border: none; border-radius: var(--radius);
+  font-size: 15px; font-weight: 700; cursor: pointer; transition: all .15s; font-family: inherit;
+  background: #0F1419; color: #fff; display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.btn-x:hover:not(:disabled) { background: #1D2A35; }
+.btn-x:disabled { background: var(--border); color: var(--text-muted); cursor: not-allowed; }
+.btn-x .btn-spinner {
+  width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite;
+}
+
+.thread-tweets-list { display: flex; flex-direction: column; gap: 12px; }
+.thread-tweet-item {
+  display: flex; gap: 12px; padding: 14px; background: var(--bg);
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+}
+.thread-tweet-num {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--text); color: #fff; font-size: 12px; font-weight: 700;
+}
+.thread-tweet-body { flex: 1; }
+.thread-tweet-text {
+  width: 100%; padding: 8px 10px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  font-size: 14px; font-family: inherit; resize: vertical; line-height: 1.6; outline: none;
+  background: var(--surface); color: var(--text);
+}
+.thread-tweet-text:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
+.thread-char-counter { font-size: 11px; color: var(--text-muted); text-align: right; margin-top: 4px; }
+.thread-char-counter.over { color: var(--error); }
+
 /* ─── Utilities ────────────────────────────────────── */
 .hidden { display: none !important; }
 .card {
