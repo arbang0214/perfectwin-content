@@ -710,3 +710,126 @@ body {
   border-radius: var(--radius); box-shadow: var(--shadow-sm);
   padding: 20px;
 }
+
+/* ─── LinkedIn Carousel / PDF UI ──────────────────────── */
+
+/* 탭 버튼 */
+.carousel-tabs {
+  display: flex;
+  gap: 2px;
+  background: var(--border);
+  border-radius: var(--radius-sm);
+  padding: 3px;
+  margin-bottom: 24px;
+  width: fit-content;
+}
+.carousel-tab-btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: calc(var(--radius-sm) - 1px);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.carousel-tab-btn.active {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+}
+.carousel-tab-btn:hover:not(.active) {
+  background: rgba(255,255,255,0.5);
+}
+
+/* 슬라이드 카드 스트립 */
+.slide-strip {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  margin-bottom: 8px;
+  scrollbar-width: thin;
+}
+.slide-strip::-webkit-scrollbar { height: 4px; }
+.slide-strip::-webkit-scrollbar-track { background: var(--border-light); }
+.slide-strip::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.slide-card {
+  flex: 0 0 148px;
+  height: 185px;
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+.slide-card-navy {
+  background: #1E3A5F;
+  color: #FAF7F2;
+}
+.slide-card-white {
+  background: #FFFFFF;
+  color: #1a2035;
+  border: 1px solid #E2E8F0;
+  border-top: 4px solid #C4603A;
+}
+.slide-card-lightblue {
+  background: #E8F3FC;
+  color: #1a2035;
+  border: 1px solid #E2E8F0;
+  border-top: 4px solid #6B8F71;
+}
+.slide-card-num {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  opacity: 0.55;
+  text-transform: uppercase;
+}
+.slide-card-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  line-height: 1.3;
+}
+.slide-card-navy .slide-card-title { color: #C4603A; }
+.slide-card-white .slide-card-title { color: #C4603A; }
+.slide-card-lightblue .slide-card-title { color: #6B8F71; }
+
+.slide-card-preview {
+  font-size: 10px;
+  line-height: 1.5;
+  opacity: 0.75;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+
+/* PDF 액션 */
+.pdf-action-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.pdf-status {
+  flex: 1;
+}
+.pdf-download-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--success-light);
+  border: 1px solid #BBF7D0;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: #166534;
+  font-weight: 500;
+}

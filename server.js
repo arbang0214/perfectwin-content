@@ -14,6 +14,7 @@ app.use("/api", require("./routes/output"));
 app.use("/api/publish", require("./routes/publish"));
 app.use("/api/topics", require("./routes/topics"));
 app.use("/api/buffer", require("./routes/buffer"));
+app.use("/api/linkedin", require("./routes/linkedin"));
 
 // Error handler
 app.use((err, _req, res, _next) => {

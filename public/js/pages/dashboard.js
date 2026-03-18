@@ -576,72 +576,109 @@ async function renderBlogEnPublish(container, weekId) {
 }
 
 // ─── Screen 5: LinkedIn publish page ──────────────────────────────────────────
-async function renderLinkedInPublish(container, weekId, contentType, postNum) {
-  const isCompany = contentType === "linkedin-company";
-  const typeLabel = isCompany ? "LinkedIn Company" : "LinkedIn Personal";
 
+// ─── Screen 5: LinkedIn publish page ──────────────────────────────────────────
+async function renderLinkedInPublish(container, weekId, contentType, postNum) {
+  if (contentType === "linkedin-company") {
+    await renderCompanyLinkedInPublish(container, weekId, postNum);
+  } else {
+    await renderPersonalLinkedInPublish(container, weekId, postNum);
+  }
+}
+
+// ─── Company: tabbed UI (캐러셀 + 단일 이미지) ───────────────────────────────
+async function renderCompanyLinkedInPublish(container, weekId, postNum) {
   container.innerHTML = `
     <button class="db-back" id="btnBack">&larr; ${weekId} 상세로</button>
     <div id="publishBody"><div style="text-align:center;padding:40px;color:var(--text-muted)">콘텐츠 불러오는 중...</div></div>
   `;
   container.querySelector("#btnBack").onclick = () => { location.hash = `#dashboard/${weekId}`; };
 
-  // Load post content
-  let postData;
+  // Load carousel + single-image data
+  let carouselData = null;
   try {
-    const res = await fetch(`/api/publish/week/${weekId}/content/${contentType}/${postNum}`);
-    if (!res.ok) {
-      const err = await res.json();
-      throw new Error(err.error || "Not found");
-    }
-    postData = await res.json();
-  } catch (err) {
-    container.querySelector("#publishBody").innerHTML = `
-      <p style="color:var(--error);padding:16px">${contentType}.md를 찾을 수 없습니다: ${esc(err.message)}</p>`;
-    return;
-  }
+    const res = await fetch(`/api/linkedin/carousel/${weekId}/${postNum}`);
+    if (res.ok) carouselData = await res.json();
+  } catch { /* no carousel */ }
 
-  // Load Buffer channel info
+  // Load post text (for single-image tab textarea default)
+  let postData = { text: "", hasImage: false, imageUrl: null };
+  try {
+    const res = await fetch(`/api/publish/week/${weekId}/content/linkedin-company/${postNum}`);
+    if (res.ok) postData = await res.json();
+  } catch { /* ignore */ }
+
+  // Load Buffer company channel
   let targetProfile = null;
   try {
     const res = await fetch("/api/buffer/profiles");
     if (res.ok) {
       const data = await res.json();
-      const profiles = data.profiles || [];
-      const targetType = isCompany ? "page" : "profile";
-      targetProfile = profiles.find(p => p.service === "linkedin" && p.serviceType === targetType) || profiles.find(p => p.service === "linkedin") || null;
+      targetProfile = (data.profiles || []).find(p => p.service === "linkedin" && p.serviceType === "page")
+        || (data.profiles || []).find(p => p.service === "linkedin") || null;
     }
   } catch { /* ignore */ }
 
-  // Check existing publish state
+  // Existing publish state
   let existingState = null;
   try {
     const res = await fetch(`/api/publish/week/${weekId}`);
     if (res.ok) {
       const data = await res.json();
-      existingState = data.contents?.find(c => c.id === `${contentType}-${postNum}`);
+      existingState = data.contents?.find(c => c.id === `linkedin-company-${postNum}`);
     }
   } catch { /* ignore */ }
 
   const isPublished = existingState?.status === "published";
   const statusBadge = isPublished
     ? `<span class="item-badge published" style="margin-left:10px">🟢 발행 완료</span>`
-    : `<span class="item-badge draft" style="margin-left:10px">⚪ 이전</span>`;
+    : `<span class="item-badge draft" style="margin-left:10px">⚪ 미발행</span>`;
 
   const profileInfo = targetProfile
     ? `<div class="buffer-profile-info">
         ${targetProfile.avatar ? `<img src="${esc(targetProfile.avatar)}" class="buffer-avatar">` : ""}
         <span>${esc(targetProfile.name)}</span>
-        <span class="buffer-profile-type">${isCompany ? "Company Page" : "Personal Profile"}</span>
+        <span class="buffer-profile-type">Company Page</span>
        </div>`
-    : `<div class="buffer-profile-info buffer-no-profile">Buffer에 연결된 LinkedIn ${isCompany ? "회사 페이지" : "개인 프로필"}가 없습니다</div>`;
+    : `<div class="buffer-profile-info buffer-no-profile">Buffer에 연결된 LinkedIn 회사 페이지가 없습니다</div>`;
 
   const el = container.querySelector("#publishBody");
+
+  // Slide cards preview HTML
+  let slideCardsHTML = "";
+  let captionDefault = "";
+  if (carouselData && carouselData.slides && carouselData.slides.length) {
+    captionDefault = carouselData.caption || "";
+    const themes = ["navy", "white", "lightblue"];
+    function cardTheme(i, total) {
+      const n = i + 1;
+      if (n === 1 || n === total) return "navy";
+      return n % 2 === 0 ? "white" : "lightblue";
+    }
+    slideCardsHTML = `
+      <div class="slide-strip">
+        ${carouselData.slides.map((s, i) => {
+          const theme = cardTheme(i, carouselData.slides.length);
+          const preview = s.content.split("\n").filter(l => l.trim()).slice(0, 2).join(" / ");
+          return `<div class="slide-card slide-card-${theme}">
+            <div class="slide-card-num">${String(i+1).padStart(2,"0")}</div>
+            <div class="slide-card-title">${esc(s.title || "")}</div>
+            <div class="slide-card-preview">${esc(preview)}</div>
+          </div>`;
+        }).join("")}
+      </div>`;
+  } else {
+    slideCardsHTML = `<p style="color:var(--text-muted);font-size:13px;padding:12px 0">캐러셀 데이터를 찾을 수 없습니다. 콘텐츠에 Option 1: Carousel 섹션이 있는지 확인하세요.</p>`;
+  }
+
+  // Single image body text default
+  const singleBodyDefault = carouselData?.singleImage?.bodyText || postData.text || "";
+
   el.innerHTML = `
-    <div style="max-width:720px">
-      <div style="margin-bottom:28px">
-        <h1 class="page-title" style="display:inline">${typeLabel} Post ${postNum}</h1>${statusBadge}
-        <p class="page-subtitle" style="margin-top:6px">${weekId} &middot; Buffer로 발행</p>
+    <div style="max-width:760px">
+      <div style="margin-bottom:20px">
+        <h1 class="page-title" style="display:inline">LinkedIn Company Post ${postNum}</h1>${statusBadge}
+        <p class="page-subtitle" style="margin-top:6px">${weekId} &middot; LG CNS 회사 계정 &middot; Buffer 발행</p>
       </div>
 
       ${isPublished ? `
@@ -650,20 +687,411 @@ async function renderLinkedInPublish(container, weekId, contentType, postNum) {
           <p style="font-size:13px;color:#166534">Buffer ID: ${esc(existingState?.bufferId || "N/A")}</p>
         </div>` : ""}
 
-      <!-- 발행 대상 -->
       <div class="form-group">
         <label>발행 채널</label>
         ${profileInfo}
       </div>
 
-      <!-- 포스트 텍스트 -->
+      <!-- 탭 -->
+      <div class="carousel-tabs">
+        <button class="carousel-tab-btn active" data-tab="carousel">🎠 캐러셀 (PDF)</button>
+        <button class="carousel-tab-btn" data-tab="single">🖼 단일 이미지</button>
+      </div>
+
+      <!-- ══ 캐러셀 탭 ══ -->
+      <div class="carousel-tab-content" id="tabCarousel">
+
+        <!-- 슬라이드 미리보기 -->
+        <div class="form-group">
+          <label>슬라이드 미리보기 (${carouselData?.totalSlides || 0}장)</label>
+          ${slideCardsHTML}
+          <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+            <a class="btn-sm btn-secondary" href="/api/linkedin/carousel-html/${weekId}/${postNum}" target="_blank">
+              🔍 HTML 미리보기
+            </a>
+          </div>
+        </div>
+
+        <!-- PDF 생성 -->
+        <div class="form-group">
+          <label>PDF 생성</label>
+          <div class="pdf-action-row">
+            <button class="btn-sm btn-primary" id="btnGenPdf" ${!carouselData ? "disabled" : ""}>
+              📄 PDF 생성
+            </button>
+            <div id="pdfStatus" class="pdf-status"></div>
+          </div>
+          <p style="font-size:12px;color:var(--text-muted);margin-top:6px">
+            Playwright로 슬라이드 ${carouselData?.totalSlides || 0}장을 1개 PDF로 변환합니다 (1080×1350px)
+          </p>
+        </div>
+
+        <!-- 캡션 -->
+        <div class="form-group">
+          <label>캡션 (Buffer 발행 텍스트)</label>
+          <textarea id="carouselCaption" rows="8" style="line-height:1.7">${esc(captionDefault)}</textarea>
+          <div class="char-counter" id="carouselCharCounter">${captionDefault.length}/3,000</div>
+        </div>
+
+        <!-- 발행 옵션 -->
+        <div class="form-group">
+          <label>발행 옵션</label>
+          <div class="publish-mode-select">
+            <label class="publish-mode-option">
+              <input type="radio" name="carouselMode" value="now" checked>
+              <div><div class="option-label">즉시 발행</div><div class="option-sub">Buffer 큐의 다음 슬롯으로 즉시 발행</div></div>
+            </label>
+            <label class="publish-mode-option">
+              <input type="radio" name="carouselMode" value="scheduled">
+              <div><div class="option-label">예약 발행</div><div class="option-sub">지정한 날짜/시간에 발행</div></div>
+            </label>
+            <label class="publish-mode-option">
+              <input type="radio" name="carouselMode" value="queue">
+              <div><div class="option-label">Buffer 큐에 추가</div><div class="option-sub">Buffer 기본 스케줄에 따라 자동 발행</div></div>
+            </label>
+          </div>
+        </div>
+        <div class="form-group" id="carouselScheduledGroup" style="display:none">
+          <label>예약 시간</label>
+          <input type="datetime-local" id="carouselScheduledAt" />
+        </div>
+
+        <div class="pub-action-area">
+          <button class="btn-buffer" id="btnCarouselPublish" ${isPublished || !targetProfile ? "disabled" : ""}>
+            ${isPublished ? "&#10003; 발행 완료" : "🚀 Buffer로 캡션 발행"}
+          </button>
+          <p class="pub-helper-text">캡션 텍스트만 Buffer에 발행됩니다. PDF는 LinkedIn에 별도 첨부하세요.</p>
+          <div id="carouselPublishStatus"></div>
+        </div>
+      </div>
+
+      <!-- ══ 단일 이미지 탭 ══ -->
+      <div class="carousel-tab-content" id="tabSingle" style="display:none">
+
+        <div class="form-group">
+          <label>포스트 텍스트</label>
+          <textarea id="singlePostText" rows="12" style="line-height:1.7">${esc(singleBodyDefault)}</textarea>
+          <div class="char-counter" id="singleCharCounter">${(singleBodyDefault).length}/3,000</div>
+        </div>
+
+        <div class="form-group">
+          <label>이미지 (선택사항)</label>
+          <input type="file" id="singleImageInput" accept="image/png,image/jpeg,image/webp" style="display:none">
+          <div id="singleImageZone" class="thumb-drop-zone li-image-zone">
+            ${postData.hasImage && postData.imageUrl
+              ? `<img src="${postData.imageUrl}?t=${Date.now()}" class="thumb-drop-img li-image-preview">`
+              : `<div class="thumb-drop-empty">
+                  <div style="font-size:36px;margin-bottom:8px">🖼</div>
+                  <div>이미지를 드래그하거나 클릭해서 업로드</div>
+                  <div style="font-size:11px;color:var(--text-muted);margin-top:4px">PNG, JPG, WebP &middot; 권장: 1200×627 또는 1080×1080</div>
+                 </div>`}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>발행 옵션</label>
+          <div class="publish-mode-select">
+            <label class="publish-mode-option">
+              <input type="radio" name="singleMode" value="now" checked>
+              <div><div class="option-label">즉시 발행</div><div class="option-sub">Buffer 큐의 다음 슬롯으로 즉시 발행</div></div>
+            </label>
+            <label class="publish-mode-option">
+              <input type="radio" name="singleMode" value="scheduled">
+              <div><div class="option-label">예약 발행</div><div class="option-sub">지정한 날짜/시간에 발행</div></div>
+            </label>
+            <label class="publish-mode-option">
+              <input type="radio" name="singleMode" value="queue">
+              <div><div class="option-label">Buffer 큐에 추가</div><div class="option-sub">Buffer 기본 스케줄에 따라 자동 발행</div></div>
+            </label>
+          </div>
+        </div>
+        <div class="form-group" id="singleScheduledGroup" style="display:none">
+          <label>예약 시간</label>
+          <input type="datetime-local" id="singleScheduledAt" />
+        </div>
+
+        <div class="pub-action-area">
+          <button class="btn-buffer" id="btnSinglePublish" ${isPublished || !targetProfile ? "disabled" : ""}>
+            ${isPublished ? "&#10003; 발행 완료" : "🚀 Buffer로 발행"}
+          </button>
+          <p class="pub-helper-text">${targetProfile ? `발행 대상: ${esc(targetProfile.name)} (Company Page)` : "Buffer 프로필을 먼저 연결하세요"}</p>
+          <div id="singlePublishStatus"></div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // ── 탭 전환 ──
+  el.querySelectorAll(".carousel-tab-btn").forEach(btn => {
+    btn.onclick = () => {
+      el.querySelectorAll(".carousel-tab-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      const tab = btn.dataset.tab;
+      el.querySelector("#tabCarousel").style.display = tab === "carousel" ? "" : "none";
+      el.querySelector("#tabSingle").style.display   = tab === "single"   ? "" : "none";
+    };
+  });
+
+  // ── 캐러셀 글자 수 ──
+  const captionTA = el.querySelector("#carouselCaption");
+  const captionCounter = el.querySelector("#carouselCharCounter");
+  captionTA.oninput = () => {
+    const len = captionTA.value.length;
+    captionCounter.textContent = `${len.toLocaleString()}/3,000`;
+    captionCounter.classList.toggle("over", len > 3000);
+  };
+
+  // ── 단일 이미지 글자 수 ──
+  const singleTA = el.querySelector("#singlePostText");
+  const singleCounter = el.querySelector("#singleCharCounter");
+  singleTA.oninput = () => {
+    const len = singleTA.value.length;
+    singleCounter.textContent = `${len.toLocaleString()}/3,000`;
+    singleCounter.classList.toggle("over", len > 3000);
+  };
+
+  // ── 단일 이미지 업로드 ──
+  const singleImageInput = el.querySelector("#singleImageInput");
+  let singleImageFile = postData.hasImage ? `images/linkedin-company-${postNum}.png` : null;
+
+  singleImageInput.onchange = async () => {
+    const file = singleImageInput.files[0];
+    if (!file) return;
+    const fd = new FormData();
+    fd.append("file", file);
+    try {
+      const res = await fetch(`/api/publish/week/${weekId}/upload`, { method: "POST", body: fd });
+      if (!res.ok) throw new Error();
+      const data = await res.json();
+      singleImageFile = data.path;
+      el.querySelector("#singleImageZone").innerHTML =
+        `<img src="/api/publish/week/${weekId}/file/${data.filename}?t=${Date.now()}" class="thumb-drop-img li-image-preview">`;
+      showToast("이미지 업로드 완료", "success");
+    } catch { showToast("이미지 업로드 실패", "error"); }
+  };
+  el.querySelector("#singleImageZone").onclick = () => singleImageInput.click();
+
+  // ── 발행 옵션 토글 ──
+  el.querySelectorAll("input[name=carouselMode]").forEach(r => {
+    r.onchange = () => {
+      el.querySelector("#carouselScheduledGroup").style.display =
+        r.value === "scheduled" && r.checked ? "" : "none";
+    };
+  });
+  el.querySelectorAll("input[name=singleMode]").forEach(r => {
+    r.onchange = () => {
+      el.querySelector("#singleScheduledGroup").style.display =
+        r.value === "scheduled" && r.checked ? "" : "none";
+    };
+  });
+
+  // ── PDF 생성 ──
+  el.querySelector("#btnGenPdf").onclick = async () => {
+    const btn = el.querySelector("#btnGenPdf");
+    const statusEl = el.querySelector("#pdfStatus");
+    btn.disabled = true;
+    btn.innerHTML = `<div class="btn-spinner"></div> 생성 중...`;
+    statusEl.innerHTML = "";
+
+    try {
+      const res = await fetch("/api/linkedin/generate-pdf", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ weekId, postNum }),
+      });
+      const result = await res.json();
+      if (!result.success) throw new Error(result.error);
+
+      btn.textContent = "✓ PDF 생성 완료";
+      statusEl.innerHTML = `
+        <div class="pdf-download-box">
+          <span>📄 ${esc(result.filename)}</span>
+          <a class="btn-sm btn-primary" href="${esc(result.downloadUrl)}" download>⬇ 다운로드</a>
+        </div>`;
+      showToast("PDF 생성 완료!", "success");
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = "📄 PDF 생성";
+      statusEl.innerHTML = `<div style="color:var(--error);font-size:13px;padding:8px;background:#FEF2F2;border-radius:6px">✕ ${esc(err.message)}</div>`;
+    }
+  };
+
+  // ── 캐러셀 캡션 발행 ──
+  el.querySelector("#btnCarouselPublish").onclick = async () => {
+    const btn = el.querySelector("#btnCarouselPublish");
+    const statusEl = el.querySelector("#carouselPublishStatus");
+    const mode = el.querySelector("input[name=carouselMode]:checked").value;
+    const scheduledAt = mode === "scheduled" ? el.querySelector("#carouselScheduledAt").value : null;
+    if (mode === "scheduled" && !scheduledAt) { showToast("예약 시간을 선택하세요", "warning"); return; }
+
+    btn.disabled = true;
+    btn.innerHTML = `<div class="btn-spinner"></div> 발행 중...`;
+    statusEl.innerHTML = "";
+
+    try {
+      const res = await fetch("/api/publish/buffer", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          week: weekId,
+          contentType: "linkedin-company",
+          postNum,
+          text: captionTA.value,
+          channelId: targetProfile.id,
+          mode,
+          dueAt: scheduledAt ? new Date(scheduledAt).toISOString() : null,
+        }),
+      });
+      const result = await res.json();
+      if (!result.success) throw new Error(result.error);
+      btn.textContent = "✓ 발행 완료";
+      const statusLabel = { sent: "즉시 발행됨", scheduled: `예약됨 (${scheduledAt})`, buffer: "Buffer 큐에 추가됨" }[result.status] || result.status;
+      statusEl.innerHTML = `
+        <div class="publish-result show">
+          <h4>&#10003; Buffer에 발행되었습니다!</h4>
+          <p style="font-size:13px;color:#166534">${statusLabel}</p>
+          ${result.bufferId ? `<p style="font-size:12px;color:var(--text-muted);margin-top:4px">Buffer ID: ${esc(result.bufferId)}</p>` : ""}
+        </div>`;
+      showToast("Buffer 발행 완료!", "success");
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = "🚀 Buffer로 캡션 발행";
+      statusEl.innerHTML = `<div style="color:var(--error);font-size:13px;padding:10px;background:#FEF2F2;border-radius:6px;border:1px solid #FECACA">✕ 발행 실패: ${esc(err.message)}</div>`;
+    }
+  };
+
+  // ── 단일 이미지 발행 ──
+  el.querySelector("#btnSinglePublish").onclick = async () => {
+    const btn = el.querySelector("#btnSinglePublish");
+    const statusEl = el.querySelector("#singlePublishStatus");
+    const mode = el.querySelector("input[name=singleMode]:checked").value;
+    const scheduledAt = mode === "scheduled" ? el.querySelector("#singleScheduledAt").value : null;
+    if (mode === "scheduled" && !scheduledAt) { showToast("예약 시간을 선택하세요", "warning"); return; }
+
+    btn.disabled = true;
+    btn.innerHTML = `<div class="btn-spinner"></div> 발행 중...`;
+    statusEl.innerHTML = "";
+
+    try {
+      // Resolve image URL if uploaded
+      let imageUrl = null;
+      if (singleImageFile) {
+        const imgFilename = singleImageFile.replace(/^.*[\\/]/, "");
+        const imgRes = await fetch(`/api/publish/week/${weekId}/file/${imgFilename}`, { method: "HEAD" });
+        if (imgRes.ok) imageUrl = `http://localhost:3000/api/publish/week/${weekId}/file/${imgFilename}`;
+      }
+
+      const res = await fetch("/api/publish/buffer", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          week: weekId,
+          contentType: "linkedin-company",
+          postNum,
+          text: singleTA.value,
+          channelId: targetProfile.id,
+          mode,
+          dueAt: scheduledAt ? new Date(scheduledAt).toISOString() : null,
+          imageUrl,
+        }),
+      });
+      const result = await res.json();
+      if (!result.success) throw new Error(result.error);
+      btn.textContent = "✓ 발행 완료";
+      const statusLabel = { sent: "즉시 발행됨", scheduled: `예약됨 (${scheduledAt})`, buffer: "Buffer 큐에 추가됨" }[result.status] || result.status;
+      statusEl.innerHTML = `
+        <div class="publish-result show">
+          <h4>&#10003; Buffer에 발행되었습니다!</h4>
+          <p style="font-size:13px;color:#166534">${statusLabel}</p>
+          ${result.bufferId ? `<p style="font-size:12px;color:var(--text-muted);margin-top:4px">Buffer ID: ${esc(result.bufferId)}</p>` : ""}
+        </div>`;
+      showToast("Buffer 발행 완료!", "success");
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = "🚀 Buffer로 발행";
+      statusEl.innerHTML = `<div style="color:var(--error);font-size:13px;padding:10px;background:#FEF2F2;border-radius:6px;border:1px solid #FECACA">✕ 발행 실패: ${esc(err.message)}</div>`;
+    }
+  };
+}
+
+// ─── Personal (ARUM): 기존 텍스트+이미지 플로우 ──────────────────────────────
+async function renderPersonalLinkedInPublish(container, weekId, postNum) {
+  const typeLabel = "LinkedIn Personal";
+
+  container.innerHTML = `
+    <button class="db-back" id="btnBack">&larr; ${weekId} 상세로</button>
+    <div id="publishBody"><div style="text-align:center;padding:40px;color:var(--text-muted)">콘텐츠 불러오는 중...</div></div>
+  `;
+  container.querySelector("#btnBack").onclick = () => { location.hash = `#dashboard/${weekId}`; };
+
+  let postData;
+  try {
+    const res = await fetch(`/api/publish/week/${weekId}/content/linkedin-personal/${postNum}`);
+    if (!res.ok) throw new Error((await res.json()).error);
+    postData = await res.json();
+  } catch (err) {
+    container.querySelector("#publishBody").innerHTML =
+      `<p style="color:var(--error);padding:16px">linkedin-personal.md를 찾을 수 없습니다: ${esc(err.message)}</p>`;
+    return;
+  }
+
+  let targetProfile = null;
+  try {
+    const res = await fetch("/api/buffer/profiles");
+    if (res.ok) {
+      const data = await res.json();
+      targetProfile = (data.profiles || []).find(p => p.service === "linkedin" && p.serviceType === "profile")
+        || (data.profiles || []).find(p => p.service === "linkedin") || null;
+    }
+  } catch { /* ignore */ }
+
+  let existingState = null;
+  try {
+    const res = await fetch(`/api/publish/week/${weekId}`);
+    if (res.ok) {
+      const data = await res.json();
+      existingState = data.contents?.find(c => c.id === `linkedin-personal-${postNum}`);
+    }
+  } catch { /* ignore */ }
+
+  const isPublished = existingState?.status === "published";
+  const statusBadge = isPublished
+    ? `<span class="item-badge published" style="margin-left:10px">🟢 발행 완료</span>`
+    : `<span class="item-badge draft" style="margin-left:10px">⚪ 미발행</span>`;
+
+  const profileInfo = targetProfile
+    ? `<div class="buffer-profile-info">
+        ${targetProfile.avatar ? `<img src="${esc(targetProfile.avatar)}" class="buffer-avatar">` : ""}
+        <span>${esc(targetProfile.name)}</span>
+        <span class="buffer-profile-type">Personal Profile (ARUM)</span>
+       </div>`
+    : `<div class="buffer-profile-info buffer-no-profile">Buffer에 연결된 LinkedIn 개인 프로필이 없습니다</div>`;
+
+  const el = container.querySelector("#publishBody");
+  el.innerHTML = `
+    <div style="max-width:720px">
+      <div style="margin-bottom:28px">
+        <h1 class="page-title" style="display:inline">${typeLabel} Post ${postNum}</h1>${statusBadge}
+        <p class="page-subtitle" style="margin-top:6px">${weekId} &middot; ARUM 개인 계정 &middot; Buffer 발행</p>
+      </div>
+
+      ${isPublished ? `
+        <div class="publish-result show" style="margin-bottom:20px">
+          <h4>&#10003; 이미 발행된 포스트입니다</h4>
+          <p style="font-size:13px;color:#166534">Buffer ID: ${esc(existingState?.bufferId || "N/A")}</p>
+        </div>` : ""}
+
+      <div class="form-group">
+        <label>발행 채널</label>
+        ${profileInfo}
+      </div>
+
       <div class="form-group">
         <label>포스트 텍스트</label>
         <textarea id="liPostText" rows="12" style="line-height:1.7">${esc(postData.text)}</textarea>
         <div class="char-counter" id="liCharCounter">${(postData.text || "").length}/3,000</div>
       </div>
 
-      <!-- 이미지 업로드 -->
       <div class="form-group">
         <label>이미지 (선택사항)</label>
         <input type="file" id="liImageInput" accept="image/png,image/jpeg,image/webp" style="display:none">
@@ -673,58 +1101,45 @@ async function renderLinkedInPublish(container, weekId, contentType, postNum) {
             : `<div class="thumb-drop-empty">
                 <div style="font-size:36px;margin-bottom:8px">🖼</div>
                 <div>이미지를 드래그하거나 클릭해서 업로드</div>
-                <div style="font-size:11px;color:var(--text-muted);margin-top:4px">PNG, JPG, WebP &middot; 권장: 1200&times;627 또는 1080&times;1080</div>
+                <div style="font-size:11px;color:var(--text-muted);margin-top:4px">PNG, JPG, WebP &middot; 권장: 1200×627 또는 1080×1080</div>
                </div>`}
         </div>
         ${postData.hasImage ? `<button class="btn-sm btn-secondary" id="liChangeImage" style="margin-top:8px">이미지 변경</button>` : ""}
       </div>
 
-      <!-- 발행 옵션 -->
       <div class="form-group">
         <label>발행 옵션</label>
         <div class="publish-mode-select">
           <label class="publish-mode-option">
             <input type="radio" name="publishMode" value="now" checked>
-            <div>
-              <div class="option-label">즉시 발행</div>
-              <div class="option-sub">Buffer 큐의 다음 슬롯으로 즉시 발행</div>
-            </div>
+            <div><div class="option-label">즉시 발행</div><div class="option-sub">Buffer 큐의 다음 슬롯으로 즉시 발행</div></div>
           </label>
           <label class="publish-mode-option">
             <input type="radio" name="publishMode" value="scheduled">
-            <div>
-              <div class="option-label">예약 발행</div>
-              <div class="option-sub">지정한 날짜/시간에 발행</div>
-            </div>
+            <div><div class="option-label">예약 발행</div><div class="option-sub">지정한 날짜/시간에 발행</div></div>
           </label>
           <label class="publish-mode-option">
             <input type="radio" name="publishMode" value="queue">
-            <div>
-              <div class="option-label">Buffer 큐에 추가</div>
-              <div class="option-sub">Buffer 기본 스케줄에 따라 자동 발행</div>
-            </div>
+            <div><div class="option-label">Buffer 큐에 추가</div><div class="option-sub">Buffer 기본 스케줄에 따라 자동 발행</div></div>
           </label>
         </div>
       </div>
-
-      <!-- 예약 시간 -->
       <div class="form-group" id="scheduledAtGroup" style="display:none">
         <label>예약 시간</label>
         <input type="datetime-local" id="liScheduledAt" />
       </div>
 
-      <!-- 발행 섹션 -->
       <div class="pub-action-area">
         <button class="btn-buffer" id="btnBufferPublish" ${isPublished || !targetProfile ? "disabled" : ""}>
           ${isPublished ? "&#10003; 발행 완료" : "🚀 Buffer로 발행"}
         </button>
-        <p class="pub-helper-text">${targetProfile ? `발행 대상: ${esc(targetProfile.name)} (${isCompany ? "Company Page" : "Personal"})` : "Buffer 프로필을 먼저 연결하세요"}</p>
+        <p class="pub-helper-text">${targetProfile ? `발행 대상: ${esc(targetProfile.name)} (Personal)` : "Buffer 프로필을 먼저 연결하세요"}</p>
         <div id="bufferPublishStatus"></div>
       </div>
     </div>
   `;
 
-  // ── 글자 수 카운터 ──
+  // ── 글자 수 ──
   const textArea = el.querySelector("#liPostText");
   const charCounter = el.querySelector("#liCharCounter");
   textArea.oninput = () => {
@@ -735,12 +1150,7 @@ async function renderLinkedInPublish(container, weekId, contentType, postNum) {
 
   // ── 이미지 업로드 ──
   const imageInput = el.querySelector("#liImageInput");
-  let currentImageFile = postData.hasImage ? `images/${contentType}-${postNum}.png` : null;
-
-  function setImage(url) {
-    const zone = el.querySelector("#liImageZone");
-    zone.innerHTML = `<img src="${url}" class="thumb-drop-img li-image-preview" id="liImagePreview">`;
-  }
+  let currentImageFile = postData.hasImage ? `images/linkedin-personal-${postNum}.png` : null;
 
   imageInput.onchange = async () => {
     const file = imageInput.files[0];
@@ -752,7 +1162,8 @@ async function renderLinkedInPublish(container, weekId, contentType, postNum) {
       if (!res.ok) throw new Error();
       const data = await res.json();
       currentImageFile = data.path;
-      setImage(`/api/publish/week/${weekId}/file/${data.filename}?t=${Date.now()}`);
+      el.querySelector("#liImageZone").innerHTML =
+        `<img src="/api/publish/week/${weekId}/file/${data.filename}?t=${Date.now()}" class="thumb-drop-img li-image-preview">`;
       showToast("이미지 업로드 완료", "success");
     } catch { showToast("이미지 업로드 실패", "error"); }
   };
@@ -760,7 +1171,6 @@ async function renderLinkedInPublish(container, weekId, contentType, postNum) {
   el.querySelector("#liImageZone").onclick = () => imageInput.click();
   el.querySelector("#liChangeImage")?.addEventListener("click", (e) => { e.stopPropagation(); imageInput.click(); });
 
-  // Drag & drop
   const imageZone = el.querySelector("#liImageZone");
   imageZone.ondragover = (e) => { e.preventDefault(); imageZone.classList.add("drag-over"); };
   imageZone.ondragleave = () => imageZone.classList.remove("drag-over");
@@ -789,37 +1199,39 @@ async function renderLinkedInPublish(container, weekId, contentType, postNum) {
     const statusEl = el.querySelector("#bufferPublishStatus");
     const publishMode = el.querySelector("input[name=publishMode]:checked").value;
     const scheduledAt = publishMode === "scheduled" ? el.querySelector("#liScheduledAt").value : null;
-
-    if (publishMode === "scheduled" && !scheduledAt) {
-      showToast("예약 시간을 선택하세요", "warning");
-      return;
-    }
+    if (publishMode === "scheduled" && !scheduledAt) { showToast("예약 시간을 선택하세요", "warning"); return; }
 
     btn.disabled = true;
     btn.innerHTML = `<div class="btn-spinner"></div> 발행 중...`;
     statusEl.innerHTML = "";
 
     try {
+      let imageUrl = null;
+      if (currentImageFile) {
+        const imgFilename = currentImageFile.replace(/^.*[\\/]/, "");
+        const imgRes = await fetch(`/api/publish/week/${weekId}/file/${imgFilename}`, { method: "HEAD" });
+        if (imgRes.ok) imageUrl = `http://localhost:3000/api/publish/week/${weekId}/file/${imgFilename}`;
+      }
+
       const res = await fetch("/api/publish/buffer", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           week: weekId,
-          contentType,
+          contentType: "linkedin-personal",
           postNum,
           text: textArea.value,
           channelId: targetProfile.id,
           mode: publishMode,
           dueAt: scheduledAt ? new Date(scheduledAt).toISOString() : null,
+          imageUrl,
         }),
       });
       const result = await res.json();
       if (!result.success) throw new Error(result.error);
 
-      btn.textContent = "\u2713 발행 완료";
-
+      btn.textContent = "✓ 발행 완료";
       const statusLabel = { sent: "즉시 발행됨", scheduled: `예약됨 (${scheduledAt})`, buffer: "Buffer 큐에 추가됨" }[result.status] || result.status;
-
       statusEl.innerHTML = `
         <div class="publish-result show">
           <h4>&#10003; Buffer에 발행되었습니다!</h4>
@@ -830,16 +1242,10 @@ async function renderLinkedInPublish(container, weekId, contentType, postNum) {
     } catch (err) {
       btn.disabled = false;
       btn.textContent = "🚀 Buffer로 발행";
-      statusEl.innerHTML = `
-        <div style="color:var(--error);font-size:13px;padding:10px;background:#FEF2F2;border-radius:6px;border:1px solid #FECACA">
-          &#10005; 발행 실패: ${esc(err.message)}
-        </div>`;
+      statusEl.innerHTML = `<div style="color:var(--error);font-size:13px;padding:10px;background:#FEF2F2;border-radius:6px;border:1px solid #FECACA">✕ 발행 실패: ${esc(err.message)}</div>`;
     }
   };
-}
-
-// ─── Screen 6: X Post publish page ────────────────────────────────────────────
-async function renderXPostPublish(container, weekId, postNum) {
+}async function renderXPostPublish(container, weekId, postNum) {
   container.innerHTML = `
     <button class="db-back" id="btnBack">&larr; ${weekId} 상세로</button>
     <div id="publishBody"><div style="text-align:center;padding:40px;color:var(--text-muted)">콘텐츠 불러오는 중...</div></div>
