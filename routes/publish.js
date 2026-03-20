@@ -506,7 +506,18 @@ function parseLinkedinPosts(markdown) {
   // Strip ## IMAGE section before parsing
   const withoutImage = markdown.replace(/\n\n## IMAGE\n[\s\S]*$/, "").trim();
 
-  // New format: ### POST_BODY / ### COMMENT_TEXT (single post per file)
+  // New format: ### POST_BODY_1/2 + ### COMMENT_TEXT_1/2 (2 posts per file)
+  const pb1 = withoutImage.match(/###\s*POST_BODY_1\s*\n([\s\S]*?)(?=\n###\s*COMMENT_TEXT_1|\n###\s*POST_BODY_2|$)/i);
+  if (pb1) {
+    const ct1 = withoutImage.match(/###\s*COMMENT_TEXT_1\s*\n([\s\S]*?)(?=\n###\s*POST_BODY_2|$)/i);
+    const pb2 = withoutImage.match(/###\s*POST_BODY_2\s*\n([\s\S]*?)(?=\n###\s*COMMENT_TEXT_2|$)/i);
+    const ct2 = withoutImage.match(/###\s*COMMENT_TEXT_2\s*\n([\s\S]*?)$/i);
+    const posts = [{ num: 1, title: "Post 1", text: pb1[1].trim(), commentText: ct1 ? ct1[1].trim() : "" }];
+    if (pb2) posts.push({ num: 2, title: "Post 2", text: pb2[1].trim(), commentText: ct2 ? ct2[1].trim() : "" });
+    return posts;
+  }
+
+  // Legacy single-post format: ### POST_BODY / ### COMMENT_TEXT
   const postBodyMatch = withoutImage.match(/###\s*POST_BODY\s*\n([\s\S]*?)(?=\n###\s*COMMENT_TEXT|$)/i);
   if (postBodyMatch) {
     const commentMatch = withoutImage.match(/###\s*COMMENT_TEXT\s*\n([\s\S]*?)$/i);

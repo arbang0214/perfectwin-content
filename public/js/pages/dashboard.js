@@ -4,8 +4,10 @@ import { showToast } from "../components/toast.js";
 const PUBLISH_ITEMS = [
   { id: "blog-en",              icon: "📄", label: "영어 블로그",              channel: "inblog",   route: "blog-en" },
   { id: "blog-ko",              icon: "📄", label: "한글 블로그",              channel: "inblog",   route: null },
-  { id: "linkedin-company-1",   icon: "💼", label: "LinkedIn Company Post",  channel: "Buffer",   route: "linkedin-company/1" },
-  { id: "linkedin-personal-1",  icon: "🤝", label: "LinkedIn Personal Post", channel: "Buffer",   route: "linkedin-personal/1" },
+  { id: "linkedin-company-1",   icon: "💼", label: "LinkedIn Company Post 1", channel: "Buffer",   route: "linkedin-company/1" },
+  { id: "linkedin-company-2",   icon: "💼", label: "LinkedIn Company Post 2", channel: "Buffer",   route: "linkedin-company/2" },
+  { id: "linkedin-personal-1",  icon: "🤝", label: "LinkedIn Personal Post 1",channel: "Buffer",   route: "linkedin-personal/1" },
+  { id: "linkedin-personal-2",  icon: "🤝", label: "LinkedIn Personal Post 2",channel: "Buffer",   route: "linkedin-personal/2" },
   { id: "x-post-1",             icon: "🐦", label: "X Post 1",               channel: "Buffer",   route: "x-post/1" },
   { id: "x-post-2",             icon: "🐦", label: "X Post 2",               channel: "Buffer",   route: "x-post/2" },
   { id: "homepage-card",        icon: "🏠", label: "홈페이지 블로그 카드",    channel: "Framer",   route: null },
@@ -643,7 +645,6 @@ async function renderCompanyLinkedInPublish(container, weekId, postNum) {
   let captionDefault = "";
   if (carouselData && carouselData.slides && carouselData.slides.length) {
     captionDefault = carouselData.caption || "";
-    const themes = ["navy", "white", "lightblue"];
     function cardTheme(i, total) {
       const n = i + 1;
       if (n === 1 || n === total) return "navy";
