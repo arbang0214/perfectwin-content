@@ -185,15 +185,18 @@ async function main() {
       const results = await Promise.all(socialTasks);
       const imageRef = "\n\n## IMAGE\nimages/blog-thumbnail.png";
       socialKeys.forEach((key, i) => {
+        // Replace [BLOG_URL] placeholder with actual UTM URL
+        const utmUrl = utmLinks[key === "x-posts" ? "x-twitter" : key];
+        const content = results[i].replaceAll("[BLOG_URL]", utmUrl || blogUrl);
         if (key === "linkedin-company") {
-          linkedinCompany = results[i];
-          saveContent(weekDir, "content", "linkedin-company.md", results[i] + imageRef);
+          linkedinCompany = content;
+          saveContent(weekDir, "content", "linkedin-company.md", content + imageRef);
           console.log("  -> content/linkedin-company.md saved");
         } else if (key === "linkedin-personal") {
-          saveContent(weekDir, "content", "linkedin-personal.md", results[i] + imageRef);
+          saveContent(weekDir, "content", "linkedin-personal.md", content + imageRef);
           console.log("  -> content/linkedin-personal.md saved");
         } else if (key === "x-posts") {
-          saveContent(weekDir, "content", "x-posts.md", results[i] + imageRef);
+          saveContent(weekDir, "content", "x-posts.md", content + imageRef);
           console.log("  -> content/x-posts.md saved");
         }
       });
