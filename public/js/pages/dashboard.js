@@ -4,16 +4,10 @@ import { showToast } from "../components/toast.js";
 const PUBLISH_ITEMS = [
   { id: "blog-en",              icon: "📄", label: "영어 블로그",              channel: "inblog",   route: "blog-en" },
   { id: "blog-ko",              icon: "📄", label: "한글 블로그",              channel: "inblog",   route: null },
-  { id: "linkedin-company-1",   icon: "💼", label: "LinkedIn Company Post 1", channel: "Buffer",   route: "linkedin-company/1" },
-  { id: "linkedin-company-2",   icon: "💼", label: "LinkedIn Company Post 2", channel: "Buffer",   route: "linkedin-company/2" },
-  { id: "linkedin-personal-1",  icon: "🤝", label: "LinkedIn Personal Post 1",channel: "Buffer",   route: "linkedin-personal/1" },
-  { id: "linkedin-personal-2",  icon: "🤝", label: "LinkedIn Personal Post 2",channel: "Buffer",   route: "linkedin-personal/2" },
+  { id: "linkedin-company-1",   icon: "💼", label: "LinkedIn Company Post",  channel: "Buffer",   route: "linkedin-company/1" },
+  { id: "linkedin-personal-1",  icon: "🤝", label: "LinkedIn Personal Post", channel: "Buffer",   route: "linkedin-personal/1" },
   { id: "x-post-1",             icon: "🐦", label: "X Post 1",               channel: "Buffer",   route: "x-post/1" },
   { id: "x-post-2",             icon: "🐦", label: "X Post 2",               channel: "Buffer",   route: "x-post/2" },
-  { id: "x-post-3",             icon: "🐦", label: "X Post 3",               channel: "Buffer",   route: "x-post/3" },
-  { id: "x-post-4",             icon: "🐦", label: "X Post 4",               channel: "Buffer",   route: "x-post/4" },
-  { id: "x-post-5",             icon: "🐦", label: "X Post 5",               channel: "Buffer",   route: "x-post/5" },
-  { id: "x-thread",             icon: "🧵", label: "X Thread",               channel: "Buffer",   route: "x-thread" },
   { id: "homepage-card",        icon: "🏠", label: "홈페이지 블로그 카드",    channel: "Framer",   route: null },
 ];
 
@@ -694,12 +688,12 @@ async function renderCompanyLinkedInPublish(container, weekId, postNum) {
 
       <!-- 탭 -->
       <div class="carousel-tabs">
-        <button class="carousel-tab-btn active" data-tab="carousel">🎠 캐러셀 (PDF)</button>
-        <button class="carousel-tab-btn" data-tab="single">🖼 단일 이미지</button>
+        <button class="carousel-tab-btn ${!carouselData ? "" : "active"}" data-tab="carousel">🎠 캐러셀 (PDF)</button>
+        <button class="carousel-tab-btn ${!carouselData ? "active" : ""}" data-tab="single">🖼 단일 이미지</button>
       </div>
 
       <!-- ══ 캐러셀 탭 ══ -->
-      <div class="carousel-tab-content" id="tabCarousel">
+      <div class="carousel-tab-content" id="tabCarousel" ${!carouselData ? 'style="display:none"' : ""}>
 
         <!-- 슬라이드 미리보기 -->
         <div class="form-group">
@@ -766,13 +760,20 @@ async function renderCompanyLinkedInPublish(container, weekId, postNum) {
       </div>
 
       <!-- ══ 단일 이미지 탭 ══ -->
-      <div class="carousel-tab-content" id="tabSingle" style="display:none">
+      <div class="carousel-tab-content" id="tabSingle" ${!carouselData ? "" : 'style="display:none"'}>
 
         <div class="form-group">
-          <label>포스트 텍스트</label>
+          <label>포스트 텍스트 (POST_BODY)</label>
           <textarea id="singlePostText" rows="12" style="line-height:1.7">${esc(singleBodyDefault)}</textarea>
           <div class="char-counter" id="singleCharCounter">${(singleBodyDefault).length}/3,000</div>
         </div>
+
+        ${postData.commentText ? `
+        <div class="form-group">
+          <label>첫 번째 댓글 (발행 후 직접 추가)</label>
+          <div style="background:var(--bg-tertiary);border:1px solid var(--border);border-radius:8px;padding:12px;font-size:13px;line-height:1.6;white-space:pre-wrap">${esc(postData.commentText)}</div>
+          <p style="font-size:11px;color:var(--text-muted);margin-top:6px">LinkedIn 발행 후 첫 댓글로 직접 추가하세요 (블로그 링크 포함)</p>
+        </div>` : ""}
 
         <div class="form-group">
           <label>이미지 (선택사항)</label>
@@ -831,6 +832,12 @@ async function renderCompanyLinkedInPublish(container, weekId, postNum) {
       el.querySelector("#tabSingle").style.display   = tab === "single"   ? "" : "none";
     };
   });
+
+  // ── 기본 탭: carouselData 없으면 single ──
+  if (!carouselData) {
+    el.querySelector("#tabCarousel").style.display = "none";
+    el.querySelector("#tabSingle").style.display   = "";
+  }
 
   // ── 캐러셀 글자 수 ──
   const captionTA = el.querySelector("#carouselCaption");
@@ -1087,10 +1094,17 @@ async function renderPersonalLinkedInPublish(container, weekId, postNum) {
       </div>
 
       <div class="form-group">
-        <label>포스트 텍스트</label>
+        <label>포스트 텍스트 (POST_BODY)</label>
         <textarea id="liPostText" rows="12" style="line-height:1.7">${esc(postData.text)}</textarea>
         <div class="char-counter" id="liCharCounter">${(postData.text || "").length}/3,000</div>
       </div>
+
+      ${postData.commentText ? `
+      <div class="form-group">
+        <label>첫 번째 댓글 (발행 후 직접 추가)</label>
+        <div style="background:var(--bg-tertiary);border:1px solid var(--border);border-radius:8px;padding:12px;font-size:13px;line-height:1.6;white-space:pre-wrap">${esc(postData.commentText)}</div>
+        <p style="font-size:11px;color:var(--text-muted);margin-top:6px">LinkedIn 발행 후 첫 댓글로 직접 추가하세요 (블로그 링크 포함)</p>
+      </div>` : ""}
 
       <div class="form-group">
         <label>이미지 (선택사항)</label>

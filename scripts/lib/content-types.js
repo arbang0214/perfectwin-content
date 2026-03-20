@@ -41,13 +41,6 @@ const CONTENT_TYPES = {
     outputFolder: "image-prompts",
     outputFile: "blog-thumbnail.md",
   },
-  "img-linkedin-company": {
-    category: "image",
-    label: "LinkedIn 회사 이미지",
-    prompt: "image-linkedin.md",
-    outputFolder: "image-prompts",
-    outputFile: "linkedin-images.md",
-  },
   "seo-meta": {
     category: "meta",
     label: "SEO 메타",

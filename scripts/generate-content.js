@@ -77,16 +77,13 @@ async function main() {
   const weekDir = createWeekFolder(stamp);
 
   // Determine effective types (with dependency resolution)
-  const ALL_TYPES = ["blog-ko", "blog-en", "linkedin-company", "linkedin-personal", "x-posts", "img-blog-thumbnail", "img-linkedin-company"];
+  const ALL_TYPES = ["blog-ko", "blog-en", "linkedin-company", "linkedin-personal", "x-posts", "img-blog-thumbnail"];
   const selectedTypes = args.types
     ? new Set(args.types.split(",").map((t) => t.trim()))
     : new Set(ALL_TYPES);
 
   const effectiveTypes = new Set(selectedTypes);
   const needsSocial = ["linkedin-company", "linkedin-personal", "x-posts"].some((t) => effectiveTypes.has(t));
-  if (effectiveTypes.has("img-linkedin-company") && !fileExists(weekDir, "content", "linkedin-company.md")) {
-    effectiveTypes.add("linkedin-company");
-  }
   if ((needsSocial || effectiveTypes.has("linkedin-company")) && !fileExists(weekDir, "content", "blog-en.md")) {
     effectiveTypes.add("blog-en");
   }
@@ -186,16 +183,17 @@ async function main() {
       }
 
       const results = await Promise.all(socialTasks);
+      const imageRef = "\n\n## IMAGE\nimages/blog-thumbnail.png";
       socialKeys.forEach((key, i) => {
         if (key === "linkedin-company") {
           linkedinCompany = results[i];
-          saveContent(weekDir, "content", "linkedin-company.md", results[i]);
+          saveContent(weekDir, "content", "linkedin-company.md", results[i] + imageRef);
           console.log("  -> content/linkedin-company.md saved");
         } else if (key === "linkedin-personal") {
-          saveContent(weekDir, "content", "linkedin-personal.md", results[i]);
+          saveContent(weekDir, "content", "linkedin-personal.md", results[i] + imageRef);
           console.log("  -> content/linkedin-personal.md saved");
         } else if (key === "x-posts") {
-          saveContent(weekDir, "content", "x-posts.md", results[i]);
+          saveContent(weekDir, "content", "x-posts.md", results[i] + imageRef);
           console.log("  -> content/x-posts.md saved");
         }
       });
@@ -208,43 +206,21 @@ async function main() {
   }
 
   // ── Step 4: 이미지 프롬프트 ──────────────────────────────
-  const imgSelected = ["img-blog-thumbnail", "img-linkedin-company"].filter(gen);
+  const imgSelected = ["img-blog-thumbnail"].filter(gen);
   console.log(`[4/5] ${imgSelected.length ? "Generating image prompts..." : "Skipping image prompts"}`);
 
   if (imgSelected.length > 0) {
     const blogTitle = seoMeta.en.title || seoMeta.ko.title || args.topic;
     const topicSummary = `${args.topic} — ${args.angle}`;
-    const imgTasks = [];
-    const imgKeys = [];
 
     if (gen("img-blog-thumbnail")) {
-      imgKeys.push("blog-thumbnail");
-      imgTasks.push(callClaude(systemPrompt, buildPrompt(loadPrompt("image-blog-thumbnail.md"), {
+      const result = await callClaude(systemPrompt, buildPrompt(loadPrompt("image-blog-thumbnail.md"), {
         blog_title_en: blogTitle,
         blog_title_ko: seoMeta.ko.title || args.topic,
         topic_summary: topicSummary,
-      })));
-    }
-    if (gen("img-linkedin-company") && linkedinCompany) {
-      imgKeys.push("linkedin-images");
-      imgTasks.push(callClaude(systemPrompt, buildPrompt(loadPrompt("image-linkedin.md"), {
-        linkedin_content: linkedinCompany,
-        blog_title_en: blogTitle,
-        topic_summary: topicSummary,
-      })));
-    }
-
-    if (imgTasks.length > 0) {
-      const imgResults = await Promise.all(imgTasks);
-      imgKeys.forEach((key, i) => {
-        if (key === "blog-thumbnail") {
-          saveContent(weekDir, "image-prompts", "blog-thumbnail.md", imgResults[i]);
-          console.log("  -> image-prompts/blog-thumbnail.md saved");
-        } else if (key === "linkedin-images") {
-          saveContent(weekDir, "image-prompts", "linkedin-images.md", imgResults[i]);
-          console.log("  -> image-prompts/linkedin-images.md saved");
-        }
-      });
+      }));
+      saveContent(weekDir, "image-prompts", "blog-thumbnail.md", result);
+      console.log("  -> image-prompts/blog-thumbnail.md saved");
     }
   }
 
@@ -265,7 +241,7 @@ async function main() {
   console.log("  -> meta/utm-links.json saved");
 
   const utmSummary = Object.entries(utmLinks).map(([k, v]) => `- **${k}**: ${v}`).join("\n");
-  const summaryMd = `# Weekly Content Summary — ${stamp}\n\n## Topic\n${args.topic}\n\n## Blog\n- **Slug**: ${slug}\n- **URL**: ${blogUrl}\n- **SEO Keywords**: ${args.keywords}\n\n## Generated Files\n\n### Content\n- [ ] blog-ko.md — Korean blog post\n- [ ] blog-en.md — English blog post\n- [ ] linkedin-company.md — LinkedIn company posts (2)\n- [ ] linkedin-personal.md — LinkedIn personal posts (2)\n- [ ] x-posts.md — X/Twitter posts (5) + thread (1)\n\n### Image Prompts\n- [ ] blog-thumbnail.md — Blog OG image prompt\n- [ ] linkedin-images.md — LinkedIn image prompts (2)\n\n### Meta\n- [ ] seo-meta.json — SEO metadata & OG tags\n- [ ] utm-links.json — UTM tracking links\n\n## Publishing Checklist\n\n### Blog\n- [ ] Review blog-ko.md (Korean)\n- [ ] Review blog-en.md (English)\n- [ ] Generate thumbnail image\n- [ ] Publish to Framer CMS\n\n### LinkedIn Company\n- [ ] Review Post A + Post B\n- [ ] Create images (linkedin-images.md)\n- [ ] Schedule via Buffer\n\n### LinkedIn Personal (ARUM)\n- [ ] Review Post A + Post B\n- [ ] Schedule via Buffer\n\n### X (Twitter)\n- [ ] Review 5 standalone posts\n- [ ] Review thread\n- [ ] Schedule via Buffer\n\n## UTM Links\n${utmSummary}\n`;
+  const summaryMd = `# Weekly Content Summary — ${stamp}\n\n## Topic\n${args.topic}\n\n## Blog\n- **Slug**: ${slug}\n- **URL**: ${blogUrl}\n- **SEO Keywords**: ${args.keywords}\n\n## Generated Files\n\n### Content\n- [ ] blog-ko.md — Korean blog post\n- [ ] blog-en.md — English blog post\n- [ ] linkedin-company.md — LinkedIn company post (POST_BODY + COMMENT_TEXT)\n- [ ] linkedin-personal.md — LinkedIn personal post (POST_BODY + COMMENT_TEXT)\n- [ ] x-posts.md — X posts (X_POST_1 + X_POST_2)\n\n### Image Prompts\n- [ ] blog-thumbnail.md — Blog OG image prompt (reused for LinkedIn)\n\n### Meta\n- [ ] seo-meta.json — SEO metadata & OG tags\n- [ ] utm-links.json — UTM tracking links\n\n## Publishing Checklist\n\n### Blog\n- [ ] Review blog-ko.md (Korean)\n- [ ] Review blog-en.md (English)\n- [ ] Generate thumbnail image (Ideogram)\n- [ ] Publish to Framer CMS\n\n### LinkedIn Company (LG CNS)\n- [ ] Review POST_BODY\n- [ ] Attach blog thumbnail image\n- [ ] Schedule via Buffer\n- [ ] Post COMMENT_TEXT with blog link after publish\n\n### LinkedIn Personal (ARUM)\n- [ ] Review POST_BODY\n- [ ] Attach blog thumbnail image\n- [ ] Schedule via Buffer\n- [ ] Post COMMENT_TEXT with blog link after publish\n\n### X (Twitter)\n- [ ] Review X_POST_1\n- [ ] Review X_POST_2\n- [ ] Schedule via Buffer\n\n## UTM Links\n${utmSummary}\n`;
 
   saveContent(weekDir, null, "summary.md", summaryMd);
   console.log("  -> summary.md saved");

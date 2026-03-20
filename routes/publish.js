@@ -503,21 +503,35 @@ async function publishToFramerCms({ thumbAbsPath, publishedUrl, publishedSlug, t
 // ─── LinkedIn post parsing ────────────────────────────────────────────────────
 
 function parseLinkedinPosts(markdown) {
+  // Strip ## IMAGE section before parsing
+  const withoutImage = markdown.replace(/\n\n## IMAGE\n[\s\S]*$/, "").trim();
+
+  // New format: ### POST_BODY / ### COMMENT_TEXT (single post per file)
+  const postBodyMatch = withoutImage.match(/###\s*POST_BODY\s*\n([\s\S]*?)(?=\n###\s*COMMENT_TEXT|$)/i);
+  if (postBodyMatch) {
+    const commentMatch = withoutImage.match(/###\s*COMMENT_TEXT\s*\n([\s\S]*?)$/i);
+    return [{
+      num: 1,
+      title: "Post",
+      text: postBodyMatch[1].trim(),
+      commentText: commentMatch ? commentMatch[1].trim() : "",
+    }];
+  }
+
   const posts = [];
-  // Try ## Post A / ## Post B headers first
+  // Legacy format: ## Post A / ## Post B headers
   const headerPattern = /^##\s+Post\s+([AB])[:\s]*(.*)/gm;
   const headers = [];
   let m;
-  while ((m = headerPattern.exec(markdown)) !== null) {
+  while ((m = headerPattern.exec(withoutImage)) !== null) {
     headers.push({ label: m[1], title: m[2].trim(), index: m.index });
   }
 
   if (headers.length >= 2) {
     for (let i = 0; i < headers.length; i++) {
       const start = headers[i].index;
-      const end = i + 1 < headers.length ? headers[i + 1].index : markdown.length;
-      const body = markdown.slice(start, end).replace(/^##\s+Post\s+[AB][:\s]*.*\n/, "").trim();
-      // Strip Korean review section
+      const end = i + 1 < headers.length ? headers[i + 1].index : withoutImage.length;
+      const body = withoutImage.slice(start, end).replace(/^##\s+Post\s+[AB][:\s]*.*\n/, "").trim();
       const koreanIdx = body.indexOf("### \uD83C\uDDF0\uD83C\uDDF7");
       const cleaned = koreanIdx !== -1 ? body.slice(0, koreanIdx).trim() : body;
       posts.push({ num: i + 1, title: headers[i].title, text: cleaned });
@@ -526,11 +540,11 @@ function parseLinkedinPosts(markdown) {
   }
 
   // Fallback: split by --- separator
-  const sections = markdown.split(/^---$/m).filter(s => s.trim());
+  const sections = withoutImage.split(/^---$/m).filter(s => s.trim());
   let num = 1;
   for (const section of sections) {
     const trimmed = section.trim();
-    if (!trimmed || trimmed.startsWith("# ")) continue; // skip title section
+    if (!trimmed || trimmed.startsWith("# ")) continue;
     const titleMatch = trimmed.match(/^##?\s+(.+)/);
     const title = titleMatch ? titleMatch[1].trim() : `Post ${num}`;
     posts.push({ num, title, text: trimmed });
@@ -557,17 +571,20 @@ router.get("/week/:weekId/content/linkedin-company/:postNum", (req, res) => {
   const post = posts.find(p => p.num === num);
   if (!post) return res.status(404).json({ error: `Post ${num} not found (${posts.length} posts parsed)` });
 
-  // Check for images
-  const imgName = `linkedin-company-${num}`;
+  // Check for dedicated image, fall back to blog thumbnail
   let imageUrl = null;
-  for (const ext of ["png", "jpg", "webp"]) {
-    if (fs.existsSync(path.join(weekPath, "images", `${imgName}.${ext}`))) {
-      imageUrl = `/api/publish/week/${weekId}/file/${imgName}.${ext}`;
-      break;
+  const candidates = [`linkedin-company-${num}`, "blog-thumbnail"];
+  for (const imgName of candidates) {
+    for (const ext of ["png", "jpg", "webp"]) {
+      if (fs.existsSync(path.join(weekPath, "images", `${imgName}.${ext}`))) {
+        imageUrl = `/api/publish/week/${weekId}/file/${imgName}.${ext}`;
+        break;
+      }
     }
+    if (imageUrl) break;
   }
 
-  res.json({ text: post.text, title: post.title, hasImage: !!imageUrl, imageUrl });
+  res.json({ text: post.text, title: post.title, commentText: post.commentText || "", hasImage: !!imageUrl, imageUrl });
 });
 
 // GET /api/publish/week/:weekId/content/linkedin-personal/:postNum
@@ -589,39 +606,51 @@ router.get("/week/:weekId/content/linkedin-personal/:postNum", (req, res) => {
   if (!post) return res.status(404).json({ error: `Post ${num} not found (${posts.length} posts parsed)` });
 
   let imageUrl = null;
-  const imgName = `linkedin-personal-${num}`;
-  for (const ext of ["png", "jpg", "webp"]) {
-    if (fs.existsSync(path.join(weekPath, "images", `${imgName}.${ext}`))) {
-      imageUrl = `/api/publish/week/${weekId}/file/${imgName}.${ext}`;
-      break;
+  const candidates = [`linkedin-personal-${num}`, "blog-thumbnail"];
+  for (const imgName of candidates) {
+    for (const ext of ["png", "jpg", "webp"]) {
+      if (fs.existsSync(path.join(weekPath, "images", `${imgName}.${ext}`))) {
+        imageUrl = `/api/publish/week/${weekId}/file/${imgName}.${ext}`;
+        break;
+      }
     }
+    if (imageUrl) break;
   }
 
-  res.json({ text: post.text, title: post.title, hasImage: !!imageUrl, imageUrl });
+  res.json({ text: post.text, title: post.title, commentText: post.commentText || "", hasImage: !!imageUrl, imageUrl });
 });
 
 // ─── X post parsing ──────────────────────────────────────────────────────────
 
 function parseXPosts(markdown) {
-  const standaloneSection = markdown.match(/##\s*Standalone Posts\s*\n([\s\S]*?)(?=\n##\s*Thread|\n##\s*🇰🇷|$)/i);
-  const threadSection = markdown.match(/##\s*Thread[^\n]*\n([\s\S]*?)(?=\n---\s*\n##\s*🇰🇷|\n##\s*🇰🇷|$)/i);
+  // Strip ## IMAGE section
+  const withoutImage = markdown.replace(/\n\n## IMAGE\n[\s\S]*$/, "").trim();
+
+  // New format: ### X_POST_1 / ### X_POST_2
+  const xPost1 = withoutImage.match(/###\s*X_POST_1\s*\n([\s\S]*?)(?=\n###\s*X_POST_2|$)/i);
+  if (xPost1) {
+    const xPost2 = withoutImage.match(/###\s*X_POST_2\s*\n([\s\S]*?)$/i);
+    const posts = [{ num: 1, type: "standalone", text: xPost1[1].trim() }];
+    if (xPost2) posts.push({ num: 2, type: "standalone", text: xPost2[1].trim() });
+    return { posts, thread: [] };
+  }
 
   const posts = [];
 
-  // Parse standalone posts: ### Post 1 (type: Empathy)
+  // Legacy format: ## Standalone Posts → ### Post N (type: ...)
+  const standaloneSection = withoutImage.match(/##\s*Standalone Posts\s*\n([\s\S]*?)(?=\n##\s*Thread|\n##\s*🇰🇷|$)/i);
+  const threadSection = withoutImage.match(/##\s*Thread[^\n]*\n([\s\S]*?)(?=\n---\s*\n##\s*🇰🇷|\n##\s*🇰🇷|$)/i);
+
   if (standaloneSection) {
     const postPattern = /###\s*Post\s+(\d+)[^\n]*\n([\s\S]*?)(?=\n###\s*Post\s+\d+|$)/gi;
     let m;
     while ((m = postPattern.exec(standaloneSection[1])) !== null) {
       const num = parseInt(m[1], 10);
-      let body = m[2].trim();
-      // Remove "Suggested day:" line
-      body = body.replace(/^Suggested day:.*$/gm, "").trim();
+      let body = m[2].trim().replace(/^Suggested day:.*$/gm, "").trim();
       posts.push({ num, type: "standalone", text: body });
     }
   }
 
-  // Parse thread: ### Tweet 1, ### Tweet 2, ...
   const tweets = [];
   if (threadSection) {
     const tweetPattern = /###\s*Tweet\s+(\d+)\s*\n([\s\S]*?)(?=\n###\s*Tweet\s+\d+|$)/gi;
