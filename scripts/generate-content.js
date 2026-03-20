@@ -83,6 +83,13 @@ async function main() {
     : new Set(ALL_TYPES);
 
   const effectiveTypes = new Set(selectedTypes);
+  // linkedin-company와 linkedin-personal은 항상 같이 생성
+  if (effectiveTypes.has("linkedin-company") && !fileExists(weekDir, "content", "linkedin-personal.md")) {
+    effectiveTypes.add("linkedin-personal");
+  }
+  if (effectiveTypes.has("linkedin-personal") && !fileExists(weekDir, "content", "linkedin-company.md")) {
+    effectiveTypes.add("linkedin-company");
+  }
   const needsSocial = ["linkedin-company", "linkedin-personal", "x-posts"].some((t) => effectiveTypes.has(t));
   if ((needsSocial || effectiveTypes.has("linkedin-company")) && !fileExists(weekDir, "content", "blog-en.md")) {
     effectiveTypes.add("blog-en");

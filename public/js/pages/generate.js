@@ -23,11 +23,10 @@ const TOPICS = [
 const FILE_DESC = {
   "blog-ko.md": "한글 블로그 (1,200~1,800단어)",
   "blog-en.md": "English blog post",
-  "linkedin-company.md": "LinkedIn 회사 포스트 2개",
-  "linkedin-personal.md": "LinkedIn 개인 포스트 2개",
-  "x-posts.md": "X 포스트 5개 + 스레드",
+  "linkedin-company.md": "LinkedIn 회사 포스트 (POST_BODY + COMMENT_TEXT)",
+  "linkedin-personal.md": "LinkedIn 개인 포스트 (POST_BODY + COMMENT_TEXT)",
+  "x-posts.md": "X 포스트 2개 (X_POST_1 + X_POST_2)",
   "blog-thumbnail.md": "블로그 썸네일 프롬프트",
-  "linkedin-images.md": "LinkedIn 이미지 프롬프트 2개",
   "seo-meta.json": "SEO 메타데이터 & OG tags",
   "utm-links.json": "UTM 트래킹 링크",
   "summary.md": "주간 요약 & 체크리스트",
@@ -129,9 +128,9 @@ function buildTemplate() {
           <div class="toggles">
             <span class="toggle-chip on" data-type="blog-ko" data-cat="publish"><span class="chip-label">Blog KO</span><span class="chip-desc">한글 블로그 (1,200~1,800단어)</span></span>
             <span class="toggle-chip on" data-type="blog-en" data-cat="publish"><span class="chip-label">Blog EN</span><span class="chip-desc">영어 블로그 (로컬라이제이션)</span></span>
-            <span class="toggle-chip on" data-type="linkedin-company" data-cat="publish"><span class="chip-label">LinkedIn Company</span><span class="chip-desc">회사 포스트 2개</span></span>
-            <span class="toggle-chip on" data-type="linkedin-personal" data-cat="publish"><span class="chip-label">LinkedIn Personal</span><span class="chip-desc">개인 포스트 2개</span></span>
-            <span class="toggle-chip on" data-type="x-posts" data-cat="publish"><span class="chip-label">X Posts</span><span class="chip-desc">포스트 5개 + 스레드</span></span>
+            <span class="toggle-chip on" data-type="linkedin-company" data-cat="publish"><span class="chip-label">LinkedIn Company</span><span class="chip-desc">회사 포스트 (POST_BODY)</span></span>
+            <span class="toggle-chip on" data-type="linkedin-personal" data-cat="publish"><span class="chip-label">LinkedIn Personal</span><span class="chip-desc">개인 포스트 (POST_BODY)</span></span>
+            <span class="toggle-chip on" data-type="x-posts" data-cat="publish"><span class="chip-label">X Posts</span><span class="chip-desc">포스트 2개</span></span>
           </div>
         </div>
         <div class="type-group">
@@ -141,7 +140,6 @@ function buildTemplate() {
           </div>
           <div class="toggles">
             <span class="toggle-chip on" data-type="img-blog-thumbnail" data-cat="image"><span class="chip-label">블로그 썸네일</span><span class="chip-desc">OG 이미지 Ideogram 프롬프트</span></span>
-            <span class="toggle-chip on" data-type="img-linkedin-company" data-cat="image"><span class="chip-label">LinkedIn 이미지</span><span class="chip-desc">회사 포스트 이미지 가이드 2개</span></span>
           </div>
         </div>
         <div class="type-group">
