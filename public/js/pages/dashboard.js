@@ -1,23 +1,8 @@
 import { showToast } from "../components/toast.js";
 
-// 주차별 발행 아이템 (고정 목록)
-const PUBLISH_ITEMS = [
-  { id: "blog-en",              icon: "📄", label: "영어 블로그",              channel: "inblog",   route: "blog-en" },
-  { id: "blog-ko",              icon: "📄", label: "한글 블로그",              channel: "inblog",   route: null },
-  { id: "linkedin-company-1",   icon: "💼", label: "LinkedIn Company Post 1", channel: "Buffer",   route: "linkedin-company/1" },
-  { id: "linkedin-company-2",   icon: "💼", label: "LinkedIn Company Post 2", channel: "Buffer",   route: "linkedin-company/2" },
-  { id: "linkedin-personal-1",  icon: "🤝", label: "LinkedIn Personal Post 1",channel: "Buffer",   route: "linkedin-personal/1" },
-  { id: "linkedin-personal-2",  icon: "🤝", label: "LinkedIn Personal Post 2",channel: "Buffer",   route: "linkedin-personal/2" },
-  { id: "x-post-1",             icon: "🐦", label: "X Post 1",               channel: "Buffer",   route: "x-post/1" },
-  { id: "x-post-2",             icon: "🐦", label: "X Post 2",               channel: "Buffer",   route: "x-post/2" },
-  { id: "homepage-card",        icon: "🏠", label: "홈페이지 블로그 카드",    channel: "Framer",   route: null },
-];
-
 // ─── Entry point ──────────────────────────────────────────────────────────────
 export function renderDashboard(container, subroute) {
-  if (subroute === "new") {
-    renderNewWeek(container);
-  } else if (subroute && subroute.startsWith("week-")) {
+  if (subroute && subroute.startsWith("week-")) {
     const slashIdx = subroute.indexOf("/");
     if (slashIdx !== -1) {
       const weekId = subroute.slice(0, slashIdx);
@@ -53,11 +38,9 @@ async function renderWeekList(container) {
         <h1 class="page-title">발행 대시보드</h1>
         <p class="page-subtitle">생성된 콘텐츠의 발행 상태를 관리합니다</p>
       </div>
-      <button class="btn-sm btn-primary" id="btnNewWeek">+ 새 주 등록</button>
     </div>
     <div id="weekListBody"><div style="text-align:center;padding:40px;color:var(--text-muted)">불러오는 중...</div></div>
   `;
-  container.querySelector("#btnNewWeek").onclick = () => { location.hash = "#dashboard/new"; };
 
   let weeks;
   try {
@@ -75,14 +58,13 @@ async function renderWeekList(container) {
       <div class="empty-page" style="min-height:50vh">
         <div class="empty-icon">📅</div>
         <h2>등록된 주가 없습니다</h2>
-        <p>콘텐츠를 생성한 후 "새 주 등록"으로 발행 관리를 시작하세요</p>
+        <p>콘텐츠를 생성하면 자동으로 대시보드에 표시됩니다</p>
       </div>`;
     return;
   }
 
   const rows = weeks.map(w => {
-    const statusLabel = { published: "발행 완료", partial: "진행 중", draft: "초안", "no-data": "미등록" }[w.status] || w.status;
-    const date = w.createdAt ? new Date(w.createdAt).toLocaleDateString("ko-KR") : "—";
+    const statusLabel = { published: "발행완료", partial: "진행중", draft: "초안" }[w.status] || w.status;
     const isFull = w.progress === 100;
     return `
       <tr class="row-link" data-week="${w.weekId}">
@@ -95,7 +77,6 @@ async function renderWeekList(container) {
             <span class="progress-label">${w.publishedCount}/${w.totalCount}</span>
           </div>
         </td>
-        <td class="week-date-cell">${date}</td>
       </tr>`;
   }).join("");
 
@@ -103,7 +84,7 @@ async function renderWeekList(container) {
     <div class="week-table-wrap">
       <table class="week-table">
         <thead><tr>
-          <th>주차</th><th>주제</th><th>상태</th><th>발행 진행</th><th>등록일</th>
+          <th>주차</th><th>주제</th><th>상태</th><th>발행 진행</th>
         </tr></thead>
         <tbody>${rows}</tbody>
       </table>
@@ -115,97 +96,16 @@ async function renderWeekList(container) {
   });
 }
 
-// ─── Screen 2: New week registration ─────────────────────────────────────────
-async function renderNewWeek(container) {
-  let folders = [];
-  try {
-    const res = await fetch("/api/outputs");
-    const data = await res.json();
-    folders = data.map(d => d.folder);
-  } catch { /* ignore */ }
-
-  container.innerHTML = `
-    <button class="db-back" id="btnBack">← 목록으로</button>
-    <div class="page-header" style="margin-bottom:24px">
-      <h1 class="page-title">새 주 등록</h1>
-      <p class="page-subtitle">발행 관리를 시작할 콘텐츠 주를 등록합니다</p>
-    </div>
-    <div class="db-form">
-      <div class="form-group">
-        <label>Output 폴더 선택</label>
-        <select id="folderSelect">
-          <option value="">— 폴더를 선택하세요 —</option>
-          ${folders.map(f => `<option value="${f}">${f}</option>`).join("")}
-        </select>
-      </div>
-      <div class="form-group">
-        <label>주제 (자동 감지됨, 수정 가능)</label>
-        <input type="text" id="topicInput" placeholder="자동 감지 중..." />
-      </div>
-      <div id="autoDetectNote" style="font-size:12px;color:var(--text-muted);margin-top:-10px;margin-bottom:14px"></div>
-      <div class="btn-row" style="justify-content:flex-start">
-        <button class="btn btn-primary" id="btnCreate" disabled>등록하기</button>
-        <button class="btn btn-secondary" id="btnCancel">취소</button>
-      </div>
-    </div>
-  `;
-
-  container.querySelector("#btnBack").onclick = () => { location.hash = "#dashboard"; };
-  container.querySelector("#btnCancel").onclick = () => { location.hash = "#dashboard"; };
-
-  const folderSelect = container.querySelector("#folderSelect");
-  const topicInput = container.querySelector("#topicInput");
-  const btnCreate = container.querySelector("#btnCreate");
-  const note = container.querySelector("#autoDetectNote");
-
-  folderSelect.onchange = async () => {
-    const weekId = folderSelect.value;
-    if (!weekId) { btnCreate.disabled = true; topicInput.value = ""; note.textContent = ""; return; }
-
-    try {
-      const res = await fetch(`/api/publish/week/${weekId}`);
-      if (res.ok) {
-        note.textContent = "⚠ 이미 등록된 주입니다. 등록하면 기존 데이터를 덮어씁니다.";
-        note.style.color = "var(--warning)";
-      } else {
-        note.textContent = "";
-      }
-    } catch { note.textContent = ""; }
-
-    try {
-      const res = await fetch(`/api/output/${weekId}/summary.md`);
-      if (res.ok) {
-        const text = await res.text();
-        const match = text.match(/^#\s+(.+)$/m) || text.match(/[Tt]opic[:\s]+(.+)/);
-        topicInput.value = match ? match[1].trim() : text.split("\n").find(l => l.trim()) || "";
-        if (topicInput.value) { note.textContent = "✓ summary.md에서 주제를 자동으로 감지했습니다."; note.style.color = "var(--success)"; }
-      }
-    } catch { /* no summary */ }
-
-    btnCreate.disabled = false;
-  };
-
-  btnCreate.onclick = async () => {
-    const weekId = folderSelect.value;
-    if (!weekId) return;
-    btnCreate.disabled = true;
-    btnCreate.textContent = "등록 중...";
-    try {
-      const res = await fetch("/api/publish/week", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ weekId, topic: topicInput.value }),
-      });
-      if (!res.ok) throw new Error((await res.json()).error);
-      showToast("주 등록 완료!", "success");
-      location.hash = `#dashboard/${weekId}`;
-    } catch (err) {
-      showToast(err.message || "등록 실패", "error");
-      btnCreate.disabled = false;
-      btnCreate.textContent = "등록하기";
-    }
-  };
-}
+// 7 fixed detail items
+const DETAIL_ITEMS = [
+  { id: "blog-en",            icon: "📄", label: "영어 블로그",                    channel: "inblog",  route: "blog-en" },
+  { id: "blog-ko",            icon: "📄", label: "한글 블로그",                    channel: "inblog",  route: null },
+  { id: "linkedin-company-1", icon: "💼", label: "LinkedIn Company Post 1",        channel: "Buffer",  route: "linkedin-company/1" },
+  { id: "linkedin-company-2", icon: "💼", label: "LinkedIn Company Post 2",        channel: "Buffer",  route: "linkedin-company/2" },
+  { id: "x-post-1",           icon: "🐦", label: "X Post 1",                      channel: "Buffer",  route: "x-post/1" },
+  { id: "x-post-2",           icon: "🐦", label: "X Post 2",                      channel: "Buffer",  route: "x-post/2" },
+  { id: "thumbnail-prompt",   icon: "🖼️", label: "블로그 썸네일 이미지 생성 프롬프트", channel: "Ideogram", route: null, isModal: true },
+];
 
 // ─── Screen 3: Week detail (list table) ──────────────────────────────────────
 async function renderWeekDetail(container, weekId) {
@@ -215,7 +115,6 @@ async function renderWeekDetail(container, weekId) {
   `;
   container.querySelector("#btnBack").onclick = () => { location.hash = "#dashboard"; };
 
-  // Load publish data (optional)
   let statusMap = {};
   let topic = weekId;
   try {
@@ -230,15 +129,17 @@ async function renderWeekDetail(container, weekId) {
   } catch { /* ignore */ }
 
   const el = container.querySelector("#detailBody");
-  const publishedCount = PUBLISH_ITEMS.filter(item => statusMap[item.id]?.status === "published").length;
+  // Count only the 6 tracked items (exclude thumbnail-prompt)
+  const tracked = DETAIL_ITEMS.filter(i => !i.isModal);
+  const publishedCount = tracked.filter(item => statusMap[item.id]?.status === "published").length;
 
-  const rows = PUBLISH_ITEMS.map(item => {
-    const status = statusMap[item.id]?.status || "draft";
+  const rows = DETAIL_ITEMS.map(item => {
+    const status = item.isModal ? null : (statusMap[item.id]?.status || "draft");
     return `
-      <tr class="publish-item-row" data-id="${item.id}" data-route="${item.route || ""}">
+      <tr class="publish-item-row" data-id="${item.id}" data-route="${item.route || ""}" data-modal="${item.isModal ? "1" : ""}">
         <td><span class="item-icon">${item.icon}</span>${item.label}</td>
         <td class="item-channel">${item.channel}</td>
-        <td>${renderItemBadge(status)}</td>
+        <td>${status ? renderItemBadge(status) : ""}</td>
         <td class="item-arrow">→</td>
       </tr>`;
   }).join("");
@@ -251,7 +152,7 @@ async function renderWeekDetail(container, weekId) {
       </div>
       <div class="db-publish-stat">
         <span class="db-publish-num">${publishedCount}</span>
-        <span class="db-publish-denom">/${PUBLISH_ITEMS.length} 발행 완료</span>
+        <span class="db-publish-denom">/6 발행 완료</span>
       </div>
     </div>
     <div class="week-table-wrap">
@@ -266,6 +167,10 @@ async function renderWeekDetail(container, weekId) {
   el.querySelectorAll(".publish-item-row").forEach(row => {
     row.style.cursor = "pointer";
     row.onclick = () => {
+      if (row.dataset.modal === "1") {
+        showThumbnailPromptModal(weekId);
+        return;
+      }
       const route = row.dataset.route;
       if (route) {
         location.hash = `#dashboard/${weekId}/${route}`;
@@ -277,9 +182,56 @@ async function renderWeekDetail(container, weekId) {
 }
 
 function renderItemBadge(status) {
-  if (status === "published") return `<span class="item-badge published">🟢 발행 완료</span>`;
-  if (status === "ready")     return `<span class="item-badge ready">🔵 발행 준비</span>`;
-  return `<span class="item-badge draft">⚪ 이전</span>`;
+  if (status === "published") return `<span class="item-badge published">발행완료</span>`;
+  return `<span class="item-badge draft">초안</span>`;
+}
+
+async function showThumbnailPromptModal(weekId) {
+  // Remove existing modal if any
+  document.querySelector(".thumb-prompt-modal-overlay")?.remove();
+
+  const overlay = document.createElement("div");
+  overlay.className = "thumb-prompt-modal-overlay";
+  overlay.innerHTML = `
+    <div class="thumb-prompt-modal">
+      <div class="thumb-prompt-modal-header">
+        <h3>블로그 썸네일 이미지 생성 프롬프트</h3>
+        <button class="thumb-prompt-close" id="btnCloseModal">✕</button>
+      </div>
+      <div class="thumb-prompt-modal-body">
+        <div id="thumbPromptContent" style="text-align:center;padding:20px;color:var(--text-muted)">불러오는 중...</div>
+      </div>
+      <div class="thumb-prompt-modal-footer">
+        <button class="btn btn-primary" id="btnCopyPrompt" disabled>복사</button>
+        <button class="btn btn-secondary" id="btnCloseModal2">닫기</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+
+  const close = () => overlay.remove();
+  overlay.querySelector("#btnCloseModal").onclick = close;
+  overlay.querySelector("#btnCloseModal2").onclick = close;
+  overlay.onclick = (e) => { if (e.target === overlay) close(); };
+
+  const contentEl = overlay.querySelector("#thumbPromptContent");
+  const copyBtn = overlay.querySelector("#btnCopyPrompt");
+
+  try {
+    const res = await fetch(`/api/publish/week/${weekId}/thumbnail-prompt`);
+    if (!res.ok) throw new Error((await res.json()).error);
+    const { content } = await res.json();
+    contentEl.innerHTML = `<pre class="thumb-prompt-pre">${esc(content)}</pre>`;
+    copyBtn.disabled = false;
+    copyBtn.onclick = () => {
+      navigator.clipboard.writeText(content).then(() => {
+        copyBtn.textContent = "복사됨 ✓";
+        setTimeout(() => { copyBtn.textContent = "복사"; }, 2000);
+      });
+    };
+  } catch (err) {
+    contentEl.innerHTML = `<p style="color:var(--error)">프롬프트를 찾을 수 없습니다: ${err.message}</p>`;
+  }
 }
 
 // ─── Screen 4: blog-en publish page ──────────────────────────────────────────
@@ -300,19 +252,31 @@ async function renderBlogEnPublish(container, weekId) {
     return;
   }
 
-  // Check existing publish state
+  // Check existing publish state + fetch inblog meta (tags, authors)
   let existingState = null;
+  let inblogMeta = { tags: [], authors: [], defaultAuthorId: "" };
   try {
-    const res = await fetch(`/api/publish/week/${weekId}`);
-    if (res.ok) {
-      const data = await res.json();
+    const [stateRes, metaRes] = await Promise.all([
+      fetch(`/api/publish/week/${weekId}`),
+      fetch("/api/publish/inblog/meta"),
+    ]);
+    if (stateRes.ok) {
+      const data = await stateRes.json();
       existingState = data.contents?.find(c => c.id === "blog-en");
     }
+    if (metaRes.ok) inblogMeta = await metaRes.json();
   } catch { /* ignore */ }
 
   const isPublished = existingState?.status === "published";
   const publishedUrl = existingState?.publishedUrl;
   const blogUrl = blogData.blogUrl || "https://blog.perfectwin.ai";
+
+  const defaultAuthor = inblogMeta.authors.find(a => a.id === inblogMeta.defaultAuthorId)
+    || inblogMeta.authors[0]
+    || null;
+  const tagCheckboxes = inblogMeta.tags.map(t =>
+    `<label class="tag-checkbox-label"><input type="checkbox" class="tag-cb" value="${esc(t.id)}"> ${esc(t.name)}</label>`
+  ).join("");
 
   const statusBadge = isPublished
     ? `<span class="item-badge published" style="margin-left:10px">🟢 발행 완료</span>`
@@ -379,6 +343,20 @@ async function renderBlogEnPublish(container, weekId) {
                </div>`}
         </div>
         ${blogData.hasThumbnail ? `<button class="btn-sm btn-secondary" id="btnChangeThumb" style="margin-top:8px">이미지 변경</button>` : ""}
+      </div>
+
+      <!-- 작가 -->
+      <div class="form-group">
+        <label>작가</label>
+        <div class="author-fixed-display" data-author-id="${esc(defaultAuthor?.id || "")}">
+          arbang <span class="author-role-badge">editor</span>
+        </div>
+      </div>
+
+      <!-- 카테고리 (태그) -->
+      <div class="form-group">
+        <label>카테고리 (태그)</label>
+        <div class="tag-checkbox-wrap">${tagCheckboxes}</div>
       </div>
 
       <!-- 홈페이지 게시 섹션 -->
@@ -518,9 +496,14 @@ async function renderBlogEnPublish(container, weekId) {
     let thumbnailPath = null;
     if (currentThumbFile) {
       thumbnailPath = `images/${currentThumbFile}`;
-    } else if (blogData.hasThumbnail) {
-      thumbnailPath = "images/blog-thumbnail.png";
+    } else if (blogData.hasThumbnail && blogData.thumbnailUrl) {
+      // Extract filename from URL (e.g. /api/publish/week/.../file/blog-thumbnail.jpg → blog-thumbnail.jpg)
+      const thumbFilename = blogData.thumbnailUrl.split("/").pop().split("?")[0];
+      thumbnailPath = `images/${thumbFilename}`;
     }
+
+    const selectedTagIds = [...el.querySelectorAll(".tag-cb:checked")].map(cb => cb.value);
+    const selectedAuthorId = el.querySelector(".author-fixed-display")?.dataset.authorId || "";
 
     try {
       const res = await fetch("/api/publish/inblog", {
@@ -538,6 +521,8 @@ async function renderBlogEnPublish(container, weekId) {
           framerTitle: useFramer ? el.querySelector("#framerTitle").value : undefined,
           framerSubtitle: useFramer ? el.querySelector("#framerSubtitle").value : undefined,
           framerFeatured: useFramer ? el.querySelector("#framerFeatured").checked : false,
+          tagIds: selectedTagIds,
+          authorId: selectedAuthorId || undefined,
         }),
       });
       const result = await res.json();

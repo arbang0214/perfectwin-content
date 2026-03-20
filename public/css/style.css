@@ -833,3 +833,68 @@ body {
   color: #166534;
   font-weight: 500;
 }
+
+/* ─── Thumbnail prompt modal ───────────────────────────────────────────────── */
+.thumb-prompt-modal-overlay {
+  display: flex; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.4); z-index: 300;
+  align-items: center; justify-content: center;
+  padding: 24px;
+}
+.thumb-prompt-modal {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  width: 100%; max-width: 640px; max-height: 80vh;
+  display: flex; flex-direction: column;
+  box-shadow: var(--shadow-lg);
+}
+.thumb-prompt-modal-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 20px; border-bottom: 1px solid var(--border);
+}
+.thumb-prompt-modal-header h3 { margin: 0; font-size: 15px; }
+.thumb-prompt-close {
+  background: none; border: none; cursor: pointer;
+  font-size: 18px; color: var(--text-muted); padding: 2px 6px;
+}
+.thumb-prompt-close:hover { color: var(--text); }
+.thumb-prompt-modal-body {
+  flex: 1; overflow-y: auto; padding: 20px;
+}
+.thumb-prompt-pre {
+  margin: 0; white-space: pre-wrap; word-break: break-word;
+  font-family: var(--font-mono, monospace); font-size: 13px;
+  line-height: 1.6; color: var(--text);
+}
+.thumb-prompt-modal-footer {
+  display: flex; justify-content: flex-end; gap: 8px;
+  padding: 14px 20px; border-top: 1px solid var(--border);
+}
+
+/* ─── Tag checkboxes ─────────────────────────────────────────────────────────── */
+.tag-checkbox-wrap {
+  display: flex; flex-wrap: wrap; gap: 8px; padding: 10px 0;
+}
+.tag-checkbox-label {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 10px; border-radius: 20px;
+  border: 1px solid var(--border); background: var(--surface);
+  font-size: 12px; cursor: pointer; user-select: none;
+  transition: background 0.15s, border-color 0.15s;
+}
+.tag-checkbox-label:has(input:checked) {
+  background: var(--primary-light, #EEF2FF); border-color: var(--primary);
+  color: var(--primary);
+}
+.tag-checkbox-label input { display: none; }
+
+.author-fixed-display {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 12px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border); background: var(--surface-2, #F8F9FA);
+  font-size: 13px; font-weight: 500; color: var(--text);
+}
+.author-role-badge {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  padding: 2px 7px; border-radius: 10px;
+  background: #EFF6FF; color: #1D4ED8;
+}

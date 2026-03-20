@@ -3,6 +3,7 @@ const router = express.Router();
 const fs = require("fs");
 const path = require("path");
 const https = require("https");
+const sharp = require("sharp");
 const multer = require("multer");
 const { marked } = require("marked");
 const { listWeekFolders, getOutputDir } = require("../scripts/lib/file-manager");
@@ -22,30 +23,42 @@ function writePublishData(weekId, data) {
   fs.writeFileSync(getPublishDataPath(weekId), JSON.stringify(data, null, 2), "utf-8");
 }
 
-const FILE_MAP = [
-  { id: "blog-ko",           label: "한글 블로그",              category: "content",      paths: ["content/blog-ko.md",            "blog-ko.md"] },
-  { id: "blog-en",           label: "영어 블로그",              category: "content",      paths: ["content/blog-en.md",            "blog-en.md"] },
-  { id: "linkedin-company",  label: "LinkedIn 회사 포스트",     category: "content",      paths: ["content/linkedin-company.md",   "linkedin-company.md"] },
-  { id: "linkedin-personal", label: "LinkedIn 개인 포스트",     category: "content",      paths: ["content/linkedin-personal.md",  "linkedin-personal.md"] },
-  { id: "x-posts",           label: "X 포스트",                 category: "content",      paths: ["content/x-posts.md",            "x-posts.md"] },
-  { id: "img-blog-thumbnail",label: "블로그 썸네일 프롬프트",   category: "image-prompt", paths: ["image-prompts/blog-thumbnail.md"] },
-  { id: "img-linkedin",      label: "LinkedIn 이미지 프롬프트", category: "image-prompt", paths: ["image-prompts/linkedin-images.md"] },
-  { id: "seo-meta",          label: "SEO 메타",                 category: "meta",         paths: ["meta/seo-meta.json",            "seo-meta.json"] },
-  { id: "utm-links",         label: "UTM 링크",                 category: "meta",         paths: ["meta/utm-links.json",           "utm-links.json"] },
+// 발행 진행율 추적 대상 6개
+const TRACKED_ITEMS = [
+  { id: "blog-ko",            label: "한글 블로그",             paths: ["content/blog-ko.md",          "blog-ko.md"] },
+  { id: "blog-en",            label: "영어 블로그",             paths: ["content/blog-en.md",          "blog-en.md"] },
+  { id: "linkedin-company-1", label: "LinkedIn Company Post 1", paths: ["content/linkedin-company.md", "linkedin-company.md"] },
+  { id: "linkedin-company-2", label: "LinkedIn Company Post 2", paths: ["content/linkedin-company.md", "linkedin-company.md"] },
+  { id: "x-post-1",           label: "X Post 1",               paths: ["content/x-posts.md",          "x-posts.md"] },
+  { id: "x-post-2",           label: "X Post 2",               paths: ["content/x-posts.md",          "x-posts.md"] },
 ];
 
 function detectWeekContents(weekId) {
   const weekPath = path.join(OUTPUT_DIR, weekId);
-  const contents = [];
-  for (const item of FILE_MAP) {
-    for (const relPath of item.paths) {
-      if (fs.existsSync(path.join(weekPath, relPath))) {
-        contents.push({ id: item.id, label: item.label, category: item.category, file: relPath, status: "draft", publishedAt: null, notes: "" });
-        break;
-      }
-    }
-  }
-  return contents;
+  return TRACKED_ITEMS.map(item => ({
+    id: item.id,
+    label: item.label,
+    status: "draft",
+    publishedAt: null,
+    exists: item.paths.some(p => fs.existsSync(path.join(weekPath, p))),
+  }));
+}
+
+// 기존 publish-data와 새 감지 결과 병합 (발행 상태 보존)
+function syncWeekContents(existing, weekId) {
+  const fresh = detectWeekContents(weekId);
+  const existingMap = Object.fromEntries(existing.map(c => [c.id, c]));
+  return fresh.map(item => {
+    const old = existingMap[item.id];
+    return old ? { ...item, status: old.status, publishedAt: old.publishedAt } : item;
+  });
+}
+
+function calcWeekStats(contents) {
+  const published = contents.filter(c => c.status === "published").length;
+  const total = contents.length;
+  const status = published === 0 ? "draft" : published === total ? "published" : "partial";
+  return { published, total, status };
 }
 
 function readTopicFromSummary(weekId) {
@@ -56,23 +69,36 @@ function readTopicFromSummary(weekId) {
   return match ? match[1].trim() : content.split("\n").find(l => l.trim()) || "";
 }
 
-// GET /api/publish/weeks
+// GET /api/publish/weeks — auto-detect and sync all week folders
 router.get("/weeks", (req, res) => {
   const weeks = listWeekFolders();
   const result = weeks.map(weekId => {
-    const data = readPublishData(weekId);
-    if (!data) return { weekId, topic: "", status: "no-data", progress: 0, publishedCount: 0, totalCount: 0, createdAt: null };
-    const total = data.contents.length;
-    const published = data.contents.filter(c => c.status === "published").length;
-    const hasActivity = data.contents.some(c => c.status !== "draft");
+    let data = readPublishData(weekId);
+
+    if (!data) {
+      // Auto-register: create publish-data.json from detected contents
+      const contents = detectWeekContents(weekId);
+      const topic = readTopicFromSummary(weekId);
+      const weekPath = path.join(OUTPUT_DIR, weekId);
+      fs.mkdirSync(path.join(weekPath, "images"), { recursive: true });
+      fs.mkdirSync(path.join(weekPath, "files"), { recursive: true });
+      data = { weekId, topic, contents, images: [], files: [] };
+      writePublishData(weekId, data);
+    } else {
+      // Re-sync: preserve publish status, refresh file existence
+      const synced = syncWeekContents(data.contents, weekId);
+      data = { ...data, contents: synced };
+      writePublishData(weekId, data);
+    }
+
+    const { published, total, status } = calcWeekStats(data.contents);
     return {
       weekId,
       topic: data.topic || "",
-      status: total > 0 && published === total ? "published" : hasActivity ? "partial" : "draft",
+      status,
       progress: total > 0 ? Math.round((published / total) * 100) : 0,
       publishedCount: published,
       totalCount: total,
-      createdAt: data.createdAt,
     };
   });
   res.json(result);
@@ -80,9 +106,31 @@ router.get("/weeks", (req, res) => {
 
 // GET /api/publish/week/:weekId
 router.get("/week/:weekId", (req, res) => {
-  const data = readPublishData(req.params.weekId);
+  const { weekId } = req.params;
+  let data = readPublishData(weekId);
   if (!data) return res.status(404).json({ error: "Not found" });
+  // Re-sync file existence on every read
+  const synced = syncWeekContents(data.contents, weekId);
+  data = { ...data, contents: synced };
+  writePublishData(weekId, data);
   res.json(data);
+});
+
+// GET /api/publish/week/:weekId/thumbnail-prompt
+router.get("/week/:weekId/thumbnail-prompt", (req, res) => {
+  const { weekId } = req.params;
+  const weekPath = path.join(OUTPUT_DIR, weekId);
+  for (const p of ["image-prompts/blog-thumbnail.md", "content/image-prompts/blog-thumbnail.md", "blog-thumbnail-prompt.md"]) {
+    const fp = path.join(weekPath, p);
+    if (fs.existsSync(fp)) {
+      const full = fs.readFileSync(fp, "utf-8");
+      // Extract only the Ideogram Prompt section
+      const match = full.match(/###\s*Ideogram Prompt\s*\n([\s\S]*?)(?=\n###\s|\n##\s|$)/i);
+      const content = match ? match[1].trim() : full.trim();
+      return res.json({ content });
+    }
+  }
+  res.status(404).json({ error: "Thumbnail prompt not found" });
 });
 
 // POST /api/publish/week
@@ -155,6 +203,26 @@ router.get("/week/:weekId/file/:filename", (req, res) => {
   res.status(404).json({ error: "File not found" });
 });
 
+// ─── GET /api/publish/inblog/meta — tags + authors ───────────────────────────
+router.get("/inblog/meta", async (req, res) => {
+  const apiKey = process.env.INBLOG_API_KEY;
+  if (!apiKey) return res.status(500).json({ error: "INBLOG_API_KEY not configured" });
+  try {
+    const [tagsRes, authorsRes] = await Promise.all([
+      inblogRequest("GET", "/api/v1/tags", null, apiKey),
+      inblogRequest("GET", "/api/v1/authors", null, apiKey),
+    ]);
+    const tags = (tagsRes.body?.data || []).map(t => ({ id: t.id, name: t.attributes.name }));
+    const authors = (authorsRes.body?.data || []).map(a => ({
+      id: a.id,
+      name: a.attributes.author_name || "",
+    }));
+    res.json({ tags, authors, defaultAuthorId: process.env.INBLOG_DEFAULT_AUTHOR_ID || "" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
 function slugify(title) {
@@ -190,17 +258,14 @@ function markdownToHtml(markdown) {
 // Call inblog REST API
 function inblogRequest(method, urlPath, body, apiKey) {
   return new Promise((resolve, reject) => {
-    const payload = JSON.stringify(body);
-    const options = {
-      hostname: "inblog.ai",
-      path: urlPath,
-      method,
-      headers: {
-        "Authorization": `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-        "Content-Length": Buffer.byteLength(payload),
-      },
+    const isGet = method === "GET";
+    const payload = isGet ? "" : JSON.stringify(body);
+    const headers = {
+      "Authorization": `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
     };
+    if (!isGet) headers["Content-Length"] = Buffer.byteLength(payload);
+    const options = { hostname: "inblog.ai", path: urlPath, method, headers };
     const req = https.request(options, (res) => {
       let data = "";
       res.on("data", chunk => { data += chunk; });
@@ -210,7 +275,7 @@ function inblogRequest(method, urlPath, body, apiKey) {
       });
     });
     req.on("error", reject);
-    req.write(payload);
+    if (!isGet) req.write(payload);
     req.end();
   });
 }
@@ -315,7 +380,7 @@ router.get("/week/:weekId/content/blog-en", (req, res) => {
 });
 
 // ─── Shared inblog publish helper ────────────────────────────────────────────
-async function inblogPublish({ apiKey, subdomain, blogUrl, weekId, contentId, title, slug, description, contentMarkdown, thumbnailPath, publishNow }) {
+async function inblogPublish({ apiKey, subdomain, blogUrl, weekId, contentId, title, slug, description, contentMarkdown, thumbnailPath, publishNow, tagIds, authorId }) {
   let thumbAbsPath = null;
   if (thumbnailPath) {
     thumbAbsPath = thumbnailPath.startsWith("/")
@@ -328,10 +393,24 @@ async function inblogPublish({ apiKey, subdomain, blogUrl, weekId, contentId, ti
 
   let imageData = null;
   if (thumbAbsPath) {
-    const buf = fs.readFileSync(thumbAbsPath);
-    const ext = path.extname(thumbAbsPath).slice(1).toLowerCase();
-    const mime = ext === "jpg" ? "image/jpeg" : `image/${ext}`;
-    imageData = `data:${mime};base64,${buf.toString("base64")}`;
+    // Compress to JPEG to stay under inblog's 1MB base64 limit (~750KB file target)
+    const compressed = await sharp(thumbAbsPath)
+      .jpeg({ quality: 82 })
+      .toBuffer();
+    // If still too large, reduce quality further
+    const finalBuf = Buffer.byteLength(compressed.toString("base64")) > 900000
+      ? await sharp(thumbAbsPath).jpeg({ quality: 60 }).toBuffer()
+      : compressed;
+    imageData = `data:image/jpeg;base64,${finalBuf.toString("base64")}`;
+    console.log(`[inblog] image compressed: ${fs.statSync(thumbAbsPath).size} → ${finalBuf.length} bytes`);
+  }
+
+  const relationships = {};
+  if (tagIds && tagIds.length > 0) {
+    relationships.tags = { data: tagIds.map(id => ({ type: "tags", id: String(id) })) };
+  }
+  if (authorId) {
+    relationships.authors = { data: [{ type: "authors", id: authorId }] };
   }
 
   function buildCreateBody(withImage) {
@@ -345,14 +424,26 @@ async function inblogPublish({ apiKey, subdomain, blogUrl, weekId, contentId, ti
           published: false,
           ...(withImage && imageData ? { image: imageData } : {}),
         },
+        ...(Object.keys(relationships).length > 0 ? { relationships } : {}),
       },
     };
   }
 
   let createRes = await inblogRequest("POST", "/api/v1/posts", buildCreateBody(true), apiKey);
-  if (createRes.status >= 500 && imageData) {
-    console.log("[inblog] 5xx with image, retrying without image...");
+  if ((createRes.status >= 500 || createRes.status === 413) && imageData) {
+    console.log(`[inblog] ${createRes.status} with image, retrying without image...`);
     createRes = await inblogRequest("POST", "/api/v1/posts", buildCreateBody(false), apiKey);
+  }
+  // 500 may mean duplicate slug — find and delete existing draft, then retry
+  if (createRes.status === 500) {
+    console.log("[inblog] 500 on create — checking for duplicate slug:", slug);
+    const listRes = await inblogRequest("GET", `/api/v1/posts?per_page=50`, null, apiKey);
+    const existing = (listRes.body?.data || []).find(p => p.attributes?.slug === slug);
+    if (existing) {
+      console.log("[inblog] deleting duplicate draft:", existing.id);
+      await inblogRequest("DELETE", `/api/v1/posts/${existing.id}`, null, apiKey);
+      createRes = await inblogRequest("POST", "/api/v1/posts", buildCreateBody(false), apiKey);
+    }
   }
   if (createRes.status >= 400) {
     const detail = typeof createRes.body === "object" ? JSON.stringify(createRes.body) : String(createRes.body);
@@ -404,6 +495,7 @@ router.post("/inblog", async (req, res) => {
   const {
     weekId, title, slug, description, contentMarkdown, thumbnailPath, publishNow,
     publishToFramer, framerTitle, framerSubtitle, framerFeatured,
+    tagIds, authorId,
   } = req.body;
   const apiKey = process.env.INBLOG_API_KEY;
   if (!apiKey) return res.status(500).json({ success: false, error: "INBLOG_API_KEY not configured" });
@@ -412,7 +504,7 @@ router.post("/inblog", async (req, res) => {
   try {
     const { postId, publishedUrl, finalStatus, thumbAbsPath } = await inblogPublish({
       apiKey, subdomain: process.env.INBLOG_BLOG_SUBDOMAIN, blogUrl: process.env.INBLOG_BLOG_URL,
-      weekId, contentId: "blog-en", title, slug, description, contentMarkdown, thumbnailPath, publishNow,
+      weekId, contentId: "blog-en", title, slug, description, contentMarkdown, thumbnailPath, publishNow, tagIds, authorId,
     });
 
     let framerResult = null;
@@ -473,19 +565,34 @@ async function publishToFramerCms({ thumbAbsPath, publishedUrl, publishedSlug, t
     const today = new Date().toISOString().split("T")[0];
     const collection = await framer.getCollection(process.env.FRAMER_COLLECTION_ID);
 
-    await collection.addItems([{
-      slug: publishedSlug,
-      fieldData: {
-        "BVgNsC65A": { type: "string", value: title },
-        "rKwlkv2dT": { type: "formattedText", value: `<p>${subtitle}</p>` },
-        ...thumbnailField,
-        "ms5QMIA5s": { type: "date", value: today },
-        "vbj565Osc": { type: "link", value: publishedUrl },
-        "K9xwshcJ3": { type: "enum", value: "qr0N73LUU" }, // "Past" case ID
-        "Wt0CDKXaK": { type: "boolean", value: featured },
-        "UGnT5Ey_I": { type: "number", value: 0 },
-      },
-    }]);
+    const fieldData = {
+      "BVgNsC65A": { type: "string", value: title },
+      "rKwlkv2dT": { type: "formattedText", value: `<p>${subtitle}</p>` },
+      ...thumbnailField,
+      "ms5QMIA5s": { type: "date", value: today },
+      "vbj565Osc": { type: "link", value: publishedUrl },
+      // K9xwshcJ3 (Status enum) omitted — framer-api 0.1.2 fails to serialize enum inputs
+      "Wt0CDKXaK": { type: "boolean", value: featured },
+      "UGnT5Ey_I": { type: "number", value: 0 },
+    };
+
+    try {
+      await collection.addItems([{ slug: publishedSlug, fieldData }]);
+    } catch (addErr) {
+      if (String(addErr.message).toLowerCase().includes("duplicate slug")) {
+        // Already exists — remove and re-add with updated data
+        const items = await collection.getItems();
+        const existing = items.find(i => i.slug === publishedSlug);
+        if (existing) {
+          await collection.removeItems([existing.id]);
+          await collection.addItems([{ slug: publishedSlug, fieldData }]);
+        } else {
+          throw addErr;
+        }
+      } else {
+        throw addErr;
+      }
+    }
 
     const publishResult = await framer.publish();
     await framer.deploy(publishResult.deployment.id);
