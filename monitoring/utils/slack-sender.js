@@ -70,9 +70,10 @@ async function sendReportToSlack(reportMd, label, targetDate) {
     }
   }
 
-  // Webhook fallback: 요약만 전송
+  // Webhook fallback: 요약 + 상세 리포트 순차 전송
   if (WEBHOOK_URL) {
-    return await sendSummaryViaWebhook(title, slackSummary);
+    const fullSlackMd = convertToSlackMrkdwn(reportMd);
+    return await sendFullViaWebhook(title, slackSummary, fullSlackMd);
   }
 
   console.log(`[Slack] 전송 수단 없음 — 콘솔 출력`);
@@ -114,22 +115,47 @@ async function sendWithBotToken(reportMd, title, slackSummary, filename) {
 }
 
 /**
- * Webhook으로 요약 메시지만 전송
+ * Webhook으로 요약 메시지 + 상세 리포트를 순차 전송
+ * 1번째 메시지: 요약 (핵심지표 + 인사이트)
+ * 2번째 메시지: 상세 리포트 전체
  */
-async function sendSummaryViaWebhook(title, slackSummary) {
-  const blocks = [
-    { type: "header", text: { type: "plain_text", text: title, emoji: true } },
-    { type: "section", text: { type: "mrkdwn", text: slackSummary } },
-  ];
-
+async function sendFullViaWebhook(title, slackSummary, fullSlackMd) {
   try {
-    const response = await fetch(WEBHOOK_URL, {
+    // 1. 요약 메시지
+    const summaryBlocks = [
+      { type: "header", text: { type: "plain_text", text: title, emoji: true } },
+      { type: "section", text: { type: "mrkdwn", text: slackSummary } },
+      { type: "divider" },
+      { type: "context", elements: [{ type: "mrkdwn", text: "📎 상세 리포트가 다음 메시지에 이어집니다" }] },
+    ];
+
+    const res1 = await fetch(WEBHOOK_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ blocks }),
+      body: JSON.stringify({ blocks: summaryBlocks }),
     });
-    if (!response.ok) throw new Error(`${response.status}`);
-    console.log(`[Slack] 요약 리포트 전송 성공 (Webhook)`);
+    if (!res1.ok) throw new Error(`요약 전송 실패: ${res1.status}`);
+
+    // 2. 상세 리포트 (블록 분할, 최대 50블록)
+    const detailChunks = splitIntoChunks(fullSlackMd, 2900);
+    const detailBlocks = [
+      { type: "header", text: { type: "plain_text", text: `📎 ${title} — 상세`, emoji: true } },
+      ...detailChunks.slice(0, 48).map((chunk) => ({
+        type: "section",
+        text: { type: "mrkdwn", text: chunk },
+      })),
+    ];
+
+    const res2 = await fetch(WEBHOOK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ blocks: detailBlocks }),
+    });
+    if (!res2.ok) {
+      console.warn(`[Slack] 상세 리포트 전송 실패 (${res2.status}) — 요약만 전송됨`);
+    }
+
+    console.log(`[Slack] 리포트 전송 성공 (요약 + 상세)`);
     return true;
   } catch (err) {
     console.error(`[Slack] Webhook 전송 실패: ${err.message}`);
