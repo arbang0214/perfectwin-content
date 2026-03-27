@@ -1,0 +1,329 @@
+{
+  "date": "2025-11-05",
+  "collectedAt": "2026-03-27T10:03:06.185Z",
+  "ga4": {
+    "date": "2025-11-05",
+    "summary": {
+      "activeUsers": 1,
+      "newUsers": 0,
+      "returningUsers": 1,
+      "sessions": 6,
+      "engagedSessions": 2,
+      "pageViews": 9,
+      "bounceRate": 66.67,
+      "engagementRate": 33.33,
+      "avgSessionDuration": 33.4,
+      "pageViewsPerSession": 1.5,
+      "totalEngagementTime": 69,
+      "eventCount": 28
+    },
+    "topPages": [
+      {
+        "pagePath": "/",
+        "pageTitle": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence",
+        "pageViews": 3,
+        "users": 1,
+        "avgDuration": 49,
+        "bounceRate": 33.33
+      },
+      {
+        "pagePath": "/product",
+        "pageTitle": "PerfecTwin - Product",
+        "pageViews": 3,
+        "users": 1,
+        "avgDuration": 24.1,
+        "bounceRate": 50
+      },
+      {
+        "pagePath": "/resources",
+        "pageTitle": "Resources",
+        "pageViews": 2,
+        "users": 0,
+        "avgDuration": 0,
+        "bounceRate": 100
+      },
+      {
+        "pagePath": "/case-studies",
+        "pageTitle": "PerfecTwin - Customers",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 5.2,
+        "bounceRate": 0
+      }
+    ],
+    "channels": [
+      {
+        "channel": "Direct",
+        "sessions": 3,
+        "users": 0,
+        "engagementRate": 33.33
+      },
+      {
+        "channel": "Organic Search",
+        "sessions": 3,
+        "users": 1,
+        "engagementRate": 33.33
+      }
+    ],
+    "sourceMedium": [
+      {
+        "source": "(direct)",
+        "medium": "(none)",
+        "sessions": 3,
+        "users": 0,
+        "engagementRate": 33.33,
+        "avgDuration": 33.3
+      },
+      {
+        "source": "google",
+        "medium": "organic",
+        "sessions": 3,
+        "users": 1,
+        "engagementRate": 33.33,
+        "avgDuration": 33.4
+      }
+    ],
+    "devices": [
+      {
+        "device": "desktop",
+        "sessions": 6,
+        "users": 1,
+        "pageViews": 9,
+        "engagementRate": 33.33,
+        "avgDuration": 33.4
+      }
+    ],
+    "countries": [
+      {
+        "country": "United States",
+        "sessions": 3,
+        "users": 1,
+        "engagementRate": 66.67
+      },
+      {
+        "country": "South Korea",
+        "sessions": 2,
+        "users": 0,
+        "engagementRate": 0
+      },
+      {
+        "country": "El Salvador",
+        "sessions": 1,
+        "users": 0,
+        "engagementRate": 0
+      }
+    ],
+    "landingPages": [
+      {
+        "landingPage": "(not set)",
+        "sessions": 2,
+        "users": 1,
+        "bounceRate": 100,
+        "avgDuration": 0,
+        "pagesPerSession": 0
+      },
+      {
+        "landingPage": "/",
+        "sessions": 2,
+        "users": 1,
+        "bounceRate": 0,
+        "avgDuration": 100.2,
+        "pagesPerSession": 3.5
+      },
+      {
+        "landingPage": "/resources",
+        "sessions": 2,
+        "users": 0,
+        "bounceRate": 100,
+        "avgDuration": 0,
+        "pagesPerSession": 1
+      }
+    ]
+  },
+  "gsc": {
+    "date": "2025-11-05",
+    "sites": [
+      {
+        "siteUrl": "https://perfectwin.ai/",
+        "label": "perfectwin.ai",
+        "date": "2025-11-05",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      },
+      {
+        "siteUrl": "https://blog.perfectwin.ai/",
+        "label": "blog.perfectwin.ai",
+        "date": "2025-11-05",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      }
+    ]
+  },
+  "inblog": {
+    "date": "2025-11-05",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2025-11-05",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-11-05",
+              "visits": 3,
+              "clicks": 0,
+              "organic": 0,
+              "home": 1,
+              "post": 23,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-11-05",
+            "end_date": "2025-11-05",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 63385,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 77338,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": null,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            }
+          ],
+          "meta": {
+            "start_date": "2025-11-05",
+            "end_date": "2025-11-05",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 3
+            }
+          ],
+          "meta": {
+            "start_date": "2025-11-05",
+            "end_date": "2025-11-05"
+          }
+        }
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2025-11-05",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-11-05",
+              "visits": 4,
+              "clicks": 0,
+              "organic": 1,
+              "home": 2,
+              "post": 23,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-11-05",
+            "end_date": "2025-11-05",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": null,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 55188,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 75497,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            }
+          ],
+          "meta": {
+            "start_date": "2025-11-05",
+            "end_date": "2025-11-05",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 3
+            },
+            {
+              "full_referrer": "www.google.com",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2025-11-05",
+            "end_date": "2025-11-05"
+          }
+        }
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": null
+  }
+}

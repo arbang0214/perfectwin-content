@@ -1,0 +1,355 @@
+{
+  "date": "2025-12-22",
+  "collectedAt": "2026-03-27T10:11:49.139Z",
+  "ga4": {
+    "date": "2025-12-22",
+    "summary": {
+      "activeUsers": 9,
+      "newUsers": 6,
+      "returningUsers": 3,
+      "sessions": 12,
+      "engagedSessions": 3,
+      "pageViews": 19,
+      "bounceRate": 75,
+      "engagementRate": 25,
+      "avgSessionDuration": 68.9,
+      "pageViewsPerSession": 1.58,
+      "totalEngagementTime": 798,
+      "eventCount": 59
+    },
+    "topPages": [
+      {
+        "pagePath": "/",
+        "pageTitle": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence",
+        "pageViews": 8,
+        "users": 7,
+        "avgDuration": 2.2,
+        "bounceRate": 87.5
+      },
+      {
+        "pagePath": "/m/home",
+        "pageTitle": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence",
+        "pageViews": 2,
+        "users": 1,
+        "avgDuration": 7.2,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/product",
+        "pageTitle": "PerfecTwin - Product",
+        "pageViews": 2,
+        "users": 2,
+        "avgDuration": 368.9,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/resources",
+        "pageTitle": "Resources",
+        "pageViews": 2,
+        "users": 2,
+        "avgDuration": 4.9,
+        "bounceRate": 33.33
+      },
+      {
+        "pagePath": "/case-studies",
+        "pageTitle": "PerfecTwin - Customers",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 17,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/company",
+        "pageTitle": "PerfecTwin - Company",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 3.8,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/m/case-studies",
+        "pageTitle": "PerfecTwin - Customers",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 2.6,
+        "bounceRate": 50
+      },
+      {
+        "pagePath": "/m/company",
+        "pageTitle": "PerfecTwin - Company",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 15.3,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/m/product",
+        "pageTitle": "PerfecTwin - Product",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 8.6,
+        "bounceRate": 0
+      }
+    ],
+    "channels": [
+      {
+        "channel": "Direct",
+        "sessions": 7,
+        "users": 7,
+        "engagementRate": 14.29
+      },
+      {
+        "channel": "Organic Search",
+        "sessions": 5,
+        "users": 2,
+        "engagementRate": 40
+      }
+    ],
+    "sourceMedium": [
+      {
+        "source": "(direct)",
+        "medium": "(none)",
+        "sessions": 7,
+        "users": 7,
+        "engagementRate": 14.29,
+        "avgDuration": 2.2
+      },
+      {
+        "source": "google",
+        "medium": "organic",
+        "sessions": 5,
+        "users": 2,
+        "engagementRate": 40,
+        "avgDuration": 162.3
+      }
+    ],
+    "devices": [
+      {
+        "device": "desktop",
+        "sessions": 11,
+        "users": 8,
+        "pageViews": 17,
+        "engagementRate": 18.18,
+        "avgDuration": 74.5
+      },
+      {
+        "device": "mobile",
+        "sessions": 1,
+        "users": 1,
+        "pageViews": 2,
+        "engagementRate": 100,
+        "avgDuration": 7.2
+      }
+    ],
+    "countries": [
+      {
+        "country": "United States",
+        "sessions": 7,
+        "users": 6,
+        "engagementRate": 14.29
+      },
+      {
+        "country": "South Korea",
+        "sessions": 4,
+        "users": 2,
+        "engagementRate": 50
+      },
+      {
+        "country": "China",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0
+      }
+    ],
+    "landingPages": [
+      {
+        "landingPage": "/",
+        "sessions": 8,
+        "users": 7,
+        "bounceRate": 87.5,
+        "avgDuration": 98.8,
+        "pagesPerSession": 1.63
+      },
+      {
+        "landingPage": "(not set)",
+        "sessions": 2,
+        "users": 2,
+        "bounceRate": 100,
+        "avgDuration": 0,
+        "pagesPerSession": 0
+      },
+      {
+        "landingPage": "/case-studies",
+        "sessions": 1,
+        "users": 1,
+        "bounceRate": 0,
+        "avgDuration": 29.2,
+        "pagesPerSession": 4
+      },
+      {
+        "landingPage": "/m/home",
+        "sessions": 1,
+        "users": 1,
+        "bounceRate": 0,
+        "avgDuration": 7.2,
+        "pagesPerSession": 2
+      }
+    ]
+  },
+  "gsc": {
+    "date": "2025-12-22",
+    "sites": [
+      {
+        "siteUrl": "https://perfectwin.ai/",
+        "label": "perfectwin.ai",
+        "date": "2025-12-22",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      },
+      {
+        "siteUrl": "https://blog.perfectwin.ai/",
+        "label": "blog.perfectwin.ai",
+        "date": "2025-12-22",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      }
+    ]
+  },
+  "inblog": {
+    "date": "2025-12-22",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2025-12-22",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-12-22",
+              "visits": 3,
+              "clicks": 0,
+              "organic": 1,
+              "home": 0,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-12-22",
+            "end_date": "2025-12-22",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 58365,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Test Automation Prioritization: Which Business Scenarios to Automate First"
+            },
+            {
+              "post_id": 70120,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": "SAP Testing Preparation Guide: 5-Step Checklist"
+            },
+            {
+              "post_id": 77338,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP S/4HANA Migration Testing: 4 Data Conversion Strategies That Prevent Go-Live Failures"
+            }
+          ],
+          "meta": {
+            "start_date": "2025-12-22",
+            "end_date": "2025-12-22",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 2
+            },
+            {
+              "full_referrer": "www.google.com",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2025-12-22",
+            "end_date": "2025-12-22"
+          }
+        }
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2025-12-22",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-12-22",
+              "visits": 0,
+              "clicks": 0,
+              "organic": 0,
+              "home": 0,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-12-22",
+            "end_date": "2025-12-22",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [],
+          "meta": {
+            "start_date": "2025-12-22",
+            "end_date": "2025-12-22",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [],
+          "meta": {
+            "start_date": "2025-12-22",
+            "end_date": "2025-12-22"
+          }
+        }
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": null
+  }
+}

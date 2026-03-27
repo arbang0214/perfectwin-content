@@ -1,0 +1,327 @@
+{
+  "date": "2025-10-28",
+  "collectedAt": "2026-03-27T10:01:38.502Z",
+  "ga4": {
+    "date": "2025-10-28",
+    "summary": {
+      "activeUsers": 4,
+      "newUsers": 2,
+      "returningUsers": 2,
+      "sessions": 5,
+      "engagedSessions": 4,
+      "pageViews": 6,
+      "bounceRate": 20,
+      "engagementRate": 80,
+      "avgSessionDuration": 188.4,
+      "pageViewsPerSession": 1.2,
+      "totalEngagementTime": 834,
+      "eventCount": 24
+    },
+    "topPages": [
+      {
+        "pagePath": "/",
+        "pageTitle": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence",
+        "pageViews": 2,
+        "users": 2,
+        "avgDuration": 8.7,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/m/home",
+        "pageTitle": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence",
+        "pageViews": 2,
+        "users": 2,
+        "avgDuration": 456.4,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/m/product",
+        "pageTitle": "PerfecTwin - Product",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 5.2,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/resources",
+        "pageTitle": "Resources",
+        "pageViews": 1,
+        "users": 2,
+        "avgDuration": 2.2,
+        "bounceRate": 33.33
+      }
+    ],
+    "channels": [
+      {
+        "channel": "Direct",
+        "sessions": 3,
+        "users": 2,
+        "engagementRate": 66.67
+      },
+      {
+        "channel": "Organic Search",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      },
+      {
+        "channel": "Referral",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      }
+    ],
+    "sourceMedium": [
+      {
+        "source": "(direct)",
+        "medium": "(none)",
+        "sessions": 3,
+        "users": 2,
+        "engagementRate": 66.67,
+        "avgDuration": 264.6
+      },
+      {
+        "source": "google",
+        "medium": "organic",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100,
+        "avgDuration": 133.6
+      },
+      {
+        "source": "jpc-excel.officeapps.live.com",
+        "medium": "referral",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100,
+        "avgDuration": 14.6
+      }
+    ],
+    "devices": [
+      {
+        "device": "desktop",
+        "sessions": 5,
+        "users": 4,
+        "pageViews": 6,
+        "engagementRate": 80,
+        "avgDuration": 188.4
+      }
+    ],
+    "countries": [
+      {
+        "country": "South Korea",
+        "sessions": 3,
+        "users": 2,
+        "engagementRate": 66.67
+      },
+      {
+        "country": "Japan",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      },
+      {
+        "country": "Panama",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      }
+    ],
+    "landingPages": [
+      {
+        "landingPage": "/",
+        "sessions": 2,
+        "users": 2,
+        "bounceRate": 0,
+        "avgDuration": 12,
+        "pagesPerSession": 1.5
+      },
+      {
+        "landingPage": "/m/home",
+        "sessions": 2,
+        "users": 2,
+        "bounceRate": 0,
+        "avgDuration": 459,
+        "pagesPerSession": 1.5
+      },
+      {
+        "landingPage": "(not set)",
+        "sessions": 1,
+        "users": 1,
+        "bounceRate": 100,
+        "avgDuration": 0,
+        "pagesPerSession": 0
+      }
+    ]
+  },
+  "gsc": {
+    "date": "2025-10-28",
+    "sites": [
+      {
+        "siteUrl": "https://perfectwin.ai/",
+        "label": "perfectwin.ai",
+        "date": "2025-10-28",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      },
+      {
+        "siteUrl": "https://blog.perfectwin.ai/",
+        "label": "blog.perfectwin.ai",
+        "date": "2025-10-28",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      }
+    ]
+  },
+  "inblog": {
+    "date": "2025-10-28",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2025-10-28",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-10-28",
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "home": 0,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-10-28",
+            "end_date": "2025-10-28",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 62136,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Cloud Ecosystem : Complete Implementation Guide"
+            }
+          ],
+          "meta": {
+            "start_date": "2025-10-28",
+            "end_date": "2025-10-28",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2025-10-28",
+            "end_date": "2025-10-28"
+          }
+        }
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2025-10-28",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-10-28",
+              "visits": 12,
+              "clicks": 0,
+              "organic": 2,
+              "home": 4,
+              "post": 28,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-10-28",
+            "end_date": "2025-10-28",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 75497,
+              "visits": 5,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": null,
+              "visits": 4,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 61892,
+              "visits": 3,
+              "clicks": 0,
+              "organic": 2,
+              "cvr": 0,
+              "title": null
+            }
+          ],
+          "meta": {
+            "start_date": "2025-10-28",
+            "end_date": "2025-10-28",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 10
+            },
+            {
+              "full_referrer": "www.google.com",
+              "count": 2
+            }
+          ],
+          "meta": {
+            "start_date": "2025-10-28",
+            "end_date": "2025-10-28"
+          }
+        }
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": null
+  }
+}

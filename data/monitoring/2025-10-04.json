@@ -1,0 +1,249 @@
+{
+  "date": "2025-10-04",
+  "collectedAt": "2026-03-27T09:56:38.351Z",
+  "ga4": {
+    "date": "2025-10-04",
+    "summary": {
+      "activeUsers": 3,
+      "newUsers": 2,
+      "returningUsers": 1,
+      "sessions": 3,
+      "engagedSessions": 2,
+      "pageViews": 3,
+      "bounceRate": 33.33,
+      "engagementRate": 66.67,
+      "avgSessionDuration": 78.4,
+      "pageViewsPerSession": 1,
+      "totalEngagementTime": 182,
+      "eventCount": 12
+    },
+    "topPages": [
+      {
+        "pagePath": "/m/home",
+        "pageTitle": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence",
+        "pageViews": 2,
+        "users": 2,
+        "avgDuration": 108.9,
+        "bounceRate": 50
+      },
+      {
+        "pagePath": "/product",
+        "pageTitle": "PerfecTwin - Product",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 17.2,
+        "bounceRate": 0
+      }
+    ],
+    "channels": [
+      {
+        "channel": "Organic Search",
+        "sessions": 3,
+        "users": 3,
+        "engagementRate": 66.67
+      }
+    ],
+    "sourceMedium": [
+      {
+        "source": "google",
+        "medium": "organic",
+        "sessions": 3,
+        "users": 3,
+        "engagementRate": 66.67,
+        "avgDuration": 78.4
+      }
+    ],
+    "devices": [
+      {
+        "device": "desktop",
+        "sessions": 2,
+        "users": 2,
+        "pageViews": 2,
+        "engagementRate": 100,
+        "avgDuration": 116.1
+      },
+      {
+        "device": "mobile",
+        "sessions": 1,
+        "users": 1,
+        "pageViews": 1,
+        "engagementRate": 0,
+        "avgDuration": 2.8
+      }
+    ],
+    "countries": [
+      {
+        "country": "France",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0
+      },
+      {
+        "country": "Panama",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      },
+      {
+        "country": "United States",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      }
+    ],
+    "landingPages": [
+      {
+        "landingPage": "/m/home",
+        "sessions": 2,
+        "users": 2,
+        "bounceRate": 50,
+        "avgDuration": 108.9,
+        "pagesPerSession": 1
+      },
+      {
+        "landingPage": "/product",
+        "sessions": 1,
+        "users": 1,
+        "bounceRate": 0,
+        "avgDuration": 17.2,
+        "pagesPerSession": 1
+      }
+    ]
+  },
+  "gsc": {
+    "date": "2025-10-04",
+    "sites": [
+      {
+        "siteUrl": "https://perfectwin.ai/",
+        "label": "perfectwin.ai",
+        "date": "2025-10-04",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      },
+      {
+        "siteUrl": "https://blog.perfectwin.ai/",
+        "label": "blog.perfectwin.ai",
+        "date": "2025-10-04",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      }
+    ]
+  },
+  "inblog": {
+    "date": "2025-10-04",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2025-10-04",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-10-04",
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "home": 0,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-10-04",
+            "end_date": "2025-10-04",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 59866,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Order-to-Cash Testing Automation: A Complete Guide (2026)"
+            }
+          ],
+          "meta": {
+            "start_date": "2025-10-04",
+            "end_date": "2025-10-04",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2025-10-04",
+            "end_date": "2025-10-04"
+          }
+        }
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2025-10-04",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-10-04",
+              "visits": 0,
+              "clicks": 0,
+              "organic": 0,
+              "home": 0,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-10-04",
+            "end_date": "2025-10-04",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [],
+          "meta": {
+            "start_date": "2025-10-04",
+            "end_date": "2025-10-04",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [],
+          "meta": {
+            "start_date": "2025-10-04",
+            "end_date": "2025-10-04"
+          }
+        }
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": null
+  }
+}

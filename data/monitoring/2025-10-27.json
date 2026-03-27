@@ -1,0 +1,205 @@
+{
+  "date": "2025-10-27",
+  "collectedAt": "2026-03-27T10:01:26.512Z",
+  "ga4": {
+    "date": "2025-10-27",
+    "summary": {
+      "activeUsers": 0,
+      "newUsers": 0,
+      "returningUsers": 0,
+      "sessions": 0,
+      "engagedSessions": 0,
+      "pageViews": 0,
+      "bounceRate": 0,
+      "engagementRate": 0,
+      "avgSessionDuration": 0,
+      "pageViewsPerSession": 0,
+      "totalEngagementTime": 0,
+      "eventCount": 0
+    },
+    "topPages": [],
+    "channels": [],
+    "sourceMedium": [],
+    "devices": [],
+    "countries": [],
+    "landingPages": []
+  },
+  "gsc": {
+    "date": "2025-10-27",
+    "sites": [
+      {
+        "siteUrl": "https://perfectwin.ai/",
+        "label": "perfectwin.ai",
+        "date": "2025-10-27",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      },
+      {
+        "siteUrl": "https://blog.perfectwin.ai/",
+        "label": "blog.perfectwin.ai",
+        "date": "2025-10-27",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      }
+    ]
+  },
+  "inblog": {
+    "date": "2025-10-27",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2025-10-27",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-10-27",
+              "visits": 3,
+              "clicks": 0,
+              "organic": 0,
+              "home": 0,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-10-27",
+            "end_date": "2025-10-27",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 56958,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Backend Test Automation: Why UI Replay Falls Short for ERP Testing"
+            },
+            {
+              "post_id": 46820,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "How a Global EV Battery Manufacturer Automated Testing for Millions of Data Points in Its SAP S/4HANA Migration"
+            }
+          ],
+          "meta": {
+            "start_date": "2025-10-27",
+            "end_date": "2025-10-27",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 3
+            }
+          ],
+          "meta": {
+            "start_date": "2025-10-27",
+            "end_date": "2025-10-27"
+          }
+        }
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2025-10-27",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-10-27",
+              "visits": 4,
+              "clicks": 0,
+              "organic": 1,
+              "home": 2,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-10-27",
+            "end_date": "2025-10-27",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": null,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 55527,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 69123,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            }
+          ],
+          "meta": {
+            "start_date": "2025-10-27",
+            "end_date": "2025-10-27",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 3
+            },
+            {
+              "full_referrer": "www.google.com",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2025-10-27",
+            "end_date": "2025-10-27"
+          }
+        }
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": null
+  }
+}

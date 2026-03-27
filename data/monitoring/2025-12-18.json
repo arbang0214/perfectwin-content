@@ -1,0 +1,441 @@
+{
+  "date": "2025-12-18",
+  "collectedAt": "2026-03-27T10:10:59.168Z",
+  "ga4": {
+    "date": "2025-12-18",
+    "summary": {
+      "activeUsers": 9,
+      "newUsers": 6,
+      "returningUsers": 3,
+      "sessions": 13,
+      "engagedSessions": 6,
+      "pageViews": 17,
+      "bounceRate": 53.85,
+      "engagementRate": 46.15,
+      "avgSessionDuration": 104.6,
+      "pageViewsPerSession": 1.31,
+      "totalEngagementTime": 128,
+      "eventCount": 51
+    },
+    "topPages": [
+      {
+        "pagePath": "/",
+        "pageTitle": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence",
+        "pageViews": 13,
+        "users": 8,
+        "avgDuration": 72.3,
+        "bounceRate": 58.33
+      },
+      {
+        "pagePath": "/m/home",
+        "pageTitle": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence",
+        "pageViews": 2,
+        "users": 2,
+        "avgDuration": 207.2,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/company",
+        "pageTitle": "PerfecTwin - Company",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 60.1,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/product",
+        "pageTitle": "PerfecTwin - Product",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 18.4,
+        "bounceRate": 0
+      }
+    ],
+    "channels": [
+      {
+        "channel": "Direct",
+        "sessions": 8,
+        "users": 6,
+        "engagementRate": 50
+      },
+      {
+        "channel": "Organic Search",
+        "sessions": 3,
+        "users": 3,
+        "engagementRate": 66.67
+      },
+      {
+        "channel": "Referral",
+        "sessions": 2,
+        "users": 0,
+        "engagementRate": 0
+      }
+    ],
+    "sourceMedium": [
+      {
+        "source": "(direct)",
+        "medium": "(none)",
+        "sessions": 8,
+        "users": 6,
+        "engagementRate": 50,
+        "avgDuration": 110.8
+      },
+      {
+        "source": "claude.ai",
+        "medium": "referral",
+        "sessions": 2,
+        "users": 0,
+        "engagementRate": 0,
+        "avgDuration": 0
+      },
+      {
+        "source": "google",
+        "medium": "organic",
+        "sessions": 2,
+        "users": 2,
+        "engagementRate": 50,
+        "avgDuration": 204.1
+      },
+      {
+        "source": "ecosia.org",
+        "medium": "organic",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100,
+        "avgDuration": 66.2
+      }
+    ],
+    "devices": [
+      {
+        "device": "desktop",
+        "sessions": 12,
+        "users": 8,
+        "pageViews": 15,
+        "engagementRate": 41.67,
+        "avgDuration": 112.9
+      },
+      {
+        "device": "mobile",
+        "sessions": 1,
+        "users": 1,
+        "pageViews": 2,
+        "engagementRate": 100,
+        "avgDuration": 6.1
+      }
+    ],
+    "countries": [
+      {
+        "country": "United States",
+        "sessions": 5,
+        "users": 5,
+        "engagementRate": 40
+      },
+      {
+        "country": "India",
+        "sessions": 3,
+        "users": 1,
+        "engagementRate": 0
+      },
+      {
+        "country": "Netherlands",
+        "sessions": 2,
+        "users": 1,
+        "engagementRate": 50
+      },
+      {
+        "country": "Nigeria",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      },
+      {
+        "country": "Panama",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      },
+      {
+        "country": "United Kingdom",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      }
+    ],
+    "landingPages": [
+      {
+        "landingPage": "/",
+        "sessions": 11,
+        "users": 8,
+        "bounceRate": 63.64,
+        "avgDuration": 84.9,
+        "pagesPerSession": 1.36
+      },
+      {
+        "landingPage": "/m/home",
+        "sessions": 1,
+        "users": 1,
+        "bounceRate": 0,
+        "avgDuration": 408.3,
+        "pagesPerSession": 1
+      },
+      {
+        "landingPage": "/product",
+        "sessions": 1,
+        "users": 1,
+        "bounceRate": 0,
+        "avgDuration": 18.4,
+        "pagesPerSession": 1
+      }
+    ]
+  },
+  "gsc": {
+    "date": "2025-12-18",
+    "sites": [
+      {
+        "siteUrl": "https://perfectwin.ai/",
+        "label": "perfectwin.ai",
+        "date": "2025-12-18",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      },
+      {
+        "siteUrl": "https://blog.perfectwin.ai/",
+        "label": "blog.perfectwin.ai",
+        "date": "2025-12-18",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      }
+    ]
+  },
+  "inblog": {
+    "date": "2025-12-18",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2025-12-18",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-12-18",
+              "visits": 35,
+              "clicks": 0,
+              "organic": 1,
+              "home": 26,
+              "post": 23,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-12-18",
+            "end_date": "2025-12-18",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": null,
+              "visits": 26,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 62136,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 77338,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 46820,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 55093,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 56958,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 65690,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 86636,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            }
+          ],
+          "meta": {
+            "start_date": "2025-12-18",
+            "end_date": "2025-12-18",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 34
+            },
+            {
+              "full_referrer": "www.google.com",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2025-12-18",
+            "end_date": "2025-12-18"
+          }
+        }
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2025-12-18",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-12-18",
+              "visits": 53,
+              "clicks": 0,
+              "organic": 1,
+              "home": 16,
+              "post": 56,
+              "category": 1,
+              "author": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2025-12-18",
+            "end_date": "2025-12-18",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 86299,
+              "visits": 26,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": null,
+              "visits": 18,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 80395,
+              "visits": 5,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 78962,
+              "visits": 3,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 63322,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": null
+            }
+          ],
+          "meta": {
+            "start_date": "2025-12-18",
+            "end_date": "2025-12-18",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 48
+            },
+            {
+              "full_referrer": "krc-excel.officeapps.live.com",
+              "count": 4
+            },
+            {
+              "full_referrer": "www.google.com",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2025-12-18",
+            "end_date": "2025-12-18"
+          }
+        }
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": null
+  }
+}

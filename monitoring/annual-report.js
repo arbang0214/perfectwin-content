@@ -240,9 +240,6 @@ ${JSON.stringify(annual.gsc?.["blog.perfectwin.ai"] || null, null, 2)}
 - 한국어, Markdown 테이블, 경영진 보고 수준, 충분히 상세하게
 - 모든 주장에 데이터 근거 명시`;
 }
-`;
-  // 이전 통합 프롬프트 — focus별 분기로 대체됨 (buildHomepageAnnualPrompt, buildBlogAnnualPrompt)
-}
 
 // ─── 메인 ────────────────────────────────────────────────
 

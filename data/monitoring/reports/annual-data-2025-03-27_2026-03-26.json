@@ -1,0 +1,4109 @@
+{
+  "period": {
+    "from": "2025-03-27",
+    "to": "2026-03-26"
+  },
+  "totalDays": 365,
+  "months": [
+    "2025-03",
+    "2025-04",
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10",
+    "2025-11",
+    "2025-12",
+    "2026-01",
+    "2026-02",
+    "2026-03"
+  ],
+  "monthly": {
+    "2025-03": {
+      "ga4": {
+        "daysWithData": 5,
+        "totals": {
+          "activeUsers": 0,
+          "newUsers": 0,
+          "sessions": 0,
+          "engagedSessions": 0,
+          "pageViews": 0,
+          "eventCount": 0
+        },
+        "averages": {
+          "bounceRate": 0,
+          "engagementRate": 0,
+          "avgSessionDuration": 0,
+          "pageViewsPerSession": 0
+        },
+        "channels": [],
+        "topPages": [],
+        "devices": [],
+        "countries": [],
+        "sourceMedium": []
+      },
+      "gsc": {},
+      "inblog": {
+        "blog-en": {
+          "daysWithData": 5,
+          "totals": {
+            "visits": 0,
+            "clicks": 0,
+            "organic": 0,
+            "post": 120,
+            "home": 0
+          },
+          "sources": []
+        },
+        "blog-ko": {
+          "daysWithData": 5,
+          "totals": {
+            "visits": 0,
+            "clicks": 0,
+            "organic": 0,
+            "post": 120,
+            "home": 0
+          },
+          "sources": []
+        }
+      }
+    },
+    "2025-04": {
+      "ga4": {
+        "daysWithData": 30,
+        "totals": {
+          "activeUsers": 0,
+          "newUsers": 0,
+          "sessions": 0,
+          "engagedSessions": 0,
+          "pageViews": 0,
+          "eventCount": 0
+        },
+        "averages": {
+          "bounceRate": 0,
+          "engagementRate": 0,
+          "avgSessionDuration": 0,
+          "pageViewsPerSession": 0
+        },
+        "channels": [],
+        "topPages": [],
+        "devices": [],
+        "countries": [],
+        "sourceMedium": []
+      },
+      "gsc": {},
+      "inblog": {
+        "blog-en": {
+          "daysWithData": 30,
+          "totals": {
+            "visits": 234,
+            "clicks": 2,
+            "organic": 2,
+            "post": 740,
+            "home": 102
+          },
+          "sources": [
+            {
+              "source": "www.perfectwin.ai",
+              "count": 68
+            },
+            {
+              "source": "perfectwin.inblog.ai",
+              "count": 63
+            },
+            {
+              "source": "direct",
+              "count": 54
+            },
+            {
+              "source": "shea74085.softr.app",
+              "count": 24
+            },
+            {
+              "source": "perfectwin.softr.app",
+              "count": 15
+            },
+            {
+              "source": "inblog.ai",
+              "count": 6
+            },
+            {
+              "source": "blog.perfectwin.ai",
+              "count": 2
+            },
+            {
+              "source": "bing.com",
+              "count": 1
+            },
+            {
+              "source": "www.google.com",
+              "count": 1
+            }
+          ]
+        },
+        "blog-ko": {
+          "daysWithData": 30,
+          "totals": {
+            "visits": 0,
+            "clicks": 0,
+            "organic": 0,
+            "post": 720,
+            "home": 0
+          },
+          "sources": []
+        }
+      }
+    },
+    "2025-05": {
+      "ga4": {
+        "daysWithData": 31,
+        "totals": {
+          "activeUsers": 0,
+          "newUsers": 0,
+          "sessions": 0,
+          "engagedSessions": 0,
+          "pageViews": 0,
+          "eventCount": 0
+        },
+        "averages": {
+          "bounceRate": 0,
+          "engagementRate": 0,
+          "avgSessionDuration": 0,
+          "pageViewsPerSession": 0
+        },
+        "channels": [],
+        "topPages": [],
+        "devices": [],
+        "countries": [],
+        "sourceMedium": []
+      },
+      "gsc": {},
+      "inblog": {
+        "blog-en": {
+          "daysWithData": 31,
+          "totals": {
+            "visits": 626,
+            "clicks": 4,
+            "organic": 1,
+            "post": 910,
+            "home": 286
+          },
+          "sources": [
+            {
+              "source": "blog.perfectwin.ai",
+              "count": 220
+            },
+            {
+              "source": "www.perfectwin.ai",
+              "count": 202
+            },
+            {
+              "source": "direct",
+              "count": 93
+            },
+            {
+              "source": "inblog.ai",
+              "count": 61
+            },
+            {
+              "source": "perfectwin.inblog.ai",
+              "count": 39
+            },
+            {
+              "source": "perfectwin.softr.app",
+              "count": 4
+            },
+            {
+              "source": "com.slack",
+              "count": 2
+            },
+            {
+              "source": "wire.lgcns.com",
+              "count": 2
+            },
+            {
+              "source": "www.google.co.kr",
+              "count": 1
+            },
+            {
+              "source": "reh.laitrcus.online",
+              "count": 1
+            }
+          ]
+        },
+        "blog-ko": {
+          "daysWithData": 31,
+          "totals": {
+            "visits": 184,
+            "clicks": 1,
+            "organic": 0,
+            "post": 797,
+            "home": 73
+          },
+          "sources": [
+            {
+              "source": "ko.blog.perfectwin.ai",
+              "count": 93
+            },
+            {
+              "source": "direct",
+              "count": 89
+            },
+            {
+              "source": "com.slack",
+              "count": 2
+            }
+          ]
+        }
+      }
+    },
+    "2025-06": {
+      "ga4": {
+        "daysWithData": 30,
+        "totals": {
+          "activeUsers": 21,
+          "newUsers": 21,
+          "sessions": 36,
+          "engagedSessions": 19,
+          "pageViews": 64,
+          "eventCount": 222
+        },
+        "averages": {
+          "bounceRate": 3.33,
+          "engagementRate": 6.67,
+          "avgSessionDuration": 55.08,
+          "pageViewsPerSession": 0.16
+        },
+        "channels": [
+          {
+            "channel": "Direct",
+            "sessions": 24,
+            "users": 14
+          },
+          {
+            "channel": "Organic Search",
+            "sessions": 5,
+            "users": 3
+          },
+          {
+            "channel": "Referral",
+            "sessions": 5,
+            "users": 4
+          },
+          {
+            "channel": "Paid Search",
+            "sessions": 2,
+            "users": 1
+          }
+        ],
+        "topPages": [
+          {
+            "pagePath": "/cf003_perfectwin_counsel_ad",
+            "pageViews": 35,
+            "users": 10,
+            "title": "PerfecTwin 데모 환경 신청"
+          },
+          {
+            "pagePath": "/cf003_thanks",
+            "pageViews": 10,
+            "users": 7,
+            "title": "감사합니다 | LG CNS"
+          },
+          {
+            "pagePath": "/",
+            "pageViews": 7,
+            "users": 5,
+            "title": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence"
+          },
+          {
+            "pagePath": "/m/request-a-demo",
+            "pageViews": 5,
+            "users": 1,
+            "title": "PerfecTwin - Request a demo"
+          },
+          {
+            "pagePath": "/m/home",
+            "pageViews": 3,
+            "users": 2,
+            "title": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence"
+          },
+          {
+            "pagePath": "/request-a-demo",
+            "pageViews": 2,
+            "users": 1,
+            "title": "PerfecTwin - Request a demo"
+          },
+          {
+            "pagePath": "/company",
+            "pageViews": 1,
+            "users": 1,
+            "title": "PerfecTwin - Company"
+          },
+          {
+            "pagePath": "/e/f2",
+            "pageViews": 1,
+            "users": 1,
+            "title": "감사합니다 | LG CNS"
+          }
+        ],
+        "devices": [
+          {
+            "device": "desktop",
+            "sessions": 31,
+            "users": 17,
+            "pageViews": 51
+          },
+          {
+            "device": "mobile",
+            "sessions": 6,
+            "users": 5,
+            "pageViews": 13
+          }
+        ],
+        "countries": [
+          {
+            "country": "South Korea",
+            "sessions": 29,
+            "users": 15
+          },
+          {
+            "country": "India",
+            "sessions": 5,
+            "users": 4
+          },
+          {
+            "country": "(not set)",
+            "sessions": 2,
+            "users": 2
+          }
+        ],
+        "sourceMedium": [
+          {
+            "source": "(direct)",
+            "medium": "(none)",
+            "sessions": 24,
+            "users": 14
+          },
+          {
+            "source": "google",
+            "medium": "organic",
+            "sessions": 5,
+            "users": 3
+          },
+          {
+            "source": "google",
+            "medium": "cpc",
+            "sessions": 2,
+            "users": 1
+          },
+          {
+            "source": "tagassistant.google.com",
+            "medium": "referral",
+            "sessions": 2,
+            "users": 1
+          },
+          {
+            "source": "connect.lgcns.com",
+            "medium": "referral",
+            "sessions": 1,
+            "users": 1
+          },
+          {
+            "source": "s3243454.t.eloqua.com",
+            "medium": "referral",
+            "sessions": 1,
+            "users": 1
+          },
+          {
+            "source": "secure.p03.eloqua.com",
+            "medium": "referral",
+            "sessions": 1,
+            "users": 1
+          }
+        ]
+      },
+      "gsc": {},
+      "inblog": {
+        "blog-en": {
+          "daysWithData": 30,
+          "totals": {
+            "visits": 252,
+            "clicks": 3,
+            "organic": 8,
+            "post": 728,
+            "home": 109
+          },
+          "sources": [
+            {
+              "source": "direct",
+              "count": 144
+            },
+            {
+              "source": "www.perfectwin.ai",
+              "count": 93
+            },
+            {
+              "source": "www.google.com",
+              "count": 6
+            },
+            {
+              "source": "perfectwin.inblog.ai",
+              "count": 5
+            },
+            {
+              "source": "www.bing.com",
+              "count": 2
+            },
+            {
+              "source": "com.linkedin.android",
+              "count": 1
+            },
+            {
+              "source": "blog.perfectwin.ai",
+              "count": 1
+            }
+          ]
+        },
+        "blog-ko": {
+          "daysWithData": 30,
+          "totals": {
+            "visits": 222,
+            "clicks": 0,
+            "organic": 0,
+            "post": 790,
+            "home": 76
+          },
+          "sources": [
+            {
+              "source": "direct",
+              "count": 212
+            },
+            {
+              "source": "ep.lgcns.com",
+              "count": 4
+            },
+            {
+              "source": "ko.blog.perfectwin.ai",
+              "count": 3
+            },
+            {
+              "source": "com.slack",
+              "count": 2
+            },
+            {
+              "source": "inblog.ai",
+              "count": 1
+            }
+          ]
+        }
+      }
+    },
+    "2025-07": {
+      "ga4": {
+        "daysWithData": 31,
+        "totals": {
+          "activeUsers": 2876,
+          "newUsers": 2824,
+          "sessions": 3084,
+          "engagedSessions": 454,
+          "pageViews": 3914,
+          "eventCount": 11444
+        },
+        "averages": {
+          "bounceRate": 68.08,
+          "engagementRate": 28.7,
+          "avgSessionDuration": 97.34,
+          "pageViewsPerSession": 1.16
+        },
+        "channels": [
+          {
+            "channel": "Cross-network",
+            "sessions": 1834,
+            "users": 1731
+          },
+          {
+            "channel": "Paid Other",
+            "sessions": 590,
+            "users": 588
+          },
+          {
+            "channel": "Paid Search",
+            "sessions": 407,
+            "users": 388
+          },
+          {
+            "channel": "Direct",
+            "sessions": 198,
+            "users": 146
+          },
+          {
+            "channel": "Referral",
+            "sessions": 31,
+            "users": 18
+          },
+          {
+            "channel": "Organic Search",
+            "sessions": 19,
+            "users": 11
+          },
+          {
+            "channel": "Organic Video",
+            "sessions": 2,
+            "users": 1
+          },
+          {
+            "channel": "Unassigned",
+            "sessions": 2,
+            "users": 2
+          }
+        ],
+        "topPages": [
+          {
+            "pagePath": "/cf003_perfectwin_counsel_ad",
+            "pageViews": 3624,
+            "users": 2757,
+            "title": "PerfecTwin 데모 환경 신청"
+          },
+          {
+            "pagePath": "/resources",
+            "pageViews": 93,
+            "users": 63,
+            "title": "Resources"
+          },
+          {
+            "pagePath": "/",
+            "pageViews": 72,
+            "users": 50,
+            "title": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence"
+          },
+          {
+            "pagePath": "/m/home",
+            "pageViews": 22,
+            "users": 17,
+            "title": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence"
+          },
+          {
+            "pagePath": "/m/product",
+            "pageViews": 16,
+            "users": 15,
+            "title": "PerfecTwin - Product"
+          },
+          {
+            "pagePath": "/company",
+            "pageViews": 16,
+            "users": 13,
+            "title": "PerfecTwin - Company"
+          },
+          {
+            "pagePath": "/m/case-studies",
+            "pageViews": 16,
+            "users": 12,
+            "title": "PerfecTwin - Customers"
+          },
+          {
+            "pagePath": "/case-studies",
+            "pageViews": 15,
+            "users": 12,
+            "title": "PerfecTwin - Customers"
+          },
+          {
+            "pagePath": "/product",
+            "pageViews": 15,
+            "users": 15,
+            "title": "PerfecTwin - Product"
+          },
+          {
+            "pagePath": "/cf003_thanks",
+            "pageViews": 8,
+            "users": 5,
+            "title": "감사합니다 | LG CNS"
+          }
+        ],
+        "devices": [
+          {
+            "device": "mobile",
+            "sessions": 1947,
+            "users": 1828,
+            "pageViews": 2629
+          },
+          {
+            "device": "desktop",
+            "sessions": 1131,
+            "users": 1042,
+            "pageViews": 1276
+          },
+          {
+            "device": "tablet",
+            "sessions": 9,
+            "users": 9,
+            "pageViews": 9
+          }
+        ],
+        "countries": [
+          {
+            "country": "South Korea",
+            "sessions": 2148,
+            "users": 1963
+          },
+          {
+            "country": "(not set)",
+            "sessions": 875,
+            "users": 873
+          },
+          {
+            "country": "United States",
+            "sessions": 29,
+            "users": 18
+          },
+          {
+            "country": "Panama",
+            "sessions": 12,
+            "users": 3
+          },
+          {
+            "country": "India",
+            "sessions": 6,
+            "users": 5
+          },
+          {
+            "country": "Japan",
+            "sessions": 5,
+            "users": 5
+          },
+          {
+            "country": "China",
+            "sessions": 3,
+            "users": 3
+          },
+          {
+            "country": "Vietnam",
+            "sessions": 2,
+            "users": 2
+          },
+          {
+            "country": "Indonesia",
+            "sessions": 1,
+            "users": 1
+          },
+          {
+            "country": "Spain",
+            "sessions": 1,
+            "users": 1
+          }
+        ],
+        "sourceMedium": [
+          {
+            "source": "google",
+            "medium": "cpc",
+            "sessions": 2241,
+            "users": 2119
+          },
+          {
+            "source": "(not set)",
+            "medium": "cpc",
+            "sessions": 590,
+            "users": 588
+          },
+          {
+            "source": "(direct)",
+            "medium": "(none)",
+            "sessions": 198,
+            "users": 146
+          },
+          {
+            "source": "google",
+            "medium": "organic",
+            "sessions": 19,
+            "users": 11
+          },
+          {
+            "source": "s3243454.t.eloqua.com",
+            "medium": "referral",
+            "sessions": 19,
+            "users": 9
+          },
+          {
+            "source": "statics.teams.cdn.office.net",
+            "medium": "referral",
+            "sessions": 9,
+            "users": 7
+          },
+          {
+            "source": "youtube.com",
+            "medium": "referral",
+            "sessions": 2,
+            "users": 1
+          },
+          {
+            "source": "secure.p03.eloqua.com",
+            "medium": "referral",
+            "sessions": 2,
+            "users": 1
+          },
+          {
+            "source": "(not set)",
+            "medium": "(not set)",
+            "sessions": 2,
+            "users": 2
+          },
+          {
+            "source": "studio.softr.io",
+            "medium": "referral",
+            "sessions": 1,
+            "users": 1
+          }
+        ]
+      },
+      "gsc": {},
+      "inblog": {
+        "blog-en": {
+          "daysWithData": 31,
+          "totals": {
+            "visits": 188,
+            "clicks": 0,
+            "organic": 19,
+            "post": 758,
+            "home": 74
+          },
+          "sources": [
+            {
+              "source": "direct",
+              "count": 125
+            },
+            {
+              "source": "www.perfectwin.ai",
+              "count": 39
+            },
+            {
+              "source": "www.bing.com",
+              "count": 6
+            },
+            {
+              "source": "www.google.com",
+              "count": 6
+            },
+            {
+              "source": "www.linkedin.com",
+              "count": 3
+            },
+            {
+              "source": "search.google.com",
+              "count": 2
+            },
+            {
+              "source": "chatgpt.com",
+              "count": 2
+            },
+            {
+              "source": "www.perplexity.ai",
+              "count": 2
+            },
+            {
+              "source": "com.linkedin.android",
+              "count": 1
+            },
+            {
+              "source": "perfectwin.inblog.ai",
+              "count": 1
+            }
+          ]
+        },
+        "blog-ko": {
+          "daysWithData": 31,
+          "totals": {
+            "visits": 188,
+            "clicks": 0,
+            "organic": 10,
+            "post": 810,
+            "home": 76
+          },
+          "sources": [
+            {
+              "source": "direct",
+              "count": 176
+            },
+            {
+              "source": "www.google.com",
+              "count": 9
+            },
+            {
+              "source": "chatgpt.com",
+              "count": 1
+            },
+            {
+              "source": "ko.blog.perfectwin.ai",
+              "count": 1
+            },
+            {
+              "source": "com.slack",
+              "count": 1
+            }
+          ]
+        }
+      }
+    },
+    "2025-08": {
+      "ga4": {
+        "daysWithData": 31,
+        "totals": {
+          "activeUsers": 69,
+          "newUsers": 44,
+          "sessions": 97,
+          "engagedSessions": 43,
+          "pageViews": 120,
+          "eventCount": 433
+        },
+        "averages": {
+          "bounceRate": 32.47,
+          "engagementRate": 25.6,
+          "avgSessionDuration": 95.38,
+          "pageViewsPerSession": 0.75
+        },
+        "channels": [
+          {
+            "channel": "Direct",
+            "sessions": 68,
+            "users": 47
+          },
+          {
+            "channel": "Organic Search",
+            "sessions": 14,
+            "users": 13
+          },
+          {
+            "channel": "Referral",
+            "sessions": 13,
+            "users": 7
+          },
+          {
+            "channel": "Unassigned",
+            "sessions": 1,
+            "users": 1
+          },
+          {
+            "channel": "Cross-network",
+            "sessions": 1,
+            "users": 1
+          }
+        ],
+        "topPages": [
+          {
+            "pagePath": "/",
+            "pageViews": 43,
+            "users": 35,
+            "title": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence"
+          },
+          {
+            "pagePath": "/resources",
+            "pageViews": 28,
+            "users": 23,
+            "title": "Resources"
+          },
+          {
+            "pagePath": "/m/home",
+            "pageViews": 13,
+            "users": 9,
+            "title": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence"
+          },
+          {
+            "pagePath": "/case-studies",
+            "pageViews": 9,
+            "users": 8,
+            "title": "PerfecTwin - Customers"
+          },
+          {
+            "pagePath": "/product",
+            "pageViews": 9,
+            "users": 5,
+            "title": "PerfecTwin - Product"
+          },
+          {
+            "pagePath": "/company",
+            "pageViews": 7,
+            "users": 7,
+            "title": "PerfecTwin - Company"
+          },
+          {
+            "pagePath": "/cf003_perfectwin_counsel_ad",
+            "pageViews": 5,
+            "users": 3,
+            "title": "PerfecTwin 데모 환경 신청"
+          },
+          {
+            "pagePath": "/m/product",
+            "pageViews": 2,
+            "users": 2,
+            "title": "PerfecTwin - Product"
+          },
+          {
+            "pagePath": "/privacy-policy",
+            "pageViews": 2,
+            "users": 2,
+            "title": "Privacy Policy"
+          },
+          {
+            "pagePath": "/m/case-studies",
+            "pageViews": 1,
+            "users": 1,
+            "title": "PerfecTwin - Customers"
+          }
+        ],
+        "devices": [
+          {
+            "device": "desktop",
+            "sessions": 77,
+            "users": 53,
+            "pageViews": 88
+          },
+          {
+            "device": "mobile",
+            "sessions": 20,
+            "users": 16,
+            "pageViews": 32
+          }
+        ],
+        "countries": [
+          {
+            "country": "South Korea",
+            "sessions": 66,
+            "users": 40
+          },
+          {
+            "country": "United States",
+            "sessions": 12,
+            "users": 11
+          },
+          {
+            "country": "China",
+            "sessions": 5,
+            "users": 5
+          },
+          {
+            "country": "Indonesia",
+            "sessions": 5,
+            "users": 5
+          },
+          {
+            "country": "(not set)",
+            "sessions": 3,
+            "users": 3
+          },
+          {
+            "country": "Vietnam",
+            "sessions": 3,
+            "users": 2
+          },
+          {
+            "country": "Japan",
+            "sessions": 1,
+            "users": 1
+          },
+          {
+            "country": "Thailand",
+            "sessions": 1,
+            "users": 1
+          },
+          {
+            "country": "Czechia",
+            "sessions": 1,
+            "users": 1
+          }
+        ],
+        "sourceMedium": [
+          {
+            "source": "(direct)",
+            "medium": "(none)",
+            "sessions": 68,
+            "users": 47
+          },
+          {
+            "source": "statics.teams.cdn.office.net",
+            "medium": "referral",
+            "sessions": 13,
+            "users": 7
+          },
+          {
+            "source": "google",
+            "medium": "organic",
+            "sessions": 13,
+            "users": 12
+          },
+          {
+            "source": "(not set)",
+            "medium": "(not set)",
+            "sessions": 1,
+            "users": 1
+          },
+          {
+            "source": "bing",
+            "medium": "organic",
+            "sessions": 1,
+            "users": 1
+          },
+          {
+            "source": "google",
+            "medium": "cpc",
+            "sessions": 1,
+            "users": 1
+          }
+        ]
+      },
+      "gsc": {},
+      "inblog": {
+        "blog-en": {
+          "daysWithData": 31,
+          "totals": {
+            "visits": 117,
+            "clicks": 0,
+            "organic": 23,
+            "post": 745,
+            "home": 44
+          },
+          "sources": [
+            {
+              "source": "direct",
+              "count": 48
+            },
+            {
+              "source": "www.perfectwin.ai",
+              "count": 39
+            },
+            {
+              "source": "www.google.com",
+              "count": 15
+            },
+            {
+              "source": "www.linkedin.com",
+              "count": 4
+            },
+            {
+              "source": "chatgpt.com",
+              "count": 2
+            },
+            {
+              "source": "perfectwin.inblog.ai",
+              "count": 2
+            },
+            {
+              "source": "search.yahoo.com",
+              "count": 2
+            },
+            {
+              "source": "www.bing.com",
+              "count": 2
+            },
+            {
+              "source": "blog.perfectwin.ai",
+              "count": 1
+            },
+            {
+              "source": "cn.bing.com",
+              "count": 1
+            }
+          ]
+        },
+        "blog-ko": {
+          "daysWithData": 31,
+          "totals": {
+            "visits": 111,
+            "clicks": 0,
+            "organic": 12,
+            "post": 798,
+            "home": 31
+          },
+          "sources": [
+            {
+              "source": "direct",
+              "count": 98
+            },
+            {
+              "source": "www.google.com",
+              "count": 11
+            },
+            {
+              "source": "com.slack",
+              "count": 1
+            },
+            {
+              "source": "www.perplexity.ai",
+              "count": 1
+            }
+          ]
+        }
+      }
+    },
+    "2025-09": {
+      "ga4": {
+        "daysWithData": 30,
+        "totals": {
+          "activeUsers": 65,
+          "newUsers": 48,
+          "sessions": 103,
+          "engagedSessions": 40,
+          "pageViews": 164,
+          "eventCount": 541
+        },
+        "averages": {
+          "bounceRate": 45.47,
+          "engagementRate": 17.86,
+          "avgSessionDuration": 60.41,
+          "pageViewsPerSession": 0.83
+        },
+        "channels": [
+          {
+            "channel": "Organic Search",
+            "sessions": 50,
+            "users": 29
+          },
+          {
+            "channel": "Direct",
+            "sessions": 50,
+            "users": 36
+          },
+          {
+            "channel": "Referral",
+            "sessions": 3,
+            "users": 3
+          }
+        ],
+        "topPages": [
+          {
+            "pagePath": "/",
+            "pageViews": 70,
+            "users": 40,
+            "title": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence"
+          },
+          {
+            "pagePath": "/m/home",
+            "pageViews": 29,
+            "users": 24,
+            "title": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence"
+          },
+          {
+            "pagePath": "/product",
+            "pageViews": 15,
+            "users": 11,
+            "title": "PerfecTwin - Product"
+          },
+          {
+            "pagePath": "/resources",
+            "pageViews": 12,
+            "users": 10,
+            "title": "Resources"
+          },
+          {
+            "pagePath": "/case-studies",
+            "pageViews": 10,
+            "users": 10,
+            "title": "PerfecTwin - Customers"
+          },
+          {
+            "pagePath": "/m/product",
+            "pageViews": 9,
+            "users": 6,
+            "title": "PerfecTwin - Product"
+          },
+          {
+            "pagePath": "/m/case-studies",
+            "pageViews": 7,
+            "users": 6,
+            "title": "PerfecTwin - Customers"
+          },
+          {
+            "pagePath": "/m/company",
+            "pageViews": 5,
+            "users": 4,
+            "title": "PerfecTwin - Company"
+          },
+          {
+            "pagePath": "/company",
+            "pageViews": 4,
+            "users": 4,
+            "title": "PerfecTwin - Company"
+          },
+          {
+            "pagePath": "/privacy-policy",
+            "pageViews": 3,
+            "users": 2,
+            "title": "Privacy Policy"
+          }
+        ],
+        "devices": [
+          {
+            "device": "desktop",
+            "sessions": 91,
+            "users": 54,
+            "pageViews": 149
+          },
+          {
+            "device": "mobile",
+            "sessions": 12,
+            "users": 11,
+            "pageViews": 15
+          }
+        ],
+        "countries": [
+          {
+            "country": "United States",
+            "sessions": 46,
+            "users": 27
+          },
+          {
+            "country": "South Korea",
+            "sessions": 45,
+            "users": 27
+          },
+          {
+            "country": "Indonesia",
+            "sessions": 3,
+            "users": 3
+          },
+          {
+            "country": "(not set)",
+            "sessions": 2,
+            "users": 2
+          },
+          {
+            "country": "United Kingdom",
+            "sessions": 2,
+            "users": 1
+          },
+          {
+            "country": "Nigeria",
+            "sessions": 1,
+            "users": 1
+          },
+          {
+            "country": "Japan",
+            "sessions": 1,
+            "users": 1
+          },
+          {
+            "country": "India",
+            "sessions": 1,
+            "users": 1
+          },
+          {
+            "country": "Germany",
+            "sessions": 1,
+            "users": 1
+          },
+          {
+            "country": "Vietnam",
+            "sessions": 1,
+            "users": 1
+          }
+        ],
+        "sourceMedium": [
+          {
+            "source": "(direct)",
+            "medium": "(none)",
+            "sessions": 50,
+            "users": 36
+          },
+          {
+            "source": "google",
+            "medium": "organic",
+            "sessions": 46,
+            "users": 26
+          },
+          {
+            "source": "bing",
+            "medium": "organic",
+            "sessions": 2,
+            "users": 2
+          },
+          {
+            "source": "ecosia.org",
+            "medium": "organic",
+            "sessions": 2,
+            "users": 1
+          },
+          {
+            "source": "studio.softr.io",
+            "medium": "referral",
+            "sessions": 1,
+            "users": 1
+          },
+          {
+            "source": "login.microsoftonline.com",
+            "medium": "referral",
+            "sessions": 1,
+            "users": 1
+          },
+          {
+            "source": "devops.sdsdev.co.kr",
+            "medium": "referral",
+            "sessions": 1,
+            "users": 1
+          }
+        ]
+      },
+      "gsc": {},
+      "inblog": {
+        "blog-en": {
+          "daysWithData": 30,
+          "totals": {
+            "visits": 142,
+            "clicks": 2,
+            "organic": 17,
+            "post": 717,
+            "home": 64
+          },
+          "sources": [
+            {
+              "source": "direct",
+              "count": 78
+            },
+            {
+              "source": "www.perfectwin.ai",
+              "count": 31
+            },
+            {
+              "source": "www.ecosia.org",
+              "count": 10
+            },
+            {
+              "source": "www.google.com",
+              "count": 9
+            },
+            {
+              "source": "www.bing.com",
+              "count": 7
+            },
+            {
+              "source": "blog.perfectwin.ai",
+              "count": 3
+            },
+            {
+              "source": "statics.teams.cdn.office.net",
+              "count": 2
+            },
+            {
+              "source": "cn.bing.com",
+              "count": 1
+            },
+            {
+              "source": "com.slack",
+              "count": 1
+            }
+          ]
+        },
+        "blog-ko": {
+          "daysWithData": 30,
+          "totals": {
+            "visits": 107,
+            "clicks": 2,
+            "organic": 15,
+            "post": 748,
+            "home": 41
+          },
+          "sources": [
+            {
+              "source": "direct",
+              "count": 85
+            },
+            {
+              "source": "www.google.com",
+              "count": 12
+            },
+            {
+              "source": "ko.blog.perfectwin.ai",
+              "count": 5
+            },
+            {
+              "source": "www.perplexity.ai",
+              "count": 3
+            },
+            {
+              "source": "inblog.ai",
+              "count": 1
+            },
+            {
+              "source": "com.slack",
+              "count": 1
+            }
+          ]
+        }
+      }
+    },
+    "2025-10": {
+      "ga4": {
+        "daysWithData": 31,
+        "totals": {
+          "activeUsers": 99,
+          "newUsers": 66,
+          "sessions": 144,
+          "engagedSessions": 65,
+          "pageViews": 204,
+          "eventCount": 733
+        },
+        "averages": {
+          "bounceRate": 56.1,
+          "engagementRate": 40.68,
+          "avgSessionDuration": 116.74,
+          "pageViewsPerSession": 1.24
+        },
+        "channels": [
+          {
+            "channel": "Organic Search",
+            "sessions": 74,
+            "users": 51
+          },
+          {
+            "channel": "Direct",
+            "sessions": 66,
+            "users": 45
+          },
+          {
+            "channel": "Referral",
+            "sessions": 3,
+            "users": 2
+          },
+          {
+            "channel": "Organic Video",
+            "sessions": 1,
+            "users": 1
+          }
+        ],
+        "topPages": [
+          {
+            "pagePath": "/",
+            "pageViews": 67,
+            "users": 49,
+            "title": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence"
+          },
+          {
+            "pagePath": "/m/home",
+            "pageViews": 53,
+            "users": 42,
+            "title": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence"
+          },
+          {
+            "pagePath": "/resources",
+            "pageViews": 16,
+            "users": 15,
+            "title": "Resources"
+          },
+          {
+            "pagePath": "/product",
+            "pageViews": 15,
+            "users": 14,
+            "title": "PerfecTwin - Product"
+          },
+          {
+            "pagePath": "/case-studies",
+            "pageViews": 13,
+            "users": 12,
+            "title": "PerfecTwin - Customers"
+          },
+          {
+            "pagePath": "/company",
+            "pageViews": 12,
+            "users": 13,
+            "title": "PerfecTwin - Company"
+          },
+          {
+            "pagePath": "/m/product",
+            "pageViews": 10,
+            "users": 9,
+            "title": "PerfecTwin - Product"
+          },
+          {
+            "pagePath": "/m/case-studies",
+            "pageViews": 7,
+            "users": 6,
+            "title": "PerfecTwin - Customers"
+          },
+          {
+            "pagePath": "/m/company",
+            "pageViews": 6,
+            "users": 6,
+            "title": "PerfecTwin - Company"
+          },
+          {
+            "pagePath": "/m/www.youtube.com/@LGCNSTestingSolution",
+            "pageViews": 2,
+            "users": 1,
+            "title": "Page not found"
+          }
+        ],
+        "devices": [
+          {
+            "device": "desktop",
+            "sessions": 135,
+            "users": 90,
+            "pageViews": 192
+          },
+          {
+            "device": "mobile",
+            "sessions": 9,
+            "users": 9,
+            "pageViews": 12
+          }
+        ],
+        "countries": [
+          {
+            "country": "South Korea",
+            "sessions": 57,
+            "users": 35
+          },
+          {
+            "country": "United States",
+            "sessions": 41,
+            "users": 30
+          },
+          {
+            "country": "Panama",
+            "sessions": 19,
+            "users": 11
+          },
+          {
+            "country": "Japan",
+            "sessions": 6,
+            "users": 4
+          },
+          {
+            "country": "India",
+            "sessions": 4,
+            "users": 2
+          },
+          {
+            "country": "Indonesia",
+            "sessions": 4,
+            "users": 4
+          },
+          {
+            "country": "Vietnam",
+            "sessions": 4,
+            "users": 4
+          },
+          {
+            "country": "Germany",
+            "sessions": 2,
+            "users": 2
+          },
+          {
+            "country": "China",
+            "sessions": 2,
+            "users": 2
+          },
+          {
+            "country": "France",
+            "sessions": 1,
+            "users": 1
+          }
+        ],
+        "sourceMedium": [
+          {
+            "source": "google",
+            "medium": "organic",
+            "sessions": 67,
+            "users": 46
+          },
+          {
+            "source": "(direct)",
+            "medium": "(none)",
+            "sessions": 66,
+            "users": 45
+          },
+          {
+            "source": "bing",
+            "medium": "organic",
+            "sessions": 6,
+            "users": 4
+          },
+          {
+            "source": "devops.sdsdev.co.kr",
+            "medium": "referral",
+            "sessions": 2,
+            "users": 1
+          },
+          {
+            "source": "youtube.com",
+            "medium": "referral",
+            "sessions": 1,
+            "users": 1
+          },
+          {
+            "source": "jpc-excel.officeapps.live.com",
+            "medium": "referral",
+            "sessions": 1,
+            "users": 1
+          },
+          {
+            "source": "br.search.yahoo.com",
+            "medium": "referral",
+            "sessions": 1,
+            "users": 1
+          }
+        ]
+      },
+      "gsc": {},
+      "inblog": {
+        "blog-en": {
+          "daysWithData": 30,
+          "totals": {
+            "visits": 118,
+            "clicks": 0,
+            "organic": 10,
+            "post": 712,
+            "home": 47
+          },
+          "sources": [
+            {
+              "source": "direct",
+              "count": 79
+            },
+            {
+              "source": "www.perfectwin.ai",
+              "count": 28
+            },
+            {
+              "source": "www.google.com",
+              "count": 9
+            },
+            {
+              "source": "perfectwin.inblog.ai",
+              "count": 1
+            },
+            {
+              "source": "www.bing.com",
+              "count": 1
+            }
+          ]
+        },
+        "blog-ko": {
+          "daysWithData": 31,
+          "totals": {
+            "visits": 49,
+            "clicks": 0,
+            "organic": 7,
+            "post": 754,
+            "home": 18
+          },
+          "sources": [
+            {
+              "source": "direct",
+              "count": 42
+            },
+            {
+              "source": "www.google.com",
+              "count": 7
+            }
+          ]
+        }
+      }
+    },
+    "2025-11": {
+      "ga4": {
+        "daysWithData": 30,
+        "totals": {
+          "activeUsers": 188,
+          "newUsers": 140,
+          "sessions": 272,
+          "engagedSessions": 109,
+          "pageViews": 406,
+          "eventCount": 1366
+        },
+        "averages": {
+          "bounceRate": 45.46,
+          "engagementRate": 41.21,
+          "avgSessionDuration": 119.78,
+          "pageViewsPerSession": 1.57
+        },
+        "channels": [
+          {
+            "channel": "Direct",
+            "sessions": 190,
+            "users": 147
+          },
+          {
+            "channel": "Organic Search",
+            "sessions": 77,
+            "users": 38
+          },
+          {
+            "channel": "Referral",
+            "sessions": 3,
+            "users": 2
+          },
+          {
+            "channel": "Unassigned",
+            "sessions": 2,
+            "users": 2
+          }
+        ],
+        "topPages": [
+          {
+            "pagePath": "/",
+            "pageViews": 207,
+            "users": 151,
+            "title": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence"
+          },
+          {
+            "pagePath": "/m/home",
+            "pageViews": 47,
+            "users": 35,
+            "title": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence"
+          },
+          {
+            "pagePath": "/product",
+            "pageViews": 41,
+            "users": 32,
+            "title": "PerfecTwin - Product"
+          },
+          {
+            "pagePath": "/resources",
+            "pageViews": 34,
+            "users": 22,
+            "title": "Resources"
+          },
+          {
+            "pagePath": "/company",
+            "pageViews": 23,
+            "users": 19,
+            "title": "PerfecTwin - Company"
+          },
+          {
+            "pagePath": "/case-studies",
+            "pageViews": 21,
+            "users": 19,
+            "title": "PerfecTwin - Customers"
+          },
+          {
+            "pagePath": "/m/product",
+            "pageViews": 13,
+            "users": 7,
+            "title": "PerfecTwin - Product"
+          },
+          {
+            "pagePath": "/m/company",
+            "pageViews": 6,
+            "users": 6,
+            "title": "PerfecTwin - Company"
+          },
+          {
+            "pagePath": "/privacy-policy",
+            "pageViews": 6,
+            "users": 6,
+            "title": "Privacy Policy"
+          },
+          {
+            "pagePath": "/m/case-studies",
+            "pageViews": 5,
+            "users": 5,
+            "title": "PerfecTwin - Customers"
+          }
+        ],
+        "devices": [
+          {
+            "device": "desktop",
+            "sessions": 241,
+            "users": 161,
+            "pageViews": 347
+          },
+          {
+            "device": "mobile",
+            "sessions": 27,
+            "users": 24,
+            "pageViews": 55
+          },
+          {
+            "device": "tablet",
+            "sessions": 4,
+            "users": 3,
+            "pageViews": 4
+          }
+        ],
+        "countries": [
+          {
+            "country": "United States",
+            "sessions": 86,
+            "users": 67
+          },
+          {
+            "country": "South Korea",
+            "sessions": 67,
+            "users": 47
+          },
+          {
+            "country": "India",
+            "sessions": 30,
+            "users": 17
+          },
+          {
+            "country": "Nigeria",
+            "sessions": 22,
+            "users": 11
+          },
+          {
+            "country": "Panama",
+            "sessions": 9,
+            "users": 2
+          },
+          {
+            "country": "Netherlands",
+            "sessions": 8,
+            "users": 5
+          },
+          {
+            "country": "France",
+            "sessions": 8,
+            "users": 8
+          },
+          {
+            "country": "Canada",
+            "sessions": 8,
+            "users": 8
+          },
+          {
+            "country": "United Kingdom",
+            "sessions": 6,
+            "users": 4
+          },
+          {
+            "country": "Japan",
+            "sessions": 5,
+            "users": 5
+          }
+        ],
+        "sourceMedium": [
+          {
+            "source": "(direct)",
+            "medium": "(none)",
+            "sessions": 190,
+            "users": 147
+          },
+          {
+            "source": "google",
+            "medium": "organic",
+            "sessions": 68,
+            "users": 33
+          },
+          {
+            "source": "bing",
+            "medium": "organic",
+            "sessions": 5,
+            "users": 3
+          },
+          {
+            "source": "ecosia.org",
+            "medium": "organic",
+            "sessions": 4,
+            "users": 2
+          },
+          {
+            "source": "(not set)",
+            "medium": "(not set)",
+            "sessions": 2,
+            "users": 2
+          },
+          {
+            "source": "devops.sdsdev.co.kr",
+            "medium": "referral",
+            "sessions": 1,
+            "users": 0
+          },
+          {
+            "source": "jpc-excel.officeapps.live.com",
+            "medium": "referral",
+            "sessions": 1,
+            "users": 1
+          },
+          {
+            "source": "statics.teams.cdn.office.net",
+            "medium": "referral",
+            "sessions": 1,
+            "users": 1
+          }
+        ]
+      },
+      "gsc": {},
+      "inblog": {
+        "blog-en": {
+          "daysWithData": 29,
+          "totals": {
+            "visits": 141,
+            "clicks": 1,
+            "organic": 15,
+            "post": 694,
+            "home": 52
+          },
+          "sources": [
+            {
+              "source": "www.perfectwin.ai",
+              "count": 60
+            },
+            {
+              "source": "direct",
+              "count": 54
+            },
+            {
+              "source": "www.google.com",
+              "count": 13
+            },
+            {
+              "source": "inblog.ai",
+              "count": 5
+            },
+            {
+              "source": "krc-excel.officeapps.live.com",
+              "count": 4
+            },
+            {
+              "source": "www.linkedin.com",
+              "count": 2
+            },
+            {
+              "source": "blog.perfectwin.ai",
+              "count": 1
+            },
+            {
+              "source": "chatgpt.com",
+              "count": 1
+            },
+            {
+              "source": "www.bing.com",
+              "count": 1
+            }
+          ]
+        },
+        "blog-ko": {
+          "daysWithData": 30,
+          "totals": {
+            "visits": 106,
+            "clicks": 1,
+            "organic": 11,
+            "post": 765,
+            "home": 25
+          },
+          "sources": [
+            {
+              "source": "direct",
+              "count": 85
+            },
+            {
+              "source": "www.google.com",
+              "count": 11
+            },
+            {
+              "source": "ko.blog.perfectwin.ai",
+              "count": 7
+            },
+            {
+              "source": "com.slack",
+              "count": 3
+            }
+          ]
+        }
+      }
+    },
+    "2025-12": {
+      "ga4": {
+        "daysWithData": 31,
+        "totals": {
+          "activeUsers": 297,
+          "newUsers": 254,
+          "sessions": 355,
+          "engagedSessions": 103,
+          "pageViews": 492,
+          "eventCount": 1612
+        },
+        "averages": {
+          "bounceRate": 72.44,
+          "engagementRate": 27.56,
+          "avgSessionDuration": 88.83,
+          "pageViewsPerSession": 1.35
+        },
+        "channels": [
+          {
+            "channel": "Direct",
+            "sessions": 281,
+            "users": 260
+          },
+          {
+            "channel": "Organic Search",
+            "sessions": 58,
+            "users": 33
+          },
+          {
+            "channel": "Referral",
+            "sessions": 15,
+            "users": 4
+          },
+          {
+            "channel": "Organic Social",
+            "sessions": 1,
+            "users": 1
+          }
+        ],
+        "topPages": [
+          {
+            "pagePath": "/",
+            "pageViews": 307,
+            "users": 237,
+            "title": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence"
+          },
+          {
+            "pagePath": "/m/home",
+            "pageViews": 69,
+            "users": 59,
+            "title": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence"
+          },
+          {
+            "pagePath": "/product",
+            "pageViews": 31,
+            "users": 22,
+            "title": "PerfecTwin - Product"
+          },
+          {
+            "pagePath": "/case-studies",
+            "pageViews": 24,
+            "users": 19,
+            "title": "PerfecTwin - Customers"
+          },
+          {
+            "pagePath": "/company",
+            "pageViews": 22,
+            "users": 15,
+            "title": "PerfecTwin - Company"
+          },
+          {
+            "pagePath": "/resources",
+            "pageViews": 15,
+            "users": 13,
+            "title": "Resources"
+          },
+          {
+            "pagePath": "/m/company",
+            "pageViews": 9,
+            "users": 7,
+            "title": "PerfecTwin - Company"
+          },
+          {
+            "pagePath": "/m/product",
+            "pageViews": 8,
+            "users": 7,
+            "title": "PerfecTwin - Product"
+          },
+          {
+            "pagePath": "/m/case-studies",
+            "pageViews": 5,
+            "users": 5,
+            "title": "PerfecTwin - Customers"
+          },
+          {
+            "pagePath": "/privacy-policy",
+            "pageViews": 2,
+            "users": 2,
+            "title": "Privacy Policy"
+          }
+        ],
+        "devices": [
+          {
+            "device": "desktop",
+            "sessions": 301,
+            "users": 246,
+            "pageViews": 404
+          },
+          {
+            "device": "mobile",
+            "sessions": 50,
+            "users": 48,
+            "pageViews": 68
+          },
+          {
+            "device": "tablet",
+            "sessions": 6,
+            "users": 5,
+            "pageViews": 20
+          }
+        ],
+        "countries": [
+          {
+            "country": "United States",
+            "sessions": 171,
+            "users": 161
+          },
+          {
+            "country": "India",
+            "sessions": 49,
+            "users": 23
+          },
+          {
+            "country": "South Korea",
+            "sessions": 39,
+            "users": 25
+          },
+          {
+            "country": "Germany",
+            "sessions": 24,
+            "users": 24
+          },
+          {
+            "country": "Saudi Arabia",
+            "sessions": 9,
+            "users": 9
+          },
+          {
+            "country": "France",
+            "sessions": 8,
+            "users": 8
+          },
+          {
+            "country": "Canada",
+            "sessions": 8,
+            "users": 8
+          },
+          {
+            "country": "Poland",
+            "sessions": 8,
+            "users": 8
+          },
+          {
+            "country": "(not set)",
+            "sessions": 8,
+            "users": 8
+          },
+          {
+            "country": "Panama",
+            "sessions": 8,
+            "users": 4
+          }
+        ],
+        "sourceMedium": [
+          {
+            "source": "(direct)",
+            "medium": "(none)",
+            "sessions": 281,
+            "users": 260
+          },
+          {
+            "source": "google",
+            "medium": "organic",
+            "sessions": 56,
+            "users": 31
+          },
+          {
+            "source": "claude.ai",
+            "medium": "referral",
+            "sessions": 13,
+            "users": 2
+          },
+          {
+            "source": "rootviewnetworks.com",
+            "medium": "referral",
+            "sessions": 1,
+            "users": 1
+          },
+          {
+            "source": "bing",
+            "medium": "organic",
+            "sessions": 1,
+            "users": 1
+          },
+          {
+            "source": "spyhost.site",
+            "medium": "referral",
+            "sessions": 1,
+            "users": 1
+          },
+          {
+            "source": "ecosia.org",
+            "medium": "organic",
+            "sessions": 1,
+            "users": 1
+          },
+          {
+            "source": "linkedin.com",
+            "medium": "referral",
+            "sessions": 1,
+            "users": 1
+          }
+        ]
+      },
+      "gsc": {},
+      "inblog": {
+        "blog-en": {
+          "daysWithData": 31,
+          "totals": {
+            "visits": 222,
+            "clicks": 0,
+            "organic": 15,
+            "post": 776,
+            "home": 68
+          },
+          "sources": [
+            {
+              "source": "direct",
+              "count": 164
+            },
+            {
+              "source": "www.perfectwin.ai",
+              "count": 26
+            },
+            {
+              "source": "www.google.com",
+              "count": 13
+            },
+            {
+              "source": "inblog.ai",
+              "count": 7
+            },
+            {
+              "source": "localhost",
+              "count": 6
+            },
+            {
+              "source": "lgcns.exaone.ai",
+              "count": 4
+            },
+            {
+              "source": "www.google.com.hk",
+              "count": 1
+            },
+            {
+              "source": "chatgpt.com",
+              "count": 1
+            }
+          ]
+        },
+        "blog-ko": {
+          "daysWithData": 31,
+          "totals": {
+            "visits": 86,
+            "clicks": 0,
+            "organic": 14,
+            "post": 788,
+            "home": 21
+          },
+          "sources": [
+            {
+              "source": "direct",
+              "count": 66
+            },
+            {
+              "source": "www.google.com",
+              "count": 14
+            },
+            {
+              "source": "krc-excel.officeapps.live.com",
+              "count": 4
+            },
+            {
+              "source": "com.slack",
+              "count": 2
+            }
+          ]
+        }
+      }
+    },
+    "2026-01": {
+      "ga4": {
+        "daysWithData": 31,
+        "totals": {
+          "activeUsers": 302,
+          "newUsers": 236,
+          "sessions": 425,
+          "engagedSessions": 230,
+          "pageViews": 1291,
+          "eventCount": 2644
+        },
+        "averages": {
+          "bounceRate": 46.34,
+          "engagementRate": 40.76,
+          "avgSessionDuration": 129.19,
+          "pageViewsPerSession": 1.65
+        },
+        "channels": [
+          {
+            "channel": "Direct",
+            "sessions": 297,
+            "users": 232
+          },
+          {
+            "channel": "Referral",
+            "sessions": 67,
+            "users": 32
+          },
+          {
+            "channel": "Organic Search",
+            "sessions": 52,
+            "users": 32
+          },
+          {
+            "channel": "Organic Social",
+            "sessions": 6,
+            "users": 5
+          },
+          {
+            "channel": "Unassigned",
+            "sessions": 3,
+            "users": 2
+          }
+        ],
+        "topPages": [
+          {
+            "pagePath": "/",
+            "pageViews": 502,
+            "users": 275,
+            "title": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence"
+          },
+          {
+            "pagePath": "/product/erp",
+            "pageViews": 157,
+            "users": 54,
+            "title": "ERP Edition for SAP Testing | PerfecTwin"
+          },
+          {
+            "pagePath": "/why-perfectwin",
+            "pageViews": 116,
+            "users": 62,
+            "title": "PerfecTwin | SAP Testing Automation Platform"
+          },
+          {
+            "pagePath": "/landing/request-demo",
+            "pageViews": 86,
+            "users": 51,
+            "title": "PerfecTwin | SAP Testing Automation Platform"
+          },
+          {
+            "pagePath": "/solutions/migration",
+            "pageViews": 50,
+            "users": 22,
+            "title": "SAP ECC to S/4HANA Migration Testing | Validate Real Operations | PerfecTwin"
+          },
+          {
+            "pagePath": "/product/erp/test-preparation",
+            "pageViews": 43,
+            "users": 23,
+            "title": "SAP Test Preparation with Real Operational Data | PerfecTwin"
+          },
+          {
+            "pagePath": "/solutions/upgrades",
+            "pageViews": 39,
+            "users": 15,
+            "title": "S/4HANA Upgrade Testing | Validate UI, Fiori, and API Changes | PerfecTwin"
+          },
+          {
+            "pagePath": "/solutions",
+            "pageViews": 34,
+            "users": 12,
+            "title": "SAP S/4HANA Testing Solutions | Migration, Upgrade & Regression | PerfecTwin"
+          },
+          {
+            "pagePath": "/product/erp/scenario-creation",
+            "pageViews": 31,
+            "users": 18,
+            "title": "Pre-built SAP Test Scenarios | No-Code Scenario Creation | PerfecTwin"
+          },
+          {
+            "pagePath": "/solutions/regression",
+            "pageViews": 25,
+            "users": 15,
+            "title": "Continuous Regression Testing for SAP | Stay Stable as Change Continues | PerfecTwin"
+          }
+        ],
+        "devices": [
+          {
+            "device": "desktop",
+            "sessions": 373,
+            "users": 258,
+            "pageViews": 1126
+          },
+          {
+            "device": "mobile",
+            "sessions": 52,
+            "users": 44,
+            "pageViews": 163
+          },
+          {
+            "device": "tablet",
+            "sessions": 1,
+            "users": 1,
+            "pageViews": 2
+          }
+        ],
+        "countries": [
+          {
+            "country": "South Korea",
+            "sessions": 278,
+            "users": 173
+          },
+          {
+            "country": "United States",
+            "sessions": 76,
+            "users": 67
+          },
+          {
+            "country": "Canada",
+            "sessions": 15,
+            "users": 13
+          },
+          {
+            "country": "India",
+            "sessions": 11,
+            "users": 6
+          },
+          {
+            "country": "France",
+            "sessions": 10,
+            "users": 10
+          },
+          {
+            "country": "China",
+            "sessions": 8,
+            "users": 7
+          },
+          {
+            "country": "Germany",
+            "sessions": 8,
+            "users": 8
+          },
+          {
+            "country": "United Kingdom",
+            "sessions": 6,
+            "users": 6
+          },
+          {
+            "country": "Panama",
+            "sessions": 3,
+            "users": 3
+          },
+          {
+            "country": "Poland",
+            "sessions": 3,
+            "users": 3
+          }
+        ],
+        "sourceMedium": [
+          {
+            "source": "(direct)",
+            "medium": "(none)",
+            "sessions": 297,
+            "users": 232
+          },
+          {
+            "source": "google",
+            "medium": "organic",
+            "sessions": 52,
+            "users": 32
+          },
+          {
+            "source": "framer.com",
+            "medium": "referral",
+            "sessions": 39,
+            "users": 18
+          },
+          {
+            "source": "statics.teams.cdn.office.net",
+            "medium": "referral",
+            "sessions": 23,
+            "users": 12
+          },
+          {
+            "source": "linkedin.com",
+            "medium": "referral",
+            "sessions": 6,
+            "users": 5
+          },
+          {
+            "source": "(not set)",
+            "medium": "(not set)",
+            "sessions": 3,
+            "users": 2
+          },
+          {
+            "source": "claude.ai",
+            "medium": "referral",
+            "sessions": 2,
+            "users": 0
+          },
+          {
+            "source": "wire.lgcns.com",
+            "medium": "referral",
+            "sessions": 2,
+            "users": 1
+          },
+          {
+            "source": "login.microsoftonline.com",
+            "medium": "referral",
+            "sessions": 1,
+            "users": 1
+          }
+        ]
+      },
+      "gsc": {},
+      "inblog": {
+        "blog-en": {
+          "daysWithData": 31,
+          "totals": {
+            "visits": 206,
+            "clicks": 0,
+            "organic": 41,
+            "post": 755,
+            "home": 58
+          },
+          "sources": [
+            {
+              "source": "direct",
+              "count": 94
+            },
+            {
+              "source": "www.perfectwin.ai",
+              "count": 35
+            },
+            {
+              "source": "www.google.com",
+              "count": 29
+            },
+            {
+              "source": "inblog.ai",
+              "count": 23
+            },
+            {
+              "source": "www.bing.com",
+              "count": 5
+            },
+            {
+              "source": "www.perplexity.ai",
+              "count": 5
+            },
+            {
+              "source": "blog.perfectwin.ai",
+              "count": 5
+            },
+            {
+              "source": "cn.bing.com",
+              "count": 1
+            },
+            {
+              "source": "statics.teams.cdn.office.net",
+              "count": 1
+            }
+          ]
+        },
+        "blog-ko": {
+          "daysWithData": 31,
+          "totals": {
+            "visits": 117,
+            "clicks": 0,
+            "organic": 18,
+            "post": 795,
+            "home": 22
+          },
+          "sources": [
+            {
+              "source": "direct",
+              "count": 98
+            },
+            {
+              "source": "www.google.com",
+              "count": 15
+            },
+            {
+              "source": "www.perplexity.ai",
+              "count": 2
+            },
+            {
+              "source": "inblog.ai",
+              "count": 1
+            },
+            {
+              "source": "www.bing.com",
+              "count": 1
+            }
+          ]
+        }
+      }
+    },
+    "2026-02": {
+      "ga4": {
+        "daysWithData": 28,
+        "totals": {
+          "activeUsers": 7641,
+          "newUsers": 7604,
+          "sessions": 7912,
+          "engagedSessions": 3988,
+          "pageViews": 10574,
+          "eventCount": 41501
+        },
+        "averages": {
+          "bounceRate": 49.19,
+          "engagementRate": 50.81,
+          "avgSessionDuration": 63.5,
+          "pageViewsPerSession": 1.81
+        },
+        "channels": [
+          {
+            "channel": "Direct",
+            "sessions": 7582,
+            "users": 7492
+          },
+          {
+            "channel": "Unassigned",
+            "sessions": 163,
+            "users": 163
+          },
+          {
+            "channel": "Organic Search",
+            "sessions": 95,
+            "users": 52
+          },
+          {
+            "channel": "Referral",
+            "sessions": 67,
+            "users": 35
+          },
+          {
+            "channel": "Organic Social",
+            "sessions": 9,
+            "users": 9
+          }
+        ],
+        "topPages": [
+          {
+            "pagePath": "/",
+            "pageViews": 4070,
+            "users": 3748,
+            "title": "PerfecTwin | SAP Testing Automation Platform"
+          },
+          {
+            "pagePath": "/why-perfectwin",
+            "pageViews": 2091,
+            "users": 2686,
+            "title": "PerfecTwin | SAP Testing Automation Platform"
+          },
+          {
+            "pagePath": "/landing/request-demo",
+            "pageViews": 2053,
+            "users": 2707,
+            "title": "PerfecTwin | SAP Testing Automation Platform"
+          },
+          {
+            "pagePath": "/solutions",
+            "pageViews": 2038,
+            "users": 2621,
+            "title": "SAP S/4HANA Testing Solutions | Migration, Upgrade & Regression | PerfecTwin"
+          },
+          {
+            "pagePath": "/product/erp",
+            "pageViews": 110,
+            "users": 69,
+            "title": "ERP Edition for SAP Testing | PerfecTwin"
+          },
+          {
+            "pagePath": "/solutions/migration",
+            "pageViews": 37,
+            "users": 32,
+            "title": "SAP ECC to S/4HANA Migration Testing | Validate Real Operations | PerfecTwin"
+          },
+          {
+            "pagePath": "/solutions/upgrades",
+            "pageViews": 31,
+            "users": 25,
+            "title": "S/4HANA Upgrade Testing | Validate UI, Fiori, and API Changes | PerfecTwin"
+          },
+          {
+            "pagePath": "/solutions/regression",
+            "pageViews": 19,
+            "users": 18,
+            "title": "Continuous Regression Testing for SAP | Stay Stable as Change Continues | PerfecTwin"
+          },
+          {
+            "pagePath": "/product/erp/test-preparation",
+            "pageViews": 17,
+            "users": 13,
+            "title": "SAP Test Preparation with Real Operational Data | PerfecTwin"
+          },
+          {
+            "pagePath": "/product/erp/scenario-creation",
+            "pageViews": 11,
+            "users": 9,
+            "title": "Pre-built SAP Test Scenarios | No-Code Scenario Creation | PerfecTwin"
+          }
+        ],
+        "devices": [
+          {
+            "device": "desktop",
+            "sessions": 7140,
+            "users": 6895,
+            "pageViews": 9539
+          },
+          {
+            "device": "mobile",
+            "sessions": 772,
+            "users": 746,
+            "pageViews": 1026
+          },
+          {
+            "device": "tablet",
+            "sessions": 3,
+            "users": 3,
+            "pageViews": 8
+          },
+          {
+            "device": "smart tv",
+            "sessions": 1,
+            "users": 1,
+            "pageViews": 1
+          }
+        ],
+        "countries": [
+          {
+            "country": "United States",
+            "sessions": 4877,
+            "users": 4760
+          },
+          {
+            "country": "Ireland",
+            "sessions": 1137,
+            "users": 1111
+          },
+          {
+            "country": "Netherlands",
+            "sessions": 1073,
+            "users": 1058
+          },
+          {
+            "country": "Singapore",
+            "sessions": 266,
+            "users": 265
+          },
+          {
+            "country": "South Korea",
+            "sessions": 229,
+            "users": 138
+          },
+          {
+            "country": "Germany",
+            "sessions": 99,
+            "users": 98
+          },
+          {
+            "country": "Canada",
+            "sessions": 66,
+            "users": 51
+          },
+          {
+            "country": "Japan",
+            "sessions": 30,
+            "users": 30
+          },
+          {
+            "country": "United Kingdom",
+            "sessions": 28,
+            "users": 28
+          },
+          {
+            "country": "France",
+            "sessions": 25,
+            "users": 25
+          }
+        ],
+        "sourceMedium": [
+          {
+            "source": "(direct)",
+            "medium": "(none)",
+            "sessions": 7582,
+            "users": 7492
+          },
+          {
+            "source": "(not set)",
+            "medium": "(not set)",
+            "sessions": 163,
+            "users": 163
+          },
+          {
+            "source": "google",
+            "medium": "organic",
+            "sessions": 83,
+            "users": 42
+          },
+          {
+            "source": "framer.com",
+            "medium": "referral",
+            "sessions": 31,
+            "users": 16
+          },
+          {
+            "source": "app.contentsquare.com",
+            "medium": "referral",
+            "sessions": 24,
+            "users": 11
+          },
+          {
+            "source": "bing",
+            "medium": "organic",
+            "sessions": 12,
+            "users": 10
+          },
+          {
+            "source": "linkedin.com",
+            "medium": "referral",
+            "sessions": 9,
+            "users": 9
+          },
+          {
+            "source": "statics.teams.cdn.office.net",
+            "medium": "referral",
+            "sessions": 6,
+            "users": 4
+          },
+          {
+            "source": "accounts.google.com",
+            "medium": "referral",
+            "sessions": 5,
+            "users": 3
+          },
+          {
+            "source": "qr.naver.com",
+            "medium": "referral",
+            "sessions": 1,
+            "users": 1
+          }
+        ]
+      },
+      "gsc": {},
+      "inblog": {
+        "blog-en": {
+          "daysWithData": 28,
+          "totals": {
+            "visits": 252,
+            "clicks": 1,
+            "organic": 67,
+            "post": 697,
+            "home": 36
+          },
+          "sources": [
+            {
+              "source": "direct",
+              "count": 169
+            },
+            {
+              "source": "www.google.com",
+              "count": 53
+            },
+            {
+              "source": "blog.perfectwin.ai",
+              "count": 5
+            },
+            {
+              "source": "www.perplexity.ai",
+              "count": 5
+            },
+            {
+              "source": "claude.ai",
+              "count": 4
+            },
+            {
+              "source": "gemini.google.com",
+              "count": 3
+            },
+            {
+              "source": "www.bing.com",
+              "count": 3
+            },
+            {
+              "source": "chatgpt.com",
+              "count": 3
+            },
+            {
+              "source": "inblog.ai",
+              "count": 2
+            },
+            {
+              "source": "perfectwin.inblog.ai",
+              "count": 2
+            }
+          ]
+        },
+        "blog-ko": {
+          "daysWithData": 28,
+          "totals": {
+            "visits": 84,
+            "clicks": 1,
+            "organic": 27,
+            "post": 692,
+            "home": 15
+          },
+          "sources": [
+            {
+              "source": "direct",
+              "count": 57
+            },
+            {
+              "source": "www.google.com",
+              "count": 23
+            },
+            {
+              "source": "www.bing.com",
+              "count": 2
+            },
+            {
+              "source": "bing.com",
+              "count": 1
+            },
+            {
+              "source": "www.perplexity.ai",
+              "count": 1
+            }
+          ]
+        }
+      }
+    },
+    "2026-03": {
+      "ga4": {
+        "daysWithData": 26,
+        "totals": {
+          "activeUsers": 1506,
+          "newUsers": 1368,
+          "sessions": 1746,
+          "engagedSessions": 707,
+          "pageViews": 4456,
+          "eventCount": 10718
+        },
+        "averages": {
+          "bounceRate": 54.78,
+          "engagementRate": 41.37,
+          "avgSessionDuration": 175.92,
+          "pageViewsPerSession": 3.01
+        },
+        "channels": [
+          {
+            "channel": "Direct",
+            "sessions": 1479,
+            "users": 1359
+          },
+          {
+            "channel": "Organic Search",
+            "sessions": 100,
+            "users": 59
+          },
+          {
+            "channel": "Referral",
+            "sessions": 99,
+            "users": 57
+          },
+          {
+            "channel": "Unassigned",
+            "sessions": 52,
+            "users": 35
+          },
+          {
+            "channel": "Organic Social",
+            "sessions": 16,
+            "users": 10
+          }
+        ],
+        "topPages": [
+          {
+            "pagePath": "/",
+            "pageViews": 1617,
+            "users": 1129,
+            "title": "PerfecTwin | SAP Testing Automation Platform"
+          },
+          {
+            "pagePath": "/why-perfectwin",
+            "pageViews": 367,
+            "users": 312,
+            "title": "PerfecTwin | SAP Testing Automation Platform"
+          },
+          {
+            "pagePath": "/product/erp",
+            "pageViews": 255,
+            "users": 119,
+            "title": "ERP Edition for SAP Testing | PerfecTwin"
+          },
+          {
+            "pagePath": "/solutions",
+            "pageViews": 241,
+            "users": 253,
+            "title": "SAP S/4HANA Testing Solutions | Migration, Upgrade & Regression | PerfecTwin"
+          },
+          {
+            "pagePath": "/landing/request-demo",
+            "pageViews": 212,
+            "users": 240,
+            "title": "PerfecTwin | SAP Testing Automation Platform"
+          },
+          {
+            "pagePath": "/contact-us/request-demo",
+            "pageViews": 187,
+            "users": 78,
+            "title": "PerfecTwin | SAP Testing Automation Platform"
+          },
+          {
+            "pagePath": "/resources",
+            "pageViews": 172,
+            "users": 57,
+            "title": "PerfecTwin | SAP Testing Automation Platform"
+          },
+          {
+            "pagePath": "/resources/blog",
+            "pageViews": 93,
+            "users": 35,
+            "title": "PerfecTwin | SAP Testing Automation Platform"
+          },
+          {
+            "pagePath": "/resources/event",
+            "pageViews": 90,
+            "users": 35,
+            "title": "PerfecTwin | SAP Testing Automation Platform"
+          },
+          {
+            "pagePath": "/about-us",
+            "pageViews": 78,
+            "users": 56,
+            "title": "PerfecTwin | SAP Testing Automation Platform"
+          }
+        ],
+        "devices": [
+          {
+            "device": "desktop",
+            "sessions": 1583,
+            "users": 1373,
+            "pageViews": 3958
+          },
+          {
+            "device": "mobile",
+            "sessions": 186,
+            "users": 150,
+            "pageViews": 497
+          },
+          {
+            "device": "tablet",
+            "sessions": 1,
+            "users": 1,
+            "pageViews": 1
+          }
+        ],
+        "countries": [
+          {
+            "country": "United States",
+            "sessions": 667,
+            "users": 649
+          },
+          {
+            "country": "South Korea",
+            "sessions": 528,
+            "users": 334
+          },
+          {
+            "country": "Netherlands",
+            "sessions": 156,
+            "users": 151
+          },
+          {
+            "country": "Ireland",
+            "sessions": 117,
+            "users": 115
+          },
+          {
+            "country": "Singapore",
+            "sessions": 59,
+            "users": 58
+          },
+          {
+            "country": "Canada",
+            "sessions": 51,
+            "users": 41
+          },
+          {
+            "country": "Germany",
+            "sessions": 28,
+            "users": 28
+          },
+          {
+            "country": "(not set)",
+            "sessions": 20,
+            "users": 20
+          },
+          {
+            "country": "United Kingdom",
+            "sessions": 17,
+            "users": 17
+          },
+          {
+            "country": "Saudi Arabia",
+            "sessions": 15,
+            "users": 15
+          }
+        ],
+        "sourceMedium": [
+          {
+            "source": "(direct)",
+            "medium": "(none)",
+            "sessions": 1479,
+            "users": 1359
+          },
+          {
+            "source": "google",
+            "medium": "organic",
+            "sessions": 97,
+            "users": 57
+          },
+          {
+            "source": "framer.com",
+            "medium": "referral",
+            "sessions": 38,
+            "users": 21
+          },
+          {
+            "source": "blog",
+            "medium": "content",
+            "sessions": 35,
+            "users": 20
+          },
+          {
+            "source": "statics.teams.cdn.office.net",
+            "medium": "referral",
+            "sessions": 27,
+            "users": 17
+          },
+          {
+            "source": "tranquil-signposts-615878.framer.app",
+            "medium": "referral",
+            "sessions": 19,
+            "users": 9
+          },
+          {
+            "source": "(not set)",
+            "medium": "(not set)",
+            "sessions": 17,
+            "users": 15
+          },
+          {
+            "source": "linkedin.com",
+            "medium": "referral",
+            "sessions": 8,
+            "users": 7
+          },
+          {
+            "source": "t.co",
+            "medium": "referral",
+            "sessions": 7,
+            "users": 2
+          },
+          {
+            "source": "sap.com",
+            "medium": "referral",
+            "sessions": 4,
+            "users": 2
+          }
+        ]
+      },
+      "gsc": {
+        "blog.perfectwin.ai": {
+          "daysWithData": 11,
+          "totals": {
+            "clicks": 4,
+            "impressions": 2420,
+            "ctr": 0.17,
+            "avgPosition": 20.2
+          },
+          "topQueries": [
+            {
+              "query": "rise with sap migration",
+              "clicks": 0,
+              "impressions": 48,
+              "avgPosition": 46.2
+            },
+            {
+              "query": "rise migration sap",
+              "clicks": 0,
+              "impressions": 30,
+              "avgPosition": 45.7
+            },
+            {
+              "query": "rise migration",
+              "clicks": 0,
+              "impressions": 26,
+              "avgPosition": 48.9
+            },
+            {
+              "query": "rise with sap adoption framework",
+              "clicks": 0,
+              "impressions": 19,
+              "avgPosition": 50.2
+            },
+            {
+              "query": "rise with sap migration and modernization",
+              "clicks": 0,
+              "impressions": 15,
+              "avgPosition": 77.8
+            },
+            {
+              "query": "difference between sap rise and grow",
+              "clicks": 0,
+              "impressions": 14,
+              "avgPosition": 49.9
+            },
+            {
+              "query": "automation prioritization",
+              "clicks": 0,
+              "impressions": 12,
+              "avgPosition": 21.7
+            },
+            {
+              "query": "rise with sap migration and modernization program",
+              "clicks": 0,
+              "impressions": 9,
+              "avgPosition": 89.1
+            },
+            {
+              "query": "optimising sap s/4hana testing",
+              "clicks": 0,
+              "impressions": 8,
+              "avgPosition": 25.8
+            },
+            {
+              "query": "perfectwin",
+              "clicks": 0,
+              "impressions": 6,
+              "avgPosition": 42.2
+            },
+            {
+              "query": "s 4hana test system",
+              "clicks": 0,
+              "impressions": 6,
+              "avgPosition": 39.6
+            },
+            {
+              "query": "conversion testing strategy",
+              "clicks": 0,
+              "impressions": 5,
+              "avgPosition": 25.4
+            },
+            {
+              "query": "difference between rise with sap and grow with sap",
+              "clicks": 0,
+              "impressions": 5,
+              "avgPosition": 45.3
+            },
+            {
+              "query": "s 4hana performance test management",
+              "clicks": 0,
+              "impressions": 4,
+              "avgPosition": 32
+            },
+            {
+              "query": "order to cash automation case study",
+              "clicks": 0,
+              "impressions": 3,
+              "avgPosition": 79
+            }
+          ],
+          "topPages": [
+            {
+              "page": "https://blog.perfectwin.ai/sap-joule-agentic-ai-future",
+              "clicks": 0,
+              "impressions": 475,
+              "avgPosition": 8.7
+            },
+            {
+              "page": "https://blog.perfectwin.ai/sap-erp-test-trends",
+              "clicks": 0,
+              "impressions": 399,
+              "avgPosition": 45.4
+            },
+            {
+              "page": "https://blog.perfectwin.ai/sap-cloud-transition-rise-grow-guide",
+              "clicks": 0,
+              "impressions": 340,
+              "avgPosition": 43.9
+            },
+            {
+              "page": "https://blog.perfectwin.ai/sap-migration-data-conversion-testing-strategy",
+              "clicks": 2,
+              "impressions": 145,
+              "avgPosition": 15.8
+            },
+            {
+              "page": "https://blog.perfectwin.ai/sap-o2c-process-testing-automation",
+              "clicks": 0,
+              "impressions": 60,
+              "avgPosition": 13.2
+            },
+            {
+              "page": "https://blog.perfectwin.ai/sap-s4hana-cloud-deployment-options-comparison-public-private-onpremise",
+              "clicks": 0,
+              "impressions": 54,
+              "avgPosition": 11
+            },
+            {
+              "page": "https://blog.perfectwin.ai/sap-grow-upgrade-testing-guide",
+              "clicks": 0,
+              "impressions": 50,
+              "avgPosition": 13
+            },
+            {
+              "page": "https://blog.perfectwin.ai/sap-cloud-ecosystem-guide",
+              "clicks": 0,
+              "impressions": 40,
+              "avgPosition": 27.5
+            },
+            {
+              "page": "https://blog.perfectwin.ai/sap-s4hana-upgrade-testing-strategy",
+              "clicks": 0,
+              "impressions": 28,
+              "avgPosition": 23.4
+            },
+            {
+              "page": "https://blog.perfectwin.ai/sap-s4hana-agentic-ai-strategy-2026",
+              "clicks": 0,
+              "impressions": 11,
+              "avgPosition": 8.5
+            },
+            {
+              "page": "https://blog.perfectwin.ai/",
+              "clicks": 2,
+              "impressions": 9,
+              "avgPosition": 21.8
+            },
+            {
+              "page": "https://blog.perfectwin.ai/category/sap-migration-testing-",
+              "clicks": 0,
+              "impressions": 9,
+              "avgPosition": 76
+            },
+            {
+              "page": "https://blog.perfectwin.ai/global-ev-battery-sap-s4hana-migration",
+              "clicks": 0,
+              "impressions": 8,
+              "avgPosition": 6.9
+            },
+            {
+              "page": "https://blog.perfectwin.ai/sap-erp-card-transaction-testing-complexity-automation",
+              "clicks": 0,
+              "impressions": 8,
+              "avgPosition": 8.1
+            },
+            {
+              "page": "https://blog.perfectwin.ai/category/case-studies",
+              "clicks": 0,
+              "impressions": 7,
+              "avgPosition": 59.4
+            }
+          ]
+        }
+      },
+      "inblog": {
+        "blog-en": {
+          "daysWithData": 26,
+          "totals": {
+            "visits": 598,
+            "clicks": 6,
+            "organic": 32,
+            "post": 833,
+            "home": 104
+          },
+          "sources": [
+            {
+              "source": "direct",
+              "count": 420
+            },
+            {
+              "source": "www.perfectwin.ai",
+              "count": 61
+            },
+            {
+              "source": "www.google.com",
+              "count": 26
+            },
+            {
+              "source": "localhost",
+              "count": 26
+            },
+            {
+              "source": "inblog.ai",
+              "count": 12
+            },
+            {
+              "source": "tranquil-signposts-615878.framer.app",
+              "count": 11
+            },
+            {
+              "source": "blog.perfectwin.ai",
+              "count": 8
+            },
+            {
+              "source": "www.perplexity.ai",
+              "count": 5
+            },
+            {
+              "source": "claude.ai",
+              "count": 5
+            },
+            {
+              "source": "www.linkedin.com",
+              "count": 5
+            }
+          ]
+        },
+        "blog-ko": {
+          "daysWithData": 26,
+          "totals": {
+            "visits": 217,
+            "clicks": 0,
+            "organic": 48,
+            "post": 679,
+            "home": 52
+          },
+          "sources": [
+            {
+              "source": "direct",
+              "count": 125
+            },
+            {
+              "source": "www.google.com",
+              "count": 44
+            },
+            {
+              "source": "statics.teams.cdn.office.net",
+              "count": 36
+            },
+            {
+              "source": "chatgpt.com",
+              "count": 4
+            },
+            {
+              "source": "localhost",
+              "count": 4
+            },
+            {
+              "source": "com.slack",
+              "count": 2
+            },
+            {
+              "source": "ko.blog.perfectwin.ai",
+              "count": 2
+            }
+          ]
+        }
+      }
+    }
+  },
+  "annual": {
+    "ga4": {
+      "daysWithData": 365,
+      "totals": {
+        "activeUsers": 13064,
+        "newUsers": 12605,
+        "sessions": 14174,
+        "engagedSessions": 5758,
+        "pageViews": 21685,
+        "eventCount": 71214
+      },
+      "averages": {
+        "bounceRate": 38.82,
+        "engagementRate": 26.12,
+        "avgSessionDuration": 81.54,
+        "pageViewsPerSession": 1.08
+      },
+      "channels": [
+        {
+          "channel": "Direct",
+          "sessions": 10235,
+          "users": 9778
+        },
+        {
+          "channel": "Cross-network",
+          "sessions": 1835,
+          "users": 1732
+        },
+        {
+          "channel": "Paid Other",
+          "sessions": 590,
+          "users": 588
+        },
+        {
+          "channel": "Organic Search",
+          "sessions": 544,
+          "users": 321
+        },
+        {
+          "channel": "Paid Search",
+          "sessions": 409,
+          "users": 389
+        },
+        {
+          "channel": "Referral",
+          "sessions": 306,
+          "users": 164
+        },
+        {
+          "channel": "Unassigned",
+          "sessions": 223,
+          "users": 205
+        },
+        {
+          "channel": "Organic Social",
+          "sessions": 32,
+          "users": 25
+        },
+        {
+          "channel": "Organic Video",
+          "sessions": 3,
+          "users": 2
+        }
+      ],
+      "topPages": [
+        {
+          "pagePath": "/",
+          "pageViews": 6962,
+          "users": 5719,
+          "title": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence"
+        },
+        {
+          "pagePath": "/cf003_perfectwin_counsel_ad",
+          "pageViews": 3664,
+          "users": 2770,
+          "title": "PerfecTwin 데모 환경 신청"
+        },
+        {
+          "pagePath": "/why-perfectwin",
+          "pageViews": 2574,
+          "users": 3060,
+          "title": "PerfecTwin | SAP Testing Automation Platform"
+        },
+        {
+          "pagePath": "/landing/request-demo",
+          "pageViews": 2351,
+          "users": 2998,
+          "title": "PerfecTwin | SAP Testing Automation Platform"
+        },
+        {
+          "pagePath": "/solutions",
+          "pageViews": 2313,
+          "users": 2886,
+          "title": "SAP S/4HANA Testing Solutions | Migration, Upgrade & Regression | PerfecTwin"
+        },
+        {
+          "pagePath": "/product/erp",
+          "pageViews": 522,
+          "users": 242,
+          "title": "ERP Edition for SAP Testing | PerfecTwin"
+        },
+        {
+          "pagePath": "/resources",
+          "pageViews": 383,
+          "users": 214,
+          "title": "Resources"
+        },
+        {
+          "pagePath": "/m/home",
+          "pageViews": 261,
+          "users": 212,
+          "title": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence"
+        },
+        {
+          "pagePath": "/contact-us/request-demo",
+          "pageViews": 187,
+          "users": 78,
+          "title": "PerfecTwin | SAP Testing Automation Platform"
+        },
+        {
+          "pagePath": "/solutions/migration",
+          "pageViews": 163,
+          "users": 90,
+          "title": "SAP ECC to S/4HANA Migration Testing | Validate Real Operations | PerfecTwin"
+        }
+      ],
+      "devices": [
+        {
+          "device": "desktop",
+          "sessions": 11103,
+          "users": 10189,
+          "pageViews": 17130
+        },
+        {
+          "device": "mobile",
+          "sessions": 3081,
+          "users": 2881,
+          "pageViews": 4510
+        },
+        {
+          "device": "tablet",
+          "sessions": 24,
+          "users": 22,
+          "pageViews": 44
+        },
+        {
+          "device": "smart tv",
+          "sessions": 1,
+          "users": 1,
+          "pageViews": 1
+        }
+      ],
+      "countries": [
+        {
+          "country": "United States",
+          "sessions": 6005,
+          "users": 5790
+        },
+        {
+          "country": "South Korea",
+          "sessions": 3486,
+          "users": 2797
+        },
+        {
+          "country": "Ireland",
+          "sessions": 1255,
+          "users": 1227
+        },
+        {
+          "country": "Netherlands",
+          "sessions": 1239,
+          "users": 1215
+        },
+        {
+          "country": "(not set)",
+          "sessions": 923,
+          "users": 921
+        },
+        {
+          "country": "Singapore",
+          "sessions": 327,
+          "users": 325
+        },
+        {
+          "country": "Germany",
+          "sessions": 163,
+          "users": 162
+        },
+        {
+          "country": "Canada",
+          "sessions": 148,
+          "users": 121
+        },
+        {
+          "country": "India",
+          "sessions": 128,
+          "users": 80
+        },
+        {
+          "country": "Japan",
+          "sessions": 64,
+          "users": 59
+        }
+      ],
+      "sourceMedium": [
+        {
+          "source": "(direct)",
+          "medium": "(none)",
+          "sessions": 10235,
+          "users": 9778
+        },
+        {
+          "source": "google",
+          "medium": "cpc",
+          "sessions": 2244,
+          "users": 2121
+        },
+        {
+          "source": "(not set)",
+          "medium": "cpc",
+          "sessions": 590,
+          "users": 588
+        },
+        {
+          "source": "google",
+          "medium": "organic",
+          "sessions": 506,
+          "users": 293
+        },
+        {
+          "source": "(not set)",
+          "medium": "(not set)",
+          "sessions": 188,
+          "users": 185
+        },
+        {
+          "source": "framer.com",
+          "medium": "referral",
+          "sessions": 108,
+          "users": 55
+        },
+        {
+          "source": "statics.teams.cdn.office.net",
+          "medium": "referral",
+          "sessions": 79,
+          "users": 48
+        },
+        {
+          "source": "blog",
+          "medium": "content",
+          "sessions": 35,
+          "users": 20
+        },
+        {
+          "source": "bing",
+          "medium": "organic",
+          "sessions": 30,
+          "users": 23
+        },
+        {
+          "source": "linkedin.com",
+          "medium": "referral",
+          "sessions": 24,
+          "users": 22
+        }
+      ]
+    },
+    "gsc": {
+      "blog.perfectwin.ai": {
+        "daysWithData": 11,
+        "totals": {
+          "clicks": 4,
+          "impressions": 2420,
+          "ctr": 0.17,
+          "avgPosition": 20.2
+        },
+        "topQueries": [
+          {
+            "query": "rise with sap migration",
+            "clicks": 0,
+            "impressions": 48,
+            "avgPosition": 46.2
+          },
+          {
+            "query": "rise migration sap",
+            "clicks": 0,
+            "impressions": 30,
+            "avgPosition": 45.7
+          },
+          {
+            "query": "rise migration",
+            "clicks": 0,
+            "impressions": 26,
+            "avgPosition": 48.9
+          },
+          {
+            "query": "rise with sap adoption framework",
+            "clicks": 0,
+            "impressions": 19,
+            "avgPosition": 50.2
+          },
+          {
+            "query": "rise with sap migration and modernization",
+            "clicks": 0,
+            "impressions": 15,
+            "avgPosition": 77.8
+          },
+          {
+            "query": "difference between sap rise and grow",
+            "clicks": 0,
+            "impressions": 14,
+            "avgPosition": 49.9
+          },
+          {
+            "query": "automation prioritization",
+            "clicks": 0,
+            "impressions": 12,
+            "avgPosition": 21.7
+          },
+          {
+            "query": "rise with sap migration and modernization program",
+            "clicks": 0,
+            "impressions": 9,
+            "avgPosition": 89.1
+          },
+          {
+            "query": "optimising sap s/4hana testing",
+            "clicks": 0,
+            "impressions": 8,
+            "avgPosition": 25.8
+          },
+          {
+            "query": "perfectwin",
+            "clicks": 0,
+            "impressions": 6,
+            "avgPosition": 42.2
+          },
+          {
+            "query": "s 4hana test system",
+            "clicks": 0,
+            "impressions": 6,
+            "avgPosition": 39.6
+          },
+          {
+            "query": "conversion testing strategy",
+            "clicks": 0,
+            "impressions": 5,
+            "avgPosition": 25.4
+          },
+          {
+            "query": "difference between rise with sap and grow with sap",
+            "clicks": 0,
+            "impressions": 5,
+            "avgPosition": 45.3
+          },
+          {
+            "query": "s 4hana performance test management",
+            "clicks": 0,
+            "impressions": 4,
+            "avgPosition": 32
+          },
+          {
+            "query": "order to cash automation case study",
+            "clicks": 0,
+            "impressions": 3,
+            "avgPosition": 79
+          }
+        ],
+        "topPages": [
+          {
+            "page": "https://blog.perfectwin.ai/sap-joule-agentic-ai-future",
+            "clicks": 0,
+            "impressions": 475,
+            "avgPosition": 8.7
+          },
+          {
+            "page": "https://blog.perfectwin.ai/sap-erp-test-trends",
+            "clicks": 0,
+            "impressions": 399,
+            "avgPosition": 45.4
+          },
+          {
+            "page": "https://blog.perfectwin.ai/sap-cloud-transition-rise-grow-guide",
+            "clicks": 0,
+            "impressions": 340,
+            "avgPosition": 43.9
+          },
+          {
+            "page": "https://blog.perfectwin.ai/sap-migration-data-conversion-testing-strategy",
+            "clicks": 2,
+            "impressions": 145,
+            "avgPosition": 15.8
+          },
+          {
+            "page": "https://blog.perfectwin.ai/sap-o2c-process-testing-automation",
+            "clicks": 0,
+            "impressions": 60,
+            "avgPosition": 13.2
+          },
+          {
+            "page": "https://blog.perfectwin.ai/sap-s4hana-cloud-deployment-options-comparison-public-private-onpremise",
+            "clicks": 0,
+            "impressions": 54,
+            "avgPosition": 11
+          },
+          {
+            "page": "https://blog.perfectwin.ai/sap-grow-upgrade-testing-guide",
+            "clicks": 0,
+            "impressions": 50,
+            "avgPosition": 13
+          },
+          {
+            "page": "https://blog.perfectwin.ai/sap-cloud-ecosystem-guide",
+            "clicks": 0,
+            "impressions": 40,
+            "avgPosition": 27.5
+          },
+          {
+            "page": "https://blog.perfectwin.ai/sap-s4hana-upgrade-testing-strategy",
+            "clicks": 0,
+            "impressions": 28,
+            "avgPosition": 23.4
+          },
+          {
+            "page": "https://blog.perfectwin.ai/sap-s4hana-agentic-ai-strategy-2026",
+            "clicks": 0,
+            "impressions": 11,
+            "avgPosition": 8.5
+          },
+          {
+            "page": "https://blog.perfectwin.ai/",
+            "clicks": 2,
+            "impressions": 9,
+            "avgPosition": 21.8
+          },
+          {
+            "page": "https://blog.perfectwin.ai/category/sap-migration-testing-",
+            "clicks": 0,
+            "impressions": 9,
+            "avgPosition": 76
+          },
+          {
+            "page": "https://blog.perfectwin.ai/global-ev-battery-sap-s4hana-migration",
+            "clicks": 0,
+            "impressions": 8,
+            "avgPosition": 6.9
+          },
+          {
+            "page": "https://blog.perfectwin.ai/sap-erp-card-transaction-testing-complexity-automation",
+            "clicks": 0,
+            "impressions": 8,
+            "avgPosition": 8.1
+          },
+          {
+            "page": "https://blog.perfectwin.ai/category/case-studies",
+            "clicks": 0,
+            "impressions": 7,
+            "avgPosition": 59.4
+          }
+        ]
+      }
+    },
+    "inblog": {
+      "blog-en": {
+        "daysWithData": 363,
+        "totals": {
+          "visits": 3096,
+          "clicks": 19,
+          "organic": 250,
+          "post": 9185,
+          "home": 1044
+        },
+        "sources": [
+          {
+            "source": "direct",
+            "count": 1522
+          },
+          {
+            "source": "www.perfectwin.ai",
+            "count": 682
+          },
+          {
+            "source": "blog.perfectwin.ai",
+            "count": 246
+          },
+          {
+            "source": "www.google.com",
+            "count": 180
+          },
+          {
+            "source": "inblog.ai",
+            "count": 116
+          },
+          {
+            "source": "perfectwin.inblog.ai",
+            "count": 115
+          },
+          {
+            "source": "localhost",
+            "count": 32
+          },
+          {
+            "source": "www.bing.com",
+            "count": 28
+          },
+          {
+            "source": "shea74085.softr.app",
+            "count": 24
+          },
+          {
+            "source": "perfectwin.softr.app",
+            "count": 19
+          }
+        ]
+      },
+      "blog-ko": {
+        "daysWithData": 365,
+        "totals": {
+          "visits": 1471,
+          "clicks": 5,
+          "organic": 162,
+          "post": 9256,
+          "home": 450
+        },
+        "sources": [
+          {
+            "source": "direct",
+            "count": 1133
+          },
+          {
+            "source": "www.google.com",
+            "count": 146
+          },
+          {
+            "source": "ko.blog.perfectwin.ai",
+            "count": 111
+          },
+          {
+            "source": "statics.teams.cdn.office.net",
+            "count": 36
+          },
+          {
+            "source": "com.slack",
+            "count": 14
+          },
+          {
+            "source": "www.perplexity.ai",
+            "count": 7
+          },
+          {
+            "source": "chatgpt.com",
+            "count": 5
+          },
+          {
+            "source": "ep.lgcns.com",
+            "count": 4
+          },
+          {
+            "source": "krc-excel.officeapps.live.com",
+            "count": 4
+          },
+          {
+            "source": "localhost",
+            "count": 4
+          }
+        ]
+      }
+    },
+    "dayOfWeek": [
+      {
+        "day": "일",
+        "avgSessions": 7.1,
+        "avgUsers": 6.6,
+        "avgPageViews": 9.3,
+        "dataPoints": 52
+      },
+      {
+        "day": "월",
+        "avgSessions": 11,
+        "avgUsers": 8.1,
+        "avgPageViews": 31.6,
+        "dataPoints": 52
+      },
+      {
+        "day": "화",
+        "avgSessions": 31,
+        "avgUsers": 27.7,
+        "avgPageViews": 45.4,
+        "dataPoints": 52
+      },
+      {
+        "day": "수",
+        "avgSessions": 101.2,
+        "avgUsers": 95.6,
+        "avgPageViews": 147.8,
+        "dataPoints": 52
+      },
+      {
+        "day": "목",
+        "avgSessions": 44.7,
+        "avgUsers": 40.5,
+        "avgPageViews": 75,
+        "dataPoints": 53
+      },
+      {
+        "day": "금",
+        "avgSessions": 46.1,
+        "avgUsers": 42.5,
+        "avgPageViews": 66.8,
+        "dataPoints": 52
+      },
+      {
+        "day": "토",
+        "avgSessions": 30.7,
+        "avgUsers": 29.4,
+        "avgPageViews": 39.6,
+        "dataPoints": 52
+      }
+    ]
+  }
+}

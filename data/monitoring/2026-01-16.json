@@ -1,0 +1,333 @@
+{
+  "date": "2026-01-16",
+  "collectedAt": "2026-03-27T10:16:50.620Z",
+  "ga4": {
+    "date": "2026-01-16",
+    "summary": {
+      "activeUsers": 8,
+      "newUsers": 4,
+      "returningUsers": 4,
+      "sessions": 12,
+      "engagedSessions": 4,
+      "pageViews": 18,
+      "bounceRate": 66.67,
+      "engagementRate": 33.33,
+      "avgSessionDuration": 147.3,
+      "pageViewsPerSession": 1.5,
+      "totalEngagementTime": 555,
+      "eventCount": 60
+    },
+    "topPages": [
+      {
+        "pagePath": "/",
+        "pageTitle": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence",
+        "pageViews": 12,
+        "users": 8,
+        "avgDuration": 90.3,
+        "bounceRate": 63.64
+      },
+      {
+        "pagePath": "/case-studies",
+        "pageTitle": "PerfecTwin - Customers",
+        "pageViews": 2,
+        "users": 1,
+        "avgDuration": 338,
+        "bounceRate": 50
+      },
+      {
+        "pagePath": "/product",
+        "pageTitle": "PerfecTwin - Product",
+        "pageViews": 2,
+        "users": 2,
+        "avgDuration": 25.8,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/m/home",
+        "pageTitle": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 15.6,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/resources",
+        "pageTitle": "Resources",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 5.4,
+        "bounceRate": 0
+      }
+    ],
+    "channels": [
+      {
+        "channel": "Direct",
+        "sessions": 6,
+        "users": 5,
+        "engagementRate": 16.67
+      },
+      {
+        "channel": "Referral",
+        "sessions": 3,
+        "users": 1,
+        "engagementRate": 66.67
+      },
+      {
+        "channel": "Organic Search",
+        "sessions": 2,
+        "users": 1,
+        "engagementRate": 50
+      },
+      {
+        "channel": "Organic Social",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0
+      }
+    ],
+    "sourceMedium": [
+      {
+        "source": "(direct)",
+        "medium": "(none)",
+        "sessions": 6,
+        "users": 5,
+        "engagementRate": 16.67,
+        "avgDuration": 77.1
+      },
+      {
+        "source": "statics.teams.cdn.office.net",
+        "medium": "referral",
+        "sessions": 3,
+        "users": 1,
+        "engagementRate": 66.67,
+        "avgDuration": 202.7
+      },
+      {
+        "source": "google",
+        "medium": "organic",
+        "sessions": 2,
+        "users": 1,
+        "engagementRate": 50,
+        "avgDuration": 347.1
+      },
+      {
+        "source": "linkedin.com",
+        "medium": "referral",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0,
+        "avgDuration": 1.9
+      }
+    ],
+    "devices": [
+      {
+        "device": "desktop",
+        "sessions": 12,
+        "users": 8,
+        "pageViews": 18,
+        "engagementRate": 33.33,
+        "avgDuration": 147.3
+      }
+    ],
+    "countries": [
+      {
+        "country": "South Korea",
+        "sessions": 8,
+        "users": 5,
+        "engagementRate": 50
+      },
+      {
+        "country": "United States",
+        "sessions": 3,
+        "users": 3,
+        "engagementRate": 0
+      },
+      {
+        "country": "India",
+        "sessions": 1,
+        "users": 0,
+        "engagementRate": 0
+      }
+    ],
+    "landingPages": [
+      {
+        "landingPage": "/",
+        "sessions": 9,
+        "users": 8,
+        "bounceRate": 66.67,
+        "avgDuration": 189,
+        "pagesPerSession": 2
+      },
+      {
+        "landingPage": "(not set)",
+        "sessions": 3,
+        "users": 1,
+        "bounceRate": 66.67,
+        "avgDuration": 21.9,
+        "pagesPerSession": 0
+      }
+    ]
+  },
+  "gsc": {
+    "date": "2026-01-16",
+    "sites": [
+      {
+        "siteUrl": "https://perfectwin.ai/",
+        "label": "perfectwin.ai",
+        "date": "2026-01-16",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      },
+      {
+        "siteUrl": "https://blog.perfectwin.ai/",
+        "label": "blog.perfectwin.ai",
+        "date": "2026-01-16",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      }
+    ]
+  },
+  "inblog": {
+    "date": "2026-01-16",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2026-01-16",
+        "traffic": {
+          "data": [
+            {
+              "date": "2026-01-16",
+              "visits": 2,
+              "clicks": 0,
+              "organic": 1,
+              "home": 0,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-01-16",
+            "end_date": "2026-01-16",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 56958,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Backend Test Automation: Why UI Replay Falls Short for ERP Testing"
+            },
+            {
+              "post_id": 79267,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": "SAP S/4HANA Upgrade Testing: 3 Strategies for Quarterly Release Verification"
+            }
+          ],
+          "meta": {
+            "start_date": "2026-01-16",
+            "end_date": "2026-01-16",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 1
+            },
+            {
+              "full_referrer": "www.perplexity.ai",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2026-01-16",
+            "end_date": "2026-01-16"
+          }
+        }
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2026-01-16",
+        "traffic": {
+          "data": [
+            {
+              "date": "2026-01-16",
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "home": 0,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-01-16",
+            "end_date": "2026-01-16",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 75497,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP 테스트 전략 (1) ECC to S/4HANA Migration"
+            }
+          ],
+          "meta": {
+            "start_date": "2026-01-16",
+            "end_date": "2026-01-16",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2026-01-16",
+            "end_date": "2026-01-16"
+          }
+        }
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": null
+  }
+}

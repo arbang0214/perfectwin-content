@@ -1,0 +1,265 @@
+{
+  "date": "2025-09-01",
+  "collectedAt": "2026-03-27T09:50:22.012Z",
+  "ga4": {
+    "date": "2025-09-01",
+    "summary": {
+      "activeUsers": 0,
+      "newUsers": 0,
+      "returningUsers": 0,
+      "sessions": 0,
+      "engagedSessions": 0,
+      "pageViews": 0,
+      "bounceRate": 0,
+      "engagementRate": 0,
+      "avgSessionDuration": 0,
+      "pageViewsPerSession": 0,
+      "totalEngagementTime": 0,
+      "eventCount": 0
+    },
+    "topPages": [],
+    "channels": [],
+    "sourceMedium": [],
+    "devices": [],
+    "countries": [],
+    "landingPages": []
+  },
+  "gsc": {
+    "date": "2025-09-01",
+    "sites": [
+      {
+        "siteUrl": "https://perfectwin.ai/",
+        "label": "perfectwin.ai",
+        "date": "2025-09-01",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      },
+      {
+        "siteUrl": "https://blog.perfectwin.ai/",
+        "label": "blog.perfectwin.ai",
+        "date": "2025-09-01",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      }
+    ]
+  },
+  "inblog": {
+    "date": "2025-09-01",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2025-09-01",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-09-01",
+              "visits": 6,
+              "clicks": 0,
+              "organic": 0,
+              "home": 4,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-09-01",
+            "end_date": "2025-09-01",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": null,
+              "visits": 4,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 68574,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            }
+          ],
+          "meta": {
+            "start_date": "2025-09-01",
+            "end_date": "2025-09-01",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 6
+            }
+          ],
+          "meta": {
+            "start_date": "2025-09-01",
+            "end_date": "2025-09-01"
+          }
+        }
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2025-09-01",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-09-01",
+              "visits": 49,
+              "clicks": 1,
+              "organic": 3,
+              "home": 19,
+              "post": 39,
+              "category": 3,
+              "author": 5
+            }
+          ],
+          "meta": {
+            "start_date": "2025-09-01",
+            "end_date": "2025-09-01",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": null,
+              "visits": 27,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 64861,
+              "visits": 7,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 65989,
+              "visits": 4,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 61892,
+              "visits": 3,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 59993,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 63322,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 55187,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 56803,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 57929,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 59130,
+              "visits": 1,
+              "clicks": 1,
+              "organic": 0,
+              "cvr": 1,
+              "title": null
+            }
+          ],
+          "meta": {
+            "start_date": "2025-09-01",
+            "end_date": "2025-09-01",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 45
+            },
+            {
+              "full_referrer": "www.google.com",
+              "count": 3
+            },
+            {
+              "full_referrer": "ko.blog.perfectwin.ai",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2025-09-01",
+            "end_date": "2025-09-01"
+          }
+        }
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": null
+  }
+}

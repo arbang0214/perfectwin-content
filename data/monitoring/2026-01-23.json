@@ -1,0 +1,295 @@
+{
+  "date": "2026-01-23",
+  "collectedAt": "2026-03-27T10:18:07.299Z",
+  "ga4": {
+    "date": "2026-01-23",
+    "summary": {
+      "activeUsers": 8,
+      "newUsers": 5,
+      "returningUsers": 3,
+      "sessions": 10,
+      "engagedSessions": 6,
+      "pageViews": 30,
+      "bounceRate": 40,
+      "engagementRate": 60,
+      "avgSessionDuration": 111.4,
+      "pageViewsPerSession": 3,
+      "totalEngagementTime": 210,
+      "eventCount": 72
+    },
+    "topPages": [
+      {
+        "pagePath": "/",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 27,
+        "users": 8,
+        "avgDuration": 107.8,
+        "bounceRate": 40
+      },
+      {
+        "pagePath": "/landing/request-demo",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 3,
+        "users": 2,
+        "avgDuration": 18,
+        "bounceRate": 0
+      }
+    ],
+    "channels": [
+      {
+        "channel": "Direct",
+        "sessions": 8,
+        "users": 6,
+        "engagementRate": 50
+      },
+      {
+        "channel": "Organic Search",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      },
+      {
+        "channel": "Referral",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      }
+    ],
+    "sourceMedium": [
+      {
+        "source": "(direct)",
+        "medium": "(none)",
+        "sessions": 8,
+        "users": 6,
+        "engagementRate": 50,
+        "avgDuration": 28.2
+      },
+      {
+        "source": "framer.com",
+        "medium": "referral",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100,
+        "avgDuration": 788
+      },
+      {
+        "source": "google",
+        "medium": "organic",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100,
+        "avgDuration": 100
+      }
+    ],
+    "devices": [
+      {
+        "device": "desktop",
+        "sessions": 9,
+        "users": 7,
+        "pageViews": 29,
+        "engagementRate": 66.67,
+        "avgDuration": 123.7
+      },
+      {
+        "device": "mobile",
+        "sessions": 1,
+        "users": 1,
+        "pageViews": 1,
+        "engagementRate": 0,
+        "avgDuration": 0
+      }
+    ],
+    "countries": [
+      {
+        "country": "South Korea",
+        "sessions": 6,
+        "users": 4,
+        "engagementRate": 83.33
+      },
+      {
+        "country": "United States",
+        "sessions": 3,
+        "users": 3,
+        "engagementRate": 0
+      },
+      {
+        "country": "France",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      }
+    ],
+    "landingPages": [
+      {
+        "landingPage": "/",
+        "sessions": 10,
+        "users": 8,
+        "bounceRate": 40,
+        "avgDuration": 111.4,
+        "pagesPerSession": 3
+      }
+    ]
+  },
+  "gsc": {
+    "date": "2026-01-23",
+    "sites": [
+      {
+        "siteUrl": "https://perfectwin.ai/",
+        "label": "perfectwin.ai",
+        "date": "2026-01-23",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      },
+      {
+        "siteUrl": "https://blog.perfectwin.ai/",
+        "label": "blog.perfectwin.ai",
+        "date": "2026-01-23",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      }
+    ]
+  },
+  "inblog": {
+    "date": "2026-01-23",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2026-01-23",
+        "traffic": {
+          "data": [
+            {
+              "date": "2026-01-23",
+              "visits": 2,
+              "clicks": 0,
+              "organic": 1,
+              "home": 1,
+              "post": 23,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-01-23",
+            "end_date": "2026-01-23",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 77338,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": null,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            }
+          ],
+          "meta": {
+            "start_date": "2026-01-23",
+            "end_date": "2026-01-23",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 1
+            },
+            {
+              "full_referrer": "www.google.com",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2026-01-23",
+            "end_date": "2026-01-23"
+          }
+        }
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2026-01-23",
+        "traffic": {
+          "data": [
+            {
+              "date": "2026-01-23",
+              "visits": 4,
+              "clicks": 0,
+              "organic": 0,
+              "home": 0,
+              "post": 27,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-01-23",
+            "end_date": "2026-01-23",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 95470,
+              "visits": 4,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "\"단순 챗봇의 시대는 끝났다\" \nSAP가 바라보는 '에이전틱 AI"
+            }
+          ],
+          "meta": {
+            "start_date": "2026-01-23",
+            "end_date": "2026-01-23",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 4
+            }
+          ],
+          "meta": {
+            "start_date": "2026-01-23",
+            "end_date": "2026-01-23"
+          }
+        }
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": null
+  }
+}

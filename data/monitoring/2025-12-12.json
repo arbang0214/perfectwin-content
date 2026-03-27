@@ -1,0 +1,319 @@
+{
+  "date": "2025-12-12",
+  "collectedAt": "2026-03-27T10:10:00.190Z",
+  "ga4": {
+    "date": "2025-12-12",
+    "summary": {
+      "activeUsers": 10,
+      "newUsers": 6,
+      "returningUsers": 4,
+      "sessions": 12,
+      "engagedSessions": 8,
+      "pageViews": 27,
+      "bounceRate": 33.33,
+      "engagementRate": 66.67,
+      "avgSessionDuration": 337.2,
+      "pageViewsPerSession": 2.25,
+      "totalEngagementTime": 438,
+      "eventCount": 82
+    },
+    "topPages": [
+      {
+        "pagePath": "/",
+        "pageTitle": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence",
+        "pageViews": 17,
+        "users": 10,
+        "avgDuration": 344.9,
+        "bounceRate": 36.36
+      },
+      {
+        "pagePath": "/product",
+        "pageTitle": "PerfecTwin - Product",
+        "pageViews": 5,
+        "users": 2,
+        "avgDuration": 18.9,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/case-studies",
+        "pageTitle": "PerfecTwin - Customers",
+        "pageViews": 2,
+        "users": 2,
+        "avgDuration": 85.9,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/company",
+        "pageTitle": "PerfecTwin - Company",
+        "pageViews": 2,
+        "users": 1,
+        "avgDuration": 16.5,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/resources",
+        "pageTitle": "Resources",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 7.3,
+        "bounceRate": 0
+      }
+    ],
+    "channels": [
+      {
+        "channel": "Direct",
+        "sessions": 11,
+        "users": 9,
+        "engagementRate": 72.73
+      },
+      {
+        "channel": "Referral",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0
+      }
+    ],
+    "sourceMedium": [
+      {
+        "source": "(direct)",
+        "medium": "(none)",
+        "sessions": 11,
+        "users": 9,
+        "engagementRate": 72.73,
+        "avgDuration": 367.8
+      },
+      {
+        "source": "spyhost.site",
+        "medium": "referral",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0,
+        "avgDuration": 0
+      }
+    ],
+    "devices": [
+      {
+        "device": "desktop",
+        "sessions": 12,
+        "users": 10,
+        "pageViews": 27,
+        "engagementRate": 66.67,
+        "avgDuration": 337.2
+      }
+    ],
+    "countries": [
+      {
+        "country": "India",
+        "sessions": 8,
+        "users": 6,
+        "engagementRate": 75
+      },
+      {
+        "country": "United States",
+        "sessions": 2,
+        "users": 2,
+        "engagementRate": 50
+      },
+      {
+        "country": "Russia",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0
+      },
+      {
+        "country": "South Korea",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      }
+    ],
+    "landingPages": [
+      {
+        "landingPage": "/",
+        "sessions": 11,
+        "users": 10,
+        "bounceRate": 36.36,
+        "avgDuration": 366,
+        "pagesPerSession": 2.36
+      },
+      {
+        "landingPage": "/case-studies",
+        "sessions": 1,
+        "users": 1,
+        "bounceRate": 0,
+        "avgDuration": 20.4,
+        "pagesPerSession": 1
+      }
+    ]
+  },
+  "gsc": {
+    "date": "2025-12-12",
+    "sites": [
+      {
+        "siteUrl": "https://perfectwin.ai/",
+        "label": "perfectwin.ai",
+        "date": "2025-12-12",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      },
+      {
+        "siteUrl": "https://blog.perfectwin.ai/",
+        "label": "blog.perfectwin.ai",
+        "date": "2025-12-12",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      }
+    ]
+  },
+  "inblog": {
+    "date": "2025-12-12",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2025-12-12",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-12-12",
+              "visits": 5,
+              "clicks": 0,
+              "organic": 0,
+              "home": 2,
+              "post": 23,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-12-12",
+            "end_date": "2025-12-12",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 63385,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": null,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 77338,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            }
+          ],
+          "meta": {
+            "start_date": "2025-12-12",
+            "end_date": "2025-12-12",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "www.perfectwin.ai",
+              "count": 3
+            },
+            {
+              "full_referrer": "direct",
+              "count": 2
+            }
+          ],
+          "meta": {
+            "start_date": "2025-12-12",
+            "end_date": "2025-12-12"
+          }
+        }
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2025-12-12",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-12-12",
+              "visits": 3,
+              "clicks": 0,
+              "organic": 3,
+              "home": 0,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-12-12",
+            "end_date": "2025-12-12",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 63322,
+              "visits": 3,
+              "clicks": 0,
+              "organic": 3,
+              "cvr": 0,
+              "title": "SAP S/4HANA Cloud 구축 방식: Public, Private, On-Premise 살펴보기"
+            }
+          ],
+          "meta": {
+            "start_date": "2025-12-12",
+            "end_date": "2025-12-12",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "www.google.com",
+              "count": 3
+            }
+          ],
+          "meta": {
+            "start_date": "2025-12-12",
+            "end_date": "2025-12-12"
+          }
+        }
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": null
+  }
+}

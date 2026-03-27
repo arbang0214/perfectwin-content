@@ -1,0 +1,273 @@
+{
+  "date": "2026-03-01",
+  "collectedAt": "2026-03-27T10:25:04.414Z",
+  "ga4": {
+    "date": "2026-03-01",
+    "summary": {
+      "activeUsers": 5,
+      "newUsers": 7,
+      "returningUsers": -2,
+      "sessions": 5,
+      "engagedSessions": 3,
+      "pageViews": 7,
+      "bounceRate": 40,
+      "engagementRate": 60,
+      "avgSessionDuration": 37.8,
+      "pageViewsPerSession": 1.4,
+      "totalEngagementTime": 181,
+      "eventCount": 28
+    },
+    "topPages": [
+      {
+        "pagePath": "/",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 7,
+        "users": 5,
+        "avgDuration": 37.8,
+        "bounceRate": 40
+      }
+    ],
+    "channels": [
+      {
+        "channel": "Direct",
+        "sessions": 5,
+        "users": 5,
+        "engagementRate": 60
+      }
+    ],
+    "sourceMedium": [
+      {
+        "source": "(direct)",
+        "medium": "(none)",
+        "sessions": 5,
+        "users": 5,
+        "engagementRate": 60,
+        "avgDuration": 37.8
+      }
+    ],
+    "devices": [
+      {
+        "device": "desktop",
+        "sessions": 5,
+        "users": 5,
+        "pageViews": 7,
+        "engagementRate": 60,
+        "avgDuration": 37.8
+      }
+    ],
+    "countries": [
+      {
+        "country": "South Korea",
+        "sessions": 2,
+        "users": 2,
+        "engagementRate": 50
+      },
+      {
+        "country": "United States",
+        "sessions": 2,
+        "users": 2,
+        "engagementRate": 100
+      },
+      {
+        "country": "Japan",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0
+      }
+    ],
+    "landingPages": [
+      {
+        "landingPage": "/",
+        "sessions": 5,
+        "users": 5,
+        "bounceRate": 40,
+        "avgDuration": 37.8,
+        "pagesPerSession": 1.4
+      }
+    ]
+  },
+  "gsc": {
+    "date": "2026-03-01",
+    "sites": [
+      {
+        "siteUrl": "https://perfectwin.ai/",
+        "label": "perfectwin.ai",
+        "date": "2026-03-01",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      },
+      {
+        "siteUrl": "https://blog.perfectwin.ai/",
+        "label": "blog.perfectwin.ai",
+        "date": "2026-03-01",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      }
+    ]
+  },
+  "inblog": {
+    "date": "2026-03-01",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2026-03-01",
+        "traffic": {
+          "data": [
+            {
+              "date": "2026-03-01",
+              "visits": 7,
+              "clicks": 0,
+              "organic": 0,
+              "home": 0,
+              "post": 23,
+              "category": 1,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-03-01",
+            "end_date": "2026-03-01",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 55093,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 59098,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 60109,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 62136,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 86636,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 87010,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": null,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            }
+          ],
+          "meta": {
+            "start_date": "2026-03-01",
+            "end_date": "2026-03-01",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 7
+            }
+          ],
+          "meta": {
+            "start_date": "2026-03-01",
+            "end_date": "2026-03-01"
+          }
+        }
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2026-03-01",
+        "traffic": {
+          "data": [
+            {
+              "date": "2026-03-01",
+              "visits": 0,
+              "clicks": 0,
+              "organic": 0,
+              "home": 0,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-03-01",
+            "end_date": "2026-03-01",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [],
+          "meta": {
+            "start_date": "2026-03-01",
+            "end_date": "2026-03-01",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [],
+          "meta": {
+            "start_date": "2026-03-01",
+            "end_date": "2026-03-01"
+          }
+        }
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": null
+  }
+}

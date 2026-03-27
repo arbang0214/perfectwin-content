@@ -1,0 +1,307 @@
+{
+  "date": "2025-11-29",
+  "collectedAt": "2026-03-27T10:07:45.921Z",
+  "ga4": {
+    "date": "2025-11-29",
+    "summary": {
+      "activeUsers": 25,
+      "newUsers": 25,
+      "returningUsers": 0,
+      "sessions": 27,
+      "engagedSessions": 7,
+      "pageViews": 27,
+      "bounceRate": 74.07,
+      "engagementRate": 25.93,
+      "avgSessionDuration": 7.9,
+      "pageViewsPerSession": 1,
+      "totalEngagementTime": 196,
+      "eventCount": 94
+    },
+    "topPages": [
+      {
+        "pagePath": "/",
+        "pageTitle": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence",
+        "pageViews": 23,
+        "users": 22,
+        "avgDuration": 8.3,
+        "bounceRate": 70.83
+      },
+      {
+        "pagePath": "/m/home",
+        "pageTitle": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence",
+        "pageViews": 4,
+        "users": 4,
+        "avgDuration": 3.6,
+        "bounceRate": 75
+      }
+    ],
+    "channels": [
+      {
+        "channel": "Direct",
+        "sessions": 25,
+        "users": 25,
+        "engagementRate": 28
+      },
+      {
+        "channel": "Organic Search",
+        "sessions": 2,
+        "users": 0,
+        "engagementRate": 0
+      }
+    ],
+    "sourceMedium": [
+      {
+        "source": "(direct)",
+        "medium": "(none)",
+        "sessions": 25,
+        "users": 25,
+        "engagementRate": 28,
+        "avgDuration": 8.5
+      },
+      {
+        "source": "google",
+        "medium": "organic",
+        "sessions": 2,
+        "users": 0,
+        "engagementRate": 0,
+        "avgDuration": 0
+      }
+    ],
+    "devices": [
+      {
+        "device": "desktop",
+        "sessions": 23,
+        "users": 21,
+        "pageViews": 22,
+        "engagementRate": 26.09,
+        "avgDuration": 8.6
+      },
+      {
+        "device": "mobile",
+        "sessions": 4,
+        "users": 4,
+        "pageViews": 5,
+        "engagementRate": 25,
+        "avgDuration": 3.6
+      }
+    ],
+    "countries": [
+      {
+        "country": "United States",
+        "sessions": 14,
+        "users": 12,
+        "engagementRate": 7.14
+      },
+      {
+        "country": "France",
+        "sessions": 5,
+        "users": 5,
+        "engagementRate": 100
+      },
+      {
+        "country": "Canada",
+        "sessions": 3,
+        "users": 3,
+        "engagementRate": 0
+      },
+      {
+        "country": "Saudi Arabia",
+        "sessions": 2,
+        "users": 2,
+        "engagementRate": 0
+      },
+      {
+        "country": "Poland",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0
+      },
+      {
+        "country": "Taiwan",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0
+      },
+      {
+        "country": "United Kingdom",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      }
+    ],
+    "landingPages": [
+      {
+        "landingPage": "/",
+        "sessions": 23,
+        "users": 22,
+        "bounceRate": 69.57,
+        "avgDuration": 9.2,
+        "pagesPerSession": 1.04
+      },
+      {
+        "landingPage": "/m/home",
+        "sessions": 3,
+        "users": 3,
+        "bounceRate": 100,
+        "avgDuration": 0,
+        "pagesPerSession": 1
+      },
+      {
+        "landingPage": "(not set)",
+        "sessions": 1,
+        "users": 0,
+        "bounceRate": 100,
+        "avgDuration": 0,
+        "pagesPerSession": 0
+      }
+    ]
+  },
+  "gsc": {
+    "date": "2025-11-29",
+    "sites": [
+      {
+        "siteUrl": "https://perfectwin.ai/",
+        "label": "perfectwin.ai",
+        "date": "2025-11-29",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      },
+      {
+        "siteUrl": "https://blog.perfectwin.ai/",
+        "label": "blog.perfectwin.ai",
+        "date": "2025-11-29",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      }
+    ]
+  },
+  "inblog": {
+    "date": "2025-11-29",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2025-11-29",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-11-29",
+              "visits": 2,
+              "clicks": 0,
+              "organic": 1,
+              "home": 0,
+              "post": 25,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-11-29",
+            "end_date": "2025-11-29",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 65690,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "RISE with SAP vs GROW with SAP: Key Differences and How to Choose (2026)"
+            },
+            {
+              "post_id": 79267,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": "SAP S/4HANA Upgrade Testing: 3 Strategies for Quarterly Release Verification"
+            }
+          ],
+          "meta": {
+            "start_date": "2025-11-29",
+            "end_date": "2025-11-29",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 1
+            },
+            {
+              "full_referrer": "www.google.com",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2025-11-29",
+            "end_date": "2025-11-29"
+          }
+        }
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2025-11-29",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-11-29",
+              "visits": 0,
+              "clicks": 0,
+              "organic": 0,
+              "home": 0,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-11-29",
+            "end_date": "2025-11-29",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [],
+          "meta": {
+            "start_date": "2025-11-29",
+            "end_date": "2025-11-29",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [],
+          "meta": {
+            "start_date": "2025-11-29",
+            "end_date": "2025-11-29"
+          }
+        }
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": null
+  }
+}

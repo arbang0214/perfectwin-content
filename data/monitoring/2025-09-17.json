@@ -1,0 +1,261 @@
+{
+  "date": "2025-09-17",
+  "collectedAt": "2026-03-27T09:53:21.116Z",
+  "ga4": {
+    "date": "2025-09-17",
+    "summary": {
+      "activeUsers": 4,
+      "newUsers": 3,
+      "returningUsers": 1,
+      "sessions": 6,
+      "engagedSessions": 1,
+      "pageViews": 6,
+      "bounceRate": 83.33,
+      "engagementRate": 16.67,
+      "avgSessionDuration": 22.9,
+      "pageViewsPerSession": 1,
+      "totalEngagementTime": 7,
+      "eventCount": 18
+    },
+    "topPages": [
+      {
+        "pagePath": "/",
+        "pageTitle": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence",
+        "pageViews": 6,
+        "users": 4,
+        "avgDuration": 22.9,
+        "bounceRate": 83.33
+      }
+    ],
+    "channels": [
+      {
+        "channel": "Direct",
+        "sessions": 4,
+        "users": 3,
+        "engagementRate": 0
+      },
+      {
+        "channel": "Organic Search",
+        "sessions": 2,
+        "users": 1,
+        "engagementRate": 50
+      }
+    ],
+    "sourceMedium": [
+      {
+        "source": "(direct)",
+        "medium": "(none)",
+        "sessions": 4,
+        "users": 3,
+        "engagementRate": 0,
+        "avgDuration": 0.5
+      },
+      {
+        "source": "google",
+        "medium": "organic",
+        "sessions": 2,
+        "users": 1,
+        "engagementRate": 50,
+        "avgDuration": 67.8
+      }
+    ],
+    "devices": [
+      {
+        "device": "desktop",
+        "sessions": 6,
+        "users": 4,
+        "pageViews": 6,
+        "engagementRate": 16.67,
+        "avgDuration": 22.9
+      }
+    ],
+    "countries": [
+      {
+        "country": "United States",
+        "sessions": 3,
+        "users": 2,
+        "engagementRate": 33.33
+      },
+      {
+        "country": "South Korea",
+        "sessions": 2,
+        "users": 1,
+        "engagementRate": 0
+      },
+      {
+        "country": "India",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0
+      }
+    ],
+    "landingPages": [
+      {
+        "landingPage": "/",
+        "sessions": 6,
+        "users": 4,
+        "bounceRate": 83.33,
+        "avgDuration": 22.9,
+        "pagesPerSession": 1
+      }
+    ]
+  },
+  "gsc": {
+    "date": "2025-09-17",
+    "sites": [
+      {
+        "siteUrl": "https://perfectwin.ai/",
+        "label": "perfectwin.ai",
+        "date": "2025-09-17",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      },
+      {
+        "siteUrl": "https://blog.perfectwin.ai/",
+        "label": "blog.perfectwin.ai",
+        "date": "2025-09-17",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      }
+    ]
+  },
+  "inblog": {
+    "date": "2025-09-17",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2025-09-17",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-09-17",
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "home": 0,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-09-17",
+            "end_date": "2025-09-17",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 55093,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "Why Real Transaction Data Testing is Essential for SAP ERP Migration"
+            }
+          ],
+          "meta": {
+            "start_date": "2025-09-17",
+            "end_date": "2025-09-17",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2025-09-17",
+            "end_date": "2025-09-17"
+          }
+        }
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2025-09-17",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-09-17",
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "home": 0,
+              "post": 25,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-09-17",
+            "end_date": "2025-09-17",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 55520,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP S/4HANA 마이그레이션을 위한 성공적인 테스트 자동화: 선도적 CPG 제조사 사례"
+            },
+            {
+              "post_id": 69123,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP 테스팅 사전 준비 가이드: 실패하지 않는 5단계 체크리스트"
+            }
+          ],
+          "meta": {
+            "start_date": "2025-09-17",
+            "end_date": "2025-09-17",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 2
+            }
+          ],
+          "meta": {
+            "start_date": "2025-09-17",
+            "end_date": "2025-09-17"
+          }
+        }
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": null
+  }
+}
