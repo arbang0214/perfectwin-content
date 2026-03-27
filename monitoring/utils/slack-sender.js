@@ -51,16 +51,11 @@ async function sendToSlack(text) {
  * @returns {boolean}
  */
 async function sendReportToSlack(reportMd, label, targetDate) {
-  const dayOfWeek = getDayOfWeek(targetDate);
-  const labelMap = {
-    homepage: { icon: "📊", ko: "홈페이지 일간 인사이트" },
-    blog: { icon: "📝", ko: "블로그 일간 인사이트" },
-    weekly: { icon: "📊", ko: "주간 종합 인사이트" },
-    monthly: { icon: "📊", ko: "월간 종합 인사이트" },
-  };
-  const { icon, ko: labelKo } = labelMap[label] || { icon: "📊", ko: label };
-  const title = `${icon} ${labelKo} (${targetDate}, ${dayOfWeek})`;
-  const filename = `${label}-daily-${targetDate}.md`;
+  // 리포트 MD 첫 줄에서 제목 추출 (기간 포함)
+  const firstLine = reportMd.split("\n").find((l) => l.startsWith("# ")) || "";
+  const extractedTitle = firstLine.replace(/^#\s*/, "").trim();
+  const title = extractedTitle || `📊 리포트 (${targetDate})`;
+  const filename = `${label}-${targetDate}.md`;
 
   // 요약 추출
   const summary = extractSummary(reportMd);
@@ -69,7 +64,7 @@ async function sendReportToSlack(reportMd, label, targetDate) {
   // Bot Token이 있으면: 요약 메시지 + .md 파일 첨부 (1개 스레드)
   if (BOT_TOKEN && CHANNEL_ID) {
     try {
-      return await sendWithBotToken(reportMd, title, slackSummary, labelKo, targetDate, dayOfWeek, filename);
+      return await sendWithBotToken(reportMd, title, slackSummary, filename);
     } catch (err) {
       console.warn(`[Slack] Bot API 실패 (${err.message}), Webhook fallback...`);
     }
@@ -87,7 +82,7 @@ async function sendReportToSlack(reportMd, label, targetDate) {
 /**
  * Bot Token으로 요약 메시지 + .md 파일 첨부
  */
-async function sendWithBotToken(reportMd, title, slackSummary, labelKo, targetDate, dayOfWeek, filename) {
+async function sendWithBotToken(reportMd, title, slackSummary, filename) {
   const messageText = `*${title}*\n\n${slackSummary}\n\n📎 _상세 리포트는 첨부 파일을 확인하세요_`;
 
   const msgRes = await fetch("https://slack.com/api/chat.postMessage", {
@@ -103,8 +98,8 @@ async function sendWithBotToken(reportMd, title, slackSummary, labelKo, targetDa
   formData.append("file", new Blob([reportMd], { type: "text/markdown" }), filename);
   formData.append("channels", CHANNEL_ID);
   formData.append("thread_ts", msgData.ts);
-  formData.append("title", `${labelKo} 상세 리포트 — ${targetDate}`);
-  formData.append("initial_comment", `📎 ${labelKo} 상세 리포트 (${targetDate}, ${dayOfWeek})`);
+  formData.append("title", `상세 리포트 — ${filename}`);
+  formData.append("initial_comment", `📎 상세 리포트`);
 
   const fileRes = await fetch("https://slack.com/api/files.upload", {
     method: "POST",
@@ -114,7 +109,7 @@ async function sendWithBotToken(reportMd, title, slackSummary, labelKo, targetDa
   const fileData = await fileRes.json();
   if (!fileData.ok) console.warn(`[Slack] 파일 첨부 실패: ${fileData.error} — 메시지만 전송됨`);
 
-  console.log(`[Slack] ${labelKo} 리포트 전송 성공 (요약 + .md 파일)`);
+  console.log(`[Slack] 리포트 전송 성공 (요약 + .md 파일)`);
   return true;
 }
 
@@ -155,7 +150,7 @@ function extractSummary(reportMd) {
   // ── 2. 인사이트 섹션 추출 (번호 헤더 제거) ──
   let insightStart = -1;
   for (let i = 0; i < lines.length; i++) {
-    if (/^#{1,4}\s*\d*\.?\s*인사이트/i.test(lines[i])) {
+    if (/^#{1,4}\s*\d*\.?\s*(종합\s*)?인사이트/i.test(lines[i])) {
       insightStart = i;
       break;
     }

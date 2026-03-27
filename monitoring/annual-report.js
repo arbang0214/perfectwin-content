@@ -12,6 +12,7 @@ require("dotenv").config({ path: path.join(__dirname, "..", ".env") });
 const fs = require("fs");
 const { aggregateAnnual } = require("./annual-aggregator");
 const { callClaude } = require("../scripts/lib/claude-api");
+const { sendReportToSlack } = require("./utils/slack-sender");
 
 const REPORTS_DIR = path.join(__dirname, "..", "data", "monitoring", "reports");
 
@@ -76,7 +77,9 @@ PerfecTwin에 대해:
 
 // ─── 사용자 프롬프트 빌더 ────────────────────────────────
 
-function buildUserPrompt(data) {
+function buildUserPrompt(data, focus) {
+  // focus: "homepage" → GA4 + GSC(perfectwin.ai) 중심
+  //        "blog" → inblog + GSC(blog.perfectwin.ai) 중심
   const { period, totalDays, months, monthly, annual } = data;
 
   // 월별 GA4 트렌드 테이블 데이터
@@ -117,142 +120,128 @@ function buildUserPrompt(data) {
     };
   });
 
-  return `아래는 PerfecTwin의 ${period.from} ~ ${period.to} (${totalDays}일) 종합 성과 데이터다.
+  if (focus === "homepage") {
+    return buildHomepageAnnualPrompt(period, totalDays, monthlyGA4, monthlyGSC, annual);
+  } else {
+    return buildBlogAnnualPrompt(period, totalDays, monthlyGSC, monthlyInblog, annual);
+  }
+}
 
-## 월별 GA4 홈페이지 트래픽
+function buildHomepageAnnualPrompt(period, totalDays, monthlyGA4, monthlyGSC, annual) {
+  return `아래는 PerfecTwin 홈페이지의 ${period.from} ~ ${period.to} (${totalDays}일) 연간 성과 데이터다.
+
+## 월별 GA4 트래픽
 ${JSON.stringify(monthlyGA4, null, 2)}
 
 ## 연간 GA4 집계
 ${JSON.stringify(annual.ga4, null, 2)}
 
-## 월별 GSC 검색 성과 (perfectwin.ai + blog.perfectwin.ai)
-${JSON.stringify(monthlyGSC, null, 2)}
+## 월별 GSC 검색 성과 (perfectwin.ai)
+${JSON.stringify(monthlyGSC.map((m) => ({ month: m.month, site: m.site })), null, 2)}
 
-## 연간 GSC 집계
-${JSON.stringify(annual.gsc, null, 2)}
+## 연간 GSC 집계 (perfectwin.ai)
+${JSON.stringify(annual.gsc?.["perfectwin.ai"] || null, null, 2)}
 
-## 월별 inblog 블로그 트래픽
+## 요일별 패턴
+${JSON.stringify(annual.dayOfWeek, null, 2)}
+
+---
+
+이 1년치 데이터를 기반으로 홈페이지 연간 분석 리포트를 작성해줘. 반드시 아래 구조와 규칙을 따른다.
+
+# 리포트 구조
+
+## 1. 요약 (Executive Summary)
+- 1년간 핵심 지표 변화를 2~3줄로 요약. "가장 중요한 발견 3가지" 번호 매겨 제시.
+
+## 2. 월별 트래픽 추이
+방문자, 세션, 페이지뷰 월별 테이블. 성장기/정체기/하락기 구간 식별.
+
+## 3. 월별 참여도 추이
+참여율, 체류시간, 세션당 페이지뷰 월별 테이블. 트래픽 양 vs 질 분석.
+
+## 4. 유입 채널 분석
+채널별 연간 비중. 월별 채널 변화. Organic Search/Social 성장 여부.
+
+## 5. Top 페이지 연간 순위
+상위 10개 페이지. 전환 퍼널(인지→관심→전환) 관점.
+
+## 6. 기기/국가 분포
+기기별 세션/참여율. 상위 국가별 분석. 타겟 시장 평가.
+
+## 7. 요일별 패턴
+요일별 평균 세션 테이블. 콘텐츠 발행 최적 타이밍 제안.
+
+## 8. 검색 성과 (perfectwin.ai GSC)
+월별 노출/클릭/CTR/순위. 핵심 키워드 Top 15. 핵심 페이지 Top 15.
+
+## 9. 종합 인사이트
+### 9-1. 가장 효과적이었던 것 (3~5개) — 구체적 수치 + 왜 + 강화 방안
+### 9-2. 개선이 필요한 것 (3~5개) — 문제 + 수치 증거 + 구체적 액션
+### 9-3. 놓치고 있는 기회 (2~3개)
+### 9-4. 다음 분기 우선순위 (3~5개) — 무엇을/왜/기대효과/첫 액션
+
+# 형식
+- 제목: "📊 홈페이지 연간 분석 리포트 — ${period.from} ~ ${period.to}"
+- 한국어, Markdown 테이블, 경영진 보고 수준, 충분히 상세하게
+- 모든 주장에 데이터 근거 명시`;
+}
+
+function buildBlogAnnualPrompt(period, totalDays, monthlyGSC, monthlyInblog, annual) {
+  return `아래는 PerfecTwin 블로그의 ${period.from} ~ ${period.to} (${totalDays}일) 연간 성과 데이터다.
+
+## 월별 inblog 트래픽 (영문/한글)
 ${JSON.stringify(monthlyInblog, null, 2)}
 
 ## 연간 inblog 집계
 ${JSON.stringify(annual.inblog, null, 2)}
 
-## 요일별 패턴 (연간 평균)
-${JSON.stringify(annual.dayOfWeek, null, 2)}
+## 월별 GSC 검색 성과 (blog.perfectwin.ai)
+${JSON.stringify(monthlyGSC.map((m) => ({ month: m.month, blog: m.blog })), null, 2)}
+
+## 연간 GSC 집계 (blog.perfectwin.ai)
+${JSON.stringify(annual.gsc?.["blog.perfectwin.ai"] || null, null, 2)}
 
 ---
 
-이 1년치 데이터를 기반으로 종합 분석 리포트를 작성해줘. 반드시 아래 구조와 규칙을 따른다.
+이 1년치 데이터를 기반으로 블로그 연간 분석 리포트를 작성해줘. 반드시 아래 구조와 규칙을 따른다.
 
 # 리포트 구조
 
 ## 1. 요약 (Executive Summary)
-- 1년간 핵심 지표 변화를 2~3줄 핵심 문장으로 요약
-- "가장 중요한 발견 3가지"를 번호 매겨 제시. 각각 구체적 수치 포함.
-- ARUM이 경영진에게 바로 보고할 수 있는 수준의 명확한 요약.
+- 1년간 블로그 핵심 지표 변화 2~3줄 요약. "가장 중요한 발견 3가지".
 
-## 2. 홈페이지 성과 (GA4)
+## 2. 월별 트래픽 추이 (영문/한글 각각)
+방문, 클릭, 오가닉 월별 테이블. 영문 vs 한글 성장 비교.
 
-### 2-1. 월별 트래픽 추이
-- 방문자, 세션, 페이지뷰 월별 테이블
-- 추이 분석: 성장기/정체기/하락기 구간 식별, 원인 추정
+## 3. 오가닉 유입 + SEO 효과 분석
+오가닉 비중 변화. SEO 성장 곡선 분석.
 
-### 2-2. 월별 참여도 추이
-- 참여율, 이탈률, 체류시간, 세션당 페이지뷰 월별 테이블
-- 트래픽 양 vs 질의 상관관계 분석
+## 4. 유입 소스 분석
+연간 유입 소스 Top 10. 어떤 배포 채널이 실제로 블로그 트래픽을 만드는지.
 
-### 2-3. 유입 채널 분석
-- 채널별 연간 세션 비중 테이블
-- 월별 채널 비중 변화 (특히 Organic Search, Organic Social의 성장/하락)
-- 각 채널의 의미와 건강도 평가
+## 5. 검색 성과 (blog.perfectwin.ai GSC)
+월별 노출/클릭/CTR/순위. SEO 성장 곡선: 노출→클릭 전환 여부.
 
-### 2-4. Top 페이지 연간 순위
-- 상위 10개 페이지 조회수/사용자 테이블
-- 전환 퍼널 관점 분석: 인지(홈)→관심(why-perfectwin, product)→전환(request-demo) 흐름
+## 6. 핵심 검색 키워드 분석
+연간 노출 Top 15. 카테고리 분류(A:마이그레이션, B:테스트자동화, C:경쟁사, D:트렌드). 카테고리별 노출/클릭/순위.
 
-### 2-5. 기기/국가별 분포
-- 기기별 세션 비중, 참여율 차이
-- 상위 국가별 세션, 참여율. 타겟 시장 vs 비타겟 시장 분석.
+## 7. 검색 상위 페이지 분석
+연간 노출 Top 15 페이지. "노출 많고 클릭 0" → 메타 리라이트 우선순위. "순위 8~15" → 첫 페이지 진입 가능.
 
-### 2-6. 요일별 패턴
-- 요일별 평균 세션/사용자 테이블
-- B2B 사이트에 적합한 패턴인지 분석
-- 콘텐츠/소셜 발행 최적 타이밍 제안
+## 8. 종합 인사이트
+### 8-1. 가장 효과적이었던 것 (3~5개) — 구체적 수치 + 왜 + 강화 방안
+### 8-2. 개선이 필요한 것 (3~5개) — 문제 + 수치 증거 + 구체적 액션
+### 8-3. 놓치고 있는 기회 (2~3개)
+### 8-4. 다음 분기 콘텐츠 우선순위 (3~5개) — 검색 데이터 근거 필수
 
-## 3. 검색 성과 (GSC)
-
-### 3-1. 홈페이지 검색 추이 (perfectwin.ai)
-- 월별 노출/클릭/CTR/순위 테이블 (데이터 있는 달만)
-- 브랜드 검색 vs 비브랜드 검색 식별 (키워드에서 'perfectwin' 포함 여부)
-
-### 3-2. 블로그 검색 추이 (blog.perfectwin.ai)
-- 월별 노출/클릭/CTR/순위 테이블
-- SEO 성장 곡선 분석: 노출 성장 → 클릭 전환이 이루어지고 있는지
-
-### 3-3. 핵심 검색 키워드 분석
-- 연간 누적 노출 Top 15 키워드 테이블 (클릭, 순위 포함)
-- 키워드를 카테고리별로 분류:
-  - 브랜드 키워드 (perfectwin 포함)
-  - SAP 마이그레이션 관련
-  - SAP 테스트 관련
-  - 경쟁사 관련
-  - 기타
-- 각 카테고리의 노출/클릭 비중, 평균 순위 분석
-
-### 3-4. 검색 상위 페이지 분석
-- 연간 노출 Top 15 페이지 테이블
-- "노출 많지만 클릭 0" 페이지 식별 → 메타 리라이트 우선순위
-- "순위 8~15" 페이지 식별 → 첫 페이지 진입 가능 콘텐츠
-
-## 4. 블로그 성과 (inblog)
-
-### 4-1. 월별 트래픽 추이
-- 영문/한글 블로그 각각 월별 방문/클릭/오가닉 테이블
-- 영문 vs 한글 블로그 성장 비교
-
-### 4-2. 콘텐츠 유형별 분석
-- 포스트 페이지 vs 홈/카테고리 페이지 비중 변화
-- 오가닉 유입 비중 변화 (SEO 효과 지표)
-
-### 4-3. 유입 소스 분석
-- 연간 유입 소스 Top 10 테이블
-- 소스별 의미 해석 (direct, google, t.co, linkedin, teams 등)
-- 어떤 배포 채널이 실제로 블로그 트래픽을 만들어내는지
-
-## 5. 종합 인사이트
-
-이 섹션이 리포트의 핵심이다. 단순 수치 나열이 아니라, 1년간의 데이터에서 도출되는 전략적 시사점을 깊이 있게 분석한다.
-
-### 5-1. 가장 효과적이었던 것 (3~5개)
-- 구체적 수치를 근거로 무엇이 효과가 있었는지
-- 왜 효과가 있었는지 추정
-- 이것을 더 강화하려면 어떻게 해야 하는지
-
-### 5-2. 개선이 필요한 것 (3~5개)
-- 기대 대비 성과가 부족한 영역
-- 구체적으로 무엇이 문제이고, 어떤 수치가 이를 증명하는지
-- 개선을 위한 구체적 액션 제안
-
-### 5-3. 놓치고 있는 기회 (2~3개)
-- 데이터에서 발견되는 미개척 기회
-- 예: 특정 키워드의 검색량은 있지만 콘텐츠가 없는 영역
-- 예: 특정 유입 채널의 참여율이 높지만 볼륨이 작은 영역
-
-### 5-4. 다음 분기 우선순위 제안
-번호를 매겨 우선순위 순으로 3~5개 제안:
-- 각 제안에 (1) 무엇을 (2) 왜 (3) 기대 효과 (4) 구체적 첫 번째 액션
-- 데이터에 근거한 제안만. 일반적인 마케팅 조언 금지.
-
-# 리포트 형식 규칙
-- 제목: "📊 PerfecTwin 연간 종합 분석 리포트 — {from} ~ {to}"
-- 언어: 한국어
-- 숫자: 천 단위 쉼표, 소수 1자리
-- 체류 시간: "N분 N초"
-- 테이블: Markdown 테이블
-- 인사이트에는 항상 구체적 수치 포함
-- 모든 주장에 데이터 근거 명시
-- 추정/가설은 "~로 추정된다", "~일 가능성이 있다"로 명확히 표시
-- 분량: 충분히 상세하게. 이것은 경영진 보고용 연간 리포트다.`;
+# 형식
+- 제목: "📝 블로그 연간 분석 리포트 — ${period.from} ~ ${period.to}"
+- 한국어, Markdown 테이블, 경영진 보고 수준, 충분히 상세하게
+- 모든 주장에 데이터 근거 명시`;
+}
+`;
+  // 이전 통합 프롬프트 — focus별 분기로 대체됨 (buildHomepageAnnualPrompt, buildBlogAnnualPrompt)
 }
 
 // ─── 메인 ────────────────────────────────────────────────
@@ -273,16 +262,26 @@ async function main() {
   fs.writeFileSync(aggregatedPath, JSON.stringify(aggregated, null, 2), "utf-8");
   console.log(`  집계 데이터 저장: ${aggregatedPath}`);
 
-  // 2. Claude API로 리포트 생성
-  console.log("[2/3] Claude API로 리포트 생성 중 (시간이 걸릴 수 있습니다)...");
-  const userPrompt = buildUserPrompt(aggregated);
-  const report = await callClaude(SYSTEM_PROMPT, userPrompt, { maxTokens: 16000 });
+  // 2. 홈페이지 연간 리포트
+  console.log("[2/5] 홈페이지 연간 리포트 생성 중...");
+  const homepagePrompt = buildUserPrompt(aggregated, "homepage");
+  const homepageReport = await callClaude(SYSTEM_PROMPT, homepagePrompt, { maxTokens: 16000 });
+  const hpPath = path.join(REPORTS_DIR, `homepage-annual-${args.from}_${args.to}.md`);
+  fs.writeFileSync(hpPath, homepageReport, "utf-8");
+  console.log(`  ✅ ${hpPath}`);
 
-  // 3. 파일 저장
-  console.log("[3/3] 리포트 저장...");
-  const mdPath = path.join(REPORTS_DIR, `annual-review-${args.from}_${args.to}.md`);
-  fs.writeFileSync(mdPath, report, "utf-8");
-  console.log(`  ✅ MD 리포트: ${mdPath}`);
+  // 3. 블로그 연간 리포트
+  console.log("[3/5] 블로그 연간 리포트 생성 중...");
+  const blogPrompt = buildUserPrompt(aggregated, "blog");
+  const blogReport = await callClaude(SYSTEM_PROMPT, blogPrompt, { maxTokens: 16000 });
+  const bpPath = path.join(REPORTS_DIR, `blog-annual-${args.from}_${args.to}.md`);
+  fs.writeFileSync(bpPath, blogReport, "utf-8");
+  console.log(`  ✅ ${bpPath}`);
+
+  // 4. Slack 발송 (요약 20줄)
+  console.log("[4/5] Slack 발송...");
+  await sendReportToSlack(homepageReport, "annual", args.from);
+  await sendReportToSlack(blogReport, "annual", args.from);
 
   console.log(`\n✅ 연간 종합 분석 리포트 생성 완료!\n`);
 }

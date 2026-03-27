@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 /**
- * 주간 성과 리포트
- * 이번 주(월~금) 일간 데이터를 집계하여 주간 인사이트를 생성한다.
+ * 주간 성과 리포트 (홈페이지 + 블로그 각각 생성)
  *
  * 사용법:
  *   node monitoring/weekly-report.js
@@ -17,6 +16,7 @@ const { callClaude } = require("../scripts/lib/claude-api");
 const { sendReportToSlack } = require("./utils/slack-sender");
 
 const REPORTS_DIR = path.join(__dirname, "..", "data", "monitoring", "reports");
+const PROMPTS_DIR = path.join(__dirname, "prompts");
 
 function parseArgs() {
   const args = process.argv.slice(2);
@@ -29,11 +29,8 @@ function parseArgs() {
 function getWeekRange(fridayDate) {
   const fri = new Date(fridayDate);
   const mon = new Date(fri);
-  mon.setDate(fri.getDate() - 4); // 월요일
-  return {
-    from: mon.toISOString().split("T")[0],
-    to: fri.toISOString().split("T")[0],
-  };
+  mon.setDate(fri.getDate() - 4);
+  return { from: mon.toISOString().split("T")[0], to: fri.toISOString().split("T")[0] };
 }
 
 function getPrevWeekRange(fridayDate) {
@@ -45,13 +42,96 @@ function getPrevWeekRange(fridayDate) {
 function getWeekNumber(dateStr) {
   const d = new Date(dateStr);
   const start = new Date(d.getFullYear(), 0, 1);
-  const diff = d - start;
-  return Math.ceil((diff / 86400000 + start.getDay() + 1) / 7);
+  return Math.ceil(((d - start) / 86400000 + start.getDay() + 1) / 7);
 }
 
-const SYSTEM_PROMPT = fs.readFileSync(path.join(__dirname, "prompts", "homepage-system.md"), "utf-8")
-  + "\n\n" + fs.readFileSync(path.join(__dirname, "prompts", "blog-system.md"), "utf-8")
-  + `\n\n추가 역할: 주간 종합 리포트 작성자. 홈페이지 + 블로그를 하나의 리포트로 통합 분석한다.`;
+function ensureDir(dir) { if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true }); }
+
+// ─── 홈페이지 주간 리포트 ────────────────────────────────
+
+async function generateHomepageWeekly(thisWeekData, prevWeekData, weekNum, thisWeek) {
+  const systemPrompt = fs.readFileSync(path.join(PROMPTS_DIR, "homepage-system.md"), "utf-8");
+
+  const userPrompt = `아래는 PerfecTwin 홈페이지의 Week ${weekNum} (${thisWeek.from} ~ ${thisWeek.to}) 주간 데이터다.
+
+## 이번 주 GA4 집계
+${JSON.stringify(thisWeekData.annual.ga4, null, 2)}
+
+## 이번 주 GSC 집계 (perfectwin.ai)
+${JSON.stringify(thisWeekData.annual.gsc?.["perfectwin.ai"] || null, null, 2)}
+
+## 이번 주 요일별 패턴
+${JSON.stringify(thisWeekData.annual.dayOfWeek, null, 2)}
+
+## 전주 GA4 집계
+${prevWeekData ? JSON.stringify(prevWeekData.annual.ga4, null, 2) : "전주 데이터 없음"}
+
+## 전주 GSC 집계 (perfectwin.ai)
+${prevWeekData ? JSON.stringify(prevWeekData.annual.gsc?.["perfectwin.ai"] || null, null, 2) : "전주 데이터 없음"}
+
+이 데이터를 기반으로 홈페이지 주간 인사이트 리포트를 작성해줘.
+
+### 리포트 구조
+#### 1. 주간 핵심 요약
+핵심 지표 테이블 (전주 대비). 2~3줄 핵심 문장.
+#### 2. 트래픽 분석
+방문자, 세션, 페이지뷰, 참여율 (전주 대비). 유입 채널 변화.
+#### 3. Top 페이지 + 랜딩 페이지
+#### 4. 기기/국가
+#### 5. 요일별 패턴 (2~3문장)
+#### 6. 인사이트 (4~6개)
+비즈니스 임팩트 순. 각각 구체적 수치 + → 액션.
+#### 7. 다음 주 콘텐츠 추천 (2~3개, 데이터 근거)
+
+### 형식
+- 제목: "📊 홈페이지 주간 인사이트 — Week ${weekNum} (${thisWeek.from} ~ ${thisWeek.to})"
+- 한국어, Markdown 테이블`;
+
+  return await callClaude(systemPrompt, userPrompt, { maxTokens: 10000 });
+}
+
+// ─── 블로그 주간 리포트 ──────────────────────────────────
+
+async function generateBlogWeekly(thisWeekData, prevWeekData, weekNum, thisWeek) {
+  const systemPrompt = fs.readFileSync(path.join(PROMPTS_DIR, "blog-system.md"), "utf-8");
+
+  const userPrompt = `아래는 PerfecTwin 블로그의 Week ${weekNum} (${thisWeek.from} ~ ${thisWeek.to}) 주간 데이터다.
+
+## 이번 주 inblog 집계
+${JSON.stringify(thisWeekData.annual.inblog, null, 2)}
+
+## 이번 주 GSC 집계 (blog.perfectwin.ai)
+${JSON.stringify(thisWeekData.annual.gsc?.["blog.perfectwin.ai"] || null, null, 2)}
+
+## 전주 inblog 집계
+${prevWeekData ? JSON.stringify(prevWeekData.annual.inblog, null, 2) : "전주 데이터 없음"}
+
+## 전주 GSC 집계 (blog.perfectwin.ai)
+${prevWeekData ? JSON.stringify(prevWeekData.annual.gsc?.["blog.perfectwin.ai"] || null, null, 2) : "전주 데이터 없음"}
+
+이 데이터를 기반으로 블로그 주간 인사이트 리포트를 작성해줘.
+
+### 리포트 구조
+#### 1. 주간 핵심 요약
+영문/한글 블로그 + GSC 핵심 지표 (전주 대비). 2~3줄 핵심 문장.
+#### 2. 블로그 트래픽 (영문/한글 각각)
+방문, 클릭, 오가닉, 유입 소스 (전주 대비)
+#### 3. Google 검색 성과
+노출/클릭/CTR/순위. 주요 키워드 변동. 주요 페이지 변동.
+"노출 많고 클릭 0" 페이지 식별 → 메타 리라이트 대상.
+#### 4. 인사이트 (4~6개)
+비즈니스 임팩트 순. 각각 구체적 수치 + → 액션.
+포지션 8~15 키워드 = 첫 페이지 진입 기회 반드시 다룸.
+#### 5. 다음 주 콘텐츠 추천 (2~3개, 검색 데이터 근거)
+
+### 형식
+- 제목: "📝 블로그 주간 인사이트 — Week ${weekNum} (${thisWeek.from} ~ ${thisWeek.to})"
+- 한국어, Markdown 테이블`;
+
+  return await callClaude(systemPrompt, userPrompt, { maxTokens: 10000 });
+}
+
+// ─── 메인 ────────────────────────────────────────────────
 
 async function main() {
   const targetFriday = parseArgs() || new Date().toISOString().split("T")[0];
@@ -61,90 +141,45 @@ async function main() {
 
   console.log(`\n📊 주간 리포트 — Week ${weekNum} (${thisWeek.from} ~ ${thisWeek.to})\n`);
 
-  // 이번 주 + 전주 데이터 집계
-  console.log("[1/3] 데이터 집계...");
+  console.log("[1/5] 데이터 집계...");
   let thisWeekData, prevWeekData;
-  try {
-    thisWeekData = aggregateAnnual(thisWeek.from, thisWeek.to);
-  } catch { thisWeekData = null; }
-  try {
-    prevWeekData = aggregateAnnual(prevWeek.from, prevWeek.to);
-  } catch { prevWeekData = null; }
+  try { thisWeekData = aggregateAnnual(thisWeek.from, thisWeek.to); } catch { thisWeekData = null; }
+  try { prevWeekData = aggregateAnnual(prevWeek.from, prevWeek.to); } catch { prevWeekData = null; }
 
   if (!thisWeekData || thisWeekData.totalDays === 0) {
-    console.error("  이번 주 데이터 없음. 먼저 일간 수집을 실행하세요.");
+    console.error("  이번 주 데이터 없음.");
     return;
   }
-
   console.log(`  이번 주: ${thisWeekData.totalDays}일, 전주: ${prevWeekData?.totalDays || 0}일`);
 
-  // Claude API 호출
-  console.log("[2/3] Claude API로 주간 리포트 생성...");
-  const userPrompt = `아래는 PerfecTwin의 Week ${weekNum} (${thisWeek.from} ~ ${thisWeek.to}) 주간 데이터다.
+  ensureDir(REPORTS_DIR);
 
-## 이번 주 집계
-${JSON.stringify(thisWeekData.annual, null, 2)}
+  // 홈페이지 주간
+  console.log("[2/5] 홈페이지 주간 리포트 생성...");
+  let homepageReport = null;
+  try {
+    homepageReport = await generateHomepageWeekly(thisWeekData, prevWeekData, weekNum, thisWeek);
+    const hp = path.join(REPORTS_DIR, `homepage-weekly-${thisWeek.from}.md`);
+    fs.writeFileSync(hp, homepageReport, "utf-8");
+    console.log(`  ✅ ${hp}`);
+  } catch (err) { console.error(`  ❌ ${err.message}`); }
 
-## 이번 주 월별(일별) 상세
-${JSON.stringify(thisWeekData.monthly, null, 2)}
+  // 블로그 주간
+  console.log("[3/5] 블로그 주간 리포트 생성...");
+  let blogReport = null;
+  try {
+    blogReport = await generateBlogWeekly(thisWeekData, prevWeekData, weekNum, thisWeek);
+    const bp = path.join(REPORTS_DIR, `blog-weekly-${thisWeek.from}.md`);
+    fs.writeFileSync(bp, blogReport, "utf-8");
+    console.log(`  ✅ ${bp}`);
+  } catch (err) { console.error(`  ❌ ${err.message}`); }
 
-## 전주 집계 (${prevWeek.from} ~ ${prevWeek.to})
-${prevWeekData ? JSON.stringify(prevWeekData.annual, null, 2) : "전주 데이터 없음"}
-
-이 데이터를 기반으로 주간 종합 인사이트 리포트를 작성해줘.
-
-### 리포트 구조
-반드시 아래 순서를 따른다:
-
-#### 1. 주간 핵심 요약
-홈페이지(GA4) + 블로그(inblog) + 검색(GSC) 핵심 지표를 하나의 요약 테이블로.
-전주 대비 변화율 포함. 2~3줄 핵심 문장.
-
-#### 2. 홈페이지 주간 성과
-- 트래픽: 방문자, 세션, 페이지뷰, 참여율 (전주 대비)
-- 유입 채널 변화
-- Top 페이지
-- 특이사항
-
-#### 3. 블로그 주간 성과
-- 영문/한글 블로그 트래픽 (전주 대비)
-- 오가닉 유입 변화
-- 유입 소스
-
-#### 4. 검색 성과 주간 변화
-- GSC perfectwin.ai + blog.perfectwin.ai 각각
-- 노출/클릭/순위 변화
-- 주요 키워드 변동
-- 주요 페이지 변동
-
-#### 5. 인사이트 (5~8개)
-비즈니스 임팩트 순 정렬. 각각:
-- 무엇이 변했는지 (구체적 수치)
-- 왜 중요한지
-- → 액션: 구체적 행동 제안
-
-#### 6. 다음 주 콘텐츠 추천
-검색 데이터 기반으로 2~3개 콘텐츠 주제 추천. 각각 근거 명시.
-
-### 형식
-- 제목: "📊 주간 종합 인사이트 — Week ${weekNum} (${thisWeek.from} ~ ${thisWeek.to})"
-- 한국어, Markdown 테이블, 인사이트 번호 매기기`;
-
-  const report = await callClaude(SYSTEM_PROMPT, userPrompt, { maxTokens: 12000 });
-
-  // 저장 + Slack 발송
-  console.log("[3/3] 저장 및 Slack 발송...");
-  if (!fs.existsSync(REPORTS_DIR)) fs.mkdirSync(REPORTS_DIR, { recursive: true });
-  const mdPath = path.join(REPORTS_DIR, `weekly-${thisWeek.from}.md`);
-  fs.writeFileSync(mdPath, report, "utf-8");
-  console.log(`  ✅ MD: ${mdPath}`);
-
-  await sendReportToSlack(report, "weekly", thisWeek.from);
+  // Slack 발송
+  console.log("[4/5] Slack 발송...");
+  if (homepageReport) await sendReportToSlack(homepageReport, "weekly", thisWeek.from);
+  if (blogReport) await sendReportToSlack(blogReport, "weekly", thisWeek.from);
 
   console.log("\n✅ 주간 리포트 완료!\n");
 }
 
-main().catch((err) => {
-  console.error("치명적 오류:", err);
-  process.exit(1);
-});
+main().catch((err) => { console.error("치명적 오류:", err); process.exit(1); });
