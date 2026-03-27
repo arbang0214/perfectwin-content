@@ -832,27 +832,78 @@ router.get("/week/:weekId/content/x-thread", (req, res) => {
 
 // ─── POST /api/publish/buffer — Publish to Buffer (GraphQL) ────────────────────
 router.post("/buffer", async (req, res) => {
-  const { week, contentType, postNum, text, channelId, mode, dueAt, imageUrl } = req.body;
+  const { week, contentType, postNum, text, channelId, mode, dueAt, imageUrl, imagePath, commentText } = req.body;
 
   if (!text || !channelId) return res.status(400).json({ success: false, error: "text and channelId required" });
 
-  const { createBufferPost } = require("../lib/buffer-client");
+  const { createBufferPost, uploadImageToBuffer } = require("../lib/buffer-client");
 
   // Map frontend mode names to Buffer GraphQL mode values
   const modeMap = { now: "shareNow", scheduled: "customSchedule", queue: "queue" };
   const bufferMode = modeMap[mode] || mode || "queue";
 
   try {
+    // ── Resolve image: upload local file to Buffer if imagePath is given ──
+    let resolvedImageUrl = imageUrl || null;
+    if (!resolvedImageUrl && imagePath && week) {
+      const weekId = week;
+      const weekPath = path.join(OUTPUT_DIR, weekId);
+      const absImagePath = path.isAbsolute(imagePath) ? imagePath : path.join(weekPath, imagePath);
+      if (fs.existsSync(absImagePath)) {
+        try {
+          const fileBuffer = fs.readFileSync(absImagePath);
+          const ext = path.extname(absImagePath).toLowerCase().slice(1);
+          const mimeType = (ext === "jpg" || ext === "jpeg") ? "image/jpeg" : `image/${ext}`;
+          console.log(`[buffer] uploading image: ${absImagePath} (${fileBuffer.length} bytes, ${mimeType})`);
+          resolvedImageUrl = await uploadImageToBuffer(channelId, fileBuffer, mimeType);
+          console.log("[buffer] image uploaded, uri:", resolvedImageUrl);
+        } catch (imgErr) {
+          console.warn("[buffer] image upload failed, posting without image:", imgErr.message);
+        }
+      } else {
+        console.warn("[buffer] imagePath not found:", absImagePath);
+      }
+    }
+
+    // ── Resolve comment: replace [BLOG_URL] with actual published URL ──
+    let resolvedComment = null;
+    if (commentText) {
+      let blogUrl = "";
+      if (week) {
+        const data = readPublishData(week);
+        const blogEn = data?.contents?.find(c => c.id === "blog-en");
+        blogUrl = blogEn?.publishedUrl || process.env.INBLOG_BLOG_URL || "";
+      }
+      resolvedComment = commentText.replace(/\[BLOG_URL\]/g, blogUrl).trim();
+    }
+
     const result = await createBufferPost({
       channelId,
       text,
       mode: bufferMode,
       dueAt: bufferMode === "customSchedule" ? dueAt : null,
-      imageUrl: imageUrl || null,
+      imageUrl: resolvedImageUrl,
     });
 
     const bufferId = result.id;
     const status = mode === "now" ? "sent" : mode === "scheduled" ? "scheduled" : "buffer";
+
+    // ── Auto-comment: only for shareNow posts with a LinkedIn post URN ──
+    let commentResult = null;
+    if (resolvedComment && mode === "now" && result.serviceId && process.env.LINKEDIN_ACCESS_TOKEN) {
+      const orgUrn = process.env.LINKEDIN_ORG_URN;
+      if (orgUrn) {
+        try {
+          const { postLinkedInComment } = require("../lib/buffer-client");
+          await postLinkedInComment(result.serviceId, orgUrn, resolvedComment);
+          console.log("[linkedin] comment posted on", result.serviceId);
+          commentResult = { success: true };
+        } catch (cErr) {
+          console.warn("[linkedin] comment failed:", cErr.message);
+          commentResult = { success: false, error: cErr.message };
+        }
+      }
+    }
 
     // Update publish-data.json
     if (week && contentType) {
@@ -891,7 +942,7 @@ router.post("/buffer", async (req, res) => {
       }
     }
 
-    res.json({ success: true, bufferId, status, scheduledAt: dueAt || null });
+    res.json({ success: true, bufferId, status, scheduledAt: dueAt || null, comment: commentResult });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }

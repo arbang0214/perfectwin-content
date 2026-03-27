@@ -1,0 +1,325 @@
+{
+  "date": "2025-08-05",
+  "collectedAt": "2026-03-27T09:45:24.020Z",
+  "ga4": {
+    "date": "2025-08-05",
+    "summary": {
+      "activeUsers": 3,
+      "newUsers": 2,
+      "returningUsers": 1,
+      "sessions": 5,
+      "engagedSessions": 2,
+      "pageViews": 8,
+      "bounceRate": 60,
+      "engagementRate": 40,
+      "avgSessionDuration": 39.4,
+      "pageViewsPerSession": 1.6,
+      "totalEngagementTime": 105,
+      "eventCount": 25
+    },
+    "topPages": [
+      {
+        "pagePath": "/m/home",
+        "pageTitle": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence",
+        "pageViews": 4,
+        "users": 1,
+        "avgDuration": 28.6,
+        "bounceRate": 50
+      },
+      {
+        "pagePath": "/",
+        "pageTitle": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 11.4,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/case-studies",
+        "pageTitle": "PerfecTwin - Customers",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 81.3,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/company",
+        "pageTitle": "PerfecTwin - Company",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 45.8,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/resources",
+        "pageTitle": "Resources",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 0.6,
+        "bounceRate": 100
+      }
+    ],
+    "channels": [
+      {
+        "channel": "Direct",
+        "sessions": 3,
+        "users": 1,
+        "engagementRate": 33.33
+      },
+      {
+        "channel": "Organic Search",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      },
+      {
+        "channel": "Unassigned",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0
+      }
+    ],
+    "sourceMedium": [
+      {
+        "source": "(direct)",
+        "medium": "(none)",
+        "sessions": 3,
+        "users": 1,
+        "engagementRate": 33.33,
+        "avgDuration": 19.4
+      },
+      {
+        "source": "(not set)",
+        "medium": "(not set)",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0,
+        "avgDuration": 0
+      },
+      {
+        "source": "google",
+        "medium": "organic",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100,
+        "avgDuration": 138.5
+      }
+    ],
+    "devices": [
+      {
+        "device": "mobile",
+        "sessions": 3,
+        "users": 2,
+        "pageViews": 4,
+        "engagementRate": 33.33,
+        "avgDuration": 19.1
+      },
+      {
+        "device": "desktop",
+        "sessions": 2,
+        "users": 1,
+        "pageViews": 4,
+        "engagementRate": 50,
+        "avgDuration": 69.8
+      }
+    ],
+    "countries": [
+      {
+        "country": "South Korea",
+        "sessions": 3,
+        "users": 1,
+        "engagementRate": 33.33
+      },
+      {
+        "country": "United States",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      },
+      {
+        "country": "Vietnam",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0
+      }
+    ],
+    "landingPages": [
+      {
+        "landingPage": "/m/home",
+        "sessions": 2,
+        "users": 1,
+        "bounceRate": 50,
+        "avgDuration": 28.6,
+        "pagesPerSession": 2
+      },
+      {
+        "landingPage": "(not set)",
+        "sessions": 1,
+        "users": 1,
+        "bounceRate": 100,
+        "avgDuration": 0,
+        "pagesPerSession": 0
+      },
+      {
+        "landingPage": "/",
+        "sessions": 1,
+        "users": 1,
+        "bounceRate": 0,
+        "avgDuration": 138.5,
+        "pagesPerSession": 3
+      },
+      {
+        "landingPage": "/resources",
+        "sessions": 1,
+        "users": 0,
+        "bounceRate": 100,
+        "avgDuration": 1.1,
+        "pagesPerSession": 1
+      }
+    ]
+  },
+  "gsc": {
+    "date": "2025-08-05",
+    "sites": [
+      {
+        "siteUrl": "https://perfectwin.ai/",
+        "label": "perfectwin.ai",
+        "date": "2025-08-05",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      },
+      {
+        "siteUrl": "https://blog.perfectwin.ai/",
+        "label": "blog.perfectwin.ai",
+        "date": "2025-08-05",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      }
+    ]
+  },
+  "inblog": {
+    "date": "2025-08-05",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2025-08-05",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-08-05",
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "home": 0,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-08-05",
+            "end_date": "2025-08-05",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 58365,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Test Automation Prioritization: Which Business Scenarios to Automate First"
+            },
+            {
+              "post_id": 59866,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Order-to-Cash Testing Automation: A Complete Guide (2026)"
+            }
+          ],
+          "meta": {
+            "start_date": "2025-08-05",
+            "end_date": "2025-08-05",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 2
+            }
+          ],
+          "meta": {
+            "start_date": "2025-08-05",
+            "end_date": "2025-08-05"
+          }
+        }
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2025-08-05",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-08-05",
+              "visits": 0,
+              "clicks": 0,
+              "organic": 0,
+              "home": 0,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-08-05",
+            "end_date": "2025-08-05",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [],
+          "meta": {
+            "start_date": "2025-08-05",
+            "end_date": "2025-08-05",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [],
+          "meta": {
+            "start_date": "2025-08-05",
+            "end_date": "2025-08-05"
+          }
+        }
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": null
+  }
+}

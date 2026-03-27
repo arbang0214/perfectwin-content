@@ -1,0 +1,219 @@
+{
+  "date": "2025-05-12",
+  "collectedAt": "2026-03-27T09:29:11.279Z",
+  "ga4": {
+    "date": "2025-05-12",
+    "summary": {
+      "activeUsers": 0,
+      "newUsers": 0,
+      "returningUsers": 0,
+      "sessions": 0,
+      "engagedSessions": 0,
+      "pageViews": 0,
+      "bounceRate": 0,
+      "engagementRate": 0,
+      "avgSessionDuration": 0,
+      "pageViewsPerSession": 0,
+      "totalEngagementTime": 0,
+      "eventCount": 0
+    },
+    "topPages": [],
+    "channels": [],
+    "sourceMedium": [],
+    "devices": [],
+    "countries": [],
+    "landingPages": []
+  },
+  "gsc": {
+    "date": "2025-05-12",
+    "sites": [
+      {
+        "siteUrl": "https://perfectwin.ai/",
+        "label": "perfectwin.ai",
+        "date": "2025-05-12",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      },
+      {
+        "siteUrl": "https://blog.perfectwin.ai/",
+        "label": "blog.perfectwin.ai",
+        "date": "2025-05-12",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      }
+    ]
+  },
+  "inblog": {
+    "date": "2025-05-12",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2025-05-12",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-05-12",
+              "visits": 68,
+              "clicks": 4,
+              "organic": 0,
+              "home": 18,
+              "post": 63,
+              "category": 1,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-05-12",
+            "end_date": "2025-05-12",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 54598,
+              "visits": 27,
+              "clicks": 3,
+              "organic": 0,
+              "cvr": 0.1111111111111111,
+              "title": null
+            },
+            {
+              "post_id": null,
+              "visits": 19,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 55093,
+              "visits": 11,
+              "clicks": 1,
+              "organic": 0,
+              "cvr": 0.09090909090909091,
+              "title": null
+            },
+            {
+              "post_id": 46820,
+              "visits": 7,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 45949,
+              "visits": 4,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            }
+          ],
+          "meta": {
+            "start_date": "2025-05-12",
+            "end_date": "2025-05-12",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "inblog.ai",
+              "count": 26
+            },
+            {
+              "full_referrer": "blog.perfectwin.ai",
+              "count": 18
+            },
+            {
+              "full_referrer": "www.perfectwin.ai",
+              "count": 14
+            },
+            {
+              "full_referrer": "direct",
+              "count": 4
+            },
+            {
+              "full_referrer": "perfectwin.inblog.ai",
+              "count": 3
+            },
+            {
+              "full_referrer": "com.slack",
+              "count": 2
+            },
+            {
+              "full_referrer": "reh.laitrcus.online",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2025-05-12",
+            "end_date": "2025-05-12"
+          }
+        }
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2025-05-12",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-05-12",
+              "visits": 0,
+              "clicks": 0,
+              "organic": 0,
+              "home": 0,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-05-12",
+            "end_date": "2025-05-12",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [],
+          "meta": {
+            "start_date": "2025-05-12",
+            "end_date": "2025-05-12",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [],
+          "meta": {
+            "start_date": "2025-05-12",
+            "end_date": "2025-05-12"
+          }
+        }
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": null
+  }
+}

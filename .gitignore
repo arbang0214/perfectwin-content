@@ -1,6 +1,8 @@
 .env
 output/
 node_modules/
+config/perfectwin-monitoring-*.json
+.claude/settings.local.json
 __pycache__/
 *.pyc
 .DS_Store

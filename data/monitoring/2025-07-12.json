@@ -1,0 +1,295 @@
+{
+  "date": "2025-07-12",
+  "collectedAt": "2026-03-27T09:41:03.299Z",
+  "ga4": {
+    "date": "2025-07-12",
+    "summary": {
+      "activeUsers": 31,
+      "newUsers": 31,
+      "returningUsers": 0,
+      "sessions": 32,
+      "engagedSessions": 5,
+      "pageViews": 33,
+      "bounceRate": 84.38,
+      "engagementRate": 15.63,
+      "avgSessionDuration": 29.5,
+      "pageViewsPerSession": 1.03,
+      "totalEngagementTime": 58,
+      "eventCount": 104
+    },
+    "topPages": [
+      {
+        "pagePath": "/cf003_perfectwin_counsel_ad",
+        "pageTitle": "PerfecTwin 데모 환경 신청",
+        "pageViews": 32,
+        "users": 30,
+        "avgDuration": 11.4,
+        "bounceRate": 87.1
+      },
+      {
+        "pagePath": "/",
+        "pageTitle": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 590.7,
+        "bounceRate": 0
+      }
+    ],
+    "channels": [
+      {
+        "channel": "Cross-network",
+        "sessions": 27,
+        "users": 27,
+        "engagementRate": 14.81
+      },
+      {
+        "channel": "Paid Search",
+        "sessions": 4,
+        "users": 3,
+        "engagementRate": 0
+      },
+      {
+        "channel": "Direct",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      }
+    ],
+    "sourceMedium": [
+      {
+        "source": "google",
+        "medium": "cpc",
+        "sessions": 31,
+        "users": 30,
+        "engagementRate": 12.9,
+        "avgDuration": 11.4
+      },
+      {
+        "source": "(direct)",
+        "medium": "(none)",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100,
+        "avgDuration": 590.7
+      }
+    ],
+    "devices": [
+      {
+        "device": "mobile",
+        "sessions": 28,
+        "users": 27,
+        "pageViews": 28,
+        "engagementRate": 3.57,
+        "avgDuration": 1.6
+      },
+      {
+        "device": "desktop",
+        "sessions": 4,
+        "users": 4,
+        "pageViews": 5,
+        "engagementRate": 100,
+        "avgDuration": 224.6
+      }
+    ],
+    "countries": [
+      {
+        "country": "South Korea",
+        "sessions": 32,
+        "users": 31,
+        "engagementRate": 15.63
+      }
+    ],
+    "landingPages": [
+      {
+        "landingPage": "/cf003_perfectwin_counsel_ad?ibch=youtubead_asset2_2506",
+        "sessions": 24,
+        "users": 24,
+        "bounceRate": 91.67,
+        "avgDuration": 12.4,
+        "pagesPerSession": 1.04
+      },
+      {
+        "landingPage": "/cf003_perfectwin_counsel_ad?ibch=youtubead_asset1_2506",
+        "sessions": 6,
+        "users": 5,
+        "bounceRate": 66.67,
+        "avgDuration": 7.6,
+        "pagesPerSession": 1
+      },
+      {
+        "landingPage": "/",
+        "sessions": 1,
+        "users": 1,
+        "bounceRate": 0,
+        "avgDuration": 590.7,
+        "pagesPerSession": 1
+      },
+      {
+        "landingPage": "/cf003_perfectwin_counsel_ad?ibch=youtubead_asset1_2506&gad_campaignid=22732999410",
+        "sessions": 1,
+        "users": 1,
+        "bounceRate": 100,
+        "avgDuration": 9.6,
+        "pagesPerSession": 1
+      }
+    ]
+  },
+  "gsc": {
+    "date": "2025-07-12",
+    "sites": [
+      {
+        "siteUrl": "https://perfectwin.ai/",
+        "label": "perfectwin.ai",
+        "date": "2025-07-12",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      },
+      {
+        "siteUrl": "https://blog.perfectwin.ai/",
+        "label": "blog.perfectwin.ai",
+        "date": "2025-07-12",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      }
+    ]
+  },
+  "inblog": {
+    "date": "2025-07-12",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2025-07-12",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-07-12",
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "home": 0,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-07-12",
+            "end_date": "2025-07-12",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 55093,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "Why Real Transaction Data Testing is Essential for SAP ERP Migration"
+            },
+            {
+              "post_id": 59866,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Order-to-Cash Testing Automation: A Complete Guide (2026)"
+            }
+          ],
+          "meta": {
+            "start_date": "2025-07-12",
+            "end_date": "2025-07-12",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 2
+            }
+          ],
+          "meta": {
+            "start_date": "2025-07-12",
+            "end_date": "2025-07-12"
+          }
+        }
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2025-07-12",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-07-12",
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "home": 0,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-07-12",
+            "end_date": "2025-07-12",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 61892,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Cloud 생태계 완전 정복하기"
+            }
+          ],
+          "meta": {
+            "start_date": "2025-07-12",
+            "end_date": "2025-07-12",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2025-07-12",
+            "end_date": "2025-07-12"
+          }
+        }
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": null
+  }
+}

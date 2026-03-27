@@ -1,0 +1,283 @@
+{
+  "date": "2025-08-08",
+  "collectedAt": "2026-03-27T09:45:57.813Z",
+  "ga4": {
+    "date": "2025-08-08",
+    "summary": {
+      "activeUsers": 4,
+      "newUsers": 3,
+      "returningUsers": 1,
+      "sessions": 4,
+      "engagedSessions": 2,
+      "pageViews": 4,
+      "bounceRate": 50,
+      "engagementRate": 50,
+      "avgSessionDuration": 271.3,
+      "pageViewsPerSession": 1,
+      "totalEngagementTime": 10,
+      "eventCount": 16
+    },
+    "topPages": [
+      {
+        "pagePath": "/",
+        "pageTitle": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence",
+        "pageViews": 4,
+        "users": 4,
+        "avgDuration": 271.3,
+        "bounceRate": 50
+      }
+    ],
+    "channels": [
+      {
+        "channel": "Direct",
+        "sessions": 3,
+        "users": 3,
+        "engagementRate": 33.33
+      },
+      {
+        "channel": "Organic Search",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      }
+    ],
+    "sourceMedium": [
+      {
+        "source": "(direct)",
+        "medium": "(none)",
+        "sessions": 3,
+        "users": 3,
+        "engagementRate": 33.33,
+        "avgDuration": 80
+      },
+      {
+        "source": "google",
+        "medium": "organic",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100,
+        "avgDuration": 845.2
+      }
+    ],
+    "devices": [
+      {
+        "device": "desktop",
+        "sessions": 3,
+        "users": 3,
+        "pageViews": 3,
+        "engagementRate": 66.67,
+        "avgDuration": 360.7
+      },
+      {
+        "device": "mobile",
+        "sessions": 1,
+        "users": 1,
+        "pageViews": 1,
+        "engagementRate": 0,
+        "avgDuration": 3
+      }
+    ],
+    "countries": [
+      {
+        "country": "China",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0
+      },
+      {
+        "country": "Japan",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      },
+      {
+        "country": "Thailand",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0
+      },
+      {
+        "country": "United States",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      }
+    ],
+    "landingPages": [
+      {
+        "landingPage": "/",
+        "sessions": 4,
+        "users": 4,
+        "bounceRate": 50,
+        "avgDuration": 271.3,
+        "pagesPerSession": 1
+      }
+    ]
+  },
+  "gsc": {
+    "date": "2025-08-08",
+    "sites": [
+      {
+        "siteUrl": "https://perfectwin.ai/",
+        "label": "perfectwin.ai",
+        "date": "2025-08-08",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      },
+      {
+        "siteUrl": "https://blog.perfectwin.ai/",
+        "label": "blog.perfectwin.ai",
+        "date": "2025-08-08",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      }
+    ]
+  },
+  "inblog": {
+    "date": "2025-08-08",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2025-08-08",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-08-08",
+              "visits": 5,
+              "clicks": 0,
+              "organic": 0,
+              "home": 3,
+              "post": 22,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-08-08",
+            "end_date": "2025-08-08",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": null,
+              "visits": 3,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 56958,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 60109,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            }
+          ],
+          "meta": {
+            "start_date": "2025-08-08",
+            "end_date": "2025-08-08",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 5
+            }
+          ],
+          "meta": {
+            "start_date": "2025-08-08",
+            "end_date": "2025-08-08"
+          }
+        }
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2025-08-08",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-08-08",
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "home": 0,
+              "post": 25,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-08-08",
+            "end_date": "2025-08-08",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 55188,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "유통 기업에 SAP 테스트 자동화가 중요한 이유"
+            }
+          ],
+          "meta": {
+            "start_date": "2025-08-08",
+            "end_date": "2025-08-08",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 2
+            }
+          ],
+          "meta": {
+            "start_date": "2025-08-08",
+            "end_date": "2025-08-08"
+          }
+        }
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": null
+  }
+}

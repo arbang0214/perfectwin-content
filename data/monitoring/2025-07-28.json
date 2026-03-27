@@ -1,0 +1,199 @@
+{
+  "date": "2025-07-28",
+  "collectedAt": "2026-03-27T09:43:49.501Z",
+  "ga4": {
+    "date": "2025-07-28",
+    "summary": {
+      "activeUsers": 1,
+      "newUsers": 1,
+      "returningUsers": 0,
+      "sessions": 1,
+      "engagedSessions": 1,
+      "pageViews": 1,
+      "bounceRate": 0,
+      "engagementRate": 100,
+      "avgSessionDuration": 14.1,
+      "pageViewsPerSession": 1,
+      "totalEngagementTime": 9,
+      "eventCount": 4
+    },
+    "topPages": [
+      {
+        "pagePath": "/company",
+        "pageTitle": "PerfecTwin - Company",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 14.1,
+        "bounceRate": 0
+      }
+    ],
+    "channels": [
+      {
+        "channel": "Direct",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      }
+    ],
+    "sourceMedium": [
+      {
+        "source": "(direct)",
+        "medium": "(none)",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100,
+        "avgDuration": 14.1
+      }
+    ],
+    "devices": [
+      {
+        "device": "desktop",
+        "sessions": 1,
+        "users": 1,
+        "pageViews": 1,
+        "engagementRate": 100,
+        "avgDuration": 14.1
+      }
+    ],
+    "countries": [
+      {
+        "country": "United States",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      }
+    ],
+    "landingPages": [
+      {
+        "landingPage": "/company",
+        "sessions": 1,
+        "users": 1,
+        "bounceRate": 0,
+        "avgDuration": 14.1,
+        "pagesPerSession": 1
+      }
+    ]
+  },
+  "gsc": {
+    "date": "2025-07-28",
+    "sites": [
+      {
+        "siteUrl": "https://perfectwin.ai/",
+        "label": "perfectwin.ai",
+        "date": "2025-07-28",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      },
+      {
+        "siteUrl": "https://blog.perfectwin.ai/",
+        "label": "blog.perfectwin.ai",
+        "date": "2025-07-28",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      }
+    ]
+  },
+  "inblog": {
+    "date": "2025-07-28",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2025-07-28",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-07-28",
+              "visits": 0,
+              "clicks": 0,
+              "organic": 0,
+              "home": 0,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-07-28",
+            "end_date": "2025-07-28",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [],
+          "meta": {
+            "start_date": "2025-07-28",
+            "end_date": "2025-07-28",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [],
+          "meta": {
+            "start_date": "2025-07-28",
+            "end_date": "2025-07-28"
+          }
+        }
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2025-07-28",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-07-28",
+              "visits": 0,
+              "clicks": 0,
+              "organic": 0,
+              "home": 0,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-07-28",
+            "end_date": "2025-07-28",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [],
+          "meta": {
+            "start_date": "2025-07-28",
+            "end_date": "2025-07-28",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [],
+          "meta": {
+            "start_date": "2025-07-28",
+            "end_date": "2025-07-28"
+          }
+        }
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": null
+  }
+}

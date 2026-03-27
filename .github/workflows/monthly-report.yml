@@ -1,0 +1,52 @@
+name: 월간 성과 리포트
+
+on:
+  schedule:
+    # 매월 28~31일 오전 9시 KST = 00:00 UTC
+    # 스크립트 내에서 실제 월말인지 확인
+    - cron: '0 0 28-31 * *'
+  workflow_dispatch:
+
+jobs:
+  monthly-report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: Google 서비스 계정 키 생성
+        run: echo '${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}' > config/perfectwin-monitoring-b8809c36eda2.json
+
+      - name: 월간 리포트 실행
+        env:
+          NODE_TLS_REJECT_UNAUTHORIZED: '0'
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GOOGLE_SERVICE_ACCOUNT_KEY: config/perfectwin-monitoring-b8809c36eda2.json
+          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
+          GSC_SITE_URL: ${{ secrets.GSC_SITE_URL }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
+          INBLOG_API_KEY: ${{ secrets.INBLOG_API_KEY }}
+          INBLOG_BLOG_SUBDOMAIN: ${{ secrets.INBLOG_BLOG_SUBDOMAIN }}
+          INBLOG_BLOG_URL: ${{ secrets.INBLOG_BLOG_URL }}
+          INBLOG_KO_API_KEY: ${{ secrets.INBLOG_KO_API_KEY }}
+          INBLOG_KO_BLOG_SUBDOMAIN: ${{ secrets.INBLOG_KO_BLOG_SUBDOMAIN }}
+          INBLOG_KO_BLOG_URL: ${{ secrets.INBLOG_KO_BLOG_URL }}
+        run: node monitoring/monthly-report.js
+
+      - name: 데이터 커밋
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/monitoring/
+          git diff --cached --quiet || git commit -m "chore: monthly report $(date -u +%Y-%m-%d)"
+          git push

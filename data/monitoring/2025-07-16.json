@@ -1,0 +1,417 @@
+{
+  "date": "2025-07-16",
+  "collectedAt": "2026-03-27T09:41:42.826Z",
+  "ga4": {
+    "date": "2025-07-16",
+    "summary": {
+      "activeUsers": 319,
+      "newUsers": 313,
+      "returningUsers": 6,
+      "sessions": 339,
+      "engagedSessions": 85,
+      "pageViews": 416,
+      "bounceRate": 74.93,
+      "engagementRate": 25.07,
+      "avgSessionDuration": 36.9,
+      "pageViewsPerSession": 1.23,
+      "totalEngagementTime": 4479,
+      "eventCount": 1216
+    },
+    "topPages": [
+      {
+        "pagePath": "/cf003_perfectwin_counsel_ad",
+        "pageTitle": "PerfecTwin 데모 환경 신청",
+        "pageViews": 406,
+        "users": 314,
+        "avgDuration": 35.1,
+        "bounceRate": 75.15
+      },
+      {
+        "pagePath": "/resources",
+        "pageTitle": "Resources",
+        "pageViews": 4,
+        "users": 2,
+        "avgDuration": 214.8,
+        "bounceRate": 50
+      },
+      {
+        "pagePath": "/",
+        "pageTitle": "PerfecTwin - Move to SAP S/4HANA with Speed and Confidence",
+        "pageViews": 2,
+        "users": 2,
+        "avgDuration": 11.7,
+        "bounceRate": 50
+      },
+      {
+        "pagePath": "/kr/request-a-demo",
+        "pageTitle": "PerfecTwin - Request a demo",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 0,
+        "bounceRate": 100
+      },
+      {
+        "pagePath": "/m/company",
+        "pageTitle": "PerfecTwin - Company",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 3.2,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/m/product",
+        "pageTitle": "PerfecTwin - Product",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 5.1,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/pagead/aclk",
+        "pageTitle": "PerfecTwin 데모 환경 신청",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 0,
+        "bounceRate": 100
+      }
+    ],
+    "channels": [
+      {
+        "channel": "Cross-network",
+        "sessions": 314,
+        "users": 300,
+        "engagementRate": 24.52
+      },
+      {
+        "channel": "Paid Search",
+        "sessions": 15,
+        "users": 13,
+        "engagementRate": 33.33
+      },
+      {
+        "channel": "Direct",
+        "sessions": 8,
+        "users": 4,
+        "engagementRate": 37.5
+      },
+      {
+        "channel": "Unassigned",
+        "sessions": 2,
+        "users": 2,
+        "engagementRate": 0
+      }
+    ],
+    "sourceMedium": [
+      {
+        "source": "google",
+        "medium": "cpc",
+        "sessions": 329,
+        "users": 313,
+        "engagementRate": 24.92,
+        "avgDuration": 35.3
+      },
+      {
+        "source": "(direct)",
+        "medium": "(none)",
+        "sessions": 8,
+        "users": 4,
+        "engagementRate": 37.5,
+        "avgDuration": 114.3
+      },
+      {
+        "source": "(not set)",
+        "medium": "(not set)",
+        "sessions": 2,
+        "users": 2,
+        "engagementRate": 0,
+        "avgDuration": 0
+      }
+    ],
+    "devices": [
+      {
+        "device": "mobile",
+        "sessions": 326,
+        "users": 310,
+        "pageViews": 400,
+        "engagementRate": 24.54,
+        "avgDuration": 35.4
+      },
+      {
+        "device": "desktop",
+        "sessions": 14,
+        "users": 10,
+        "pageViews": 16,
+        "engagementRate": 42.86,
+        "avgDuration": 70.4
+      }
+    ],
+    "countries": [
+      {
+        "country": "South Korea",
+        "sessions": 336,
+        "users": 317,
+        "engagementRate": 24.7
+      },
+      {
+        "country": "United States",
+        "sessions": 2,
+        "users": 1,
+        "engagementRate": 50
+      },
+      {
+        "country": "India",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      }
+    ],
+    "landingPages": [
+      {
+        "landingPage": "/cf003_perfectwin_counsel_ad?ibch=youtubead_asset1_2506&gad_campaignid=22732999410",
+        "sessions": 108,
+        "users": 106,
+        "bounceRate": 76.85,
+        "avgDuration": 35.7,
+        "pagesPerSession": 1.25
+      },
+      {
+        "landingPage": "/cf003_perfectwin_counsel_ad?ibch=youtubead_asset2_2506",
+        "sessions": 87,
+        "users": 80,
+        "bounceRate": 77.01,
+        "avgDuration": 37.6,
+        "pagesPerSession": 1.3
+      },
+      {
+        "landingPage": "/cf003_perfectwin_counsel_ad?ibch=youtubead_asset2_2506&gad_campaignid=22739139258",
+        "sessions": 76,
+        "users": 76,
+        "bounceRate": 72.37,
+        "avgDuration": 49.5,
+        "pagesPerSession": 1.2
+      },
+      {
+        "landingPage": "/cf003_perfectwin_counsel_ad?ibch=youtubead_asset1_2506",
+        "sessions": 57,
+        "users": 54,
+        "bounceRate": 71.93,
+        "avgDuration": 12.5,
+        "pagesPerSession": 1.18
+      },
+      {
+        "landingPage": "(not set)",
+        "sessions": 5,
+        "users": 3,
+        "bounceRate": 100,
+        "avgDuration": 0,
+        "pagesPerSession": 0
+      },
+      {
+        "landingPage": "/",
+        "sessions": 2,
+        "users": 2,
+        "bounceRate": 0,
+        "avgDuration": 26.2,
+        "pagesPerSession": 1.5
+      },
+      {
+        "landingPage": "/resources",
+        "sessions": 2,
+        "users": 1,
+        "bounceRate": 50,
+        "avgDuration": 431.1,
+        "pagesPerSession": 2.5
+      },
+      {
+        "landingPage": "/kr/request-a-demo",
+        "sessions": 1,
+        "users": 1,
+        "bounceRate": 100,
+        "avgDuration": 0,
+        "pagesPerSession": 1
+      },
+      {
+        "landingPage": "/pagead/aclk?sa=L&ai=CPVr_R-F2aPvlJq6Js8IPvoqH8QHlt8zNgAGezaesmxSxkB8QASAAYJuD6YScKYIBF2NhLXB1Yi02MjE5ODExNzQ3MDQ5MzcxoAHyz7CsQKkCo4VxRcHDCD6oAwTIAwqqBKoCT9AZ-FZ5O-Ua4ezSSKNa5IqLQEmqXDiK4A4LNyACZfdr6mj_LGq8xRJujt-QRUq-1FNcEAsNspWUh8itcto6cRTQxoMOj6XwQFo1mrFIgksFuiehWN3dJ0HLDQjsDgYiZxf54EacXNyWfo2JTus-M9lXk7msG_DLQt_bUT-MoEvSd9W4cerzxCmUi3t52obDur6LqaPT737dutF9LhEFQURJEXG61foK1EGUzfKI35oEjog8cdCDq7nxNfnC6Kieda5O1M_CFta9I6aYyCPwPnX1IfWW230YAnoEsslE27dc_DRvhJmhd5RsYAsbUFFsc7Jk-t3BfzbyN7-gqAJKRv2_CId3ll2_b84V7npW6QLWRGvq3WXP_Yii2ZQMFYBbY8L8zI7nBiGrw5IFCAgTeLP0z6QboAahAdgGAoAH8oeBjBuIBwGQBwKYBwKoB_LAsQKoB7jEsQKoB-G2sQKoB6XPsQKoB-edsQKoB-idsQKoB--1sQKoB_C1sQKoB_nTsQKoB4KqsQKoB4QIqAem1LECqAeo0huoB7YHqAex3BuoB8PSsQKoB7CbsQKoB66xsQKoB-a8sQKoB8q6sQKoB_zLsQKoB_2ysQKoB_e4sQKoB_i4sQKoB8jPsQKoB8nPsQKoB83HsQKoB_HRsQKoB4HGG6gH_K-xAqgH1c4bqAerxRuoB5zcG6gHt6GxAqgH1amxAqgH3rWxAqgH6rGxAqgHvrexAqgHmbWxAqgHhcGxAqgHoaqxAqgHtq2xApIIC2pQQ1VlNTVtU2NrqAgB0ggsCAAQAhhaMgEAOhGP0ICAgI",
+        "sessions": 1,
+        "users": 1,
+        "bounceRate": 100,
+        "avgDuration": 0,
+        "pagesPerSession": 1
+      }
+    ]
+  },
+  "gsc": {
+    "date": "2025-07-16",
+    "sites": [
+      {
+        "siteUrl": "https://perfectwin.ai/",
+        "label": "perfectwin.ai",
+        "date": "2025-07-16",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      },
+      {
+        "siteUrl": "https://blog.perfectwin.ai/",
+        "label": "blog.perfectwin.ai",
+        "date": "2025-07-16",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      }
+    ]
+  },
+  "inblog": {
+    "date": "2025-07-16",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2025-07-16",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-07-16",
+              "visits": 8,
+              "clicks": 0,
+              "organic": 1,
+              "home": 1,
+              "post": 26,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-07-16",
+            "end_date": "2025-07-16",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 58365,
+              "visits": 4,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 45949,
+              "visits": 3,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": null,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": null
+            }
+          ],
+          "meta": {
+            "start_date": "2025-07-16",
+            "end_date": "2025-07-16",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 5
+            },
+            {
+              "full_referrer": "www.linkedin.com",
+              "count": 2
+            },
+            {
+              "full_referrer": "www.bing.com",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2025-07-16",
+            "end_date": "2025-07-16"
+          }
+        }
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2025-07-16",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-07-16",
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "home": 0,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-07-16",
+            "end_date": "2025-07-16",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 55187,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": "SAP ERP 전환, 왜 실거래 데이터 기반 테스트가 필수인가?"
+            }
+          ],
+          "meta": {
+            "start_date": "2025-07-16",
+            "end_date": "2025-07-16",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "www.google.com",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2025-07-16",
+            "end_date": "2025-07-16"
+          }
+        }
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": null
+  }
+}

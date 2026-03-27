@@ -1,0 +1,730 @@
+{
+  "date": "2026-03-26",
+  "collectedAt": "2026-03-27T06:46:42.841Z",
+  "ga4": {
+    "date": "2026-03-26",
+    "summary": {
+      "activeUsers": 23,
+      "newUsers": 21,
+      "returningUsers": 2,
+      "sessions": 33,
+      "engagedSessions": 9,
+      "pageViews": 43,
+      "bounceRate": 72.73,
+      "engagementRate": 27.27,
+      "avgSessionDuration": 163.4,
+      "pageViewsPerSession": 1.3,
+      "totalEngagementTime": 329,
+      "eventCount": 120
+    },
+    "topPages": [
+      {
+        "pagePath": "/",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 29,
+        "users": 21,
+        "avgDuration": 182.5,
+        "bounceRate": 67.86
+      },
+      {
+        "pagePath": "/product/erp",
+        "pageTitle": "ERP Edition for SAP Testing | PerfecTwin",
+        "pageViews": 4,
+        "users": 2,
+        "avgDuration": 6.7,
+        "bounceRate": 66.67
+      },
+      {
+        "pagePath": "/contact-us/request-demo",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 3,
+        "users": 2,
+        "avgDuration": 3.2,
+        "bounceRate": 33.33
+      },
+      {
+        "pagePath": "/why-perfectwin",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 3,
+        "users": 2,
+        "avgDuration": 68.9,
+        "bounceRate": 33.33
+      },
+      {
+        "pagePath": "/about-us",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 29,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/product/erp/test-maintenance",
+        "pageTitle": "SAP Test Preparation with Real Operational Data | PerfecTwin",
+        "pageViews": 1,
+        "users": 0,
+        "avgDuration": 0,
+        "bounceRate": 100
+      },
+      {
+        "pagePath": "/solutions",
+        "pageTitle": "SAP S/4HANA Testing Solutions | Migration, Upgrade & Regression | PerfecTwin",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 8.6,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/solutions/migration",
+        "pageTitle": "SAP ECC to S/4HANA Migration Testing | Validate Real Operations | PerfecTwin",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 3.3,
+        "bounceRate": 0
+      }
+    ],
+    "channels": [
+      {
+        "channel": "Direct",
+        "sessions": 24,
+        "users": 19,
+        "engagementRate": 16.67
+      },
+      {
+        "channel": "Organic Search",
+        "sessions": 5,
+        "users": 2,
+        "engagementRate": 40
+      },
+      {
+        "channel": "Referral",
+        "sessions": 2,
+        "users": 1,
+        "engagementRate": 50
+      },
+      {
+        "channel": "Unassigned",
+        "sessions": 2,
+        "users": 1,
+        "engagementRate": 100
+      }
+    ],
+    "sourceMedium": [
+      {
+        "source": "(direct)",
+        "medium": "(none)",
+        "sessions": 24,
+        "users": 19,
+        "engagementRate": 16.67,
+        "avgDuration": 61
+      },
+      {
+        "source": "google",
+        "medium": "organic",
+        "sessions": 5,
+        "users": 2,
+        "engagementRate": 40,
+        "avgDuration": 527.6
+      },
+      {
+        "source": "blog",
+        "medium": "content",
+        "sessions": 2,
+        "users": 1,
+        "engagementRate": 100,
+        "avgDuration": 627.6
+      },
+      {
+        "source": "10.100.10.101:8080",
+        "medium": "referral",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100,
+        "avgDuration": 33.7
+      },
+      {
+        "source": "sap.com",
+        "medium": "referral",
+        "sessions": 1,
+        "users": 0,
+        "engagementRate": 0,
+        "avgDuration": 0
+      }
+    ],
+    "devices": [
+      {
+        "device": "desktop",
+        "sessions": 30,
+        "users": 21,
+        "pageViews": 40,
+        "engagementRate": 26.67,
+        "avgDuration": 176.1
+      },
+      {
+        "device": "mobile",
+        "sessions": 3,
+        "users": 2,
+        "pageViews": 3,
+        "engagementRate": 33.33,
+        "avgDuration": 35.8
+      }
+    ],
+    "countries": [
+      {
+        "country": "United States",
+        "sessions": 15,
+        "users": 14,
+        "engagementRate": 13.33
+      },
+      {
+        "country": "South Korea",
+        "sessions": 14,
+        "users": 6,
+        "engagementRate": 35.71
+      },
+      {
+        "country": "Singapore",
+        "sessions": 2,
+        "users": 1,
+        "engagementRate": 50
+      },
+      {
+        "country": "Germany",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0
+      },
+      {
+        "country": "India",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      }
+    ],
+    "landingPages": [
+      {
+        "landingPage": "/",
+        "sessions": 23,
+        "users": 21,
+        "bounceRate": 65.22,
+        "avgDuration": 232.3,
+        "pagesPerSession": 1.35
+      },
+      {
+        "landingPage": "(not set)",
+        "sessions": 5,
+        "users": 2,
+        "bounceRate": 100,
+        "avgDuration": 0,
+        "pagesPerSession": 0
+      },
+      {
+        "landingPage": "/contact-us/request-demo",
+        "sessions": 2,
+        "users": 2,
+        "bounceRate": 50,
+        "avgDuration": 24.2,
+        "pagesPerSession": 4.5
+      },
+      {
+        "landingPage": "/product/erp",
+        "sessions": 2,
+        "users": 1,
+        "bounceRate": 100,
+        "avgDuration": 0,
+        "pagesPerSession": 1
+      },
+      {
+        "landingPage": "/product/erp/test-maintenance",
+        "sessions": 1,
+        "users": 0,
+        "bounceRate": 100,
+        "avgDuration": 0,
+        "pagesPerSession": 1
+      }
+    ]
+  },
+  "gsc": {
+    "date": "2026-03-26",
+    "sites": [
+      {
+        "siteUrl": "https://perfectwin.ai/",
+        "label": "perfectwin.ai",
+        "date": "2026-03-26",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      },
+      {
+        "siteUrl": "https://blog.perfectwin.ai/",
+        "label": "blog.perfectwin.ai",
+        "date": "2026-03-26",
+        "actualDate": "2026-03-25",
+        "totals": {
+          "clicks": 1,
+          "impressions": 237,
+          "ctr": 0.42,
+          "position": 21.1
+        },
+        "topQueries": [
+          {
+            "query": "automation prioritization",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 18
+          },
+          {
+            "query": "difference between sap rise and grow",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 53.5
+          },
+          {
+            "query": "optimising sap s/4hana testing",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 22
+          },
+          {
+            "query": "rise migration",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 46
+          },
+          {
+            "query": "rise migration sap",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 44.5
+          },
+          {
+            "query": "rise with sap adoption framework",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 45.5
+          },
+          {
+            "query": "rise with sap migration",
+            "clicks": 0,
+            "impressions": 6,
+            "ctr": 0,
+            "position": 42
+          },
+          {
+            "query": "rise with sap migration and modernization",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 74
+          },
+          {
+            "query": "rise with sap migration and modernization program",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 94
+          },
+          {
+            "query": "s 4hana performance test management",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 32
+          }
+        ],
+        "topPages": [
+          {
+            "page": "https://blog.perfectwin.ai/",
+            "clicks": 1,
+            "impressions": 2,
+            "ctr": 50,
+            "position": 21
+          },
+          {
+            "page": "https://blog.perfectwin.ai/category/case-studies",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 68
+          },
+          {
+            "page": "https://blog.perfectwin.ai/category/market-trend",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 2
+          },
+          {
+            "page": "https://blog.perfectwin.ai/category/sap-migration-testing-",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 83
+          },
+          {
+            "page": "https://blog.perfectwin.ai/category/sap-upgrade-testing",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 20
+          },
+          {
+            "page": "https://blog.perfectwin.ai/sap-cloud-ecosystem-guide",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 30
+          },
+          {
+            "page": "https://blog.perfectwin.ai/sap-cloud-transition-rise-grow-guide",
+            "clicks": 0,
+            "impressions": 28,
+            "ctr": 0,
+            "position": 45.7
+          },
+          {
+            "page": "https://blog.perfectwin.ai/sap-erp-test-trends",
+            "clicks": 0,
+            "impressions": 51,
+            "ctr": 0,
+            "position": 42.5
+          },
+          {
+            "page": "https://blog.perfectwin.ai/sap-grow-upgrade-testing-guide",
+            "clicks": 0,
+            "impressions": 4,
+            "ctr": 0,
+            "position": 12
+          },
+          {
+            "page": "https://blog.perfectwin.ai/sap-joule-agentic-ai-future",
+            "clicks": 0,
+            "impressions": 49,
+            "ctr": 0,
+            "position": 10.4
+          }
+        ],
+        "devices": [
+          {
+            "device": "DESKTOP",
+            "clicks": 1,
+            "impressions": 216,
+            "ctr": 0.46,
+            "position": 20.3
+          },
+          {
+            "device": "MOBILE",
+            "clicks": 0,
+            "impressions": 21,
+            "ctr": 0,
+            "position": 28.8
+          }
+        ],
+        "countries": [
+          {
+            "country": "jpn",
+            "clicks": 1,
+            "impressions": 2,
+            "ctr": 50,
+            "position": 6.5
+          },
+          {
+            "country": "are",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 12
+          },
+          {
+            "country": "arg",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 1
+          },
+          {
+            "country": "aus",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 6
+          },
+          {
+            "country": "bel",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 5.5
+          },
+          {
+            "country": "bol",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 7
+          },
+          {
+            "country": "bra",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 4
+          },
+          {
+            "country": "can",
+            "clicks": 0,
+            "impressions": 6,
+            "ctr": 0,
+            "position": 6.2
+          },
+          {
+            "country": "che",
+            "clicks": 0,
+            "impressions": 19,
+            "ctr": 0,
+            "position": 26.3
+          },
+          {
+            "country": "chn",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 5
+          }
+        ]
+      }
+    ]
+  },
+  "inblog": {
+    "date": "2026-03-26",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2026-03-26",
+        "traffic": {
+          "data": [
+            {
+              "date": "2026-03-26",
+              "visits": 30,
+              "clicks": 1,
+              "organic": 0,
+              "home": 4,
+              "post": 44,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-03-26",
+            "end_date": "2026-03-26",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 141509,
+              "visits": 7,
+              "clicks": 1,
+              "organic": 0,
+              "cvr": 0.14285714285714285,
+              "title": null
+            },
+            {
+              "post_id": null,
+              "visits": 4,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 79267,
+              "visits": 3,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 65690,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 86636,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 124575,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 45949,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 55093,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 55299,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 56156,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            }
+          ],
+          "meta": {
+            "start_date": "2026-03-26",
+            "end_date": "2026-03-26",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 22
+            },
+            {
+              "full_referrer": "blog.perfectwin.ai",
+              "count": 4
+            },
+            {
+              "full_referrer": "com.slack",
+              "count": 3
+            },
+            {
+              "full_referrer": "claude.ai",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2026-03-26",
+            "end_date": "2026-03-26"
+          }
+        }
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2026-03-26",
+        "traffic": {
+          "data": [
+            {
+              "date": "2026-03-26",
+              "visits": 4,
+              "clicks": 0,
+              "organic": 2,
+              "home": 2,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-03-26",
+            "end_date": "2026-03-26",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 63322,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 2,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": null,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            }
+          ],
+          "meta": {
+            "start_date": "2026-03-26",
+            "end_date": "2026-03-26",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "www.google.com",
+              "count": 2
+            },
+            {
+              "full_referrer": "direct",
+              "count": 1
+            },
+            {
+              "full_referrer": "statics.teams.cdn.office.net",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2026-03-26",
+            "end_date": "2026-03-26"
+          }
+        }
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": "2026-03-27T06:46:42.841Z"
+  }
+}

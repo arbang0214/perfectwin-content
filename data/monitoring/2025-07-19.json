@@ -1,0 +1,261 @@
+{
+  "date": "2025-07-19",
+  "collectedAt": "2026-03-27T09:42:14.790Z",
+  "ga4": {
+    "date": "2025-07-19",
+    "summary": {
+      "activeUsers": 1,
+      "newUsers": 1,
+      "returningUsers": 0,
+      "sessions": 2,
+      "engagedSessions": 0,
+      "pageViews": 2,
+      "bounceRate": 100,
+      "engagementRate": 0,
+      "avgSessionDuration": 0,
+      "pageViewsPerSession": 1,
+      "totalEngagementTime": 0,
+      "eventCount": 5
+    },
+    "topPages": [
+      {
+        "pagePath": "/cf003_perfectwin_counsel_ad",
+        "pageTitle": "PerfecTwin 데모 환경 신청",
+        "pageViews": 2,
+        "users": 1,
+        "avgDuration": 0,
+        "bounceRate": 100
+      }
+    ],
+    "channels": [
+      {
+        "channel": "Cross-network",
+        "sessions": 1,
+        "users": 0,
+        "engagementRate": 0
+      },
+      {
+        "channel": "Paid Search",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0
+      }
+    ],
+    "sourceMedium": [
+      {
+        "source": "google",
+        "medium": "cpc",
+        "sessions": 2,
+        "users": 1,
+        "engagementRate": 0,
+        "avgDuration": 0
+      }
+    ],
+    "devices": [
+      {
+        "device": "mobile",
+        "sessions": 2,
+        "users": 1,
+        "pageViews": 2,
+        "engagementRate": 0,
+        "avgDuration": 0
+      }
+    ],
+    "countries": [
+      {
+        "country": "South Korea",
+        "sessions": 2,
+        "users": 1,
+        "engagementRate": 0
+      }
+    ],
+    "landingPages": [
+      {
+        "landingPage": "/cf003_perfectwin_counsel_ad?ibch=youtubead_asset1_2506",
+        "sessions": 1,
+        "users": 1,
+        "bounceRate": 100,
+        "avgDuration": 0,
+        "pagesPerSession": 1
+      },
+      {
+        "landingPage": "/cf003_perfectwin_counsel_ad?ibch=youtubead_asset2_2506&gad_campaignid=22739139258",
+        "sessions": 1,
+        "users": 0,
+        "bounceRate": 100,
+        "avgDuration": 0,
+        "pagesPerSession": 1
+      }
+    ]
+  },
+  "gsc": {
+    "date": "2025-07-19",
+    "sites": [
+      {
+        "siteUrl": "https://perfectwin.ai/",
+        "label": "perfectwin.ai",
+        "date": "2025-07-19",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      },
+      {
+        "siteUrl": "https://blog.perfectwin.ai/",
+        "label": "blog.perfectwin.ai",
+        "date": "2025-07-19",
+        "actualDate": null,
+        "totals": null,
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      }
+    ]
+  },
+  "inblog": {
+    "date": "2025-07-19",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2025-07-19",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-07-19",
+              "visits": 3,
+              "clicks": 0,
+              "organic": 0,
+              "home": 2,
+              "post": 23,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-07-19",
+            "end_date": "2025-07-19",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": null,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 59098,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            }
+          ],
+          "meta": {
+            "start_date": "2025-07-19",
+            "end_date": "2025-07-19",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 2
+            },
+            {
+              "full_referrer": "perfectwin.inblog.ai",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2025-07-19",
+            "end_date": "2025-07-19"
+          }
+        }
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2025-07-19",
+        "traffic": {
+          "data": [
+            {
+              "date": "2025-07-19",
+              "visits": 5,
+              "clicks": 0,
+              "organic": 0,
+              "home": 4,
+              "post": 21,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2025-07-19",
+            "end_date": "2025-07-19",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": null,
+              "visits": 4,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            },
+            {
+              "post_id": 55187,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": null
+            }
+          ],
+          "meta": {
+            "start_date": "2025-07-19",
+            "end_date": "2025-07-19",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 5
+            }
+          ],
+          "meta": {
+            "start_date": "2025-07-19",
+            "end_date": "2025-07-19"
+          }
+        }
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": null
+  }
+}

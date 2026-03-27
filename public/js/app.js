@@ -2,6 +2,7 @@ import { initSidebar } from "./components/sidebar.js";
 import { renderGenerate } from "./pages/generate.js";
 import { renderDashboard } from "./pages/dashboard.js";
 import { renderTopics } from "./pages/topics.js";
+import { renderMonitoring } from "./pages/monitoring.js";
 
 function navigate(hash) {
   const h = hash || "#generate";
@@ -16,6 +17,8 @@ function navigate(hash) {
 
   if (base === "#dashboard") {
     renderDashboard(container, subroute);
+  } else if (base === "#monitoring") {
+    renderMonitoring(container);
   } else if (base === "#topics") {
     renderTopics(container);
   } else {

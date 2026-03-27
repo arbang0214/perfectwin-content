@@ -756,9 +756,9 @@ async function renderCompanyLinkedInPublish(container, weekId, postNum) {
 
         ${postData.commentText ? `
         <div class="form-group">
-          <label>첫 번째 댓글 (발행 후 직접 추가)</label>
+          <label>첫 번째 댓글 (자동 게시)</label>
           <div style="background:var(--bg-tertiary);border:1px solid var(--border);border-radius:8px;padding:12px;font-size:13px;line-height:1.6;white-space:pre-wrap">${esc(postData.commentText)}</div>
-          <p style="font-size:11px;color:var(--text-muted);margin-top:6px">LinkedIn 발행 후 첫 댓글로 직접 추가하세요 (블로그 링크 포함)</p>
+          <p style="font-size:11px;color:#166534;margin-top:6px">발행 즉시 페이지 계정으로 첫 댓글이 자동으로 게시됩니다 (블로그 링크 포함)</p>
         </div>` : ""}
 
         <div class="form-group">
@@ -845,7 +845,12 @@ async function renderCompanyLinkedInPublish(container, weekId, postNum) {
 
   // ── 단일 이미지 업로드 ──
   const singleImageInput = el.querySelector("#singleImageInput");
-  let singleImageFile = postData.hasImage ? `images/linkedin-company-${postNum}.png` : null;
+  // Derive relative image path from imageUrl like /api/publish/week/{weekId}/file/{filename}
+  let singleImageFile = null;
+  if (postData.hasImage && postData.imageUrl) {
+    const urlFilename = postData.imageUrl.split("/").pop().split("?")[0];
+    singleImageFile = `images/${urlFilename}`;
+  }
 
   singleImageInput.onchange = async () => {
     const file = singleImageInput.files[0];
@@ -966,14 +971,6 @@ async function renderCompanyLinkedInPublish(container, weekId, postNum) {
     statusEl.innerHTML = "";
 
     try {
-      // Resolve image URL if uploaded
-      let imageUrl = null;
-      if (singleImageFile) {
-        const imgFilename = singleImageFile.replace(/^.*[\\/]/, "");
-        const imgRes = await fetch(`/api/publish/week/${weekId}/file/${imgFilename}`, { method: "HEAD" });
-        if (imgRes.ok) imageUrl = `http://localhost:3000/api/publish/week/${weekId}/file/${imgFilename}`;
-      }
-
       const res = await fetch("/api/publish/buffer", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -985,17 +982,24 @@ async function renderCompanyLinkedInPublish(container, weekId, postNum) {
           channelId: targetProfile.id,
           mode,
           dueAt: scheduledAt ? new Date(scheduledAt).toISOString() : null,
-          imageUrl,
+          imagePath: singleImageFile || null,
+          commentText: postData.commentText || null,
         }),
       });
       const result = await res.json();
       if (!result.success) throw new Error(result.error);
       btn.textContent = "✓ 발행 완료";
       const statusLabel = { sent: "즉시 발행됨", scheduled: `예약됨 (${scheduledAt})`, buffer: "Buffer 큐에 추가됨" }[result.status] || result.status;
+      const commentHtml = result.comment
+        ? result.comment.success
+          ? `<p style="font-size:12px;color:#166534;margin-top:4px">✓ 첫 댓글 자동 게시 완료</p>`
+          : `<p style="font-size:12px;color:#b45309;margin-top:4px">⚠ 댓글 자동 게시 실패: ${esc(result.comment.error)}</p>`
+        : "";
       statusEl.innerHTML = `
         <div class="publish-result show">
           <h4>&#10003; Buffer에 발행되었습니다!</h4>
           <p style="font-size:13px;color:#166534">${statusLabel}</p>
+          ${commentHtml}
           ${result.bufferId ? `<p style="font-size:12px;color:var(--text-muted);margin-top:4px">Buffer ID: ${esc(result.bufferId)}</p>` : ""}
         </div>`;
       showToast("Buffer 발행 완료!", "success");
@@ -1087,9 +1091,9 @@ async function renderPersonalLinkedInPublish(container, weekId, postNum) {
 
       ${postData.commentText ? `
       <div class="form-group">
-        <label>첫 번째 댓글 (발행 후 직접 추가)</label>
+        <label>첫 번째 댓글 (자동 게시)</label>
         <div style="background:var(--bg-tertiary);border:1px solid var(--border);border-radius:8px;padding:12px;font-size:13px;line-height:1.6;white-space:pre-wrap">${esc(postData.commentText)}</div>
-        <p style="font-size:11px;color:var(--text-muted);margin-top:6px">LinkedIn 발행 후 첫 댓글로 직접 추가하세요 (블로그 링크 포함)</p>
+        <p style="font-size:11px;color:#166534;margin-top:6px">발행 즉시 페이지 계정으로 첫 댓글이 자동으로 게시됩니다 (블로그 링크 포함)</p>
       </div>` : ""}
 
       <div class="form-group">
@@ -1150,7 +1154,11 @@ async function renderPersonalLinkedInPublish(container, weekId, postNum) {
 
   // ── 이미지 업로드 ──
   const imageInput = el.querySelector("#liImageInput");
-  let currentImageFile = postData.hasImage ? `images/linkedin-personal-${postNum}.png` : null;
+  let currentImageFile = null;
+  if (postData.hasImage && postData.imageUrl) {
+    const urlFilename = postData.imageUrl.split("/").pop().split("?")[0];
+    currentImageFile = `images/${urlFilename}`;
+  }
 
   imageInput.onchange = async () => {
     const file = imageInput.files[0];
@@ -1206,13 +1214,6 @@ async function renderPersonalLinkedInPublish(container, weekId, postNum) {
     statusEl.innerHTML = "";
 
     try {
-      let imageUrl = null;
-      if (currentImageFile) {
-        const imgFilename = currentImageFile.replace(/^.*[\\/]/, "");
-        const imgRes = await fetch(`/api/publish/week/${weekId}/file/${imgFilename}`, { method: "HEAD" });
-        if (imgRes.ok) imageUrl = `http://localhost:3000/api/publish/week/${weekId}/file/${imgFilename}`;
-      }
-
       const res = await fetch("/api/publish/buffer", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -1224,7 +1225,8 @@ async function renderPersonalLinkedInPublish(container, weekId, postNum) {
           channelId: targetProfile.id,
           mode: publishMode,
           dueAt: scheduledAt ? new Date(scheduledAt).toISOString() : null,
-          imageUrl,
+          imagePath: currentImageFile || null,
+          commentText: postData.commentText || null,
         }),
       });
       const result = await res.json();
