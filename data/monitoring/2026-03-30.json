@@ -1,6 +1,6 @@
 {
   "date": "2026-03-30",
-  "collectedAt": "2026-03-31T00:04:47.732Z",
+  "collectedAt": "2026-03-31T00:28:06.449Z",
   "ga4": {
     "date": "2026-03-30",
     "summary": {
@@ -569,7 +569,7 @@
           "data": [
             {
               "date": "2026-03-30",
-              "visits": 29,
+              "visits": 30,
               "clicks": 1,
               "organic": 1,
               "home": 8,
@@ -589,11 +589,11 @@
           "data": [
             {
               "post_id": 149800,
-              "visits": 8,
+              "visits": 9,
               "clicks": 1,
               "organic": 0,
-              "cvr": 0.125,
-              "title": null
+              "cvr": 0.1111111111111111,
+              "title": "SAP Cloud ALM Test Management: Strengths, Gaps, and What to Look for in Automation Tools"
             },
             {
               "post_id": null,
@@ -601,7 +601,7 @@
               "clicks": 0,
               "organic": 0,
               "cvr": 0,
-              "title": null
+              "title": "(비포스트 페이지)"
             },
             {
               "post_id": 77338,
@@ -609,7 +609,7 @@
               "clicks": 0,
               "organic": 1,
               "cvr": 0,
-              "title": null
+              "title": "SAP S/4HANA Migration Testing: 4 Data Conversion Strategies That Prevent Go-Live Failures"
             },
             {
               "post_id": 79267,
@@ -617,7 +617,7 @@
               "clicks": 0,
               "organic": 0,
               "cvr": 0,
-              "title": null
+              "title": "SAP S/4HANA Upgrade Testing: 3 Strategies for Quarterly Release Verification"
             },
             {
               "post_id": 87010,
@@ -625,7 +625,7 @@
               "clicks": 0,
               "organic": 0,
               "cvr": 0,
-              "title": null
+              "title": "SAP Test Case Design: Scenario-Based E2E Testing Guide"
             },
             {
               "post_id": 141509,
@@ -633,7 +633,7 @@
               "clicks": 0,
               "organic": 0,
               "cvr": 0,
-              "title": null
+              "title": "Why You Need to Redesign Your SAP Testing Strategy for the Cloud ALM Era"
             }
           ],
           "meta": {
@@ -648,7 +648,7 @@
           "data": [
             {
               "full_referrer": "direct",
-              "count": 11
+              "count": 12
             },
             {
               "full_referrer": "inblog.ai",
@@ -758,6 +758,6 @@
   },
   "slack": {
     "sent": false,
-    "timestamp": "2026-03-31T00:04:47.732Z"
+    "timestamp": "2026-03-31T00:28:06.449Z"
   }
 }

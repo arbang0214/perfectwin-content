@@ -208,7 +208,7 @@ GSC topQueries. 키워드, 노출, 클릭, CTR, 포지션, 해석. 해석 규칙
 GSC topPages. slug만 추출. 노출 많은데 클릭 0인 글 = 메타 리라이트 대상.
 
 #### 5. 포스트별 방문 성과 (inblog)
-post_id null = 비포스트 페이지. CVR은 %로 변환(0.05→5%).
+post_id null = 비포스트 페이지. CVR은 %로 변환(0.05→5%). **포스트 제목(title)은 데이터에 있는 그대로 전체를 표시하라. 절대로 축약·의역·재구성하지 마라.**
 
 #### 6. 유입 소스 (inblog)
 소스별 방문수. 소스 설명(direct, google.com, t.co, linkedin.com, teams.cdn.office.net 등).

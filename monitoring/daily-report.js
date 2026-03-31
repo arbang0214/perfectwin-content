@@ -20,6 +20,8 @@ const { collectInblog } = require("./collectors/inblog");
 const { formatDailyReport } = require("./formatters/slack-message");
 const { sendToSlack, sendReportToSlack } = require("./utils/slack-sender");
 const { generateDailyReports } = require("./report-generator");
+const { generatePDF } = require("./utils/pdf-generator");
+const { sendReportEmail } = require("./utils/email-sender");
 
 const DATA_DIR = path.join(__dirname, "..", "data", "monitoring");
 
@@ -145,28 +147,59 @@ async function main() {
   console.log("[5/7] JSON 스냅샷 저장...");
   saveSnapshot(targetDate, { ga4: ga4Data, gsc: gscData, inblog: inblogData, slackSent: false });
 
-  // 6. Claude API로 인사이트 리포트 생성 + Slack 발송
+  // 6. Claude API로 인사이트 리포트 생성
   const skipReport = process.argv.includes("--no-report");
   if (!skipReport && process.env.ANTHROPIC_API_KEY) {
-    console.log("[6/7] 인사이트 리포트 생성 (Claude API)...");
+    console.log("[6/9] 인사이트 리포트 생성 (Claude API)...");
     try {
       const reports = await generateDailyReports(targetDate);
       if (reports.homepage) console.log("  ✅ 홈페이지 리포트 생성 완료");
       if (reports.blog) console.log("  ✅ 블로그 리포트 생성 완료");
 
-      // 7. 인사이트 리포트를 Slack으로 발송
-      console.log("[7/7] 인사이트 리포트 Slack 발송...");
+      // 7. Slack 요약 발송
+      console.log("[7/9] Slack 요약 발송...");
       if (reports.homepage) {
         await sendReportToSlack(reports.homepage, "homepage", targetDate);
       }
       if (reports.blog) {
         await sendReportToSlack(reports.blog, "blog", targetDate);
       }
+
+      // 8. PDF 생성
+      console.log("[8/9] 상세 리포트 PDF 생성...");
+      const pdfs = {};
+      if (reports.homepage) {
+        pdfs.homepage = await generatePDF(reports.homepage);
+        console.log("  ✅ 홈페이지 PDF 생성 완료");
+      }
+      if (reports.blog) {
+        pdfs.blog = await generatePDF(reports.blog);
+        console.log("  ✅ 블로그 PDF 생성 완료");
+      }
+
+      // 9. 이메일 발송 (PDF 첨부)
+      console.log("[9/9] 상세 리포트 이메일 발송...");
+      if (pdfs.homepage) {
+        await sendReportEmail(
+          pdfs.homepage,
+          `homepage-daily-${targetDate}.pdf`,
+          `📊 홈페이지 일간 상세 리포트 — ${targetDate}`,
+          `PerfecTwin 홈페이지 일간 상세 리포트 (${targetDate})가 첨부되어 있습니다.`
+        );
+      }
+      if (pdfs.blog) {
+        await sendReportEmail(
+          pdfs.blog,
+          `blog-daily-${targetDate}.pdf`,
+          `📝 블로그 일간 상세 리포트 — ${targetDate}`,
+          `PerfecTwin 블로그 일간 상세 리포트 (${targetDate})가 첨부되어 있습니다.`
+        );
+      }
     } catch (err) {
       console.error(`  ❌ 리포트 생성/발송 실패: ${err.message}`);
     }
   } else if (skipReport) {
-    console.log("[6/7] 리포트 생성 건너뜀 (--no-report)");
+    console.log("[6/9] 리포트 생성 건너뜀 (--no-report)");
   }
 
   console.log("\n✅ 일간 리포트 완료!\n");

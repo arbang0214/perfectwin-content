@@ -63,6 +63,27 @@ function apiRequest(path, apiKey) {
 }
 
 /**
+ * 포스트 목록을 가져와 post_id → title 매핑을 만든다.
+ * /api/v1/posts 엔드포인트는 페이지당 최대 100개를 반환한다.
+ */
+async function fetchPostTitleMap(apiKey) {
+  const titleMap = {};
+  let page = 1;
+  const limit = 100;
+  while (true) {
+    const res = await apiRequest(`/posts?limit=${limit}&page=${page}`, apiKey);
+    if (res.status !== 200 || !res.body?.data) break;
+    for (const post of res.body.data) {
+      titleMap[Number(post.id)] = post.attributes?.title || null;
+    }
+    const totalPages = res.body.meta?.totalPages || 1;
+    if (page >= totalPages) break;
+    page++;
+  }
+  return titleMap;
+}
+
+/**
  * 단일 블로그의 애널리틱스 데이터를 수집한다.
  */
 async function collectSingleBlog(config, targetDate) {
@@ -78,7 +99,7 @@ async function collectSingleBlog(config, targetDate) {
 
     // 2. 포스트별 성과 Top 10
     const postsRes = await apiRequest(
-      `/blogs/analytics/posts?${dateParam}&sort=visits&order=desc&limit=10&include=title`,
+      `/blogs/analytics/posts?${dateParam}&sort=visits&order=desc&limit=10`,
       apiKey
     );
 
@@ -89,8 +110,20 @@ async function collectSingleBlog(config, targetDate) {
     );
 
     const traffic = trafficRes.status === 200 ? trafficRes.body : null;
-    const posts = postsRes.status === 200 ? postsRes.body : null;
+    let posts = postsRes.status === 200 ? postsRes.body : null;
     const sources = sourcesRes.status === 200 ? sourcesRes.body : null;
+
+    // 4. 포스트 제목 매핑
+    if (posts?.data?.length) {
+      const titleMap = await fetchPostTitleMap(apiKey);
+      for (const p of posts.data) {
+        if (p.post_id != null && titleMap[p.post_id]) {
+          p.title = titleMap[p.post_id];
+        } else if (p.post_id == null) {
+          p.title = "(비포스트 페이지)";
+        }
+      }
+    }
 
     console.log(`  [inblog:${label}] 수집 완료 (status: traffic=${trafficRes.status}, posts=${postsRes.status}, sources=${sourcesRes.status})`);
 

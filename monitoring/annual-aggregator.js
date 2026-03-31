@@ -229,7 +229,7 @@ function aggregateInblogMonthly(monthSnapshots) {
       const t = blog.traffic?.data?.[0];
       if (!t) continue;
       if (!blogMap[blog.label]) {
-        blogMap[blog.label] = { visits: 0, clicks: 0, organic: 0, post: 0, home: 0, daysWithData: 0, sourceMap: {} };
+        blogMap[blog.label] = { visits: 0, clicks: 0, organic: 0, post: 0, home: 0, daysWithData: 0, sourceMap: {}, postMap: {} };
       }
       const b = blogMap[blog.label];
       b.visits += t.visits || 0;
@@ -244,6 +244,17 @@ function aggregateInblogMonthly(monthSnapshots) {
         if (!b.sourceMap[src.full_referrer]) b.sourceMap[src.full_referrer] = 0;
         b.sourceMap[src.full_referrer] += src.count;
       }
+
+      // 포스트별 집계
+      for (const p of (blog.posts?.data || [])) {
+        const key = p.post_id ?? "null";
+        if (!b.postMap[key]) b.postMap[key] = { post_id: p.post_id, title: p.title || null, visits: 0, clicks: 0, organic: 0 };
+        b.postMap[key].visits += p.visits || 0;
+        b.postMap[key].clicks += p.clicks || 0;
+        b.postMap[key].organic += p.organic || 0;
+        // 제목이 나중 스냅샷에서 채워질 수 있으므로 갱신
+        if (p.title) b.postMap[key].title = p.title;
+      }
     }
   }
 
@@ -254,10 +265,15 @@ function aggregateInblogMonthly(monthSnapshots) {
       .sort((a, b) => b.count - a.count)
       .slice(0, 10);
 
+    const topPosts = Object.values(data.postMap)
+      .sort((a, b) => b.visits - a.visits)
+      .slice(0, 10);
+
     result[label] = {
       daysWithData: data.daysWithData,
       totals: { visits: data.visits, clicks: data.clicks, organic: data.organic, post: data.post, home: data.home },
       sources,
+      topPosts,
     };
   }
   return result;

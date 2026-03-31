@@ -55,25 +55,13 @@ async function sendReportToSlack(reportMd, label, targetDate) {
   const firstLine = reportMd.split("\n").find((l) => l.startsWith("# ")) || "";
   const extractedTitle = firstLine.replace(/^#\s*/, "").trim();
   const title = extractedTitle || `📊 리포트 (${targetDate})`;
-  const filename = `${label}-${targetDate}.md`;
 
-  // 요약 추출
+  // 요약만 추출하여 Slack 전송 (상세 리포트는 이메일 PDF로 발송)
   const summary = extractSummary(reportMd);
   const slackSummary = convertToSlackMrkdwn(summary);
 
-  // Bot Token이 있으면: 요약 메시지 + .md 파일 첨부 (1개 스레드)
-  if (BOT_TOKEN && CHANNEL_ID) {
-    try {
-      return await sendWithBotToken(reportMd, title, slackSummary, filename);
-    } catch (err) {
-      console.warn(`[Slack] Bot API 실패 (${err.message}), Webhook fallback...`);
-    }
-  }
-
-  // Webhook fallback: 요약 + 상세 리포트 순차 전송
   if (WEBHOOK_URL) {
-    const fullSlackMd = convertToSlackMrkdwn(reportMd);
-    return await sendFullViaWebhook(title, slackSummary, fullSlackMd);
+    return await sendSummaryViaWebhook(title, slackSummary);
   }
 
   console.log(`[Slack] 전송 수단 없음 — 콘솔 출력`);
@@ -159,6 +147,33 @@ async function sendFullViaWebhook(title, slackSummary, fullSlackMd) {
     return true;
   } catch (err) {
     console.error(`[Slack] Webhook 전송 실패: ${err.message}`);
+    return false;
+  }
+}
+
+/**
+ * Webhook으로 요약 메시지만 전송 (상세 리포트는 이메일 PDF로 발송)
+ */
+async function sendSummaryViaWebhook(title, slackSummary) {
+  try {
+    const blocks = [
+      { type: "header", text: { type: "plain_text", text: title, emoji: true } },
+      { type: "section", text: { type: "mrkdwn", text: slackSummary } },
+      { type: "divider" },
+      { type: "context", elements: [{ type: "mrkdwn", text: "📎 상세 리포트는 이메일(PDF)로 발송됩니다" }] },
+    ];
+
+    const res = await fetch(WEBHOOK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ blocks }),
+    });
+    if (!res.ok) throw new Error(`전송 실패: ${res.status}`);
+
+    console.log(`[Slack] 요약 전송 성공`);
+    return true;
+  } catch (err) {
+    console.error(`[Slack] 요약 전송 실패: ${err.message}`);
     return false;
   }
 }
