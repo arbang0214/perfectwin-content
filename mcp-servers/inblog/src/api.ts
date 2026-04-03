@@ -17,12 +17,24 @@ interface PostAttributes {
   published_at?: string;
   created_at?: string;
   updated_at?: string;
+  cta_text?: string;
+  cta_link?: string;
+  cta_color?: string;
+  cta_text_color?: string;
+}
+
+interface Relationship {
+  data: { type: string; id: string }[];
 }
 
 interface PostData {
   id: string;
   type: string;
   attributes: PostAttributes;
+  relationships?: {
+    tags?: Relationship;
+    authors?: Relationship;
+  };
 }
 
 interface ApiResponse {
@@ -90,7 +102,21 @@ export async function createPost(attrs: {
   description?: string;
   content_html: string;
   image?: string;
+  cta_text?: string;
+  cta_link?: string;
+  cta_color?: string;
+  cta_text_color?: string;
+  tag_ids?: string[];
+  author_ids?: string[];
 }): Promise<PostData> {
+  const relationships: Record<string, Relationship> = {};
+  if (attrs.tag_ids?.length) {
+    relationships.tags = { data: attrs.tag_ids.map((id) => ({ type: "tags", id })) };
+  }
+  if (attrs.author_ids?.length) {
+    relationships.authors = { data: attrs.author_ids.map((id) => ({ type: "authors", id })) };
+  }
+
   const res = await apiRequest("/posts", "POST", {
     jsonapi: { version: "1.0" },
     data: {
@@ -102,7 +128,12 @@ export async function createPost(attrs: {
         content_html: attrs.content_html,
         published: false,
         ...(attrs.image ? { image: attrs.image } : {}),
+        ...(attrs.cta_text ? { cta_text: attrs.cta_text } : {}),
+        ...(attrs.cta_link ? { cta_link: attrs.cta_link } : {}),
+        ...(attrs.cta_color ? { cta_color: attrs.cta_color } : {}),
+        ...(attrs.cta_text_color ? { cta_text_color: attrs.cta_text_color } : {}),
       },
+      ...(Object.keys(relationships).length ? { relationships } : {}),
     },
   });
   return res.data as PostData;

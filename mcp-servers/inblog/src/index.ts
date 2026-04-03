@@ -15,6 +15,16 @@ const server = new McpServer({
   version: "1.0.0",
 });
 
+// ─── 디폴트 설정 ──────────────────────────────────────────
+const DEFAULT_AUTHOR_ID = process.env.INBLOG_DEFAULT_AUTHOR_ID || "94f00ea5-1034-423c-a926-fcb7b9fd2393";
+const DEFAULT_TAG_ID = process.env.INBLOG_DEFAULT_TAG_ID || "";
+const DEFAULT_CTA = {
+  cta_text: "Request a Free PerfecTwin Demo",
+  cta_link: "https://www.perfectwin.ai/contact-us/request-demo",
+  cta_color: "#000000",
+  cta_text_color: "#FFFFFF",
+};
+
 // ─── Tool 1: 포스트 목록 조회 ──────────────────────────────
 
 server.registerTool(
@@ -82,6 +92,9 @@ server.registerTool(
         description,
         content_html: contentHtml,
         image: image_url,
+        ...DEFAULT_CTA,
+        author_ids: [DEFAULT_AUTHOR_ID],
+        ...(DEFAULT_TAG_ID ? { tag_ids: [DEFAULT_TAG_ID] } : {}),
       });
 
       let status = "draft";
