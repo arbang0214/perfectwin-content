@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "inblog": {
+      "command": "node",
+      "args": ["/home/user/perfectwin-content/mcp-servers/inblog/build/index.js"],
+      "env": {
+        "INBLOG_API_KEY": "${INBLOG_API_KEY}",
+        "INBLOG_BLOG_URL": "https://blog.perfectwin.ai",
+        "INBLOG_API_BASE": "https://inblog.ai/api/v1"
+      }
+    }
+  }
+}
