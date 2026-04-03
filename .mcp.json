@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "inblog": {
+      "command": "node",
+      "args": ["mcp-servers/inblog/build/index.js"],
+      "env": {
+        "NODE_TLS_REJECT_UNAUTHORIZED": "0"
+      }
+    }
+  }
+}

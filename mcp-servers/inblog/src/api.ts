@@ -4,8 +4,18 @@
  */
 
 const API_BASE = process.env.INBLOG_API_BASE || "https://inblog.ai/api/v1";
-const API_KEY = process.env.INBLOG_API_KEY || "";
-const BLOG_URL = process.env.INBLOG_BLOG_URL || "https://blog.perfectwin.ai";
+
+export type BlogLang = "ko" | "en";
+
+function getApiKey(lang: BlogLang): string {
+  if (lang === "ko") return process.env.INBLOG_API_KEY_KO || process.env.INBLOG_API_KEY || "";
+  return process.env.INBLOG_API_KEY_EN || process.env.INBLOG_API_KEY || "";
+}
+
+function getBlogUrl(lang: BlogLang): string {
+  if (lang === "ko") return process.env.INBLOG_BLOG_URL_KO || "https://ko.blog.perfectwin.ai";
+  return process.env.INBLOG_BLOG_URL_EN || "https://blog.perfectwin.ai";
+}
 
 interface PostAttributes {
   title: string;
@@ -33,12 +43,13 @@ interface ApiResponse {
 
 async function apiRequest(
   path: string,
+  lang: BlogLang,
   method: string = "GET",
   body?: unknown
 ): Promise<ApiResponse> {
   const url = `${API_BASE}${path}`;
   const headers: Record<string, string> = {
-    Authorization: `Bearer ${API_KEY}`,
+    Authorization: `Bearer ${getApiKey(lang)}`,
     "Content-Type": "application/json",
   };
 
@@ -60,6 +71,7 @@ async function apiRequest(
  * 포스트 목록 조회
  */
 export async function listPosts(
+  lang: BlogLang,
   page: number = 1,
   perPage: number = 20,
   published?: boolean
@@ -68,7 +80,7 @@ export async function listPosts(
   if (published !== undefined) {
     path += `&filter[published]=${published}`;
   }
-  const res = await apiRequest(path);
+  const res = await apiRequest(path, lang);
   const posts = Array.isArray(res.data) ? res.data : [res.data];
   return { posts, meta: res.meta };
 }
@@ -76,22 +88,22 @@ export async function listPosts(
 /**
  * 포스트 단건 조회
  */
-export async function getPost(postId: string): Promise<PostData> {
-  const res = await apiRequest(`/posts/${postId}`);
+export async function getPost(lang: BlogLang, postId: string): Promise<PostData> {
+  const res = await apiRequest(`/posts/${postId}`, lang);
   return res.data as PostData;
 }
 
 /**
  * 포스트 생성 (Draft)
  */
-export async function createPost(attrs: {
+export async function createPost(lang: BlogLang, attrs: {
   title: string;
   slug: string;
   description?: string;
   content_html: string;
   image?: string;
 }): Promise<PostData> {
-  const res = await apiRequest("/posts", "POST", {
+  const res = await apiRequest("/posts", lang, "POST", {
     jsonapi: { version: "1.0" },
     data: {
       type: "posts",
@@ -112,6 +124,7 @@ export async function createPost(attrs: {
  * 포스트 수정
  */
 export async function updatePost(
+  lang: BlogLang,
   postId: string,
   attrs: {
     title?: string;
@@ -121,7 +134,7 @@ export async function updatePost(
     image?: string;
   }
 ): Promise<PostData> {
-  const res = await apiRequest(`/posts/${postId}`, "PATCH", {
+  const res = await apiRequest(`/posts/${postId}`, lang, "PATCH", {
     jsonapi: { version: "1.0" },
     data: {
       type: "posts",
@@ -136,10 +149,11 @@ export async function updatePost(
  * 포스트 발행/취소
  */
 export async function publishPost(
+  lang: BlogLang,
   postId: string,
   action: "publish" | "unpublish" = "publish"
 ): Promise<void> {
-  await apiRequest(`/posts/${postId}/publish`, "PATCH", {
+  await apiRequest(`/posts/${postId}/publish`, lang, "PATCH", {
     jsonapi: { version: "1.0" },
     data: {
       type: "publish_action",
@@ -151,6 +165,6 @@ export async function publishPost(
 /**
  * 포스트 URL 생성
  */
-export function getPostUrl(slug: string): string {
-  return `${BLOG_URL}/${slug}`;
+export function getPostUrl(lang: BlogLang, slug: string): string {
+  return `${getBlogUrl(lang)}/${slug}`;
 }
