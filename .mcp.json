@@ -1,10 +1,19 @@
 {
   "mcpServers": {
-    "inblog": {
+    "inblog-en": {
       "command": "node",
       "args": ["/home/user/perfectwin-content/mcp-servers/inblog/build/index.js"],
       "env": {
-        "INBLOG_API_KEY": "${INBLOG_API_KEY}",
+        "INBLOG_API_KEY": "${INBLOG_API_KEY_EN}",
+        "INBLOG_BLOG_URL": "https://blog.perfectwin.ai",
+        "INBLOG_API_BASE": "https://inblog.ai/api/v1"
+      }
+    },
+    "inblog-ko": {
+      "command": "node",
+      "args": ["/home/user/perfectwin-content/mcp-servers/inblog/build/index.js"],
+      "env": {
+        "INBLOG_API_KEY": "${INBLOG_API_KEY_KO}",
         "INBLOG_BLOG_URL": "https://blog.perfectwin.ai",
         "INBLOG_API_BASE": "https://inblog.ai/api/v1"
       }
