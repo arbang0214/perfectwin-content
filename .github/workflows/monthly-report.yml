@@ -44,7 +44,10 @@ jobs:
           INBLOG_KO_API_KEY: ${{ secrets.INBLOG_KO_API_KEY }}
           INBLOG_KO_BLOG_SUBDOMAIN: ${{ secrets.INBLOG_KO_BLOG_SUBDOMAIN }}
           INBLOG_KO_BLOG_URL: ${{ secrets.INBLOG_KO_BLOG_URL }}
-        run: node monitoring/monthly-report.js
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          REPORT_EMAIL_TO: ${{ secrets.REPORT_EMAIL_TO }}
+        run: npx playwright install chromium --with-deps && node monitoring/monthly-report.js
 
       - name: 데이터 커밋
         run: |

@@ -14,6 +14,8 @@ const fs = require("fs");
 const { aggregateAnnual } = require("./annual-aggregator");
 const { callClaude } = require("../scripts/lib/claude-api");
 const { sendReportToSlack } = require("./utils/slack-sender");
+const { generatePDF } = require("./utils/pdf-generator");
+const { sendReportEmail } = require("./utils/email-sender");
 
 const REPORTS_DIR = path.join(__dirname, "..", "data", "monitoring", "reports");
 const PROMPTS_DIR = path.join(__dirname, "prompts");
@@ -141,7 +143,7 @@ async function main() {
 
   console.log(`\n📊 주간 리포트 — Week ${weekNum} (${thisWeek.from} ~ ${thisWeek.to})\n`);
 
-  console.log("[1/5] 데이터 집계...");
+  console.log("[1/7] 데이터 집계...");
   let thisWeekData, prevWeekData;
   try { thisWeekData = aggregateAnnual(thisWeek.from, thisWeek.to); } catch { thisWeekData = null; }
   try { prevWeekData = aggregateAnnual(prevWeek.from, prevWeek.to); } catch { prevWeekData = null; }
@@ -155,7 +157,7 @@ async function main() {
   ensureDir(REPORTS_DIR);
 
   // 홈페이지 주간
-  console.log("[2/5] 홈페이지 주간 리포트 생성...");
+  console.log("[2/7] 홈페이지 주간 리포트 생성...");
   let homepageReport = null;
   try {
     homepageReport = await generateHomepageWeekly(thisWeekData, prevWeekData, weekNum, thisWeek);
@@ -165,7 +167,7 @@ async function main() {
   } catch (err) { console.error(`  ❌ ${err.message}`); }
 
   // 블로그 주간
-  console.log("[3/5] 블로그 주간 리포트 생성...");
+  console.log("[3/7] 블로그 주간 리포트 생성...");
   let blogReport = null;
   try {
     blogReport = await generateBlogWeekly(thisWeekData, prevWeekData, weekNum, thisWeek);
@@ -175,9 +177,44 @@ async function main() {
   } catch (err) { console.error(`  ❌ ${err.message}`); }
 
   // Slack 발송
-  console.log("[4/5] Slack 발송...");
+  console.log("[4/7] Slack 발송...");
   if (homepageReport) await sendReportToSlack(homepageReport, "weekly", thisWeek.from);
   if (blogReport) await sendReportToSlack(blogReport, "weekly", thisWeek.from);
+
+  // PDF 생성
+  console.log("[5/7] 상세 리포트 PDF 생성...");
+  const pdfs = {};
+  try {
+    if (homepageReport) {
+      pdfs.homepage = await generatePDF(homepageReport);
+      console.log("  ✅ 홈페이지 PDF 생성 완료");
+    }
+    if (blogReport) {
+      pdfs.blog = await generatePDF(blogReport);
+      console.log("  ✅ 블로그 PDF 생성 완료");
+    }
+  } catch (err) { console.error(`  ❌ PDF 생성 실패: ${err.message}`); }
+
+  // 이메일 발송 (PDF 첨부)
+  console.log("[6/7] 상세 리포트 이메일 발송...");
+  try {
+    if (pdfs.homepage) {
+      await sendReportEmail(
+        pdfs.homepage,
+        `homepage-weekly-${thisWeek.from}.pdf`,
+        `📊 홈페이지 주간 상세 리포트 — Week ${weekNum} (${thisWeek.from} ~ ${thisWeek.to})`,
+        `PerfecTwin 홈페이지 주간 상세 리포트 (Week ${weekNum}: ${thisWeek.from} ~ ${thisWeek.to})가 첨부되어 있습니다.`
+      );
+    }
+    if (pdfs.blog) {
+      await sendReportEmail(
+        pdfs.blog,
+        `blog-weekly-${thisWeek.from}.pdf`,
+        `📝 블로그 주간 상세 리포트 — Week ${weekNum} (${thisWeek.from} ~ ${thisWeek.to})`,
+        `PerfecTwin 블로그 주간 상세 리포트 (Week ${weekNum}: ${thisWeek.from} ~ ${thisWeek.to})가 첨부되어 있습니다.`
+      );
+    }
+  } catch (err) { console.error(`  ❌ 이메일 발송 실패: ${err.message}`); }
 
   console.log("\n✅ 주간 리포트 완료!\n");
 }
