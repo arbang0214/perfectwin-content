@@ -27,9 +27,14 @@ const DATA_DIR = path.join(__dirname, "..", "data", "monitoring");
 
 // ─── 유틸리티 ────────────────────────────────────────────
 function getYesterday() {
-  const d = new Date();
-  d.setDate(d.getDate() - 1);
-  return d.toISOString().split("T")[0];
+  // KST(UTC+9) 기준 "어제" 날짜를 반환한다.
+  // cron이 23:00 UTC(=08:00 KST)에 실행되므로, UTC 기준으로는
+  // 자정 전후에 따라 날짜가 달라질 수 있다.
+  // KST 기준으로 계산하면 23:xx UTC든 00:xx UTC든 항상 동일한 결과.
+  const now = new Date();
+  const kst = new Date(now.getTime() + 9 * 60 * 60 * 1000);
+  kst.setDate(kst.getDate() - 1);
+  return kst.toISOString().split("T")[0];
 }
 
 function parseArgs() {

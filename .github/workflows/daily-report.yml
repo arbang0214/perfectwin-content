@@ -53,5 +53,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/monitoring/
-          git diff --cached --quiet || git commit -m "chore: daily report $(date -u +%Y-%m-%d)"
-          git push
+          if git diff --cached --quiet; then
+            echo "변경 사항 없음 — 커밋 생략"
+          else
+            git commit -m "chore: daily report $(TZ=Asia/Seoul date +%Y-%m-%d)"
+            git pull --rebase origin main
+            git push
+          fi
