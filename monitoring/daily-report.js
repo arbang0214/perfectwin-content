@@ -164,10 +164,10 @@ async function main() {
       // 7. Slack 요약 발송
       console.log("[7/9] Slack 요약 발송...");
       if (reports.homepage) {
-        await sendReportToSlack(reports.homepage, "homepage", targetDate);
+        await sendReportToSlack(reports.homepage, "daily", targetDate);
       }
       if (reports.blog) {
-        await sendReportToSlack(reports.blog, "blog", targetDate);
+        await sendReportToSlack(reports.blog, "daily", targetDate);
       }
 
       // 8. PDF 생성

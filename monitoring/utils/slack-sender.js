@@ -50,14 +50,18 @@ async function sendToSlack(text) {
  * @param {string} targetDate - YYYY-MM-DD
  * @returns {boolean}
  */
+/**
+ * @param {string} reportMd - Markdown 리포트
+ * @param {string} label - "daily" | "weekly" | "monthly"
+ * @param {string} targetDate - YYYY-MM-DD
+ */
 async function sendReportToSlack(reportMd, label, targetDate) {
-  // 리포트 MD 첫 줄에서 제목 추출 (기간 포함)
   const firstLine = reportMd.split("\n").find((l) => l.startsWith("# ")) || "";
   const extractedTitle = firstLine.replace(/^#\s*/, "").trim();
   const title = extractedTitle || `📊 리포트 (${targetDate})`;
 
-  // 요약만 추출하여 Slack 전송 (상세 리포트는 이메일 PDF로 발송)
-  const summary = extractSummary(reportMd);
+  const insightCount = label === "daily" ? 3 : 5;
+  const summary = extractSummary(reportMd, insightCount);
   const slackSummary = convertToSlackMrkdwn(summary);
 
   if (WEBHOOK_URL) {
@@ -158,10 +162,16 @@ async function sendSummaryViaWebhook(title, slackSummary) {
   try {
     const blocks = [
       { type: "header", text: { type: "plain_text", text: title, emoji: true } },
-      { type: "section", text: { type: "mrkdwn", text: slackSummary } },
-      { type: "divider" },
-      { type: "context", elements: [{ type: "mrkdwn", text: "📎 상세 리포트는 이메일(PDF)로 발송됩니다" }] },
     ];
+
+    // Slack section 블록 text는 3000자 제한 → 분할
+    const chunks = splitIntoChunks(slackSummary, 2900);
+    for (const chunk of chunks) {
+      blocks.push({ type: "section", text: { type: "mrkdwn", text: chunk } });
+    }
+
+    blocks.push({ type: "divider" });
+    blocks.push({ type: "context", elements: [{ type: "mrkdwn", text: "📎 상세 리포트는 이메일(PDF)로 발송됩니다" }] });
 
     const res = await fetch(WEBHOOK_URL, {
       method: "POST",
@@ -180,18 +190,20 @@ async function sendSummaryViaWebhook(title, slackSummary) {
 
 /**
  * 리포트에서 Slack 요약을 추출한다.
- * (1) 핵심 지표 요약 2~3줄 + (2) 인사이트 본문 (섹션 헤더 제거)
+ * 형식: 지표 요약 1줄 + 인사이트 N개
+ * @param {string} reportMd - Markdown 리포트
+ * @param {number} insightCount - 인사이트 개수 (일간: 3, 주간/월간: 5)
  */
-function extractSummary(reportMd) {
+function extractSummary(reportMd, insightCount = 3) {
   const lines = reportMd.split("\n");
 
-  // ── 1. 핵심 지표 요약 추출 (첫 번째 테이블에서 주요 수치) ──
-  const metricsSummary = extractMetricsSummary(reportMd);
+  // ── 1. 지표 요약 1줄 (테이블 → 한 줄 or 텍스트 핵심 요약 첫 줄) ──
+  const metricsLine = extractMetricsOneLiner(reportMd);
 
-  // ── 2. 인사이트 섹션 추출 (번호 헤더 제거) ──
+  // ── 2. 인사이트 N개 (## 섹션 헤더에서 찾기, # 제목 제외) ──
   let insightStart = -1;
   for (let i = 0; i < lines.length; i++) {
-    if (/^#{1,4}\s*\d*\.?\s*(종합\s*)?인사이트/i.test(lines[i])) {
+    if (/^#{2,4}\s*\d*\.?\s*.*인사이트/i.test(lines[i])) {
       insightStart = i;
       break;
     }
@@ -199,74 +211,103 @@ function extractSummary(reportMd) {
 
   let insightText = "";
   if (insightStart >= 0) {
-    const insightLines = [];
+    const insightItems = [];
     for (let i = insightStart + 1; i < lines.length; i++) {
       if (/^#{1,2}\s/.test(lines[i])) break;
-      insightLines.push(lines[i]);
+      const match = lines[i].match(/^###\s*(.+)/);
+      if (match) {
+        insightItems.push(`• ${match[1].replace(/\*\*/g, "").trim()}`);
+      }
     }
-    insightText = insightLines.join("\n").trim();
+    // 인사이트가 ### 형태가 아닌 경우 (번호 리스트, 볼드 리스트 등)
+    if (insightItems.length === 0) {
+      for (let i = insightStart + 1; i < lines.length; i++) {
+        if (/^#{1,2}\s/.test(lines[i])) break;
+        const bulletMatch = lines[i].match(/^[-*]\s+\*\*(.+?)\*\*/);
+        const numMatch = lines[i].match(/^\d+\.\s+\*\*(.+?)\*\*/);
+        if (bulletMatch) insightItems.push(`• ${bulletMatch[1].trim()}`);
+        else if (numMatch) insightItems.push(`• ${numMatch[1].trim()}`);
+      }
+    }
+    if (insightItems.length > 0) {
+      insightText = `💡 *인사이트*\n${insightItems.slice(0, insightCount).join("\n")}`;
+    }
   }
 
-  // 합치기
   const parts = [];
-  if (metricsSummary) parts.push(metricsSummary);
+  if (metricsLine) parts.push(metricsLine);
   if (insightText) parts.push(insightText);
 
-  return parts.join("\n\n") || lines.slice(0, 12).join("\n").trim();
+  return parts.join("\n\n") || lines.slice(0, 8).join("\n").trim();
 }
 
 /**
- * 리포트에서 핵심 지표를 2~3줄로 요약한다.
- * 첫 번째 테이블의 주요 수치를 한 줄 텍스트로 변환.
+ * 리포트에서 핵심 지표를 1줄로 요약한다.
+ * 1) 테이블에서 주요 수치 추출 → 1줄
+ * 2) 테이블 없으면 "핵심 요약" 섹션 텍스트 첫 줄 사용
  */
-function extractMetricsSummary(reportMd) {
-  // 테이블 행에서 지표|수치 쌍 추출
+function extractMetricsOneLiner(reportMd) {
+  // 테이블에서 지표 추출 시도
   const tableRows = reportMd.match(/^\|[^|]+\|[^|]+\|.*$/gm);
-  if (!tableRows || tableRows.length < 2) return null;
+  if (tableRows && tableRows.length >= 2) {
+    const dataRows = tableRows.filter((row) => !/^[\s|:-]+$/.test(row.replace(/\|/g, "")));
+    const keyMetrics = [];
+    const keywords = [
+      { pattern: /방문자|activeUsers|사용자/i, label: "방문자" },
+      { pattern: /세션|sessions/i, label: "세션" },
+      { pattern: /페이지뷰|pageViews/i, label: "PV" },
+      { pattern: /참여율|engagement/i, label: "참여율" },
+      { pattern: /방문수|visits/i, label: "방문" },
+      { pattern: /클릭수|clicks/i, label: "클릭" },
+      { pattern: /오가닉|organic/i, label: "오가닉" },
+      { pattern: /노출|impressions/i, label: "노출" },
+      { pattern: /CTR/i, label: "CTR" },
+    ];
 
-  // 구분자 행 건너뛰고 데이터 행만
-  const dataRows = tableRows.filter((row) => !/^[\s|:-]+$/.test(row.replace(/\|/g, "")));
-  if (dataRows.length < 2) return null;
+    for (const row of dataRows.slice(0, 15)) {
+      const cells = row.split("|").map((c) => c.trim()).filter(Boolean);
+      if (cells.length < 2) continue;
+      const cellLabel = cells[0];
+      const value = cells[1];
 
-  // 핵심 지표 키워드 매칭
-  const keyMetrics = [];
-  const keywords = [
-    { pattern: /방문자|activeUsers/i, emoji: "👤" },
-    { pattern: /세션|sessions/i, emoji: "🔗" },
-    { pattern: /페이지뷰|pageViews/i, emoji: "📄" },
-    { pattern: /참여율|engagement/i, emoji: "⚡" },
-    { pattern: /체류|duration/i, emoji: "⏱️" },
-    { pattern: /방문.*visits/i, emoji: "👤" },
-    { pattern: /클릭.*clicks/i, emoji: "🖱️" },
-    { pattern: /오가닉|organic/i, emoji: "🌱" },
-    { pattern: /노출|impressions/i, emoji: "👁️" },
-    { pattern: /CTR/i, emoji: "📊" },
-    { pattern: /포지션|position|순위/i, emoji: "📍" },
-  ];
-
-  for (const row of dataRows.slice(0, 15)) {
-    const cells = row.split("|").map((c) => c.trim()).filter(Boolean);
-    if (cells.length < 2) continue;
-    const label = cells[0];
-    const value = cells[1];
-
-    for (const kw of keywords) {
-      if (kw.pattern.test(label) && !keyMetrics.find((m) => m.emoji === kw.emoji)) {
-        // 전일 대비 값이 있으면 포함
-        const change = cells.find((c) => /^[+(−-]/.test(c.trim()) && c !== value);
-        const display = change ? `${value} (${change.trim()})` : value;
-        keyMetrics.push({ emoji: kw.emoji, label: label.replace(/\*\*/g, "").replace(/[∟└]/g, "").trim(), value: display });
-        break;
+      for (const kw of keywords) {
+        if (kw.pattern.test(cellLabel) && !keyMetrics.find((m) => m.label === kw.label)) {
+          const change = cells.find((c) => /^[+(−-]/.test(c.trim()) && c !== value);
+          const display = change ? `${value}(${change.trim()})` : value;
+          keyMetrics.push({ label: kw.label, value: display });
+          break;
+        }
       }
+      if (keyMetrics.length >= 4) break;
     }
-    if (keyMetrics.length >= 6) break;
+
+    if (keyMetrics.length > 0) {
+      return `📌 ${keyMetrics.map((m) => `*${m.label}* ${m.value}`).join(" · ")}`;
+    }
   }
 
-  if (keyMetrics.length === 0) return null;
+  // 테이블 없으면 "핵심 요약" 섹션 텍스트에서 추출
+  const lines = reportMd.split("\n");
+  let summaryStart = -1;
+  for (let i = 0; i < lines.length; i++) {
+    if (/^#{1,4}\s*\d*\.?\s*.*핵심\s*요약/i.test(lines[i])) {
+      summaryStart = i;
+      break;
+    }
+  }
+  if (summaryStart >= 0) {
+    const summaryLines = [];
+    for (let i = summaryStart + 1; i < lines.length; i++) {
+      if (/^#{1,2}\s/.test(lines[i])) break;
+      const trimmed = lines[i].trim();
+      if (trimmed && trimmed !== "---") summaryLines.push(trimmed);
+    }
+    if (summaryLines.length > 0) {
+      return `📌 ${summaryLines.join("  ")}`;
+    }
+  }
 
-  // 2~3줄로 포맷
-  const line = keyMetrics.map((m) => `${m.emoji} ${m.label}: *${m.value}*`).join("  ·  ");
-  return `📌 *핵심 지표*\n${line}`;
+  return null;
 }
 
 function getDayOfWeek(dateStr) {

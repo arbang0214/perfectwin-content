@@ -15,6 +15,7 @@ const { callClaude } = require("../scripts/lib/claude-api");
 const { sendReportToSlack } = require("./utils/slack-sender");
 
 const REPORTS_DIR = path.join(__dirname, "..", "data", "monitoring", "reports");
+const PROMPTS_DIR = path.join(__dirname, "prompts");
 
 function parseArgs() {
   const args = process.argv.slice(2);
@@ -73,7 +74,19 @@ PerfecTwin에 대해:
 1. GA4: perfectwin.ai 홈페이지 트래픽, 참여도, 유입 경로, 페이지 성과
 2. GSC (perfectwin.ai): 홈페이지 검색 노출/클릭/순위
 3. GSC (blog.perfectwin.ai): 블로그 검색 노출/클릭/순위
-4. inblog: 블로그 자체 통계 — 방문수, 클릭(CTA), 오가닉 유입, 유입 소스`;
+4. inblog: 블로그 자체 통계 — 방문수, 클릭(CTA), 오가닉 유입, 유입 소스
+
+분석 톤 & 태도:
+- 객관적·비판적 시각을 유지하라. 긍정 편향 금지.
+- 단일 지표만으로 "좋다/나쁘다" 판단하지 마라. 반드시 2개 이상 교차 확인 후 해석.
+- 양(volume) 지표는 반드시 질(quality) 지표와 짝으로 봐라 (sessions ↔ engagementRate, impressions ↔ position, visits ↔ clicks).
+- 같은 대상을 다른 소스로 검증하라 (GA4 organic ↔ GSC clicks, inblog organic ↔ GSC clicks).
+- "관심도 높다"는 표현은 engagementRate > 50% + pageViewsPerSession > 1.5일 때만 허용.
+- 체류시간이 긴데 engagementRate 낮고 pageViewsPerSession = 1이면 "방치 탭 가능성"을 반드시 명시.
+- impressions가 높아도 position > 20이면 "사실상 미노출"로 해석.
+- CTR/CVR은 모수가 10 미만이면 "표본 부족"으로 표기.
+- 문제점과 리스크를 먼저 짚고, 그 다음에 긍정적 신호를 다뤄라.
+- "~한 것으로 보인다" 같은 모호한 표현 대신 데이터 근거와 함께 단정적으로 해석하라.`;
 
 // ─── 사용자 프롬프트 빌더 ────────────────────────────────
 
@@ -259,10 +272,14 @@ async function main() {
   fs.writeFileSync(aggregatedPath, JSON.stringify(aggregated, null, 2), "utf-8");
   console.log(`  집계 데이터 저장: ${aggregatedPath}`);
 
+  // 교차 해석 규칙 로드
+  const crossRules = fs.readFileSync(path.join(PROMPTS_DIR, "cross-analysis-rules.md"), "utf-8");
+  const fullSystemPrompt = SYSTEM_PROMPT + "\n\n" + crossRules;
+
   // 2. 홈페이지 연간 리포트
   console.log("[2/5] 홈페이지 연간 리포트 생성 중...");
   const homepagePrompt = buildUserPrompt(aggregated, "homepage");
-  const homepageReport = await callClaude(SYSTEM_PROMPT, homepagePrompt, { maxTokens: 16000 });
+  const homepageReport = await callClaude(fullSystemPrompt, homepagePrompt, { maxTokens: 16000 });
   const hpPath = path.join(REPORTS_DIR, `homepage-annual-${args.from}_${args.to}.md`);
   fs.writeFileSync(hpPath, homepageReport, "utf-8");
   console.log(`  ✅ ${hpPath}`);
@@ -270,7 +287,7 @@ async function main() {
   // 3. 블로그 연간 리포트
   console.log("[3/5] 블로그 연간 리포트 생성 중...");
   const blogPrompt = buildUserPrompt(aggregated, "blog");
-  const blogReport = await callClaude(SYSTEM_PROMPT, blogPrompt, { maxTokens: 16000 });
+  const blogReport = await callClaude(fullSystemPrompt, blogPrompt, { maxTokens: 16000 });
   const bpPath = path.join(REPORTS_DIR, `blog-annual-${args.from}_${args.to}.md`);
   fs.writeFileSync(bpPath, blogReport, "utf-8");
   console.log(`  ✅ ${bpPath}`);

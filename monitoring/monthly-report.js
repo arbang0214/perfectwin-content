@@ -14,6 +14,8 @@ const fs = require("fs");
 const { aggregateAnnual } = require("./annual-aggregator");
 const { callClaude } = require("../scripts/lib/claude-api");
 const { sendReportToSlack } = require("./utils/slack-sender");
+const { generatePDF } = require("./utils/pdf-generator");
+const { sendReportEmail } = require("./utils/email-sender");
 
 const REPORTS_DIR = path.join(__dirname, "..", "data", "monitoring", "reports");
 const PROMPTS_DIR = path.join(__dirname, "prompts");
@@ -57,7 +59,8 @@ function loadMonthData(yearMonth) {
 // ─── 홈페이지 월간 ──────────────────────────────────────
 
 async function generateHomepageMonthly(thisData, prevData, prev2Data, prev3Data, thisMonth, monthName) {
-  const systemPrompt = fs.readFileSync(path.join(PROMPTS_DIR, "homepage-system.md"), "utf-8");
+  const crossRules = fs.readFileSync(path.join(PROMPTS_DIR, "cross-analysis-rules.md"), "utf-8");
+  const systemPrompt = fs.readFileSync(path.join(PROMPTS_DIR, "homepage-system.md"), "utf-8") + "\n\n" + crossRules;
 
   const userPrompt = `아래는 PerfecTwin 홈페이지의 ${thisMonth.year}년 ${monthName} (${thisMonth.from} ~ ${thisMonth.to}) 월간 데이터다.
 
@@ -107,7 +110,8 @@ ${prev3Data ? JSON.stringify(prev3Data.annual.ga4, null, 2) : "데이터 없음"
 // ─── 블로그 월간 ────────────────────────────────────────
 
 async function generateBlogMonthly(thisData, prevData, prev2Data, prev3Data, thisMonth, monthName) {
-  const systemPrompt = fs.readFileSync(path.join(PROMPTS_DIR, "blog-system.md"), "utf-8");
+  const crossRules = fs.readFileSync(path.join(PROMPTS_DIR, "cross-analysis-rules.md"), "utf-8");
+  const systemPrompt = fs.readFileSync(path.join(PROMPTS_DIR, "blog-system.md"), "utf-8") + "\n\n" + crossRules;
 
   const userPrompt = `아래는 PerfecTwin 블로그의 ${thisMonth.year}년 ${monthName} (${thisMonth.from} ~ ${thisMonth.to}) 월간 데이터다.
 
@@ -207,10 +211,47 @@ async function main() {
     console.log(`  ✅ ${bp}`);
   } catch (err) { console.error(`  ❌ ${err.message}`); }
 
-  // Slack 발송
+  // Slack 발송 (요약 + 상세)
   console.log("[4/6] Slack 발송...");
   if (homepageReport) await sendReportToSlack(homepageReport, "monthly", thisMonth.from);
   if (blogReport) await sendReportToSlack(blogReport, "monthly", thisMonth.from);
+
+  // PDF 생성
+  console.log("[5/6] PDF 생성...");
+  const pdfs = {};
+  try {
+    if (homepageReport) {
+      pdfs.homepage = await generatePDF(homepageReport);
+      const hpPdf = path.join(REPORTS_DIR, `homepage-monthly-${targetMonth}.pdf`);
+      fs.writeFileSync(hpPdf, pdfs.homepage);
+      console.log(`  ✅ ${hpPdf}`);
+    }
+    if (blogReport) {
+      pdfs.blog = await generatePDF(blogReport);
+      const bpPdf = path.join(REPORTS_DIR, `blog-monthly-${targetMonth}.pdf`);
+      fs.writeFileSync(bpPdf, pdfs.blog);
+      console.log(`  ✅ ${bpPdf}`);
+    }
+  } catch (err) { console.error(`  ❌ PDF 생성 실패: ${err.message}`); }
+
+  // 이메일 발송 (PDF 첨부)
+  console.log("[6/6] 이메일 발송...");
+  if (pdfs.homepage) {
+    await sendReportEmail(
+      pdfs.homepage,
+      `homepage-monthly-${targetMonth}.pdf`,
+      `📊 홈페이지 월간 리포트 — ${thisMonth.year}년 ${monthName}`,
+      `PerfecTwin 홈페이지 월간 리포트 (${thisMonth.from} ~ ${thisMonth.to})가 첨부되어 있습니다.`
+    );
+  }
+  if (pdfs.blog) {
+    await sendReportEmail(
+      pdfs.blog,
+      `blog-monthly-${targetMonth}.pdf`,
+      `📝 블로그 월간 리포트 — ${thisMonth.year}년 ${monthName}`,
+      `PerfecTwin 블로그 월간 리포트 (${thisMonth.from} ~ ${thisMonth.to})가 첨부되어 있습니다.`
+    );
+  }
 
   console.log("\n✅ 월간 리포트 완료!\n");
 }
