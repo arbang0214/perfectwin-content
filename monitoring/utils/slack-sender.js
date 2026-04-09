@@ -60,7 +60,7 @@ async function sendReportToSlack(reportMd, label, targetDate) {
   const extractedTitle = firstLine.replace(/^#\s*/, "").trim();
   const title = extractedTitle || `📊 리포트 (${targetDate})`;
 
-  const insightCount = label === "daily" ? 3 : 5;
+  const insightCount = label === "daily" ? 6 : 8;
   const summary = extractSummary(reportMd, insightCount);
   const slackSummary = convertToSlackMrkdwn(summary);
 
@@ -197,10 +197,10 @@ async function sendSummaryViaWebhook(title, slackSummary) {
 function extractSummary(reportMd, insightCount = 3) {
   const lines = reportMd.split("\n");
 
-  // ── 1. 지표 요약 1줄 (테이블 → 한 줄 or 텍스트 핵심 요약 첫 줄) ──
+  // ── 1. 지표 요약 1줄 ──
   const metricsLine = extractMetricsOneLiner(reportMd);
 
-  // ── 2. 인사이트 N개 (## 섹션 헤더에서 찾기, # 제목 제외) ──
+  // ── 2. 인사이트 블록 추출 (제목 + 핵심 불릿 + 액션) ──
   let insightStart = -1;
   for (let i = 0; i < lines.length; i++) {
     if (/^#{2,4}\s*\d*\.?\s*.*인사이트/i.test(lines[i])) {
@@ -211,26 +211,9 @@ function extractSummary(reportMd, insightCount = 3) {
 
   let insightText = "";
   if (insightStart >= 0) {
-    const insightItems = [];
-    for (let i = insightStart + 1; i < lines.length; i++) {
-      if (/^#{1,2}\s/.test(lines[i])) break;
-      const match = lines[i].match(/^###\s*(.+)/);
-      if (match) {
-        insightItems.push(`• ${match[1].replace(/\*\*/g, "").trim()}`);
-      }
-    }
-    // 인사이트가 ### 형태가 아닌 경우 (번호 리스트, 볼드 리스트 등)
-    if (insightItems.length === 0) {
-      for (let i = insightStart + 1; i < lines.length; i++) {
-        if (/^#{1,2}\s/.test(lines[i])) break;
-        const bulletMatch = lines[i].match(/^[-*]\s+\*\*(.+?)\*\*/);
-        const numMatch = lines[i].match(/^\d+\.\s+\*\*(.+?)\*\*/);
-        if (bulletMatch) insightItems.push(`• ${bulletMatch[1].trim()}`);
-        else if (numMatch) insightItems.push(`• ${numMatch[1].trim()}`);
-      }
-    }
-    if (insightItems.length > 0) {
-      insightText = `💡 *인사이트*\n${insightItems.slice(0, insightCount).join("\n")}`;
+    const insightBlocks = extractInsightBlocks(lines, insightStart, insightCount);
+    if (insightBlocks.length > 0) {
+      insightText = insightBlocks.join("\n\n");
     }
   }
 
@@ -239,6 +222,99 @@ function extractSummary(reportMd, insightCount = 3) {
   if (insightText) parts.push(insightText);
 
   return parts.join("\n\n") || lines.slice(0, 8).join("\n").trim();
+}
+
+/**
+ * 인사이트 섹션에서 각 인사이트의 제목 + 핵심 불릿 + 액션을 추출한다.
+ * 출력 형식: 🔴/🟡/🟢 N. 제목 + 불릿 + → 액션
+ */
+function extractInsightBlocks(lines, insightStart, maxCount) {
+  const blocks = [];
+  let insightNum = 0;
+
+  for (let i = insightStart + 1; i < lines.length; i++) {
+    // 인사이트 섹션 종료 (## 이상의 다른 섹션)
+    if (/^#{1,2}\s/.test(lines[i]) && !/인사이트/i.test(lines[i])) break;
+
+    // ### 인사이트 제목 감지
+    const titleMatch = lines[i].match(/^###\s*(.+)/);
+    if (!titleMatch) continue;
+    if (insightNum >= maxCount) break;
+    insightNum++;
+
+    // 제목 정리 (이모지·볼드·번호 제거 후 severity 판정)
+    const rawTitle = titleMatch[1].replace(/\*\*/g, "").trim();
+    const severity = getSeverity(rawTitle);
+    const cleanTitle = rawTitle
+      .replace(/^[🚨⚠️💡📉📈📊📍🔍🎯🌍]+\s*/, "")  // 이모지 제거
+      .replace(/^\d+\.\s*/, "");                         // 번호 제거
+
+    // 제목 아래에서 핵심 내용 추출
+    const bullets = [];
+    let actionLine = "";
+
+    for (let j = i + 1; j < lines.length; j++) {
+      // 다음 인사이트 또는 섹션이면 중단
+      if (/^#{1,3}\s/.test(lines[j])) break;
+
+      const trimmed = lines[j].trim();
+      if (!trimmed) continue;
+
+      // 불릿 접두사 제거한 버전으로 패턴 매칭
+      const stripped = trimmed.replace(/^[-•*]\s*/, "");
+
+      // **현상**: ... 에서 핵심 데이터만 추출
+      if (/\*?\*?현상\*?\*?\s*[::]\s*/.test(stripped)) {
+        const content = stripped.replace(/\*?\*?현상\*?\*?\s*[::]\s*/, "").trim();
+        if (content) bullets.push(`• ${content}`);
+        continue;
+      }
+
+      // **→ 액션**: 추출
+      if (/\*?\*?→\s*액션\*?\*?\s*[::]\s*/.test(stripped)) {
+        const content = stripped.replace(/\*?\*?→\s*액션\*?\*?\s*[::]\s*/, "").replace(/\*\*/g, "").trim();
+        if (content) actionLine = `→ 액션: ${content}`;
+        continue;
+      }
+
+      // **왜 이런 일이 생겼나** → Slack 요약에서는 생략
+      if (/\*?\*?왜\s/.test(stripped)) {
+        continue;
+      }
+
+      // **비즈니스 임팩트** → Slack 요약에서는 생략
+      if (/\*?\*?비즈니스\s*임팩트/i.test(stripped)) {
+        continue;
+      }
+
+      // 일반 불릿 포인트 (기존 짧은 형식 인사이트 대응)
+      if (/^[-•]\s/.test(trimmed) && bullets.length < 3) {
+        const bulletContent = stripped.replace(/\*\*/g, "").trim();
+        if (bulletContent && bulletContent.length < 150) {
+          bullets.push(`• ${bulletContent}`);
+        }
+      }
+    }
+
+    // 블록 조립
+    let block = `${severity} ${insightNum}. ${cleanTitle}`;
+    if (bullets.length > 0) block += "\n" + bullets.join("\n");
+    if (actionLine) block += "\n" + actionLine;
+
+    blocks.push(block);
+  }
+
+  return blocks;
+}
+
+/**
+ * 인사이트 제목에서 심각도를 판정한다.
+ * 🔴 심각/긴급, 🟡 주의/기회, 🟢 긍정/개선
+ */
+function getSeverity(title) {
+  if (/🚨|심각|급감|급락|붕괴|차단|실패|단절|위험|긴급|봇|방치/.test(title)) return "🔴";
+  if (/🟢|개선|증가|상승|긍정|성과|효과|잠재력|기회.*긍정/.test(title)) return "🟢";
+  return "🟡";
 }
 
 /**
@@ -262,9 +338,11 @@ function extractMetricsOneLiner(reportMd) {
       { pattern: /오가닉|organic/i, label: "오가닉" },
       { pattern: /노출|impressions/i, label: "노출" },
       { pattern: /CTR/i, label: "CTR" },
+      { pattern: /평균.*포지션|position/i, label: "평균 포지션" },
+      { pattern: /이탈률|bounceRate|bounce/i, label: "이탈률" },
     ];
 
-    for (const row of dataRows.slice(0, 15)) {
+    for (const row of dataRows.slice(0, 20)) {
       const cells = row.split("|").map((c) => c.trim()).filter(Boolean);
       if (cells.length < 2) continue;
       const cellLabel = cells[0];
@@ -278,7 +356,7 @@ function extractMetricsOneLiner(reportMd) {
           break;
         }
       }
-      if (keyMetrics.length >= 4) break;
+      if (keyMetrics.length >= 7) break;
     }
 
     if (keyMetrics.length > 0) {
