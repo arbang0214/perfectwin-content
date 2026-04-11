@@ -68,7 +68,7 @@ async function sendReportToSlack(reportMd, label, targetDate) {
     return await sendSummaryViaWebhook(title, slackSummary);
   }
 
-  console.log(`[Slack] 전송 수단 없음 — 콘솔 출력`);
+  console.error(`[Slack] ⚠️ SLACK_WEBHOOK_URL 미설정 — 요약 발송 불가! GitHub Secrets에 SLACK_WEBHOOK_URL을 확인하세요.`);
   return false;
 }
 
@@ -176,9 +176,12 @@ async function sendSummaryViaWebhook(title, slackSummary) {
     const res = await fetch(WEBHOOK_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ blocks }),
+      body: JSON.stringify({ text: `${title}\n\n${slackSummary}`, blocks }),
     });
-    if (!res.ok) throw new Error(`전송 실패: ${res.status}`);
+    if (!res.ok) {
+      const body = await res.text().catch(() => "");
+      throw new Error(`전송 실패: ${res.status} ${body}`);
+    }
 
     console.log(`[Slack] 요약 전송 성공`);
     return true;
@@ -270,10 +273,28 @@ function extractInsightBlocks(lines, insightStart, maxCount) {
         continue;
       }
 
-      // **→ 액션**: 추출
+      // **→ 액션**: 추출 (같은 줄 또는 다음 줄 불릿)
       if (/\*?\*?→\s*액션\*?\*?\s*[::]\s*/.test(stripped)) {
         const content = stripped.replace(/\*?\*?→\s*액션\*?\*?\s*[::]\s*/, "").replace(/\*\*/g, "").trim();
-        if (content) actionLine = `→ 액션: ${content}`;
+        if (content) {
+          actionLine = `→ 액션: ${content}`;
+        } else {
+          // 다음 줄 불릿에서 첫 번째 액션 항목을 수집
+          for (let k = j + 1; k < lines.length; k++) {
+            const actionTrimmed = lines[k].trim();
+            if (!actionTrimmed) continue;
+            if (/^#{1,3}\s/.test(lines[k])) break;
+            if (/^[-•*]\s/.test(actionTrimmed)) {
+              const actionContent = actionTrimmed.replace(/^[-•*]\s*/, "").replace(/\*\*/g, "").trim();
+              if (actionContent) {
+                actionLine = `→ 액션: ${actionContent}`;
+                break;
+              }
+            } else {
+              break;
+            }
+          }
+        }
         continue;
       }
 
