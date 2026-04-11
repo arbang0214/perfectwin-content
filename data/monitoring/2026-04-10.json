@@ -1,0 +1,750 @@
+{
+  "date": "2026-04-10",
+  "collectedAt": "2026-04-11T00:05:59.645Z",
+  "ga4": {
+    "date": "2026-04-10",
+    "summary": {
+      "activeUsers": 25,
+      "newUsers": 23,
+      "returningUsers": 2,
+      "sessions": 26,
+      "engagedSessions": 4,
+      "pageViews": 31,
+      "bounceRate": 84.62,
+      "engagementRate": 15.38,
+      "avgSessionDuration": 24.1,
+      "pageViewsPerSession": 1.19,
+      "totalEngagementTime": 79,
+      "eventCount": 89
+    },
+    "topPages": [
+      {
+        "pagePath": "/",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 25,
+        "users": 24,
+        "avgDuration": 24.3,
+        "bounceRate": 83.33
+      },
+      {
+        "pagePath": "/resources",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 2,
+        "users": 1,
+        "avgDuration": 12.3,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/new-folder/home",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 3.4,
+        "bounceRate": 100
+      },
+      {
+        "pagePath": "/product/erp",
+        "pageTitle": "ERP Edition for SAP Testing | PerfecTwin",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 20.1,
+        "bounceRate": 100
+      },
+      {
+        "pagePath": "/resources/blog",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 7.7,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/why-perfectwin",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 0,
+        "bounceRate": 100
+      }
+    ],
+    "channels": [
+      {
+        "channel": "Direct",
+        "sessions": 21,
+        "users": 21,
+        "engagementRate": 9.52
+      },
+      {
+        "channel": "Referral",
+        "sessions": 2,
+        "users": 2,
+        "engagementRate": 50
+      },
+      {
+        "channel": "Organic Search",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0
+      },
+      {
+        "channel": "Organic Social",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      },
+      {
+        "channel": "Unassigned",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0
+      }
+    ],
+    "sourceMedium": [
+      {
+        "source": "(direct)",
+        "medium": "(none)",
+        "sessions": 21,
+        "users": 21,
+        "engagementRate": 9.52,
+        "avgDuration": 9.7
+      },
+      {
+        "source": "(not set)",
+        "medium": "(not set)",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0,
+        "avgDuration": 20.1
+      },
+      {
+        "source": "framer.com",
+        "medium": "referral",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0,
+        "avgDuration": 3.4
+      },
+      {
+        "source": "google",
+        "medium": "organic",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0,
+        "avgDuration": 0
+      },
+      {
+        "source": "linkedin.com",
+        "medium": "referral",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100,
+        "avgDuration": 378.4
+      },
+      {
+        "source": "tranquil-signposts-615878.framer.app",
+        "medium": "referral",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100,
+        "avgDuration": 22.7
+      }
+    ],
+    "devices": [
+      {
+        "device": "desktop",
+        "sessions": 26,
+        "users": 25,
+        "pageViews": 31,
+        "engagementRate": 15.38,
+        "avgDuration": 24.1
+      }
+    ],
+    "countries": [
+      {
+        "country": "United States",
+        "sessions": 21,
+        "users": 21,
+        "engagementRate": 14.29
+      },
+      {
+        "country": "Japan",
+        "sessions": 2,
+        "users": 1,
+        "engagementRate": 0
+      },
+      {
+        "country": "South Korea",
+        "sessions": 2,
+        "users": 2,
+        "engagementRate": 50
+      },
+      {
+        "country": "United Kingdom",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0
+      }
+    ],
+    "landingPages": [
+      {
+        "landingPage": "/",
+        "sessions": 23,
+        "users": 23,
+        "bounceRate": 82.61,
+        "avgDuration": 26.3,
+        "pagesPerSession": 1.22
+      },
+      {
+        "landingPage": "",
+        "sessions": 1,
+        "users": 1,
+        "bounceRate": 100,
+        "avgDuration": 0,
+        "pagesPerSession": 0
+      },
+      {
+        "landingPage": "/new-folder/home",
+        "sessions": 1,
+        "users": 1,
+        "bounceRate": 100,
+        "avgDuration": 3.4,
+        "pagesPerSession": 1
+      },
+      {
+        "landingPage": "/why-perfectwin",
+        "sessions": 1,
+        "users": 1,
+        "bounceRate": 100,
+        "avgDuration": 20.1,
+        "pagesPerSession": 2
+      }
+    ]
+  },
+  "gsc": {
+    "date": "2026-04-10",
+    "sites": [
+      {
+        "siteUrl": "https://perfectwin.ai/",
+        "label": "perfectwin.ai",
+        "date": "2026-04-10",
+        "actualDate": "2026-04-08",
+        "totals": {
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      },
+      {
+        "siteUrl": "https://blog.perfectwin.ai/",
+        "label": "blog.perfectwin.ai",
+        "date": "2026-04-10",
+        "actualDate": "2026-04-08",
+        "totals": {
+          "clicks": 0,
+          "impressions": 291,
+          "ctr": 0,
+          "position": 20.1
+        },
+        "topQueries": [
+          {
+            "query": "\"i_salesorder\" cds view s/4hana",
+            "clicks": 0,
+            "impressions": 8,
+            "ctr": 0,
+            "position": 9.1
+          },
+          {
+            "query": "automate pre and post migration validation in sap",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 14
+          },
+          {
+            "query": "automated testing sap",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 49
+          },
+          {
+            "query": "automation prioritization",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 17
+          },
+          {
+            "query": "difference between sap rise and grow",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 50
+          },
+          {
+            "query": "optimising sap s/4hana testing",
+            "clicks": 0,
+            "impressions": 3,
+            "ctr": 0,
+            "position": 10.3
+          },
+          {
+            "query": "perfectwin",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 32
+          },
+          {
+            "query": "rise migration",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 39
+          },
+          {
+            "query": "rise migration sap",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 53
+          },
+          {
+            "query": "rise with sap migration",
+            "clicks": 0,
+            "impressions": 5,
+            "ctr": 0,
+            "position": 62.2
+          }
+        ],
+        "topPages": [
+          {
+            "page": "https://blog.perfectwin.ai/",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 19
+          },
+          {
+            "page": "https://blog.perfectwin.ai/backend-logic-test-automation",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 10
+          },
+          {
+            "page": "https://blog.perfectwin.ai/category/sap-migration-testing-",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 88
+          },
+          {
+            "page": "https://blog.perfectwin.ai/category/sap-regression-testing",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 69
+          },
+          {
+            "page": "https://blog.perfectwin.ai/sap-cloud-alm-test-management-strengths-gaps-automation-criteria",
+            "clicks": 0,
+            "impressions": 20,
+            "ctr": 0,
+            "position": 9.9
+          },
+          {
+            "page": "https://blog.perfectwin.ai/sap-cloud-alm-testing-strategy-redesign",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 4.5
+          },
+          {
+            "page": "https://blog.perfectwin.ai/sap-cloud-ecosystem-guide",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 39
+          },
+          {
+            "page": "https://blog.perfectwin.ai/sap-cloud-transition-rise-grow-guide",
+            "clicks": 0,
+            "impressions": 18,
+            "ctr": 0,
+            "position": 55.8
+          },
+          {
+            "page": "https://blog.perfectwin.ai/sap-erp-test-trends",
+            "clicks": 0,
+            "impressions": 52,
+            "ctr": 0,
+            "position": 34.3
+          },
+          {
+            "page": "https://blog.perfectwin.ai/sap-grow-upgrade-testing-guide",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 10
+          }
+        ],
+        "devices": [
+          {
+            "device": "DESKTOP",
+            "clicks": 0,
+            "impressions": 272,
+            "ctr": 0,
+            "position": 19.3
+          },
+          {
+            "device": "MOBILE",
+            "clicks": 0,
+            "impressions": 18,
+            "ctr": 0,
+            "position": 29.9
+          },
+          {
+            "device": "TABLET",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 55
+          }
+        ],
+        "countries": [
+          {
+            "country": "are",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 11
+          },
+          {
+            "country": "aus",
+            "clicks": 0,
+            "impressions": 3,
+            "ctr": 0,
+            "position": 17.3
+          },
+          {
+            "country": "aut",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 4.5
+          },
+          {
+            "country": "bel",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 1
+          },
+          {
+            "country": "bol",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 8
+          },
+          {
+            "country": "bra",
+            "clicks": 0,
+            "impressions": 7,
+            "ctr": 0,
+            "position": 7.1
+          },
+          {
+            "country": "can",
+            "clicks": 0,
+            "impressions": 12,
+            "ctr": 0,
+            "position": 7.7
+          },
+          {
+            "country": "che",
+            "clicks": 0,
+            "impressions": 23,
+            "ctr": 0,
+            "position": 24.7
+          },
+          {
+            "country": "chl",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 1
+          },
+          {
+            "country": "chn",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 7.5
+          }
+        ]
+      }
+    ]
+  },
+  "inblog": {
+    "date": "2026-04-10",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2026-04-10",
+        "traffic": {
+          "data": [
+            {
+              "date": "2026-04-10",
+              "visits": 9,
+              "clicks": 0,
+              "organic": 4,
+              "home": 1,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-10",
+            "end_date": "2026-04-10",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 156549,
+              "visits": 3,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Test Automation Tools Compared: A Practical Selection Guide for 2026"
+            },
+            {
+              "post_id": 59866,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 2,
+              "cvr": 0,
+              "title": "SAP Order-to-Cash Testing Automation: A Complete Guide (2026)"
+            },
+            {
+              "post_id": 70120,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Testing Preparation Guide: 5-Step Checklist"
+            },
+            {
+              "post_id": 149800,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": "SAP Cloud ALM Test Management: Strengths, Gaps, and What to Look for in Automation Tools"
+            },
+            {
+              "post_id": 153503,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": "Can Your Company Start SAP Test Automation? A Practical Path Forward"
+            },
+            {
+              "post_id": null,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "(비포스트 페이지)"
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-10",
+            "end_date": "2026-04-10",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "www.google.com",
+              "count": 4
+            },
+            {
+              "full_referrer": "direct",
+              "count": 3
+            },
+            {
+              "full_referrer": "com.linkedin.android",
+              "count": 2
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-10",
+            "end_date": "2026-04-10"
+          }
+        }
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2026-04-10",
+        "traffic": {
+          "data": [
+            {
+              "date": "2026-04-10",
+              "visits": 23,
+              "clicks": 0,
+              "organic": 2,
+              "home": 7,
+              "post": 34,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-10",
+            "end_date": "2026-04-10",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": null,
+              "visits": 7,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "(비포스트 페이지)"
+            },
+            {
+              "post_id": 154898,
+              "visits": 5,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP 테스트 자동화 도구 비교: 실무 기준으로 본 2026년 선택 가이드"
+            },
+            {
+              "post_id": 55187,
+              "visits": 3,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP ERP 전환, 왜 실거래 데이터 기반 테스트가 필수인가?"
+            },
+            {
+              "post_id": 80395,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP S/4HANA 전환 시대, 테스트 전략은 어떻게 달라져야 할까"
+            },
+            {
+              "post_id": 55188,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": "유통 기업에 SAP 테스트 자동화가 중요한 이유"
+            },
+            {
+              "post_id": 63322,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP S/4HANA Cloud 구축 방식: Public, Private, On-Premise 살펴보기"
+            },
+            {
+              "post_id": 69123,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": "SAP 테스팅 사전 준비 가이드: 실패하지 않는 5단계 체크리스트"
+            },
+            {
+              "post_id": 78962,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP 테스트 전략 (2) S/4HANA Upgrade"
+            },
+            {
+              "post_id": 86299,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP 테스트 케이스 설계: 시나리오 기반 E2E 테스트 가이드"
+            },
+            {
+              "post_id": 150139,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Cloud ALM 테스트 관리, 어디까지 되고 무엇이 부족한가"
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-10",
+            "end_date": "2026-04-10",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 17
+            },
+            {
+              "full_referrer": "com.linkedin.android",
+              "count": 2
+            },
+            {
+              "full_referrer": "inblog.ai",
+              "count": 2
+            },
+            {
+              "full_referrer": "www.google.com",
+              "count": 2
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-10",
+            "end_date": "2026-04-10"
+          }
+        }
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": "2026-04-11T00:05:59.645Z"
+  }
+}
