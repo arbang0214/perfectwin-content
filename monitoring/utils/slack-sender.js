@@ -249,8 +249,8 @@ function extractInsightBlocks(lines, insightStart, maxCount) {
     const rawTitle = titleMatch[1].replace(/\*\*/g, "").trim();
     const severity = getSeverity(rawTitle);
     const cleanTitle = rawTitle
-      .replace(/^[🚨⚠️💡📉📈📊📍🔍🎯🌍]+\s*/, "")  // 이모지 제거
-      .replace(/^\d+\.\s*/, "");                         // 번호 제거
+      .replace(/^[\p{Emoji_Presentation}\p{Extended_Pictographic}]+\s*/u, "")  // 이모지 제거
+      .replace(/^\d+\.\s*/, "");                                                // 번호 제거
 
     // 제목 아래에서 핵심 내용 추출
     const bullets = [];
@@ -279,17 +279,17 @@ function extractInsightBlocks(lines, insightStart, maxCount) {
         if (content) {
           actionLine = `→ 액션: ${content}`;
         } else {
-          // 다음 줄 불릿에서 첫 번째 액션 항목을 수집
+          // 다음 줄 불릿에서 첫 번째 액션 항목을 수집하고, 나머지 액션 불릿은 건너뜀
           for (let k = j + 1; k < lines.length; k++) {
             const actionTrimmed = lines[k].trim();
-            if (!actionTrimmed) continue;
+            if (!actionTrimmed) { j = k; continue; }
             if (/^#{1,3}\s/.test(lines[k])) break;
             if (/^[-•*]\s/.test(actionTrimmed)) {
-              const actionContent = actionTrimmed.replace(/^[-•*]\s*/, "").replace(/\*\*/g, "").trim();
-              if (actionContent) {
-                actionLine = `→ 액션: ${actionContent}`;
-                break;
+              if (!actionLine) {
+                const actionContent = actionTrimmed.replace(/^[-•*]\s*/, "").replace(/\*\*/g, "").trim();
+                if (actionContent) actionLine = `→ 액션: ${actionContent}`;
               }
+              j = k; // 외부 j 루프를 전진시켜 액션 불릿이 일반 불릿으로 중복 추출되지 않도록 함
             } else {
               break;
             }
