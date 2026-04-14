@@ -1,0 +1,401 @@
+{
+  "date": "2026-04-14",
+  "collectedAt": "2026-04-14T23:52:42.392Z",
+  "ga4": {
+    "date": "2026-04-14",
+    "summary": {
+      "activeUsers": 18,
+      "newUsers": 20,
+      "returningUsers": -2,
+      "sessions": 20,
+      "engagedSessions": 4,
+      "pageViews": 27,
+      "bounceRate": 80,
+      "engagementRate": 20,
+      "avgSessionDuration": 134.2,
+      "pageViewsPerSession": 1.35,
+      "totalEngagementTime": 163,
+      "eventCount": 77
+    },
+    "topPages": [
+      {
+        "pagePath": "/",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 24,
+        "users": 18,
+        "avgDuration": 124.8,
+        "bounceRate": 80
+      },
+      {
+        "pagePath": "/why-perfectwin",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 2,
+        "users": 1,
+        "avgDuration": 34.1,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/resources",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 153.2,
+        "bounceRate": 0
+      }
+    ],
+    "channels": [
+      {
+        "channel": "Direct",
+        "sessions": 17,
+        "users": 16,
+        "engagementRate": 17.65
+      },
+      {
+        "channel": "Organic Search",
+        "sessions": 1,
+        "users": 0,
+        "engagementRate": 0
+      },
+      {
+        "channel": "Organic Social",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0
+      },
+      {
+        "channel": "Referral",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      }
+    ],
+    "sourceMedium": [
+      {
+        "source": "(direct)",
+        "medium": "(none)",
+        "sessions": 17,
+        "users": 16,
+        "engagementRate": 17.65,
+        "avgDuration": 14.7
+      },
+      {
+        "source": "google",
+        "medium": "organic",
+        "sessions": 1,
+        "users": 0,
+        "engagementRate": 0,
+        "avgDuration": 0
+      },
+      {
+        "source": "inblog.ai",
+        "medium": "referral",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100,
+        "avgDuration": 2435
+      },
+      {
+        "source": "linkedin.com",
+        "medium": "referral",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0,
+        "avgDuration": 0
+      }
+    ],
+    "devices": [
+      {
+        "device": "desktop",
+        "sessions": 19,
+        "users": 17,
+        "pageViews": 26,
+        "engagementRate": 21.05,
+        "avgDuration": 141.3
+      },
+      {
+        "device": "mobile",
+        "sessions": 1,
+        "users": 1,
+        "pageViews": 1,
+        "engagementRate": 0,
+        "avgDuration": 0
+      }
+    ],
+    "countries": [
+      {
+        "country": "United States",
+        "sessions": 17,
+        "users": 16,
+        "engagementRate": 17.65
+      },
+      {
+        "country": "South Korea",
+        "sessions": 3,
+        "users": 2,
+        "engagementRate": 33.33
+      }
+    ],
+    "landingPages": [
+      {
+        "landingPage": "/",
+        "sessions": 19,
+        "users": 17,
+        "bounceRate": 84.21,
+        "avgDuration": 13.1,
+        "pagesPerSession": 1.16
+      },
+      {
+        "landingPage": "/resources",
+        "sessions": 1,
+        "users": 1,
+        "bounceRate": 0,
+        "avgDuration": 2435,
+        "pagesPerSession": 5
+      }
+    ]
+  },
+  "gsc": null,
+  "inblog": {
+    "date": "2026-04-14",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2026-04-14",
+        "traffic": {
+          "data": [
+            {
+              "date": "2026-04-14",
+              "visits": 49,
+              "clicks": 0,
+              "organic": 1,
+              "home": 8,
+              "post": 47,
+              "category": 8,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-14",
+            "end_date": "2026-04-14",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": null,
+              "visits": 16,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "(비포스트 페이지)"
+            },
+            {
+              "post_id": 70120,
+              "visits": 5,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Testing Checklist: 5 Steps Before S/4HANA Go-Live"
+            },
+            {
+              "post_id": 79267,
+              "visits": 5,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP S/4HANA Upgrade Testing: 3 Proven Strategies (2026)"
+            },
+            {
+              "post_id": 86636,
+              "visits": 5,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP S/4HANA Testing Strategy: 4 Trends Reshaping How Enterprises Test in 2026"
+            },
+            {
+              "post_id": 124575,
+              "visits": 5,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "2026 SAP Strategy: Addressing Challenges & Automation Tips for 80% Efficiency Gain"
+            },
+            {
+              "post_id": 87010,
+              "visits": 4,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Test Case Design: Scenario-Based E2E Testing Guide"
+            },
+            {
+              "post_id": 60109,
+              "visits": 3,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "What SAP Finance Teams Need to Know About Document Posting Complexity and Test Automation"
+            },
+            {
+              "post_id": 56958,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Backend Test Automation: Why UI Replay Falls Short for ERP Testing"
+            },
+            {
+              "post_id": 59866,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Order-to-Cash Test Automation: Complete Guide (2026)"
+            },
+            {
+              "post_id": 77338,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": "SAP S/4HANA Migration Testing: 4 Data Conversion Strategies That Prevent Go-Live Failures"
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-14",
+            "end_date": "2026-04-14",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 47
+            },
+            {
+              "full_referrer": "www.google.com",
+              "count": 1
+            },
+            {
+              "full_referrer": "www.linkedin.com",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-14",
+            "end_date": "2026-04-14"
+          }
+        }
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2026-04-14",
+        "traffic": {
+          "data": [
+            {
+              "date": "2026-04-14",
+              "visits": 9,
+              "clicks": 0,
+              "organic": 2,
+              "home": 3,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-14",
+            "end_date": "2026-04-14",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 63322,
+              "visits": 3,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": "SAP S/4HANA Cloud 구축 방식: Public, Private, On-Premise 살펴보기"
+            },
+            {
+              "post_id": null,
+              "visits": 3,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "(비포스트 페이지)"
+            },
+            {
+              "post_id": 157559,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP 테스트 자동화, 왜 실패하고 어떻게 성공하는가"
+            },
+            {
+              "post_id": 58745,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": "테스트 자동화 전략 (2) 자동화 도구 선정 전략"
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-14",
+            "end_date": "2026-04-14",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 3
+            },
+            {
+              "full_referrer": "ko.blog.perfectwin.ai",
+              "count": 2
+            },
+            {
+              "full_referrer": "www.google.com",
+              "count": 2
+            },
+            {
+              "full_referrer": "claude.ai",
+              "count": 1
+            },
+            {
+              "full_referrer": "com.linkedin.android",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-14",
+            "end_date": "2026-04-14"
+          }
+        }
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": "2026-04-14T23:52:42.392Z"
+  }
+}
