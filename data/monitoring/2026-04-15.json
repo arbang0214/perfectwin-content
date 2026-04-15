@@ -1,0 +1,471 @@
+{
+  "date": "2026-04-15",
+  "collectedAt": "2026-04-15T23:52:53.217Z",
+  "ga4": {
+    "date": "2026-04-15",
+    "summary": {
+      "activeUsers": 21,
+      "newUsers": 22,
+      "returningUsers": -1,
+      "sessions": 23,
+      "engagedSessions": 7,
+      "pageViews": 36,
+      "bounceRate": 69.57,
+      "engagementRate": 30.43,
+      "avgSessionDuration": 24.9,
+      "pageViewsPerSession": 1.57,
+      "totalEngagementTime": 274,
+      "eventCount": 93
+    },
+    "topPages": [
+      {
+        "pagePath": "/",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 23,
+        "users": 20,
+        "avgDuration": 18.9,
+        "bounceRate": 75
+      },
+      {
+        "pagePath": "/product/erp",
+        "pageTitle": "ERP Edition for SAP Testing | PerfecTwin",
+        "pageViews": 4,
+        "users": 3,
+        "avgDuration": 6.4,
+        "bounceRate": 25
+      },
+      {
+        "pagePath": "/about-us",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 2,
+        "users": 1,
+        "avgDuration": 11.7,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/contact-us/request-demo",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 2,
+        "users": 2,
+        "avgDuration": 6.4,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/why-perfectwin",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 2,
+        "users": 2,
+        "avgDuration": 17.1,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/resources/blog",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 45.5,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/solutions",
+        "pageTitle": "SAP S/4HANA Testing Solutions | Migration, Upgrade & Regression | PerfecTwin",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 23.5,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/solutions/migration",
+        "pageTitle": "SAP ECC to S/4HANA Migration Testing | Validate Real Operations | PerfecTwin",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 39.6,
+        "bounceRate": 0
+      }
+    ],
+    "channels": [
+      {
+        "channel": "Direct",
+        "sessions": 22,
+        "users": 20,
+        "engagementRate": 27.27
+      },
+      {
+        "channel": "Organic Search",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      }
+    ],
+    "sourceMedium": [
+      {
+        "source": "(direct)",
+        "medium": "(none)",
+        "sessions": 22,
+        "users": 20,
+        "engagementRate": 27.27,
+        "avgDuration": 24.7
+      },
+      {
+        "source": "bing",
+        "medium": "organic",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100,
+        "avgDuration": 28.1
+      }
+    ],
+    "devices": [
+      {
+        "device": "desktop",
+        "sessions": 23,
+        "users": 21,
+        "pageViews": 36,
+        "engagementRate": 30.43,
+        "avgDuration": 24.9
+      }
+    ],
+    "countries": [
+      {
+        "country": "United States",
+        "sessions": 18,
+        "users": 18,
+        "engagementRate": 16.67
+      },
+      {
+        "country": "Canada",
+        "sessions": 2,
+        "users": 1,
+        "engagementRate": 100
+      },
+      {
+        "country": "Poland",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      },
+      {
+        "country": "South Korea",
+        "sessions": 1,
+        "users": 0,
+        "engagementRate": 0
+      },
+      {
+        "country": "Vietnam",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      }
+    ],
+    "landingPages": [
+      {
+        "landingPage": "/",
+        "sessions": 20,
+        "users": 20,
+        "bounceRate": 75,
+        "avgDuration": 26.7,
+        "pagesPerSession": 1.45
+      },
+      {
+        "landingPage": "",
+        "sessions": 1,
+        "users": 0,
+        "bounceRate": 100,
+        "avgDuration": 0,
+        "pagesPerSession": 0
+      },
+      {
+        "landingPage": "/about-us",
+        "sessions": 1,
+        "users": 1,
+        "bounceRate": 0,
+        "avgDuration": 28.1,
+        "pagesPerSession": 5
+      },
+      {
+        "landingPage": "/contact-us/request-demo",
+        "sessions": 1,
+        "users": 1,
+        "bounceRate": 0,
+        "avgDuration": 8.6,
+        "pagesPerSession": 2
+      }
+    ]
+  },
+  "gsc": null,
+  "inblog": {
+    "date": "2026-04-15",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2026-04-15",
+        "traffic": {
+          "data": [
+            {
+              "date": "2026-04-15",
+              "visits": 20,
+              "clicks": 0,
+              "organic": 2,
+              "home": 5,
+              "post": 31,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-15",
+            "end_date": "2026-04-15",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": null,
+              "visits": 5,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "(비포스트 페이지)"
+            },
+            {
+              "post_id": 87010,
+              "visits": 3,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Test Case Design: Scenario-Based E2E Testing Guide"
+            },
+            {
+              "post_id": 68574,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP GROW Upgrade: Complete Testing Guide"
+            },
+            {
+              "post_id": 141509,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": "Why You Need to Redesign Your SAP Testing Strategy for the Cloud ALM Era"
+            },
+            {
+              "post_id": 160801,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Hypercare Testing Strategy: How to Cut Your Stabilization Period in Half"
+            },
+            {
+              "post_id": 55299,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "Why SAP Test Automation is Critical for Retail Enterprises"
+            },
+            {
+              "post_id": 77338,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP S/4HANA Migration Testing: 4 Data Conversion Strategies That Prevent Go-Live Failures"
+            },
+            {
+              "post_id": 86636,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP S/4HANA Testing Strategy: 4 Trends Reshaping How Enterprises Test in 2026"
+            },
+            {
+              "post_id": 124575,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "2026 SAP Strategy: Addressing Challenges & Automation Tips for 80% Efficiency Gain"
+            },
+            {
+              "post_id": 151584,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": "How to Build SAP Test Automation on Cloud ALM: A Practical Guide"
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-15",
+            "end_date": "2026-04-15",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 18
+            },
+            {
+              "full_referrer": "www.bing.com",
+              "count": 2
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-15",
+            "end_date": "2026-04-15"
+          }
+        }
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2026-04-15",
+        "traffic": {
+          "data": [
+            {
+              "date": "2026-04-15",
+              "visits": 28,
+              "clicks": 0,
+              "organic": 0,
+              "home": 9,
+              "post": 34,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-15",
+            "end_date": "2026-04-15",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 159870,
+              "visits": 9,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Hypercare 테스트 전략: 안정화 기간을 절반으로 줄이는 법"
+            },
+            {
+              "post_id": null,
+              "visits": 9,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "(비포스트 페이지)"
+            },
+            {
+              "post_id": 75497,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP 테스트 전략 (1) ECC to S/4HANA Migration"
+            },
+            {
+              "post_id": 86299,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP 테스트 케이스 설계: 시나리오 기반 E2E 테스트 가이드"
+            },
+            {
+              "post_id": 154898,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP 테스트 자동화 도구 비교: 실무 기준으로 본 2026년 선택 가이드"
+            },
+            {
+              "post_id": 56803,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "UI를 넘어서: 백엔드 로직 기반 테스트 자동화"
+            },
+            {
+              "post_id": 78962,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP 테스트 전략 (2) S/4HANA Upgrade"
+            },
+            {
+              "post_id": 150139,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Cloud ALM 테스트 관리, 어디까지 되고 무엇이 부족한가"
+            },
+            {
+              "post_id": 153494,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP 테스트 자동화, 우리 회사도 시작할 수 있을까"
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-15",
+            "end_date": "2026-04-15",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 17
+            },
+            {
+              "full_referrer": "com.linkedin.android",
+              "count": 6
+            },
+            {
+              "full_referrer": "claude.ai",
+              "count": 4
+            },
+            {
+              "full_referrer": "inblog.ai",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-15",
+            "end_date": "2026-04-15"
+          }
+        }
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": "2026-04-15T23:52:53.217Z"
+  }
+}
