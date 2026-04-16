@@ -1,0 +1,331 @@
+{
+  "date": "2026-04-16",
+  "collectedAt": "2026-04-16T23:52:13.245Z",
+  "ga4": {
+    "date": "2026-04-16",
+    "summary": {
+      "activeUsers": 13,
+      "newUsers": 12,
+      "returningUsers": 1,
+      "sessions": 17,
+      "engagedSessions": 5,
+      "pageViews": 26,
+      "bounceRate": 70.59,
+      "engagementRate": 29.41,
+      "avgSessionDuration": 240.8,
+      "pageViewsPerSession": 1.53,
+      "totalEngagementTime": 247,
+      "eventCount": 66
+    },
+    "topPages": [
+      {
+        "pagePath": "/",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 20,
+        "users": 12,
+        "avgDuration": 289.1,
+        "bounceRate": 64.29
+      },
+      {
+        "pagePath": "/contact-us/request-demo",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 5,
+        "users": 3,
+        "avgDuration": 11.7,
+        "bounceRate": 50
+      },
+      {
+        "pagePath": "/why-perfectwin",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 0,
+        "bounceRate": 50
+      }
+    ],
+    "channels": [
+      {
+        "channel": "Direct",
+        "sessions": 14,
+        "users": 12,
+        "engagementRate": 28.57
+      },
+      {
+        "channel": "Organic Search",
+        "sessions": 3,
+        "users": 1,
+        "engagementRate": 33.33
+      }
+    ],
+    "sourceMedium": [
+      {
+        "source": "(direct)",
+        "medium": "(none)",
+        "sessions": 14,
+        "users": 12,
+        "engagementRate": 28.57,
+        "avgDuration": 289.2
+      },
+      {
+        "source": "google",
+        "medium": "organic",
+        "sessions": 3,
+        "users": 1,
+        "engagementRate": 33.33,
+        "avgDuration": 14.9
+      }
+    ],
+    "devices": [
+      {
+        "device": "desktop",
+        "sessions": 17,
+        "users": 13,
+        "pageViews": 26,
+        "engagementRate": 29.41,
+        "avgDuration": 240.8
+      }
+    ],
+    "countries": [
+      {
+        "country": "United States",
+        "sessions": 15,
+        "users": 12,
+        "engagementRate": 26.67
+      },
+      {
+        "country": "Algeria",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      },
+      {
+        "country": "South Korea",
+        "sessions": 1,
+        "users": 0,
+        "engagementRate": 0
+      }
+    ],
+    "landingPages": [
+      {
+        "landingPage": "/",
+        "sessions": 14,
+        "users": 12,
+        "bounceRate": 64.29,
+        "avgDuration": 292.1,
+        "pagesPerSession": 1.79
+      },
+      {
+        "landingPage": "",
+        "sessions": 2,
+        "users": 2,
+        "bounceRate": 100,
+        "avgDuration": 0,
+        "pagesPerSession": 0
+      },
+      {
+        "landingPage": "/contact-us/request-demo",
+        "sessions": 1,
+        "users": 1,
+        "bounceRate": 100,
+        "avgDuration": 5,
+        "pagesPerSession": 1
+      }
+    ]
+  },
+  "gsc": null,
+  "inblog": {
+    "date": "2026-04-16",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2026-04-16",
+        "traffic": {
+          "data": [
+            {
+              "date": "2026-04-16",
+              "visits": 12,
+              "clicks": 0,
+              "organic": 1,
+              "home": 1,
+              "post": 27,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-16",
+            "end_date": "2026-04-16",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 160801,
+              "visits": 3,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Hypercare Testing Strategy: How to Cut Your Stabilization Period in Half"
+            },
+            {
+              "post_id": 45949,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "Successful Test Automation in SAP S/4HANA Migration: Case Study of a Leading CPG Manufacturer"
+            },
+            {
+              "post_id": 46820,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "How a Global EV Battery Manufacturer Automated Testing for Millions of Data Points in Its SAP S/4HANA Migration"
+            },
+            {
+              "post_id": 55299,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "Why SAP Test Automation is Critical for Retail Enterprises"
+            },
+            {
+              "post_id": 56958,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Backend Test Automation: Why UI Replay Falls Short for ERP Testing"
+            },
+            {
+              "post_id": 77338,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP S/4HANA Migration Testing: 4 Data Conversion Strategies That Prevent Go-Live Failures"
+            },
+            {
+              "post_id": 149800,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Cloud ALM Test Management: Strengths, Gaps, and What to Look for in Automation Tools"
+            },
+            {
+              "post_id": 151584,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": "How to Build SAP Test Automation on Cloud ALM: A Practical Guide"
+            },
+            {
+              "post_id": null,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "(비포스트 페이지)"
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-16",
+            "end_date": "2026-04-16",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 10
+            },
+            {
+              "full_referrer": "www.bing.com",
+              "count": 1
+            },
+            {
+              "full_referrer": "www.perfectwin.ai",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-16",
+            "end_date": "2026-04-16"
+          }
+        }
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2026-04-16",
+        "traffic": {
+          "data": [
+            {
+              "date": "2026-04-16",
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "home": 0,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-16",
+            "end_date": "2026-04-16",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 86299,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": "SAP 테스트 케이스 설계: 시나리오 기반 E2E 테스트 가이드"
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-16",
+            "end_date": "2026-04-16",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "www.google.com",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-16",
+            "end_date": "2026-04-16"
+          }
+        }
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": "2026-04-16T23:52:13.245Z"
+  }
+}
