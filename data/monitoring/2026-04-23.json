@@ -1,0 +1,399 @@
+{
+  "date": "2026-04-23",
+  "collectedAt": "2026-04-23T23:55:09.105Z",
+  "ga4": {
+    "date": "2026-04-23",
+    "summary": {
+      "activeUsers": 19,
+      "newUsers": 21,
+      "returningUsers": -2,
+      "sessions": 21,
+      "engagedSessions": 8,
+      "pageViews": 25,
+      "bounceRate": 61.9,
+      "engagementRate": 38.1,
+      "avgSessionDuration": 20.2,
+      "pageViewsPerSession": 1.19,
+      "totalEngagementTime": 279,
+      "eventCount": 83
+    },
+    "topPages": [
+      {
+        "pagePath": "/",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 24,
+        "users": 19,
+        "avgDuration": 19.6,
+        "bounceRate": 61.9
+      },
+      {
+        "pagePath": "/product/erp/test-execution",
+        "pageTitle": "SAP Test Preparation with Real Operational Data | PerfecTwin",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 12.4,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/solutions/migration",
+        "pageTitle": "SAP ECC to S/4HANA Migration Testing | Validate Real Operations | PerfecTwin",
+        "pageViews": 0,
+        "users": 1,
+        "avgDuration": 0.2,
+        "bounceRate": 100
+      }
+    ],
+    "channels": [
+      {
+        "channel": "Direct",
+        "sessions": 17,
+        "users": 16,
+        "engagementRate": 41.18
+      },
+      {
+        "channel": "Organic Search",
+        "sessions": 3,
+        "users": 2,
+        "engagementRate": 0
+      },
+      {
+        "channel": "Referral",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      }
+    ],
+    "sourceMedium": [
+      {
+        "source": "(direct)",
+        "medium": "(none)",
+        "sessions": 17,
+        "users": 16,
+        "engagementRate": 41.18,
+        "avgDuration": 24.2
+      },
+      {
+        "source": "google",
+        "medium": "organic",
+        "sessions": 3,
+        "users": 2,
+        "engagementRate": 0,
+        "avgDuration": 0.1
+      },
+      {
+        "source": "hanbijegarl.framer.website",
+        "medium": "referral",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100,
+        "avgDuration": 12.4
+      }
+    ],
+    "devices": [
+      {
+        "device": "desktop",
+        "sessions": 21,
+        "users": 19,
+        "pageViews": 25,
+        "engagementRate": 38.1,
+        "avgDuration": 20.2
+      }
+    ],
+    "countries": [
+      {
+        "country": "United States",
+        "sessions": 13,
+        "users": 12,
+        "engagementRate": 30.77
+      },
+      {
+        "country": "India",
+        "sessions": 2,
+        "users": 1,
+        "engagementRate": 0
+      },
+      {
+        "country": "",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      },
+      {
+        "country": "Canada",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      },
+      {
+        "country": "France",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      },
+      {
+        "country": "New Zealand",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0
+      },
+      {
+        "country": "Russia",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0
+      },
+      {
+        "country": "United Kingdom",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      }
+    ],
+    "landingPages": [
+      {
+        "landingPage": "/",
+        "sessions": 20,
+        "users": 18,
+        "bounceRate": 60,
+        "avgDuration": 21.2,
+        "pagesPerSession": 1.25
+      },
+      {
+        "landingPage": "",
+        "sessions": 1,
+        "users": 1,
+        "bounceRate": 100,
+        "avgDuration": 0.2,
+        "pagesPerSession": 0
+      }
+    ]
+  },
+  "gsc": null,
+  "inblog": {
+    "date": "2026-04-23",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2026-04-23",
+        "traffic": {
+          "data": [
+            {
+              "date": "2026-04-23",
+              "visits": 9,
+              "clicks": 0,
+              "organic": 5,
+              "home": 0,
+              "post": 27,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-23",
+            "end_date": "2026-04-23",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 141509,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": "Why You Need to Redesign Your SAP Testing Strategy for the Cloud ALM Era"
+            },
+            {
+              "post_id": 151584,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 2,
+              "cvr": 0,
+              "title": "How to Build SAP Test Automation on Cloud ALM: A Practical Guide"
+            },
+            {
+              "post_id": 59098,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Test Automation Tool Selection: A Framework for Choosing the Right Solution"
+            },
+            {
+              "post_id": 65690,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "RISE with SAP vs GROW with SAP: Key Differences and How to Choose (2026)"
+            },
+            {
+              "post_id": 70120,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Testing Checklist: 5 Steps Before S/4HANA Go-Live"
+            },
+            {
+              "post_id": 77338,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": "SAP S/4HANA Migration Testing: 4 Data Conversion Strategies That Prevent Go-Live Failures"
+            },
+            {
+              "post_id": 79267,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": "SAP S/4HANA Upgrade Testing: 3 Proven Strategies (2026)"
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-23",
+            "end_date": "2026-04-23",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 4
+            },
+            {
+              "full_referrer": "www.bing.com",
+              "count": 2
+            },
+            {
+              "full_referrer": "www.google.com",
+              "count": 2
+            },
+            {
+              "full_referrer": "au.search.yahoo.com",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-23",
+            "end_date": "2026-04-23"
+          }
+        }
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2026-04-23",
+        "traffic": {
+          "data": [
+            {
+              "date": "2026-04-23",
+              "visits": 8,
+              "clicks": 0,
+              "organic": 1,
+              "home": 1,
+              "post": 26,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-23",
+            "end_date": "2026-04-23",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 59993,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP 재경 담당자가 알아야 할 전표 처리 복잡성과 테스트 자동화"
+            },
+            {
+              "post_id": 151636,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "Cloud ALM 시대, SAP 테스트 자동화 구축 실전 가이드"
+            },
+            {
+              "post_id": 55823,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "테스트 자동화의 시대: 기업들이 주목하는 이유"
+            },
+            {
+              "post_id": 63322,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": "SAP S/4HANA Cloud 구축 방식: Public, Private, On-Premise 살펴보기"
+            },
+            {
+              "post_id": 141529,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Cloud ALM 전환 시대, 테스트 전략을 다시 설계해야 하는 이유"
+            },
+            {
+              "post_id": null,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "(비포스트 페이지)"
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-23",
+            "end_date": "2026-04-23",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 7
+            },
+            {
+              "full_referrer": "www.google.com",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-23",
+            "end_date": "2026-04-23"
+          }
+        }
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": "2026-04-23T23:55:09.105Z"
+  }
+}
