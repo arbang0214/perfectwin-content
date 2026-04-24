@@ -1,0 +1,387 @@
+{
+  "date": "2026-04-24",
+  "collectedAt": "2026-04-24T23:50:00.418Z",
+  "ga4": {
+    "date": "2026-04-24",
+    "summary": {
+      "activeUsers": 16,
+      "newUsers": 17,
+      "returningUsers": -1,
+      "sessions": 21,
+      "engagedSessions": 6,
+      "pageViews": 25,
+      "bounceRate": 71.43,
+      "engagementRate": 28.57,
+      "avgSessionDuration": 111.2,
+      "pageViewsPerSession": 1.19,
+      "totalEngagementTime": 594,
+      "eventCount": 80
+    },
+    "topPages": [
+      {
+        "pagePath": "/",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 21,
+        "users": 15,
+        "avgDuration": 90.8,
+        "bounceRate": 68.42
+      },
+      {
+        "pagePath": "/about-us",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 4.9,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/contact-us/request-demo",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 5,
+        "bounceRate": 100
+      },
+      {
+        "pagePath": "/solutions/regression",
+        "pageTitle": "SAP ECC to S/4HANA Migration Testing | Validate Real Operations | PerfecTwin",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 81.1,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/why-perfectwin",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 260,
+        "bounceRate": 50
+      }
+    ],
+    "channels": [
+      {
+        "channel": "Direct",
+        "sessions": 16,
+        "users": 13,
+        "engagementRate": 18.75
+      },
+      {
+        "channel": "Organic Search",
+        "sessions": 5,
+        "users": 3,
+        "engagementRate": 60
+      }
+    ],
+    "sourceMedium": [
+      {
+        "source": "(direct)",
+        "medium": "(none)",
+        "sessions": 16,
+        "users": 13,
+        "engagementRate": 18.75,
+        "avgDuration": 17.8
+      },
+      {
+        "source": "google",
+        "medium": "organic",
+        "sessions": 5,
+        "users": 3,
+        "engagementRate": 60,
+        "avgDuration": 410.2
+      }
+    ],
+    "devices": [
+      {
+        "device": "desktop",
+        "sessions": 21,
+        "users": 16,
+        "pageViews": 25,
+        "engagementRate": 28.57,
+        "avgDuration": 111.2
+      }
+    ],
+    "countries": [
+      {
+        "country": "United States",
+        "sessions": 19,
+        "users": 14,
+        "engagementRate": 26.32
+      },
+      {
+        "country": "Germany",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0
+      },
+      {
+        "country": "Vietnam",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      }
+    ],
+    "landingPages": [
+      {
+        "landingPage": "/",
+        "sessions": 17,
+        "users": 15,
+        "bounceRate": 64.71,
+        "avgDuration": 137.1,
+        "pagesPerSession": 1.41
+      },
+      {
+        "landingPage": "",
+        "sessions": 3,
+        "users": 1,
+        "bounceRate": 100,
+        "avgDuration": 0,
+        "pagesPerSession": 0
+      },
+      {
+        "landingPage": "/contact-us/request-demo",
+        "sessions": 1,
+        "users": 1,
+        "bounceRate": 100,
+        "avgDuration": 5,
+        "pagesPerSession": 1
+      }
+    ]
+  },
+  "gsc": null,
+  "inblog": {
+    "date": "2026-04-24",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2026-04-24",
+        "traffic": {
+          "data": [
+            {
+              "date": "2026-04-24",
+              "visits": 22,
+              "clicks": 1,
+              "organic": 0,
+              "home": 5,
+              "post": 34,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-24",
+            "end_date": "2026-04-24",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": null,
+              "visits": 5,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "(비포스트 페이지)"
+            },
+            {
+              "post_id": 166538,
+              "visits": 4,
+              "clicks": 1,
+              "organic": 0,
+              "cvr": 0.25,
+              "title": "Why Testing Matters More in the SAP Clean Core Era"
+            },
+            {
+              "post_id": 86636,
+              "visits": 3,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP S/4HANA Testing Strategy: 4 Trends Reshaping How Enterprises Test in 2026"
+            },
+            {
+              "post_id": 163597,
+              "visits": 3,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "Why Does SAP Hypercare Drag On? 5 Regression Cycle Bottlenecks"
+            },
+            {
+              "post_id": 65690,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "RISE with SAP vs GROW with SAP: Key Differences and How to Choose (2026)"
+            },
+            {
+              "post_id": 87010,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Test Case Design: Scenario-Based E2E Testing Guide"
+            },
+            {
+              "post_id": 141509,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "Why You Need to Redesign Your SAP Testing Strategy for the Cloud ALM Era"
+            },
+            {
+              "post_id": 77338,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP S/4HANA Migration Testing: 4 Data Conversion Strategies That Prevent Go-Live Failures"
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-24",
+            "end_date": "2026-04-24",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 18
+            },
+            {
+              "full_referrer": "inblog.ai",
+              "count": 2
+            },
+            {
+              "full_referrer": "com.linkedin.android",
+              "count": 1
+            },
+            {
+              "full_referrer": "www.linkedin.com",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-24",
+            "end_date": "2026-04-24"
+          }
+        }
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2026-04-24",
+        "traffic": {
+          "data": [
+            {
+              "date": "2026-04-24",
+              "visits": 11,
+              "clicks": 0,
+              "organic": 1,
+              "home": 3,
+              "post": 28,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-24",
+            "end_date": "2026-04-24",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 166523,
+              "visits": 3,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Clean Core 시대, 테스트가 더 중요해지는 이유"
+            },
+            {
+              "post_id": null,
+              "visits": 3,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "(비포스트 페이지)"
+            },
+            {
+              "post_id": 63322,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": "SAP S/4HANA Cloud 구축 방식: Public, Private, On-Premise 살펴보기"
+            },
+            {
+              "post_id": 86299,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP 테스트 케이스 설계: 시나리오 기반 E2E 테스트 가이드"
+            },
+            {
+              "post_id": 163588,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Hypercare를 길게 만드는 회귀 테스트 사이클: 5가지 구조적 병목과 해법"
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-24",
+            "end_date": "2026-04-24",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 7
+            },
+            {
+              "full_referrer": "com.linkedin.android",
+              "count": 2
+            },
+            {
+              "full_referrer": "gemini.google.com",
+              "count": 1
+            },
+            {
+              "full_referrer": "inblog.ai",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-24",
+            "end_date": "2026-04-24"
+          }
+        }
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": "2026-04-24T23:50:00.418Z"
+  }
+}
