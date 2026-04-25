@@ -1,0 +1,237 @@
+{
+  "date": "2026-04-25",
+  "collectedAt": "2026-04-25T23:49:07.614Z",
+  "ga4": {
+    "date": "2026-04-25",
+    "summary": {
+      "activeUsers": 19,
+      "newUsers": 21,
+      "returningUsers": -2,
+      "sessions": 19,
+      "engagedSessions": 2,
+      "pageViews": 21,
+      "bounceRate": 89.47,
+      "engagementRate": 10.53,
+      "avgSessionDuration": 10.7,
+      "pageViewsPerSession": 1.11,
+      "totalEngagementTime": 1,
+      "eventCount": 64
+    },
+    "topPages": [
+      {
+        "pagePath": "/",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 21,
+        "users": 19,
+        "avgDuration": 10.7,
+        "bounceRate": 89.47
+      }
+    ],
+    "channels": [
+      {
+        "channel": "Direct",
+        "sessions": 18,
+        "users": 18,
+        "engagementRate": 11.11
+      },
+      {
+        "channel": "Organic Search",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0
+      }
+    ],
+    "sourceMedium": [
+      {
+        "source": "(direct)",
+        "medium": "(none)",
+        "sessions": 18,
+        "users": 18,
+        "engagementRate": 11.11,
+        "avgDuration": 11.3
+      },
+      {
+        "source": "google",
+        "medium": "organic",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0,
+        "avgDuration": 0
+      }
+    ],
+    "devices": [
+      {
+        "device": "desktop",
+        "sessions": 18,
+        "users": 18,
+        "pageViews": 20,
+        "engagementRate": 11.11,
+        "avgDuration": 11.3
+      },
+      {
+        "device": "mobile",
+        "sessions": 1,
+        "users": 1,
+        "pageViews": 1,
+        "engagementRate": 0,
+        "avgDuration": 0
+      }
+    ],
+    "countries": [
+      {
+        "country": "United States",
+        "sessions": 18,
+        "users": 18,
+        "engagementRate": 11.11
+      },
+      {
+        "country": "Malaysia",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0
+      }
+    ],
+    "landingPages": [
+      {
+        "landingPage": "/",
+        "sessions": 19,
+        "users": 19,
+        "bounceRate": 89.47,
+        "avgDuration": 10.7,
+        "pagesPerSession": 1.11
+      }
+    ]
+  },
+  "gsc": null,
+  "inblog": {
+    "date": "2026-04-25",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2026-04-25",
+        "traffic": {
+          "data": [
+            {
+              "date": "2026-04-25",
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "home": 0,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-25",
+            "end_date": "2026-04-25",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 70120,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": "SAP Testing Checklist: 5 Steps Before S/4HANA Go-Live"
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-25",
+            "end_date": "2026-04-25",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "www.google.com",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-25",
+            "end_date": "2026-04-25"
+          }
+        }
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2026-04-25",
+        "traffic": {
+          "data": [
+            {
+              "date": "2026-04-25",
+              "visits": 3,
+              "clicks": 0,
+              "organic": 0,
+              "home": 2,
+              "post": 23,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-25",
+            "end_date": "2026-04-25",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": null,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "(비포스트 페이지)"
+            },
+            {
+              "post_id": 86299,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP 테스트 케이스 설계: 시나리오 기반 E2E 테스트 가이드"
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-25",
+            "end_date": "2026-04-25",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 3
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-25",
+            "end_date": "2026-04-25"
+          }
+        }
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": "2026-04-25T23:49:07.614Z"
+  }
+}
