@@ -2,8 +2,8 @@ name: 일간 성과 리포트
 
 on:
   schedule:
-    # 매일 오전 8시 KST = 전날 23:00 UTC
-    - cron: '0 23 * * *'
+    # 매일 오전 9시 KST = 0:00 UTC
+    - cron: '0 0 * * *'
   workflow_dispatch: # 수동 실행 가능
 
 permissions:

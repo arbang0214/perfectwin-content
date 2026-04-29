@@ -22,6 +22,7 @@ const { sendToSlack, sendReportToSlack } = require("./utils/slack-sender");
 const { generateDailyReports } = require("./report-generator");
 const { generatePDF } = require("./utils/pdf-generator");
 const { sendReportEmail } = require("./utils/email-sender");
+const { generateLinkedInReport } = require("./linkedin-report");
 
 const DATA_DIR = path.join(__dirname, "..", "data", "monitoring");
 
@@ -161,50 +162,54 @@ async function main() {
       if (reports.homepage) console.log("  ✅ 홈페이지 리포트 생성 완료");
       if (reports.blog) console.log("  ✅ 블로그 리포트 생성 완료");
 
-      // 7. Slack 요약 발송
-      console.log("[7/9] Slack 요약 발송...");
+      // 7. Slack 요약 발송 (순차 — 동시 발송 시 짤림 방지)
+      console.log("[7/10] Slack 요약 발송 (순차)...");
       if (reports.homepage) {
         await sendReportToSlack(reports.homepage, "daily", targetDate);
+        console.log("  ✅ 홈페이지 Slack 발송 완료");
       }
       if (reports.blog) {
         await sendReportToSlack(reports.blog, "daily", targetDate);
+        console.log("  ✅ 블로그 Slack 발송 완료");
       }
 
-      // 8. PDF 생성
-      console.log("[8/9] 상세 리포트 PDF 생성...");
-      const pdfs = {};
+      // 8. PDF 생성 + 이메일 발송 (순차)
+      console.log("[8/10] 상세 리포트 PDF 생성 + 이메일 발송 (순차)...");
       if (reports.homepage) {
-        pdfs.homepage = await generatePDF(reports.homepage);
+        const hpPdf = await generatePDF(reports.homepage);
         console.log("  ✅ 홈페이지 PDF 생성 완료");
-      }
-      if (reports.blog) {
-        pdfs.blog = await generatePDF(reports.blog);
-        console.log("  ✅ 블로그 PDF 생성 완료");
-      }
-
-      // 9. 이메일 발송 (PDF 첨부)
-      console.log("[9/9] 상세 리포트 이메일 발송...");
-      if (pdfs.homepage) {
         await sendReportEmail(
-          pdfs.homepage,
+          hpPdf,
           `homepage-daily-${targetDate}.pdf`,
           `📊 홈페이지 일간 상세 리포트 — ${targetDate}`,
           `PerfecTwin 홈페이지 일간 상세 리포트 (${targetDate})가 첨부되어 있습니다.`
         );
       }
-      if (pdfs.blog) {
+      if (reports.blog) {
+        const blogPdf = await generatePDF(reports.blog);
+        console.log("  ✅ 블로그 PDF 생성 완료");
         await sendReportEmail(
-          pdfs.blog,
+          blogPdf,
           `blog-daily-${targetDate}.pdf`,
           `📝 블로그 일간 상세 리포트 — ${targetDate}`,
           `PerfecTwin 블로그 일간 상세 리포트 (${targetDate})가 첨부되어 있습니다.`
         );
       }
+
+      // 9. LinkedIn 유입 리포트 (순차)
+      console.log("[9/10] LinkedIn 유입 리포트...");
+      try {
+        await generateLinkedInReport();
+      } catch (liErr) {
+        console.error(`  ❌ LinkedIn 리포트 실패: ${liErr.message}`);
+      }
+
+      console.log("[10/10] 전체 발송 완료");
     } catch (err) {
       console.error(`  ❌ 리포트 생성/발송 실패: ${err.message}`);
     }
   } else if (skipReport) {
-    console.log("[6/9] 리포트 생성 건너뜀 (--no-report)");
+    console.log("[6/10] 리포트 생성 건너뜀 (--no-report)");
   }
 
   console.log("\n✅ 일간 리포트 완료!\n");
