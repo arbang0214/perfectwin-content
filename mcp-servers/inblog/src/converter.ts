@@ -8,7 +8,7 @@ import { marked, type Renderer, type Tokens } from "marked";
 const renderer: Partial<Renderer> = {
   heading({ tokens, depth }: Tokens.Heading): string {
     const text = this.parser!.parseInline(tokens);
-    const level = Math.min(depth + 1, 6); // h1→h2, h2→h3, ...
+    const level = depth === 1 ? 2 : depth; // h1→h2만 다운그레이드, h2/h3는 유지
     return `<h${level}>${text}</h${level}>\n`;
   },
 };
