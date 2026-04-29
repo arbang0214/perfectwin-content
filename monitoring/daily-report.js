@@ -17,6 +17,7 @@ const fs = require("fs");
 const { collectGA4 } = require("./collectors/ga4");
 const { collectGSC } = require("./collectors/gsc");
 const { collectInblog } = require("./collectors/inblog");
+const { collectBing } = require("./collectors/bing");
 const { formatDailyReport } = require("./formatters/slack-message");
 const { sendToSlack, sendReportToSlack } = require("./utils/slack-sender");
 const { generateDailyReports } = require("./report-generator");
@@ -78,6 +79,7 @@ function saveSnapshot(targetDate, data) {
     collectedAt: new Date().toISOString(),
     ga4: data.ga4 || null,
     gsc: data.gsc || null,
+    bing: data.bing || null,
     inblog: data.inblog || null,
     slack: { sent: data.slackSent, timestamp: new Date().toISOString() },
   };
@@ -96,9 +98,10 @@ async function main() {
   let ga4Data = null;
   let gscData = null;
   let inblogData = null;
+  let bingData = null;
 
   // 1. GA4 데이터 수집
-  console.log("[1/5] GA4 데이터 수집...");
+  console.log("[1/6] GA4 데이터 수집...");
   try {
     ga4Data = await collectGA4(targetDate);
     console.log("  ✅ GA4 수집 완료");
@@ -107,7 +110,7 @@ async function main() {
   }
 
   // 2. GSC 데이터 수집
-  console.log("[2/5] GSC 데이터 수집...");
+  console.log("[2/6] GSC 데이터 수집...");
   try {
     gscData = await collectGSC(targetDate);
     console.log("  ✅ GSC 수집 완료");
@@ -115,8 +118,19 @@ async function main() {
     console.error(`  ❌ GSC 수집 실패: ${err.message}`);
   }
 
-  // 3. inblog 데이터 수집
-  console.log("[3/5] inblog 데이터 수집...");
+  // 3. Bing 데이터 수집
+  console.log("[3/6] Bing 데이터 수집...");
+  try {
+    bingData = await collectBing(targetDate);
+    if (bingData) {
+      console.log("  ✅ Bing 수집 완료");
+    }
+  } catch (err) {
+    console.error(`  ❌ Bing 수집 실패: ${err.message}`);
+  }
+
+  // 4. inblog 데이터 수집
+  console.log("[4/6] inblog 데이터 수집...");
   try {
     inblogData = await collectInblog(targetDate);
     if (inblogData) {
@@ -151,7 +165,7 @@ async function main() {
 
   // 5. JSON 스냅샷 저장
   console.log("[5/7] JSON 스냅샷 저장...");
-  saveSnapshot(targetDate, { ga4: ga4Data, gsc: gscData, inblog: inblogData, slackSent: false });
+  saveSnapshot(targetDate, { ga4: ga4Data, gsc: gscData, bing: bingData, inblog: inblogData, slackSent: false });
 
   // 6. Claude API로 인사이트 리포트 생성
   const skipReport = process.argv.includes("--no-report");
