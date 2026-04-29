@@ -177,6 +177,48 @@ async function getSourceMedium(client, date, limit = 10) {
 }
 
 /**
+ * UTM 캠페인별 성과 (LinkedIn 등 소셜 UTM 추적용)
+ * source에 "linkedin"이 포함된 트래픽을 campaign별로 분류한다.
+ */
+async function getUtmCampaigns(client, date) {
+  const response = await runReport(client, {
+    dateRanges: [{ startDate: date, endDate: date }],
+    dimensions: [
+      { name: "sessionSource" },
+      { name: "sessionMedium" },
+      { name: "sessionCampaignName" },
+    ],
+    metrics: [
+      { name: "sessions" },
+      { name: "activeUsers" },
+      { name: "engagementRate" },
+      { name: "averageSessionDuration" },
+      { name: "screenPageViews" },
+    ],
+    dimensionFilter: {
+      filter: {
+        fieldName: "sessionMedium",
+        stringFilter: { matchType: "EXACT", value: "social" },
+      },
+    },
+    orderBys: [{ metric: { metricName: "sessions" }, desc: true }],
+    limit: 20,
+  });
+
+  if (!response.rows) return [];
+  return response.rows.map((row) => ({
+    source: row.dimensionValues[0].value,
+    medium: row.dimensionValues[1].value,
+    campaign: row.dimensionValues[2].value,
+    sessions: Number(row.metricValues[0].value),
+    users: Number(row.metricValues[1].value),
+    engagementRate: Math.round(Number(row.metricValues[2].value) * 10000) / 100,
+    avgDuration: Math.round(Number(row.metricValues[3].value) * 10) / 10,
+    pageViews: Number(row.metricValues[4].value),
+  }));
+}
+
+/**
  * 기기 카테고리별 분포
  */
 async function getDeviceBreakdown(client, date) {
@@ -268,7 +310,7 @@ async function getLandingPages(client, date, limit = 10) {
 async function collectGA4(targetDate) {
   const client = createClient();
 
-  const [summary, topPages, channels, sourceMedium, devices, countries, landingPages] =
+  const [summary, topPages, channels, sourceMedium, devices, countries, landingPages, utmCampaigns] =
     await Promise.all([
       getSiteSummary(client, targetDate),
       getTopPages(client, targetDate),
@@ -277,6 +319,7 @@ async function collectGA4(targetDate) {
       getDeviceBreakdown(client, targetDate),
       getCountryBreakdown(client, targetDate),
       getLandingPages(client, targetDate),
+      getUtmCampaigns(client, targetDate),
     ]);
 
   return {
@@ -288,6 +331,7 @@ async function collectGA4(targetDate) {
     devices,
     countries,
     landingPages,
+    utmCampaigns,
   };
 }
 

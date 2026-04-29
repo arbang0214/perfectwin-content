@@ -113,7 +113,7 @@ async function collectSingleBlog(config, targetDate) {
     let posts = postsRes.status === 200 ? postsRes.body : null;
     const sources = sourcesRes.status === 200 ? sourcesRes.body : null;
 
-    // 4. 포스트 제목 매핑
+    // 4. 포스트 제목 매핑 + 포스트별 LinkedIn 유입 추적
     if (posts?.data?.length) {
       const titleMap = await fetchPostTitleMap(apiKey);
       for (const p of posts.data) {
@@ -123,7 +123,33 @@ async function collectSingleBlog(config, targetDate) {
           p.title = "(비포스트 페이지)";
         }
       }
+
+      // 포스트별 소셜 유입 소스 수집 (post_id가 있는 것만)
+      const postIds = posts.data.filter((p) => p.post_id != null).map((p) => p.post_id);
+      for (const pid of postIds) {
+        try {
+          const srcRes = await apiRequest(
+            `/blogs/analytics/posts/${pid}/sources?${dateParam}&limit=20`,
+            apiKey
+          );
+          if (srcRes.status === 200 && srcRes.body?.data) {
+            const post = posts.data.find((p) => p.post_id === pid);
+            if (post) {
+              post.sources = srcRes.body.data;
+              post.linkedinVisits = srcRes.body.data
+                .filter((s) => /linkedin/i.test(s.full_referrer))
+                .reduce((sum, s) => sum + (s.count || 0), 0);
+            }
+          }
+        } catch {
+          // 개별 포스트 소스 실패는 무시
+        }
+      }
     }
+
+    // 5. 블로그 전체 LinkedIn 유입 합산
+    const linkedinTotal = posts?.data
+      ?.reduce((sum, p) => sum + (p.linkedinVisits || 0), 0) || 0;
 
     console.log(`  [inblog:${label}] 수집 완료 (status: traffic=${trafficRes.status}, posts=${postsRes.status}, sources=${sourcesRes.status})`);
 
@@ -135,6 +161,7 @@ async function collectSingleBlog(config, targetDate) {
       traffic,
       posts,
       sources,
+      linkedinTotal,
     };
   } catch (err) {
     console.error(`  [inblog:${label}] 수집 실패: ${err.message}`);
