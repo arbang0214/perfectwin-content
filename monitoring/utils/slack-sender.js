@@ -246,7 +246,7 @@ function extractInsightBlocks(lines, insightStart, maxCount) {
     const rawTitle = titleMatch[1].replace(/\*\*/g, "").trim();
     const severity = getSeverity(rawTitle);
     const cleanTitle = rawTitle
-      .replace(/^[🚨⚠️💡📉📈📊📍🔍🎯🌍]+\s*/, "")  // 이모지 제거
+      .replace(/^[\p{Emoji_Presentation}\p{Extended_Pictographic}\uFE0F]+\s*/gu, "")  // 이모지 제거 (유니코드 안전)
       .replace(/^\d+\.\s*/, "");                         // 번호 제거
 
     // 제목 아래에서 핵심 내용 추출
