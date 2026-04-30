@@ -1,6 +1,6 @@
 {
   "date": "2026-04-29",
-  "collectedAt": "2026-04-30T00:56:06.112Z",
+  "collectedAt": "2026-04-30T03:49:12.664Z",
   "ga4": {
     "date": "2026-04-29",
     "summary": {
@@ -189,9 +189,9 @@
         "pagesPerSession": 1.5
       },
       {
-        "landingPage": "",
+        "landingPage": "(not set)",
         "sessions": 1,
-        "users": 0,
+        "users": 1,
         "bounceRate": 100,
         "avgDuration": 0,
         "pagesPerSession": 0
@@ -280,11 +280,11 @@
           "data": [
             {
               "date": "2026-04-29",
-              "visits": 7,
+              "visits": 8,
               "clicks": 0,
               "organic": 0,
-              "home": 1,
-              "post": 24,
+              "home": 2,
+              "post": 23,
               "category": 0,
               "author": 0
             }
@@ -329,6 +329,14 @@
               "linkedinVisits": 0
             },
             {
+              "post_id": null,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "(비포스트 페이지)"
+            },
+            {
               "post_id": 58365,
               "visits": 1,
               "clicks": 0,
@@ -357,14 +365,6 @@
                 }
               ],
               "linkedinVisits": 0
-            },
-            {
-              "post_id": null,
-              "visits": 1,
-              "clicks": 0,
-              "organic": 0,
-              "cvr": 0,
-              "title": "(비포스트 페이지)"
             }
           ],
           "meta": {
@@ -379,7 +379,7 @@
           "data": [
             {
               "full_referrer": "direct",
-              "count": 5
+              "count": 6
             },
             {
               "full_referrer": "www.linkedin.com",
@@ -493,6 +493,6 @@
   },
   "slack": {
     "sent": false,
-    "timestamp": "2026-04-30T00:56:06.112Z"
+    "timestamp": "2026-04-30T03:49:12.664Z"
   }
 }
