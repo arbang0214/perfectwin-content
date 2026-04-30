@@ -1,0 +1,498 @@
+{
+  "date": "2026-04-29",
+  "collectedAt": "2026-04-30T00:56:06.112Z",
+  "ga4": {
+    "date": "2026-04-29",
+    "summary": {
+      "activeUsers": 12,
+      "newUsers": 13,
+      "returningUsers": -1,
+      "sessions": 16,
+      "engagedSessions": 6,
+      "pageViews": 22,
+      "bounceRate": 62.5,
+      "engagementRate": 37.5,
+      "avgSessionDuration": 22.5,
+      "pageViewsPerSession": 1.38,
+      "totalEngagementTime": 169,
+      "eventCount": 61
+    },
+    "topPages": [
+      {
+        "pagePath": "/",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 18,
+        "users": 12,
+        "avgDuration": 21.7,
+        "bounceRate": 60
+      },
+      {
+        "pagePath": "/contact-us/request-demo",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 13.8,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/product/erp",
+        "pageTitle": "ERP Edition for SAP Testing | PerfecTwin",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 14.6,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/resources",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 6.4,
+        "bounceRate": 0
+      },
+      {
+        "pagePath": "/resources/event",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 0,
+        "bounceRate": 50
+      }
+    ],
+    "channels": [
+      {
+        "channel": "Direct",
+        "sessions": 7,
+        "users": 6,
+        "engagementRate": 28.57
+      },
+      {
+        "channel": "Referral",
+        "sessions": 4,
+        "users": 4,
+        "engagementRate": 50
+      },
+      {
+        "channel": "Organic Search",
+        "sessions": 3,
+        "users": 1,
+        "engagementRate": 33.33
+      },
+      {
+        "channel": "Organic Social",
+        "sessions": 1,
+        "users": 0,
+        "engagementRate": 0
+      },
+      {
+        "channel": "Unassigned",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      }
+    ],
+    "sourceMedium": [
+      {
+        "source": "(direct)",
+        "medium": "(none)",
+        "sessions": 7,
+        "users": 6,
+        "engagementRate": 28.57,
+        "avgDuration": 30.4
+      },
+      {
+        "source": "comm.lgcns.com",
+        "medium": "referral",
+        "sessions": 3,
+        "users": 3,
+        "engagementRate": 66.67,
+        "avgDuration": 6.1
+      },
+      {
+        "source": "google",
+        "medium": "organic",
+        "sessions": 3,
+        "users": 1,
+        "engagementRate": 33.33,
+        "avgDuration": 16.7
+      },
+      {
+        "source": "blog",
+        "medium": "content",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100,
+        "avgDuration": 78.3
+      },
+      {
+        "source": "inblog.ai",
+        "medium": "referral",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0,
+        "avgDuration": 1.2
+      },
+      {
+        "source": "t.co",
+        "medium": "referral",
+        "sessions": 1,
+        "users": 0,
+        "engagementRate": 0,
+        "avgDuration": 0
+      }
+    ],
+    "devices": [
+      {
+        "device": "desktop",
+        "sessions": 14,
+        "users": 12,
+        "pageViews": 20,
+        "engagementRate": 42.86,
+        "avgDuration": 25.7
+      },
+      {
+        "device": "mobile",
+        "sessions": 2,
+        "users": 0,
+        "pageViews": 2,
+        "engagementRate": 0,
+        "avgDuration": 0
+      }
+    ],
+    "countries": [
+      {
+        "country": "United States",
+        "sessions": 11,
+        "users": 10,
+        "engagementRate": 45.45
+      },
+      {
+        "country": "South Korea",
+        "sessions": 4,
+        "users": 2,
+        "engagementRate": 25
+      },
+      {
+        "country": "United Kingdom",
+        "sessions": 1,
+        "users": 0,
+        "engagementRate": 0
+      }
+    ],
+    "landingPages": [
+      {
+        "landingPage": "/",
+        "sessions": 12,
+        "users": 9,
+        "bounceRate": 66.67,
+        "avgDuration": 28.5,
+        "pagesPerSession": 1.5
+      },
+      {
+        "landingPage": "",
+        "sessions": 1,
+        "users": 0,
+        "bounceRate": 100,
+        "avgDuration": 0,
+        "pagesPerSession": 0
+      },
+      {
+        "landingPage": "/?mkt_tok=ODg4LUpPTC05NDgAAAGheExBUmwVv9cczxcRAJ5hS0qh9vPHcyrtkYZiHFner6BzTWK9ac2u3M1gOxKpdW_dRT-q3DwEBwHUlPc_4rD0uZgUxKqcHZa-nXIPA_w",
+        "sessions": 1,
+        "users": 1,
+        "bounceRate": 100,
+        "avgDuration": 0,
+        "pagesPerSession": 1
+      },
+      {
+        "landingPage": "/?mkt_tok=ODg4LUpPTC05NDgAAAGheExCs3IigJ-OfILTd7sGfAmOb_1PBHaQ7Kh9MbT1ZoYVsvrlsxI9tyGXLYc6nGz5zP_yW1ohaAKLzdo9OsQx6hd17m0AKEQ-5wVtSjg",
+        "sessions": 1,
+        "users": 1,
+        "bounceRate": 0,
+        "avgDuration": 0.4,
+        "pagesPerSession": 2
+      },
+      {
+        "landingPage": "/?mkt_tok=ODg4LUpPTC05NDgAAAGheExFXqvp_-C7owVxQI5C4EuA1v_HiA_26il5E6Hx8c1pQpiu1rkgDEgrlqGu2fgyfIuJBZP4ptlbCebO3swPDeAsu9lrxw2BL2OGwNQ",
+        "sessions": 1,
+        "users": 1,
+        "bounceRate": 0,
+        "avgDuration": 18,
+        "pagesPerSession": 1
+      }
+    ],
+    "utmCampaigns": []
+  },
+  "gsc": null,
+  "bing": {
+    "date": "2026-04-29",
+    "sites": [
+      {
+        "label": "perfectwin.ai",
+        "siteUrl": "https://perfectwin.ai/",
+        "actualDate": "2026-04-29",
+        "totals": {
+          "clicks": 0,
+          "impressions": 0,
+          "avgClickPosition": 0,
+          "avgImpressionPosition": 0,
+          "ctr": 0
+        },
+        "topQueries": []
+      },
+      {
+        "label": "blog.perfectwin.ai",
+        "siteUrl": "https://blog.perfectwin.ai/",
+        "actualDate": "2026-04-29",
+        "totals": {
+          "clicks": 0,
+          "impressions": 0,
+          "avgClickPosition": 0,
+          "avgImpressionPosition": 0,
+          "ctr": 0
+        },
+        "topQueries": []
+      },
+      {
+        "label": "ko.blog.perfectwin.ai",
+        "siteUrl": "https://ko.blog.perfectwin.ai/",
+        "actualDate": "2026-04-29",
+        "totals": {
+          "clicks": 0,
+          "impressions": 0,
+          "avgClickPosition": 0,
+          "avgImpressionPosition": 0,
+          "ctr": 0
+        },
+        "topQueries": []
+      }
+    ]
+  },
+  "inblog": {
+    "date": "2026-04-29",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2026-04-29",
+        "traffic": {
+          "data": [
+            {
+              "date": "2026-04-29",
+              "visits": 7,
+              "clicks": 0,
+              "organic": 0,
+              "home": 1,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-29",
+            "end_date": "2026-04-29",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 160801,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Hypercare Testing Strategy: How to Cut Your Stabilization Period in Half",
+              "sources": [
+                {
+                  "full_referrer": "www.linkedin.com",
+                  "count": 2
+                }
+              ],
+              "linkedinVisits": 2
+            },
+            {
+              "post_id": 168459,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "Beyond Self-Healing: What AI Should Really Fix in SAP Testing",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 2
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
+              "post_id": 58365,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Test Automation Prioritization: Which Business Scenarios to Automate First",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 1
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
+              "post_id": 79267,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP S/4HANA Upgrade Testing: 3 Proven Strategies (2026)",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 1
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
+              "post_id": null,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "(비포스트 페이지)"
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-29",
+            "end_date": "2026-04-29",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 5
+            },
+            {
+              "full_referrer": "www.linkedin.com",
+              "count": 2
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-29",
+            "end_date": "2026-04-29"
+          }
+        },
+        "linkedinTotal": 2
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2026-04-29",
+        "traffic": {
+          "data": [
+            {
+              "date": "2026-04-29",
+              "visits": 4,
+              "clicks": 0,
+              "organic": 1,
+              "home": 1,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-29",
+            "end_date": "2026-04-29",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 86299,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP 테스트 케이스 설계: 시나리오 기반 E2E 테스트 가이드",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 2
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
+              "post_id": 63322,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": "SAP S/4HANA Cloud 구축 방식: Public, Private, On-Premise 살펴보기",
+              "sources": [
+                {
+                  "full_referrer": "www.google.com",
+                  "count": 1
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
+              "post_id": null,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "(비포스트 페이지)"
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-29",
+            "end_date": "2026-04-29",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 2
+            },
+            {
+              "full_referrer": "wire.lgcns.com",
+              "count": 1
+            },
+            {
+              "full_referrer": "www.google.com",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2026-04-29",
+            "end_date": "2026-04-29"
+          }
+        },
+        "linkedinTotal": 0
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": "2026-04-30T00:56:06.112Z"
+  }
+}
