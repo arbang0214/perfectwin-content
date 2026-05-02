@@ -1,0 +1,439 @@
+{
+  "date": "2026-05-01",
+  "collectedAt": "2026-05-02T03:33:29.012Z",
+  "ga4": {
+    "date": "2026-05-01",
+    "summary": {
+      "activeUsers": 458,
+      "newUsers": 461,
+      "returningUsers": -3,
+      "sessions": 464,
+      "engagedSessions": 79,
+      "pageViews": 495,
+      "bounceRate": 82.97,
+      "engagementRate": 17.03,
+      "avgSessionDuration": 9.2,
+      "pageViewsPerSession": 1.07,
+      "totalEngagementTime": 1696,
+      "eventCount": 1521
+    },
+    "topPages": [
+      {
+        "pagePath": "/",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 453,
+        "users": 441,
+        "avgDuration": 7.8,
+        "bounceRate": 82.92
+      },
+      {
+        "pagePath": "/contact-us/request-demo",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 20,
+        "users": 24,
+        "avgDuration": 4.7,
+        "bounceRate": 46.15
+      },
+      {
+        "pagePath": "/resources",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 20,
+        "users": 20,
+        "avgDuration": 0.4,
+        "bounceRate": 45
+      },
+      {
+        "pagePath": "/product/erp",
+        "pageTitle": "ERP Edition for SAP Testing | PerfecTwin",
+        "pageViews": 2,
+        "users": 2,
+        "avgDuration": 332,
+        "bounceRate": 0
+      }
+    ],
+    "channels": [
+      {
+        "channel": "Direct",
+        "sessions": 455,
+        "users": 451,
+        "engagementRate": 16.7
+      },
+      {
+        "channel": "Unassigned",
+        "sessions": 5,
+        "users": 5,
+        "engagementRate": 0
+      },
+      {
+        "channel": "Organic Search",
+        "sessions": 3,
+        "users": 3,
+        "engagementRate": 66.67
+      },
+      {
+        "channel": "Referral",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      }
+    ],
+    "sourceMedium": [
+      {
+        "source": "(direct)",
+        "medium": "(none)",
+        "sessions": 455,
+        "users": 451,
+        "engagementRate": 16.7,
+        "avgDuration": 5.8
+      },
+      {
+        "source": "(not set)",
+        "medium": "(not set)",
+        "sessions": 5,
+        "users": 5,
+        "engagementRate": 0,
+        "avgDuration": 0.5
+      },
+      {
+        "source": "google",
+        "medium": "organic",
+        "sessions": 2,
+        "users": 2,
+        "engagementRate": 100,
+        "avgDuration": 486.9
+      },
+      {
+        "source": "bing",
+        "medium": "organic",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0,
+        "avgDuration": 0
+      },
+      {
+        "source": "chatgpt.com",
+        "medium": "referral",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100,
+        "avgDuration": 654.6
+      }
+    ],
+    "devices": [
+      {
+        "device": "desktop",
+        "sessions": 463,
+        "users": 457,
+        "pageViews": 490,
+        "engagementRate": 16.85,
+        "avgDuration": 9.1
+      },
+      {
+        "device": "mobile",
+        "sessions": 4,
+        "users": 4,
+        "pageViews": 5,
+        "engagementRate": 100,
+        "avgDuration": 22.4
+      }
+    ],
+    "countries": [
+      {
+        "country": "United States",
+        "sessions": 324,
+        "users": 319,
+        "engagementRate": 12.35
+      },
+      {
+        "country": "Netherlands",
+        "sessions": 36,
+        "users": 36,
+        "engagementRate": 22.22
+      },
+      {
+        "country": "Singapore",
+        "sessions": 36,
+        "users": 36,
+        "engagementRate": 30.56
+      },
+      {
+        "country": "Ireland",
+        "sessions": 34,
+        "users": 34,
+        "engagementRate": 26.47
+      },
+      {
+        "country": "India",
+        "sessions": 11,
+        "users": 11,
+        "engagementRate": 18.18
+      },
+      {
+        "country": "(not set)",
+        "sessions": 6,
+        "users": 6,
+        "engagementRate": 100
+      },
+      {
+        "country": "Germany",
+        "sessions": 6,
+        "users": 6,
+        "engagementRate": 16.67
+      },
+      {
+        "country": "Japan",
+        "sessions": 3,
+        "users": 3,
+        "engagementRate": 0
+      },
+      {
+        "country": "Switzerland",
+        "sessions": 2,
+        "users": 2,
+        "engagementRate": 50
+      },
+      {
+        "country": "Australia",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0
+      }
+    ],
+    "landingPages": [
+      {
+        "landingPage": "/",
+        "sessions": 438,
+        "users": 435,
+        "bounceRate": 84.02,
+        "avgDuration": 9.5,
+        "pagesPerSession": 1.04
+      },
+      {
+        "landingPage": "/resources",
+        "sessions": 13,
+        "users": 13,
+        "bounceRate": 69.23,
+        "avgDuration": 2.9,
+        "pagesPerSession": 1.46
+      },
+      {
+        "landingPage": "/contact-us/request-demo",
+        "sessions": 12,
+        "users": 12,
+        "bounceRate": 58.33,
+        "avgDuration": 5.7,
+        "pagesPerSession": 1.83
+      },
+      {
+        "landingPage": "(not set)",
+        "sessions": 1,
+        "users": 1,
+        "bounceRate": 100,
+        "avgDuration": 0,
+        "pagesPerSession": 0
+      }
+    ],
+    "utmCampaigns": []
+  },
+  "gsc": null,
+  "bing": {
+    "date": "2026-05-01",
+    "sites": [
+      {
+        "label": "perfectwin.ai",
+        "siteUrl": "https://perfectwin.ai/",
+        "actualDate": "2026-05-01",
+        "totals": {
+          "clicks": 0,
+          "impressions": 0,
+          "avgClickPosition": 0,
+          "avgImpressionPosition": 0,
+          "ctr": 0
+        },
+        "topQueries": []
+      },
+      {
+        "label": "blog.perfectwin.ai",
+        "siteUrl": "https://blog.perfectwin.ai/",
+        "actualDate": "2026-05-01",
+        "totals": {
+          "clicks": 0,
+          "impressions": 0,
+          "avgClickPosition": 0,
+          "avgImpressionPosition": 0,
+          "ctr": 0
+        },
+        "topQueries": []
+      },
+      {
+        "label": "ko.blog.perfectwin.ai",
+        "siteUrl": "https://ko.blog.perfectwin.ai/",
+        "actualDate": "2026-05-01",
+        "totals": {
+          "clicks": 0,
+          "impressions": 0,
+          "avgClickPosition": 0,
+          "avgImpressionPosition": 0,
+          "ctr": 0
+        },
+        "topQueries": []
+      }
+    ]
+  },
+  "inblog": {
+    "date": "2026-05-01",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2026-05-01",
+        "traffic": {
+          "data": [
+            {
+              "date": "2026-05-01",
+              "visits": 4,
+              "clicks": 0,
+              "organic": 0,
+              "home": 0,
+              "post": 24,
+              "category": 1,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-05-01",
+            "end_date": "2026-05-01",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 55299,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "Why SAP Test Automation is Critical for Retail Enterprises",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 1
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
+              "post_id": 68574,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP GROW Upgrade: Complete Testing Guide",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 1
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
+              "post_id": 79267,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP S/4HANA Upgrade Testing: 3 Proven Strategies (2026)",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 1
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
+              "post_id": null,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "(비포스트 페이지)"
+            }
+          ],
+          "meta": {
+            "start_date": "2026-05-01",
+            "end_date": "2026-05-01",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 4
+            }
+          ],
+          "meta": {
+            "start_date": "2026-05-01",
+            "end_date": "2026-05-01"
+          }
+        },
+        "linkedinTotal": 0
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2026-05-01",
+        "traffic": {
+          "data": [
+            {
+              "date": "2026-05-01",
+              "visits": 0,
+              "clicks": 0,
+              "organic": 0,
+              "home": 0,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-05-01",
+            "end_date": "2026-05-01",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [],
+          "meta": {
+            "start_date": "2026-05-01",
+            "end_date": "2026-05-01",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [],
+          "meta": {
+            "start_date": "2026-05-01",
+            "end_date": "2026-05-01"
+          }
+        },
+        "linkedinTotal": 0
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": "2026-05-02T03:33:29.012Z"
+  }
+}
