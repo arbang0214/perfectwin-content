@@ -1,0 +1,323 @@
+{
+  "date": "2026-05-03",
+  "collectedAt": "2026-05-04T03:52:36.911Z",
+  "ga4": {
+    "date": "2026-05-03",
+    "summary": {
+      "activeUsers": 1,
+      "newUsers": 1,
+      "returningUsers": 0,
+      "sessions": 2,
+      "engagedSessions": 1,
+      "pageViews": 3,
+      "bounceRate": 50,
+      "engagementRate": 50,
+      "avgSessionDuration": 100.7,
+      "pageViewsPerSession": 1.5,
+      "totalEngagementTime": 18,
+      "eventCount": 12
+    },
+    "topPages": [
+      {
+        "pagePath": "/",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 3,
+        "users": 1,
+        "avgDuration": 100.7,
+        "bounceRate": 50
+      }
+    ],
+    "channels": [
+      {
+        "channel": "Direct",
+        "sessions": 2,
+        "users": 1,
+        "engagementRate": 50
+      }
+    ],
+    "sourceMedium": [
+      {
+        "source": "(direct)",
+        "medium": "(none)",
+        "sessions": 2,
+        "users": 1,
+        "engagementRate": 50,
+        "avgDuration": 100.7
+      }
+    ],
+    "devices": [
+      {
+        "device": "desktop",
+        "sessions": 2,
+        "users": 1,
+        "pageViews": 3,
+        "engagementRate": 50,
+        "avgDuration": 100.7
+      }
+    ],
+    "countries": [
+      {
+        "country": "Lithuania",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      },
+      {
+        "country": "United States",
+        "sessions": 1,
+        "users": 0,
+        "engagementRate": 0
+      }
+    ],
+    "landingPages": [
+      {
+        "landingPage": "/",
+        "sessions": 2,
+        "users": 1,
+        "bounceRate": 50,
+        "avgDuration": 100.7,
+        "pagesPerSession": 1.5
+      }
+    ],
+    "utmCampaigns": []
+  },
+  "gsc": null,
+  "bing": {
+    "date": "2026-05-03",
+    "sites": [
+      {
+        "label": "perfectwin.ai",
+        "siteUrl": "https://perfectwin.ai/",
+        "actualDate": "2026-05-03",
+        "totals": {
+          "clicks": 0,
+          "impressions": 0,
+          "avgClickPosition": 0,
+          "avgImpressionPosition": 0,
+          "ctr": 0
+        },
+        "topQueries": []
+      },
+      {
+        "label": "blog.perfectwin.ai",
+        "siteUrl": "https://blog.perfectwin.ai/",
+        "actualDate": "2026-05-03",
+        "totals": {
+          "clicks": 0,
+          "impressions": 0,
+          "avgClickPosition": 0,
+          "avgImpressionPosition": 0,
+          "ctr": 0
+        },
+        "topQueries": []
+      },
+      {
+        "label": "ko.blog.perfectwin.ai",
+        "siteUrl": "https://ko.blog.perfectwin.ai/",
+        "actualDate": "2026-05-03",
+        "totals": {
+          "clicks": 0,
+          "impressions": 0,
+          "avgClickPosition": 0,
+          "avgImpressionPosition": 0,
+          "ctr": 0
+        },
+        "topQueries": []
+      }
+    ]
+  },
+  "inblog": {
+    "date": "2026-05-03",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2026-05-03",
+        "traffic": {
+          "data": [
+            {
+              "date": "2026-05-03",
+              "visits": 8,
+              "clicks": 0,
+              "organic": 2,
+              "home": 1,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-05-03",
+            "end_date": "2026-05-03",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 149800,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Cloud ALM Test Management: Strengths, Gaps, and What to Look for in Automation Tools",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 2
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
+              "post_id": 160801,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Hypercare Testing Strategy: How to Cut Your Stabilization Period in Half",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 2
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
+              "post_id": 70120,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": "SAP Testing Checklist: 5 Steps Before S/4HANA Go-Live",
+              "sources": [
+                {
+                  "full_referrer": "www.google.com",
+                  "count": 1
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
+              "post_id": 79267,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": "SAP S/4HANA Upgrade Testing: 3 Proven Strategies (2026)",
+              "sources": [
+                {
+                  "full_referrer": "www.google.com",
+                  "count": 1
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
+              "post_id": 157589,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Test Automation: Why It Fails and How to Get It Right",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 1
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
+              "post_id": null,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "(비포스트 페이지)"
+            }
+          ],
+          "meta": {
+            "start_date": "2026-05-03",
+            "end_date": "2026-05-03",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 5
+            },
+            {
+              "full_referrer": "www.google.com",
+              "count": 2
+            },
+            {
+              "full_referrer": "blog.perfectwin.ai",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2026-05-03",
+            "end_date": "2026-05-03"
+          }
+        },
+        "linkedinTotal": 0
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2026-05-03",
+        "traffic": {
+          "data": [
+            {
+              "date": "2026-05-03",
+              "visits": 0,
+              "clicks": 0,
+              "organic": 0,
+              "home": 0,
+              "post": 24,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-05-03",
+            "end_date": "2026-05-03",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [],
+          "meta": {
+            "start_date": "2026-05-03",
+            "end_date": "2026-05-03",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [],
+          "meta": {
+            "start_date": "2026-05-03",
+            "end_date": "2026-05-03"
+          }
+        },
+        "linkedinTotal": 0
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": "2026-05-04T03:52:36.911Z"
+  }
+}
