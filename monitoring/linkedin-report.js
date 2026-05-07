@@ -1,6 +1,7 @@
 /**
  * LinkedIn → 블로그 유입 리포트
  * inblog 포스트별 referrer 데이터에서 LinkedIn 유입을 집계하여 Slack으로 발송한다.
+ * 어제 하루치 + 전체 누적을 병행 표시한다.
  */
 
 const https = require("https");
@@ -31,6 +32,28 @@ function apiRequest(path, apiKey) {
   });
 }
 
+/**
+ * KST 기준 어제 날짜 (YYYY-MM-DD).
+ */
+function getKstYesterday() {
+  const now = new Date();
+  const kst = new Date(now.getTime() + 9 * 60 * 60 * 1000);
+  kst.setDate(kst.getDate() - 1);
+  return kst.toISOString().split("T")[0];
+}
+
+/**
+ * sources 응답에서 LinkedIn 유입을 집계한다.
+ */
+function summarizeLinkedIn(sourcesData) {
+  const data = sourcesData || [];
+  const li = data.filter((s) => /linkedin/i.test(s.full_referrer));
+  const total = li.reduce((s, x) => s + x.count, 0);
+  const app = li.filter((s) => /android|ios/i.test(s.full_referrer)).reduce((s, x) => s + x.count, 0);
+  const totalVisits = data.reduce((s, x) => s + x.count, 0);
+  return { total, app, web: total - app, totalVisits };
+}
+
 async function scanBlog(apiKey, label, blogUrl) {
   let allPosts = [];
   let page = 1;
@@ -42,34 +65,50 @@ async function scanBlog(apiKey, label, blogUrl) {
     page++;
   }
 
+  const today = new Date().toISOString().split("T")[0];
+  const yesterday = getKstYesterday();
+
   const results = [];
   for (const p of allPosts) {
-    const src = await apiRequest(
-      `/blogs/analytics/posts/${p.id}/sources?start_date=2025-01-01&end_date=${new Date().toISOString().split("T")[0]}&limit=50`,
+    // 누적 (2025-01-01 ~ 오늘)
+    const srcCum = await apiRequest(
+      `/blogs/analytics/posts/${p.id}/sources?start_date=2025-01-01&end_date=${today}&limit=50`,
       apiKey
     );
-    if (src.body?.data) {
-      const li = src.body.data.filter((s) => /linkedin/i.test(s.full_referrer));
-      const totalVisits = src.body.data.reduce((s, x) => s + x.count, 0);
-      const liTotal = li.reduce((s, x) => s + x.count, 0);
-      if (liTotal > 0) {
-        const app = li.filter((s) => /android|ios/i.test(s.full_referrer)).reduce((s, x) => s + x.count, 0);
-        results.push({
-          title: p.attributes.title,
-          linkedin: liTotal,
-          linkedinApp: app,
-          linkedinWeb: liTotal - app,
-          totalVisits,
-        });
-      }
+    // 어제 하루
+    const srcDaily = await apiRequest(
+      `/blogs/analytics/posts/${p.id}/sources?start_date=${yesterday}&end_date=${yesterday}&limit=50`,
+      apiKey
+    );
+
+    const cum = summarizeLinkedIn(srcCum.body?.data);
+    const daily = summarizeLinkedIn(srcDaily.body?.data);
+
+    // 누적이라도 LinkedIn 유입이 한 번이라도 있었던 포스트만 표시
+    if (cum.total > 0) {
+      results.push({
+        title: p.attributes.title,
+        cumLi: cum.total,
+        cumLiApp: cum.app,
+        cumLiWeb: cum.web,
+        cumTotal: cum.totalVisits,
+        dailyLi: daily.total,
+        dailyLiApp: daily.app,
+        dailyLiWeb: daily.web,
+      });
     }
   }
-  results.sort((a, b) => b.linkedin - a.linkedin);
+
+  // 어제 유입 큰 순 → 누적 큰 순 (어제 0인 포스트는 누적 순으로)
+  results.sort((a, b) => b.dailyLi - a.dailyLi || b.cumLi - a.cumLi);
+
   return {
     label,
     totalPosts: allPosts.length,
     results,
-    grandTotal: results.reduce((s, r) => s + r.linkedin, 0),
+    grandCum: results.reduce((s, r) => s + r.cumLi, 0),
+    grandDaily: results.reduce((s, r) => s + r.dailyLi, 0),
+    activeYesterday: results.filter((r) => r.dailyLi > 0).length,
   };
 }
 
@@ -78,8 +117,11 @@ function buildTable(data) {
   let rank = 0;
   for (const r of data.results) {
     rank++;
-    lines.push(`${rank}. *${r.title}*`);
-    lines.push(`   LinkedIn ${r.linkedin}명 (앱 ${r.linkedinApp} · 웹 ${r.linkedinWeb}) | 전체 방문 ${r.totalVisits}명`);
+    const dailyMarker = r.dailyLi > 0 ? `🆕 ` : "";
+    lines.push(`${rank}. ${dailyMarker}*${r.title}*`);
+    lines.push(
+      `   어제 ${r.dailyLi}명 (앱 ${r.dailyLiApp} · 웹 ${r.dailyLiWeb}) | 누적 ${r.cumLi}명 (앱 ${r.cumLiApp} · 웹 ${r.cumLiWeb}) | 전체 방문 ${r.cumTotal}명`
+    );
   }
   return lines.join("\n");
 }
@@ -96,13 +138,16 @@ async function generateLinkedInReport() {
   }
 
   const today = new Date().toISOString().split("T")[0];
+  const yesterday = getKstYesterday();
   const en = await scanBlog(process.env.INBLOG_API_KEY, "영문 블로그", process.env.INBLOG_BLOG_URL);
   const ko = process.env.INBLOG_KO_API_KEY
     ? await scanBlog(process.env.INBLOG_KO_API_KEY, "한글 블로그", process.env.INBLOG_KO_BLOG_URL)
-    : { label: "한글 블로그", totalPosts: 0, results: [], grandTotal: 0 };
+    : { label: "한글 블로그", totalPosts: 0, results: [], grandCum: 0, grandDaily: 0, activeYesterday: 0 };
 
-  const totalAll = en.grandTotal + ko.grandTotal;
-  const totalPosts = en.results.length + ko.results.length;
+  const totalCum = en.grandCum + ko.grandCum;
+  const totalDaily = en.grandDaily + ko.grandDaily;
+  const activeYesterday = en.activeYesterday + ko.activeYesterday;
+  const totalPostsWithLi = en.results.length + ko.results.length;
 
   const blocks = [
     { type: "header", text: { type: "plain_text", text: `📊 LinkedIn → 블로그 유입 리포트 — ${today}`, emoji: true } },
@@ -110,7 +155,11 @@ async function generateLinkedInReport() {
       type: "section",
       text: {
         type: "mrkdwn",
-        text: `*기간:* 전체 누적 ~ ${today}\n*LinkedIn 총 유입:* ${totalAll}명 (${totalPosts}개 포스트)\n*영문:* ${en.grandTotal}명 (${en.results.length}/${en.totalPosts}개 포스트) | *한글:* ${ko.grandTotal}명 (${ko.results.length}/${ko.totalPosts}개 포스트)`,
+        text:
+          `*어제 (${yesterday}) LinkedIn 유입:* ${totalDaily}명 (${activeYesterday}개 포스트)\n` +
+          `*전체 누적 LinkedIn 유입:* ${totalCum}명 (${totalPostsWithLi}개 포스트)\n` +
+          `*영문 블로그:* 어제 ${en.grandDaily} / 누적 ${en.grandCum}명 (${en.results.length}/${en.totalPosts}개 포스트)\n` +
+          `*한글 블로그:* 어제 ${ko.grandDaily} / 누적 ${ko.grandCum}명 (${ko.results.length}/${ko.totalPosts}개 포스트)`,
       },
     },
     { type: "divider" },
@@ -134,7 +183,13 @@ async function generateLinkedInReport() {
 
   blocks.push({
     type: "context",
-    elements: [{ type: "mrkdwn", text: "📎 inblog referrer 기반 누적 집계 | com.linkedin.android + www.linkedin.com 합산" }],
+    elements: [
+      {
+        type: "mrkdwn",
+        text:
+          "📎 inblog referrer 기반 | com.linkedin.android + www.linkedin.com 합산 | 🆕 = 어제 신규 유입 발생 포스트",
+      },
+    ],
   });
 
   const res = await fetch(WEBHOOK, {

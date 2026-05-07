@@ -1,0 +1,28 @@
+name: LinkedIn 리포트 (수동)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  linkedin-report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: LinkedIn 리포트 실행
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          INBLOG_API_KEY: ${{ secrets.INBLOG_API_KEY }}
+          INBLOG_BLOG_URL: ${{ secrets.INBLOG_BLOG_URL }}
+          INBLOG_KO_API_KEY: ${{ secrets.INBLOG_KO_API_KEY }}
+          INBLOG_KO_BLOG_URL: ${{ secrets.INBLOG_KO_BLOG_URL }}
+        run: node monitoring/run-linkedin-report.js
