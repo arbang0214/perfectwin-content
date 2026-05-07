@@ -49,6 +49,14 @@ function getWeekNumber(dateStr) {
 
 function ensureDir(dir) { if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true }); }
 
+function getKstToday() {
+  // KST(UTC+9) 기준 오늘 날짜를 반환한다.
+  // cron이 UTC 23:43에 실행되면 UTC 기준으로는 어제, KST 기준으로는 오늘.
+  const now = new Date();
+  const kst = new Date(now.getTime() + 9 * 60 * 60 * 1000);
+  return kst.toISOString().split("T")[0];
+}
+
 // ─── 홈페이지 주간 리포트 ────────────────────────────────
 
 async function generateHomepageWeekly(thisWeekData, prevWeekData, weekNum, thisWeek) {
@@ -146,7 +154,7 @@ ${prevWeekData ? JSON.stringify(prevWeekData.annual.gsc?.["blog.perfectwin.ai"] 
 // ─── 메인 ────────────────────────────────────────────────
 
 async function main() {
-  const targetFriday = parseArgs() || new Date().toISOString().split("T")[0];
+  const targetFriday = parseArgs() || getKstToday();
   const thisWeek = getWeekRange(targetFriday);
   const prevWeek = getPrevWeekRange(targetFriday);
   const weekNum = getWeekNumber(targetFriday);

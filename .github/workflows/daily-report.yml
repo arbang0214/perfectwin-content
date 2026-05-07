@@ -2,8 +2,8 @@ name: 일간 성과 리포트
 
 on:
   schedule:
-    # 매일 오전 9시 KST = 0:00 UTC
-    - cron: '0 0 * * *'
+    # 매일 오전 8:43 KST = 23:43 UTC (전날) — 정시 큐 폭주 회피
+    - cron: '43 23 * * *'
   workflow_dispatch: # 수동 실행 가능
 
 permissions:

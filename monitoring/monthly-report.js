@@ -29,9 +29,11 @@ function parseArgs() {
 }
 
 function isLastDayOfMonth() {
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  return tomorrow.getDate() === 1;
+  // KST(UTC+9) 기준 내일이 1일이면 오늘이 월말이라는 뜻.
+  // cron이 UTC 23:43에 실행되므로 UTC 날짜와 KST 날짜가 달라 KST로 판정해야 한다.
+  const now = new Date();
+  const kstTomorrow = new Date(now.getTime() + 9 * 60 * 60 * 1000 + 24 * 60 * 60 * 1000);
+  return kstTomorrow.getUTCDate() === 1;
 }
 
 function getMonthRange(yearMonth) {
