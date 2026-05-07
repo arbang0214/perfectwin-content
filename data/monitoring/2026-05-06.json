@@ -1,6 +1,6 @@
 {
   "date": "2026-05-06",
-  "collectedAt": "2026-05-07T03:48:06.730Z",
+  "collectedAt": "2026-05-07T05:24:25.843Z",
   "ga4": {
     "date": "2026-05-06",
     "summary": {
@@ -161,7 +161,271 @@
     ],
     "utmCampaigns": []
   },
-  "gsc": null,
+  "gsc": {
+    "date": "2026-05-06",
+    "sites": [
+      {
+        "siteUrl": "https://perfectwin.ai/",
+        "label": "perfectwin.ai",
+        "date": "2026-05-06",
+        "actualDate": "2026-05-04",
+        "totals": {
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      },
+      {
+        "siteUrl": "https://blog.perfectwin.ai/",
+        "label": "blog.perfectwin.ai",
+        "date": "2026-05-06",
+        "actualDate": "2026-05-04",
+        "totals": {
+          "clicks": 0,
+          "impressions": 306,
+          "ctr": 0,
+          "position": 17.9
+        },
+        "topQueries": [
+          {
+            "query": "automate pre and post migration validation in sap",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 7
+          },
+          {
+            "query": "automatic prioritization",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 25.5
+          },
+          {
+            "query": "difference between sap rise and grow",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 66
+          },
+          {
+            "query": "grow vs rise with sap",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 46
+          },
+          {
+            "query": "how to automate pre and post migration validation in sap?",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 10
+          },
+          {
+            "query": "i_salesordertp",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 10
+          },
+          {
+            "query": "perfectwin",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 12
+          },
+          {
+            "query": "regression testing in sap",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 76
+          },
+          {
+            "query": "rise and grow with sap difference",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 50
+          },
+          {
+            "query": "rise migration",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 66
+          }
+        ],
+        "topPages": [
+          {
+            "page": "https://blog.perfectwin.ai/",
+            "clicks": 0,
+            "impressions": 5,
+            "ctr": 0,
+            "position": 7.8
+          },
+          {
+            "page": "https://blog.perfectwin.ai/backend-logic-test-automation",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 23
+          },
+          {
+            "page": "https://blog.perfectwin.ai/category/sap-regression-testing",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 65.5
+          },
+          {
+            "page": "https://blog.perfectwin.ai/category/sap-upgrade-testing",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 38
+          },
+          {
+            "page": "https://blog.perfectwin.ai/global-ev-battery-sap-s4hana-migration",
+            "clicks": 0,
+            "impressions": 5,
+            "ctr": 0,
+            "position": 12
+          },
+          {
+            "page": "https://blog.perfectwin.ai/rise-with-sap-migration-testing-strategy",
+            "clicks": 0,
+            "impressions": 7,
+            "ctr": 0,
+            "position": 23.7
+          },
+          {
+            "page": "https://blog.perfectwin.ai/sap-cloud-alm-test-management-strengths-gaps-automation-criteria",
+            "clicks": 0,
+            "impressions": 37,
+            "ctr": 0,
+            "position": 8.4
+          },
+          {
+            "page": "https://blog.perfectwin.ai/sap-cloud-alm-testing-strategy-redesign",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 20
+          },
+          {
+            "page": "https://blog.perfectwin.ai/sap-cloud-transition-rise-grow-guide",
+            "clicks": 0,
+            "impressions": 22,
+            "ctr": 0,
+            "position": 48
+          },
+          {
+            "page": "https://blog.perfectwin.ai/sap-erp-card-transaction-testing-complexity-automation",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 23
+          }
+        ],
+        "devices": [
+          {
+            "device": "DESKTOP",
+            "clicks": 0,
+            "impressions": 291,
+            "ctr": 0,
+            "position": 16.8
+          },
+          {
+            "device": "MOBILE",
+            "clicks": 0,
+            "impressions": 15,
+            "ctr": 0,
+            "position": 37.7
+          }
+        ],
+        "countries": [
+          {
+            "country": "are",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 24
+          },
+          {
+            "country": "arg",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 17
+          },
+          {
+            "country": "aus",
+            "clicks": 0,
+            "impressions": 5,
+            "ctr": 0,
+            "position": 7.6
+          },
+          {
+            "country": "aut",
+            "clicks": 0,
+            "impressions": 3,
+            "ctr": 0,
+            "position": 8.3
+          },
+          {
+            "country": "bel",
+            "clicks": 0,
+            "impressions": 3,
+            "ctr": 0,
+            "position": 12
+          },
+          {
+            "country": "bgd",
+            "clicks": 0,
+            "impressions": 3,
+            "ctr": 0,
+            "position": 14
+          },
+          {
+            "country": "bra",
+            "clicks": 0,
+            "impressions": 16,
+            "ctr": 0,
+            "position": 10.2
+          },
+          {
+            "country": "can",
+            "clicks": 0,
+            "impressions": 8,
+            "ctr": 0,
+            "position": 9.4
+          },
+          {
+            "country": "chn",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 9
+          },
+          {
+            "country": "cri",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 30.5
+          }
+        ]
+      }
+    ]
+  },
   "bing": {
     "date": "2026-05-06",
     "sites": [
@@ -583,6 +847,6 @@
   },
   "slack": {
     "sent": false,
-    "timestamp": "2026-05-07T03:48:06.730Z"
+    "timestamp": "2026-05-07T05:24:25.843Z"
   }
 }
