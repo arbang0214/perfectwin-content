@@ -18,12 +18,15 @@ const { collectGA4 } = require("./collectors/ga4");
 const { collectGSC } = require("./collectors/gsc");
 const { collectInblog } = require("./collectors/inblog");
 const { collectBing } = require("./collectors/bing");
+const { collectDemoFunnel } = require("./collectors/demo-funnel");
 const { formatDailyReport } = require("./formatters/slack-message");
-const { sendToSlack, sendReportToSlack } = require("./utils/slack-sender");
-const { generateDailyReports } = require("./report-generator");
-const { generatePDF } = require("./utils/pdf-generator");
-const { sendReportEmail } = require("./utils/email-sender");
-const { generateLinkedInReport } = require("./linkedin-report");
+const { sendToSlack } = require("./utils/slack-sender");
+const { runUnifiedDaily } = require("./unified-daily-report");
+// Legacy: 통합 리포트로 대체. 호출 안 함. 함수는 export 상태로 유지.
+// const { generateDailyReports } = require("./report-generator");
+// const { generatePDF } = require("./utils/pdf-generator");
+// const { sendReportEmail } = require("./utils/email-sender");
+// const { generateLinkedInReport } = require("./linkedin-report");
 
 const DATA_DIR = path.join(__dirname, "..", "data", "monitoring");
 
@@ -81,6 +84,7 @@ function saveSnapshot(targetDate, data) {
     gsc: data.gsc || null,
     bing: data.bing || null,
     inblog: data.inblog || null,
+    demoFunnel: data.demoFunnel || null,
     slack: { sent: data.slackSent, timestamp: new Date().toISOString() },
   };
 
@@ -99,9 +103,10 @@ async function main() {
   let gscData = null;
   let inblogData = null;
   let bingData = null;
+  let demoFunnelData = null;
 
   // 1. GA4 데이터 수집
-  console.log("[1/6] GA4 데이터 수집...");
+  console.log("[1/7] GA4 데이터 수집...");
   try {
     ga4Data = await collectGA4(targetDate);
     console.log("  ✅ GA4 수집 완료");
@@ -110,7 +115,7 @@ async function main() {
   }
 
   // 2. GSC 데이터 수집
-  console.log("[2/6] GSC 데이터 수집...");
+  console.log("[2/7] GSC 데이터 수집...");
   try {
     gscData = await collectGSC(targetDate);
     console.log("  ✅ GSC 수집 완료");
@@ -119,7 +124,7 @@ async function main() {
   }
 
   // 3. Bing 데이터 수집
-  console.log("[3/6] Bing 데이터 수집...");
+  console.log("[3/7] Bing 데이터 수집...");
   try {
     bingData = await collectBing(targetDate);
     if (bingData) {
@@ -130,7 +135,7 @@ async function main() {
   }
 
   // 4. inblog 데이터 수집
-  console.log("[4/6] inblog 데이터 수집...");
+  console.log("[4/7] inblog 데이터 수집...");
   try {
     inblogData = await collectInblog(targetDate);
     if (inblogData) {
@@ -138,6 +143,17 @@ async function main() {
     }
   } catch (err) {
     console.error(`  ❌ inblog 수집 실패: ${err.message}`);
+  }
+
+  // 5. Demo Funnel (GA4 기반 데모 신청 어트리뷰션)
+  console.log("[5/7] Demo Funnel 데이터 수집...");
+  try {
+    demoFunnelData = await collectDemoFunnel(targetDate);
+    const submits = demoFunnelData?.summary?.submissions ?? 0;
+    const intent = demoFunnelData?.summary?.demoPageSessions ?? 0;
+    console.log(`  ✅ Demo Funnel 수집 완료 (의향 ${intent}, 완료 ${submits})`);
+  } catch (err) {
+    console.error(`  ❌ Demo Funnel 수집 실패: ${err.message}`);
   }
 
   // 모두 실패한 경우
@@ -148,8 +164,8 @@ async function main() {
     return;
   }
 
-  // 4. 전일 데이터 로드 + 포맷
-  console.log("[4/5] 리포트 생성...");
+  // 6. 콘솔 1차 출력 (디버깅·로컬 확인용)
+  console.log("[6/7] 콘솔 1차 출력 + 스냅샷 저장...");
   const prevData = loadPreviousData(targetDate);
   if (prevData) {
     console.log(`  전일 데이터 로드: ${prevData.date}`);
@@ -157,73 +173,23 @@ async function main() {
     console.log("  전일 데이터 없음 (첫 실행 또는 누락) — 변화율 생략");
   }
 
-  const reportData = { date: targetDate, ga4: ga4Data, gsc: gscData, inblog: inblogData };
+  const reportData = { date: targetDate, ga4: ga4Data, gsc: gscData, inblog: inblogData, demoFunnel: demoFunnelData };
   const reportText = formatDailyReport(reportData, prevData);
-
-  // 콘솔 출력 (항상)
   console.log(reportText);
+  saveSnapshot(targetDate, { ga4: ga4Data, gsc: gscData, bing: bingData, inblog: inblogData, demoFunnel: demoFunnelData, slackSent: false });
 
-  // 5. JSON 스냅샷 저장
-  console.log("[5/7] JSON 스냅샷 저장...");
-  saveSnapshot(targetDate, { ga4: ga4Data, gsc: gscData, bing: bingData, inblog: inblogData, slackSent: false });
-
-  // 6. Claude API로 인사이트 리포트 생성
+  // 7. 통합 일간 리포트 생성 + Slack 발송 (헤드라인 + thread)
   const skipReport = process.argv.includes("--no-report");
   if (!skipReport && process.env.ANTHROPIC_API_KEY) {
-    console.log("[6/9] 인사이트 리포트 생성 (Claude API)...");
+    console.log("[7/7] 통합 일간 리포트 생성 + Slack 발송...");
     try {
-      const reports = await generateDailyReports(targetDate);
-      if (reports.homepage) console.log("  ✅ 홈페이지 리포트 생성 완료");
-      if (reports.blog) console.log("  ✅ 블로그 리포트 생성 완료");
-
-      // 7. Slack 인사이트 + LinkedIn 리포트 발송 (순차)
-      console.log("[7/10] Slack 발송 (순차)...");
-      if (reports.homepage) {
-        await sendReportToSlack(reports.homepage, "daily", targetDate);
-        console.log("  ✅ 홈페이지 인사이트 Slack 발송 완료");
-      }
-      if (reports.blog) {
-        await sendReportToSlack(reports.blog, "daily", targetDate);
-        console.log("  ✅ 블로그 인사이트 Slack 발송 완료");
-      }
-
-      // 8. LinkedIn 유입 리포트 (블로그 인사이트 바로 뒤)
-      console.log("[8/10] LinkedIn 유입 리포트...");
-      try {
-        await generateLinkedInReport();
-      } catch (liErr) {
-        console.error(`  ❌ LinkedIn 리포트 실패: ${liErr.message}`);
-      }
-
-      // 9. PDF 생성 + 이메일 발송 (순차)
-      console.log("[9/10] 상세 리포트 PDF + 이메일 발송 (순차)...");
-      if (reports.homepage) {
-        const hpPdf = await generatePDF(reports.homepage);
-        console.log("  ✅ 홈페이지 PDF 생성 완료");
-        await sendReportEmail(
-          hpPdf,
-          `homepage-daily-${targetDate}.pdf`,
-          `📊 홈페이지 일간 상세 리포트 — ${targetDate}`,
-          `PerfecTwin 홈페이지 일간 상세 리포트 (${targetDate})가 첨부되어 있습니다.`
-        );
-      }
-      if (reports.blog) {
-        const blogPdf = await generatePDF(reports.blog);
-        console.log("  ✅ 블로그 PDF 생성 완료");
-        await sendReportEmail(
-          blogPdf,
-          `blog-daily-${targetDate}.pdf`,
-          `📝 블로그 일간 상세 리포트 — ${targetDate}`,
-          `PerfecTwin 블로그 일간 상세 리포트 (${targetDate})가 첨부되어 있습니다.`
-        );
-      }
-
-      console.log("[10/10] 전체 발송 완료");
+      await runUnifiedDaily(targetDate);
+      console.log("  ✅ 통합 리포트 발송 완료");
     } catch (err) {
-      console.error(`  ❌ 리포트 생성/발송 실패: ${err.message}`);
+      console.error(`  ❌ 통합 리포트 실패: ${err.message}`);
     }
   } else if (skipReport) {
-    console.log("[6/10] 리포트 생성 건너뜀 (--no-report)");
+    console.log("[7/7] 리포트 생성 건너뜀 (--no-report)");
   }
 
   console.log("\n✅ 일간 리포트 완료!\n");

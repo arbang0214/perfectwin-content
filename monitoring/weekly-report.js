@@ -74,22 +74,36 @@ ${JSON.stringify(thisWeekData.annual.gsc?.["perfectwin.ai"] || null, null, 2)}
 ## 이번 주 요일별 패턴
 ${JSON.stringify(thisWeekData.annual.dayOfWeek, null, 2)}
 
+## 이번 주 Demo Funnel 집계
+${thisWeekData.annual.demoFunnel ? JSON.stringify(thisWeekData.annual.demoFunnel, null, 2) : "데모 퍼널 데이터 없음"}
+
 ## 전주 GA4 집계
 ${prevWeekData ? JSON.stringify(prevWeekData.annual.ga4, null, 2) : "전주 데이터 없음"}
 
 ## 전주 GSC 집계 (perfectwin.ai)
 ${prevWeekData ? JSON.stringify(prevWeekData.annual.gsc?.["perfectwin.ai"] || null, null, 2) : "전주 데이터 없음"}
 
+## 전주 Demo Funnel 집계
+${prevWeekData?.annual.demoFunnel ? JSON.stringify(prevWeekData.annual.demoFunnel, null, 2) : "전주 데이터 없음"}
+
 이 데이터를 기반으로 홈페이지 주간 인사이트 리포트를 작성해줘.
 
 ### 리포트 구조
 #### 1. 주간 핵심 요약
-핵심 지표 테이블 (전주 대비). 2~3줄 핵심 문장.
+핵심 지표 테이블 (전주 대비). 2~3줄 핵심 문장. **데모 신청 건수(demoFunnel.totals.submissions)는 핵심 지표에 반드시 포함**.
 #### 2. 트래픽 분석
 방문자, 세션, 페이지뷰, 참여율 (전주 대비). 유입 채널 변화.
 #### 3. Top 페이지 + 랜딩 페이지
 #### 4. 기기/국가
 #### 5. 요일별 패턴 (2~3문장)
+#### 5-1. 데모 신청 어트리뷰션 (이번 주 핵심 — ARUM이 가장 보고 싶어하는 지표)
+demoFunnel.totals.submissions=0이면 "이번 주 데모 신청 없음"으로 1줄.
+≥1이면 아래 모두 작성:
+- summary: 데모 페이지 도달 → submit 전환율 (전주 대비).
+- **기여 콘텐츠 Top 5 (submit.byLandingPage)**: submit한 사용자가 어느 페이지로 처음 들어왔는지. 블로그 path별로 정리. **이게 다음 주 콘텐츠 의사결정의 핵심 데이터**.
+- 채널별 (submit.bySourceMedium): google/organic, linkedin, direct 등 비중.
+- first-touch vs last-touch 차이가 크면 별도로 언급.
+- intent → submission gap: 의향만 표현한 사용자가 어느 페이지에서 왔는지 (intent.byLandingPage) — CTA·폼 UX 개선 후보.
 #### 6. 인사이트 (4~6개)
 비즈니스 임팩트 순. 각 인사이트는 아래 구조로 **충분히 자세하게** 서술:
 - **현상**: 구체적 수치 + 전주 대비 변화량/변화율.
@@ -119,22 +133,35 @@ ${JSON.stringify(thisWeekData.annual.inblog, null, 2)}
 ## 이번 주 GSC 집계 (blog.perfectwin.ai)
 ${JSON.stringify(thisWeekData.annual.gsc?.["blog.perfectwin.ai"] || null, null, 2)}
 
+## 이번 주 Demo Funnel 집계 (블로그 → 데모 신청 어트리뷰션)
+${thisWeekData.annual.demoFunnel ? JSON.stringify(thisWeekData.annual.demoFunnel, null, 2) : "데모 퍼널 데이터 없음"}
+
 ## 전주 inblog 집계
 ${prevWeekData ? JSON.stringify(prevWeekData.annual.inblog, null, 2) : "전주 데이터 없음"}
 
 ## 전주 GSC 집계 (blog.perfectwin.ai)
 ${prevWeekData ? JSON.stringify(prevWeekData.annual.gsc?.["blog.perfectwin.ai"] || null, null, 2) : "전주 데이터 없음"}
 
+## 전주 Demo Funnel 집계
+${prevWeekData?.annual.demoFunnel ? JSON.stringify(prevWeekData.annual.demoFunnel, null, 2) : "전주 데이터 없음"}
+
 이 데이터를 기반으로 블로그 주간 인사이트 리포트를 작성해줘.
 
 ### 리포트 구조
 #### 1. 주간 핵심 요약
-영문/한글 블로그 + GSC 핵심 지표 (전주 대비). 2~3줄 핵심 문장.
+영문/한글 블로그 + GSC 핵심 지표 (전주 대비). 2~3줄 핵심 문장. **데모 신청 기여 블로그 수**도 핵심 지표에 포함.
 #### 2. 블로그 트래픽 (영문/한글 각각)
 방문, 클릭, 오가닉, 유입 소스 (전주 대비)
 #### 3. Google 검색 성과
 노출/클릭/CTR/순위. 주요 키워드 변동. 주요 페이지 변동.
 "노출 많고 클릭 0" 페이지 식별 → 메타 리라이트 대상.
+#### 3-1. 데모 신청 기여 블로그 (이번 주 핵심 — 다음 주 콘텐츠 결정에 직접 사용)
+demoFunnel.totals.submissions=0이면 "이번 주 데모 신청 없음" 1줄.
+≥1이면:
+- submit.byLandingPage Top 10에서 **블로그 경로(/blog-en/..., /blog-ko/...)** 만 필터링해서 표로 정리.
+- 각 블로그별: submit 세션, 같은 주 inblog 방문수, "방문 → submit 전환"의 강도.
+- 비블로그(/, /pricing, /features 등)는 별도 합계만.
+- "어떤 주제/각도/CTA가 데모를 잘 만들었는가" 1~2문장 분석 — 다음 주 콘텐츠 선정에 직접 영향.
 #### 4. 인사이트 (4~6개)
 비즈니스 임팩트 순. 포지션 8~15 키워드 = 첫 페이지 진입 기회 반드시 다룸.
 각 인사이트는 아래 구조로 **충분히 자세하게** 서술:

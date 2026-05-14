@@ -14,6 +14,7 @@ const fs = require("fs");
 const { collectGA4 } = require("./collectors/ga4");
 const { collectGSC } = require("./collectors/gsc");
 const { collectInblog } = require("./collectors/inblog");
+const { collectDemoFunnel } = require("./collectors/demo-funnel");
 
 const DATA_DIR = path.join(__dirname, "..", "data", "monitoring");
 
@@ -26,10 +27,10 @@ function parseArgs() {
     if (args[i] === "--from" && args[i + 1]) parsed.from = args[++i];
     if (args[i] === "--to" && args[i + 1]) parsed.to = args[++i];
     if (args[i] === "--skip-existing") parsed.skipExisting = true;
-    if (args[i] === "--source") parsed.source = args[++i]; // ga4, gsc, inblog, all
+    if (args[i] === "--source") parsed.source = args[++i]; // ga4, gsc, inblog, demo, all
   }
   if (!parsed.from) {
-    console.error("Usage: node monitoring/backfill.js --from YYYY-MM-DD [--to YYYY-MM-DD] [--skip-existing] [--source ga4|gsc|inblog|all]");
+    console.error("Usage: node monitoring/backfill.js --from YYYY-MM-DD [--to YYYY-MM-DD] [--skip-existing] [--source ga4|gsc|inblog|demo|all]");
     process.exit(1);
   }
   if (!parsed.to) {
@@ -81,6 +82,7 @@ async function main() {
   const doGA4 = args.source === "all" || args.source === "ga4";
   const doGSC = args.source === "all" || args.source === "gsc";
   const doInblog = args.source === "all" || args.source === "inblog";
+  const doDemo = args.source === "all" || args.source === "demo";
 
   let success = 0;
   let skipped = 0;
@@ -97,7 +99,8 @@ async function main() {
       const hasGA4 = !doGA4 || existing.ga4;
       const hasGSC = !doGSC || existing.gsc;
       const hasInblog = !doInblog || existing.inblog;
-      if (hasGA4 && hasGSC && hasInblog) {
+      const hasDemo = !doDemo || existing.demoFunnel;
+      if (hasGA4 && hasGSC && hasInblog && hasDemo) {
         skipped++;
         if (i % 30 === 0) console.log(`${progress} ${date} — 건너뜀 (기존 데이터 있음)`);
         continue;
@@ -110,6 +113,7 @@ async function main() {
       ga4: null,
       gsc: null,
       inblog: null,
+      demoFunnel: null,
       slack: { sent: false, timestamp: null },
     };
 
@@ -157,6 +161,23 @@ async function main() {
       } catch { /* 무시 */ }
     }
 
+    // demo funnel (GA4)
+    if (doDemo) {
+      try {
+        snapshot.demoFunnel = await collectDemoFunnel(date);
+        collected = true;
+      } catch (err) {
+        if (err.message?.includes("429") || err.message?.includes("RESOURCE_EXHAUSTED")) {
+          console.log(`${progress} ${date} — Demo Funnel 속도 제한, 30초 대기...`);
+          await delay(30000);
+          try {
+            snapshot.demoFunnel = await collectDemoFunnel(date);
+            collected = true;
+          } catch { /* 재시도 실패 */ }
+        }
+      }
+    }
+
     if (collected) {
       snapshot.collectedAt = new Date().toISOString();
       saveSnapshot(date, snapshot);
@@ -175,7 +196,7 @@ async function main() {
     }
 
     // API 속도 제한 대응: 요청 간 간격
-    if (doGA4 || doGSC) await delay(500);
+    if (doGA4 || doGSC || doDemo) await delay(500);
   }
 
   console.log(`\n✅ 백필 완료!`);

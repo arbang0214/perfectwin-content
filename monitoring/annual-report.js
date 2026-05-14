@@ -133,14 +133,23 @@ function buildUserPrompt(data, focus) {
     };
   });
 
+  // 월별 Demo Funnel 트렌드
+  const monthlyDemo = months.map((m) => {
+    const df = monthly[m]?.demoFunnel;
+    return {
+      month: m,
+      totals: df?.totals || null,
+    };
+  });
+
   if (focus === "homepage") {
-    return buildHomepageAnnualPrompt(period, totalDays, monthlyGA4, monthlyGSC, annual);
+    return buildHomepageAnnualPrompt(period, totalDays, monthlyGA4, monthlyGSC, monthlyDemo, annual);
   } else {
-    return buildBlogAnnualPrompt(period, totalDays, monthlyGSC, monthlyInblog, annual);
+    return buildBlogAnnualPrompt(period, totalDays, monthlyGSC, monthlyInblog, monthlyDemo, annual);
   }
 }
 
-function buildHomepageAnnualPrompt(period, totalDays, monthlyGA4, monthlyGSC, annual) {
+function buildHomepageAnnualPrompt(period, totalDays, monthlyGA4, monthlyGSC, monthlyDemo, annual) {
   return `아래는 PerfecTwin 홈페이지의 ${period.from} ~ ${period.to} (${totalDays}일) 연간 성과 데이터다.
 
 ## 월별 GA4 트래픽
@@ -157,6 +166,12 @@ ${JSON.stringify(annual.gsc?.["perfectwin.ai"] || null, null, 2)}
 
 ## 요일별 패턴
 ${JSON.stringify(annual.dayOfWeek, null, 2)}
+
+## 월별 Demo Funnel (데모 신청 추이)
+${JSON.stringify(monthlyDemo, null, 2)}
+
+## 연간 Demo Funnel 집계
+${annual.demoFunnel ? JSON.stringify(annual.demoFunnel, null, 2) : "데모 퍼널 데이터 없음"}
 
 ---
 
@@ -178,6 +193,14 @@ ${JSON.stringify(annual.dayOfWeek, null, 2)}
 
 ## 5. Top 페이지 연간 순위
 상위 10개 페이지. 전환 퍼널(인지→관심→전환) 관점.
+
+## 5-1. 데모 신청 어트리뷰션 (연간 누적, 경영진 핵심 지표)
+demoFunnel 데이터 있을 때만 작성:
+- 연간 누적 submit 건수, 월별 추이(monthlyDemo), 전환율 변화.
+- **submit.byLandingPage Top 15**: 1년간 데모로 가장 많이 보낸 페이지·블로그 — 가장 중요한 콘텐츠 자산 식별.
+- submit.bySourceMedium: 채널 분포 (organic vs social vs direct).
+- first-touch (byFirstUserSource) vs last-touch — 인지 채널과 전환 채널이 다른지 확인.
+- intent → submit 전환율 추이: 폼 UX·CTA 개선 여부 판단 신호.
 
 ## 6. 기기/국가 분포
 기기별 세션/참여율. 상위 국가별 분석. 타겟 시장 평가.
@@ -201,7 +224,7 @@ ${JSON.stringify(annual.dayOfWeek, null, 2)}
 - 모든 주장에 데이터 근거 명시`;
 }
 
-function buildBlogAnnualPrompt(period, totalDays, monthlyGSC, monthlyInblog, annual) {
+function buildBlogAnnualPrompt(period, totalDays, monthlyGSC, monthlyInblog, monthlyDemo, annual) {
   return `아래는 PerfecTwin 블로그의 ${period.from} ~ ${period.to} (${totalDays}일) 연간 성과 데이터다.
 
 ## 월별 inblog 트래픽 (영문/한글)
@@ -215,6 +238,12 @@ ${JSON.stringify(monthlyGSC.map((m) => ({ month: m.month, blog: m.blog })), null
 
 ## 연간 GSC 집계 (blog.perfectwin.ai)
 ${JSON.stringify(annual.gsc?.["blog.perfectwin.ai"] || null, null, 2)}
+
+## 월별 Demo Funnel (블로그 → 데모 어트리뷰션)
+${JSON.stringify(monthlyDemo, null, 2)}
+
+## 연간 Demo Funnel 집계
+${annual.demoFunnel ? JSON.stringify(annual.demoFunnel, null, 2) : "데모 퍼널 데이터 없음"}
 
 ---
 
@@ -242,6 +271,14 @@ ${JSON.stringify(annual.gsc?.["blog.perfectwin.ai"] || null, null, 2)}
 
 ## 7. 검색 상위 페이지 분석
 연간 노출 Top 15 페이지. "노출 많고 클릭 0" → 메타 리라이트 우선순위. "순위 8~15" → 첫 페이지 진입 가능.
+
+## 7-1. 데모 신청 기여 블로그 랭킹 (연간 — 콘텐츠 전략 핵심)
+demoFunnel 데이터 있을 때만 작성:
+- submit.byLandingPage에서 블로그 path만 추출하여 Top 15 표.
+- 각 블로그별 누적 submit 세션 + 같은 기간 inblog 방문수 → "방문 → submit" 효율 비율.
+- 카테고리(A: 마이그레이션, B: 테스트자동화, C: 경쟁사, D: 트렌드)별로 분류해서 어느 카테고리가 가장 데모로 잘 이어졌는지 분석.
+- 월별 추이(monthlyDemo)와 매칭해서 발행 시점 이후 몇 개월에 효과가 나타나는지 패턴 분석.
+- **다음 분기 콘텐츠 우선순위는 이 섹션의 데이터를 근거로 도출할 것**.
 
 ## 8. 종합 인사이트
 각 항목을 **충분히 자세하게** 서술. 수치 근거 + 원인 분석 + 비즈니스 임팩트 + 구체적 액션을 빠짐없이 포함.

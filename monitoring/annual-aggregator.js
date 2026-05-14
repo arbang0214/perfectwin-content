@@ -280,6 +280,98 @@ function aggregateInblogMonthly(monthSnapshots) {
 }
 
 /**
+ * Demo Funnel 월별 집계 — submit/intent 합산 + 차원별 breakdown 합산
+ */
+function aggregateDemoFunnelMonthly(monthSnapshots) {
+  const days = monthSnapshots.filter((s) => s.demoFunnel?.summary);
+  if (days.length === 0) return null;
+
+  const totals = {
+    demoPageSessions: 0,
+    demoPageUsers: 0,
+    submissions: 0,
+    submissionUsers: 0,
+  };
+  for (const d of days) {
+    const s = d.demoFunnel.summary;
+    totals.demoPageSessions += s.demoPageSessions || 0;
+    totals.demoPageUsers += s.demoPageUsers || 0;
+    totals.submissions += s.submissions || 0;
+    totals.submissionUsers += s.submissionUsers || 0;
+  }
+  const conversionRate = totals.demoPageSessions > 0
+    ? Math.round((totals.submissions / totals.demoPageSessions) * 10000) / 100
+    : null;
+
+  // 차원 합산 헬퍼: key 함수가 만든 그룹별로 sessions/users 합산
+  function aggregateBreakdown(snapshots, getRows, keyFn, fields) {
+    const map = {};
+    for (const snap of snapshots) {
+      const rows = getRows(snap) || [];
+      for (const r of rows) {
+        const key = keyFn(r);
+        if (!map[key]) {
+          map[key] = { sessions: 0, users: 0 };
+          for (const f of fields) map[key][f] = r[f];
+        }
+        map[key].sessions += r.sessions || 0;
+        map[key].users += r.users || 0;
+      }
+    }
+    return Object.values(map).sort((a, b) => b.sessions - a.sessions);
+  }
+
+  const submitBySourceMedium = aggregateBreakdown(
+    days,
+    (s) => s.demoFunnel?.submit?.bySourceMedium,
+    (r) => `${r.sessionSource}/${r.sessionMedium}`,
+    ["sessionSource", "sessionMedium"],
+  );
+
+  const submitByCampaign = aggregateBreakdown(
+    days,
+    (s) => s.demoFunnel?.submit?.byCampaign,
+    (r) => `${r.sessionCampaignName}|${r.sessionSource}|${r.sessionMedium}`,
+    ["sessionCampaignName", "sessionSource", "sessionMedium"],
+  );
+
+  const submitByLandingPage = aggregateBreakdown(
+    days,
+    (s) => s.demoFunnel?.submit?.byLandingPage,
+    (r) => r.landingPagePlusQueryString,
+    ["landingPagePlusQueryString"],
+  ).slice(0, 25);
+
+  const submitByFirstUserSource = aggregateBreakdown(
+    days,
+    (s) => s.demoFunnel?.submit?.byFirstUserSource,
+    (r) => `${r.firstUserSource}/${r.firstUserMedium}`,
+    ["firstUserSource", "firstUserMedium"],
+  );
+
+  const intentByLandingPage = aggregateBreakdown(
+    days,
+    (s) => s.demoFunnel?.intent?.byLandingPage,
+    (r) => r.landingPagePlusQueryString,
+    ["landingPagePlusQueryString"],
+  ).slice(0, 25);
+
+  return {
+    daysWithData: days.length,
+    totals: { ...totals, conversionRate },
+    submit: {
+      bySourceMedium: submitBySourceMedium,
+      byCampaign: submitByCampaign,
+      byLandingPage: submitByLandingPage,
+      byFirstUserSource: submitByFirstUserSource,
+    },
+    intent: {
+      byLandingPage: intentByLandingPage,
+    },
+  };
+}
+
+/**
  * 요일별 패턴 분석
  */
 function analyzeDayOfWeekPattern(snapshots) {
@@ -331,6 +423,7 @@ function aggregateAnnual(from, to) {
       ga4: aggregateGA4Monthly(snaps),
       gsc: aggregateGSCMonthly(snaps),
       inblog: aggregateInblogMonthly(snaps),
+      demoFunnel: aggregateDemoFunnelMonthly(snaps),
     };
   }
 
@@ -338,6 +431,7 @@ function aggregateAnnual(from, to) {
   const annualGA4 = aggregateGA4Monthly(snapshots);
   const annualGSC = aggregateGSCMonthly(snapshots);
   const annualInblog = aggregateInblogMonthly(snapshots);
+  const annualDemoFunnel = aggregateDemoFunnelMonthly(snapshots);
   const dayOfWeek = analyzeDayOfWeekPattern(snapshots);
 
   return {
@@ -349,6 +443,7 @@ function aggregateAnnual(from, to) {
       ga4: annualGA4,
       gsc: annualGSC,
       inblog: annualInblog,
+      demoFunnel: annualDemoFunnel,
       dayOfWeek,
     },
   };

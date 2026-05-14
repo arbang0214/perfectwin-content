@@ -88,20 +88,82 @@ function formatGSC(gscData, prevGSC) {
 }
 
 /**
+ * Demo Funnel 데이터를 텍스트로 포맷한다.
+ * 콘솔 1차 출력의 최상단 블록. 구조:
+ *   1) 핵심 지표 박스 (도달 / 완료 / 전환율)
+ *   2) 데모 페이지로 데려온 콘텐츠 (intent.byLandingPage)
+ *   3) 데모 신청까지 간 콘텐츠 (submit.byLandingPage)
+ *   4) submit 유입 채널 (submit.bySourceMedium)
+ */
+function formatDemoFunnel(demoData, prevDemo) {
+  if (!demoData?.summary) return "🎯 *데모 신청 어트리뷰션* — 데이터 없음";
+
+  const s = demoData.summary;
+  const prev = prevDemo?.summary || {};
+  const pad = (n, w = 4) => String(n).padStart(w);
+
+  let text = `🎯 *데모 신청 어트리뷰션 — ${demoData.date}*\n`;
+
+  // 1) 핵심 지표
+  text += `\n  ┌─ 핵심 지표 ─────────────────────────────\n`;
+  text += `  │ 데모 페이지 도달:   ${pad(s.demoPageSessions)} 세션  (${changeRate(s.demoPageSessions, prev.demoPageSessions)})\n`;
+  text += `  │ 데모 신청 완료:     ${pad(s.submissions)} 세션  (${changeRate(s.submissions, prev.submissions)})\n`;
+  if (s.conversionRate != null) {
+    text += `  │ 도달 → 완료 전환율: ${s.conversionRate}%\n`;
+  }
+  text += `  └─────────────────────────────────────────\n`;
+
+  // 2) 데모 페이지로 데려온 콘텐츠 (의향 단계)
+  const intentLanding = demoData.intent?.byLandingPage || [];
+  if (intentLanding.length > 0) {
+    text += `\n  📥 데모 페이지로 데려온 콘텐츠 (첫 진입 페이지 Top 5)\n`;
+    intentLanding.slice(0, 5).forEach((row, i) => {
+      text += `    ${i + 1}. ${row.landingPagePlusQueryString} — ${row.sessions}건\n`;
+    });
+  } else if (s.demoPageSessions === 0) {
+    text += `\n  📥 오늘 데모 페이지 도달 0건\n`;
+  }
+
+  // 3) 데모 신청 완료까지 간 콘텐츠 (어트리뷰션 핵심)
+  const submitLanding = demoData.submit?.byLandingPage || [];
+  if (submitLanding.length > 0) {
+    text += `\n  ✅ 데모 신청 완료까지 간 콘텐츠 (첫 진입 페이지 Top 5)\n`;
+    submitLanding.slice(0, 5).forEach((row, i) => {
+      text += `    ${i + 1}. ${row.landingPagePlusQueryString} — ${row.sessions}건\n`;
+    });
+  } else if (s.submissions === 0) {
+    text += `\n  ✅ 오늘 데모 신청 0건\n`;
+  }
+
+  // 4) submit 유입 채널 (last-touch)
+  const submitSource = demoData.submit?.bySourceMedium || [];
+  if (submitSource.length > 0) {
+    text += `\n  🔗 데모 신청 유입 채널 (source/medium)\n`;
+    submitSource.slice(0, 5).forEach((row) => {
+      text += `    ${row.sessionSource}/${row.sessionMedium}: ${row.sessions}건\n`;
+    });
+  }
+
+  return text;
+}
+
+/**
  * 전체 일간 리포트를 포맷한다.
- * @param {Object} data - { ga4, gsc, date }
+ * @param {Object} data - { ga4, gsc, demoFunnel, date }
  * @param {Object|null} prevData - 전일 데이터 (비교용)
  * @returns {string}
  */
 function formatDailyReport(data, prevData) {
   const header = `\n════════════════════════════════════════\n  PerfecTwin 일간 성과 리포트 — ${data.date}\n════════════════════════════════════════\n`;
 
+  // 데모 퍼널을 가장 상단으로 — 콘텐츠 의사결정의 핵심 신호
+  const demoSection = formatDemoFunnel(data.demoFunnel, prevData?.demoFunnel);
   const ga4Section = formatGA4(data.ga4, prevData?.ga4);
   const gscSection = formatGSC(data.gsc, prevData?.gsc);
 
   const footer = `\n────────────────────────────────────────\n`;
 
-  return header + "\n" + ga4Section + "\n\n" + gscSection + footer;
+  return header + "\n" + demoSection + "\n\n" + ga4Section + "\n\n" + gscSection + footer;
 }
 
-module.exports = { formatDailyReport, formatGA4, formatGSC, changeRate };
+module.exports = { formatDailyReport, formatGA4, formatGSC, formatDemoFunnel, changeRate };
