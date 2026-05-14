@@ -1,6 +1,6 @@
 {
   "date": "2026-05-13",
-  "collectedAt": "2026-05-14T01:33:34.865Z",
+  "collectedAt": "2026-05-14T07:47:42.484Z",
   "ga4": {
     "date": "2026-05-13",
     "summary": {
@@ -253,13 +253,13 @@
       {
         "landingPage": "/contact-us/request-demo",
         "sessions": 4,
-        "users": 3,
+        "users": 4,
         "bounceRate": 25,
         "avgDuration": 208.7,
         "pagesPerSession": 5
       },
       {
-        "landingPage": "",
+        "landingPage": "(not set)",
         "sessions": 3,
         "users": 1,
         "bounceRate": 100,
@@ -614,11 +614,11 @@
           "data": [
             {
               "date": "2026-05-13",
-              "visits": 10,
-              "clicks": 1,
+              "visits": 26,
+              "clicks": 2,
               "organic": 0,
-              "home": 2,
-              "post": 24,
+              "home": 7,
+              "post": 32,
               "category": 2,
               "author": 0
             }
@@ -634,11 +634,83 @@
           "data": [
             {
               "post_id": null,
-              "visits": 4,
+              "visits": 9,
               "clicks": 0,
               "organic": 0,
               "cvr": 0,
               "title": "(비포스트 페이지)"
+            },
+            {
+              "post_id": 168459,
+              "visits": 4,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "Beyond Self-Healing: What AI Should Really Fix in SAP Testing",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 2
+                },
+                {
+                  "full_referrer": "inblog.ai",
+                  "count": 2
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
+              "post_id": 175377,
+              "visits": 4,
+              "clicks": 1,
+              "organic": 0,
+              "cvr": 0.25,
+              "title": "SAP Test Automation: Asset or Liability After Go-live?",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 2
+                },
+                {
+                  "full_referrer": "com.linkedin.android",
+                  "count": 1
+                },
+                {
+                  "full_referrer": "www.perfectwin.ai",
+                  "count": 1
+                }
+              ],
+              "linkedinVisits": 1
+            },
+            {
+              "post_id": 79267,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP S/4HANA Upgrade Testing: 3 Proven Strategies (2026)",
+              "sources": [
+                {
+                  "full_referrer": "inblog.ai",
+                  "count": 2
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
+              "post_id": 163597,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "Why Does SAP Hypercare Drag On? 5 Regression Cycle Bottlenecks",
+              "sources": [
+                {
+                  "full_referrer": "inblog.ai",
+                  "count": 2
+                }
+              ],
+              "linkedinVisits": 0
             },
             {
               "post_id": 59098,
@@ -701,21 +773,6 @@
               "linkedinVisits": 0
             },
             {
-              "post_id": 168459,
-              "visits": 1,
-              "clicks": 0,
-              "organic": 0,
-              "cvr": 0,
-              "title": "Beyond Self-Healing: What AI Should Really Fix in SAP Testing",
-              "sources": [
-                {
-                  "full_referrer": "direct",
-                  "count": 1
-                }
-              ],
-              "linkedinVisits": 0
-            },
-            {
               "post_id": 171557,
               "visits": 1,
               "clicks": 0,
@@ -743,7 +800,19 @@
           "data": [
             {
               "full_referrer": "direct",
-              "count": 10
+              "count": 15
+            },
+            {
+              "full_referrer": "inblog.ai",
+              "count": 9
+            },
+            {
+              "full_referrer": "com.linkedin.android",
+              "count": 1
+            },
+            {
+              "full_referrer": "www.perfectwin.ai",
+              "count": 1
             }
           ],
           "meta": {
@@ -751,7 +820,7 @@
             "end_date": "2026-05-13"
           }
         },
-        "linkedinTotal": 0
+        "linkedinTotal": 1
       },
       {
         "label": "blog-ko",
@@ -820,8 +889,72 @@
       }
     ]
   },
+  "demoFunnel": {
+    "date": "2026-05-13",
+    "paths": {
+      "request": "/contact-us/request-demo",
+      "thankyou": "/contact-us/thankyou"
+    },
+    "summary": {
+      "demoPageSessions": 5,
+      "demoPagePageViews": 10,
+      "demoPageUsers": 4,
+      "submissions": 1,
+      "submissionPageViews": 1,
+      "submissionUsers": 1,
+      "conversionRate": 20
+    },
+    "submit": {
+      "bySourceMedium": [
+        {
+          "sessionSource": "(direct)",
+          "sessionMedium": "(none)",
+          "sessions": 1,
+          "users": 1
+        }
+      ],
+      "byCampaign": [
+        {
+          "sessionCampaignName": "(direct)",
+          "sessionSource": "(direct)",
+          "sessionMedium": "(none)",
+          "sessions": 1,
+          "users": 1
+        }
+      ],
+      "byLandingPage": [
+        {
+          "landingPagePlusQueryString": "/contact-us/request-demo",
+          "sessions": 1,
+          "users": 1
+        }
+      ],
+      "byFirstUserSource": [
+        {
+          "firstUserSource": "(direct)",
+          "firstUserMedium": "(none)",
+          "sessions": 1,
+          "users": 1
+        }
+      ]
+    },
+    "intent": {
+      "byLandingPage": [
+        {
+          "landingPagePlusQueryString": "/contact-us/request-demo",
+          "sessions": 4,
+          "users": 4
+        },
+        {
+          "landingPagePlusQueryString": "/",
+          "sessions": 1,
+          "users": 1
+        }
+      ]
+    }
+  },
   "slack": {
     "sent": false,
-    "timestamp": "2026-05-14T01:33:34.865Z"
+    "timestamp": "2026-05-14T07:47:42.484Z"
   }
 }
