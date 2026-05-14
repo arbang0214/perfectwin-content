@@ -484,7 +484,12 @@ async function sendUnifiedDailyToSlack({ title, headline, detail }) {
   const detailMrkdwn = convertToSlackMrkdwn(detail);
 
   if (BOT_TOKEN && CHANNEL_ID) {
-    return await sendBotThreaded(title, headlineMrkdwn, detailMrkdwn);
+    const ok = await sendBotThreaded(title, headlineMrkdwn, detailMrkdwn);
+    if (ok) return true;
+    if (WEBHOOK_URL) {
+      console.log("[Slack] Bot thread 실패 — webhook으로 fallback");
+    }
+    // fall through to webhook
   }
   if (WEBHOOK_URL) {
     return await sendFullViaWebhook(title, headlineMrkdwn, detailMrkdwn);
