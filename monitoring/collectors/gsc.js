@@ -16,8 +16,8 @@
 const { google } = require("googleapis");
 const { getAuthClient } = require("../utils/google-auth");
 
-// 메인 사이트 + 블로그 둘 다 수집
-const SITE_URLS = (process.env.GSC_SITE_URL || "https://perfectwin.ai/,https://blog.perfectwin.ai/")
+// 메인 사이트 + 영문/한글 블로그 모두 수집
+const SITE_URLS = (process.env.GSC_SITE_URL || "https://perfectwin.ai/,https://blog.perfectwin.ai/,https://ko.blog.perfectwin.ai/")
   .split(",")
   .map((s) => s.trim())
   .filter(Boolean);
