@@ -1,6 +1,6 @@
 {
   "date": "2026-05-14",
-  "collectedAt": "2026-05-15T01:26:10.908Z",
+  "collectedAt": "2026-05-15T01:49:07.143Z",
   "ga4": {
     "date": "2026-05-14",
     "summary": {
@@ -566,7 +566,7 @@
           "data": [
             {
               "date": "2026-05-14",
-              "visits": 33,
+              "visits": 34,
               "clicks": 0,
               "organic": 1,
               "home": 4,
@@ -717,12 +717,12 @@
               "linkedinVisits": 0
             },
             {
-              "post_id": 160801,
+              "post_id": 86636,
               "visits": 2,
               "clicks": 0,
               "organic": 0,
               "cvr": 0,
-              "title": "SAP Hypercare Testing Strategy: How to Cut Your Stabilization Period in Half",
+              "title": "SAP S/4HANA Testing Strategy: 4 Trends Reshaping How Enterprises Test in 2026",
               "sources": [
                 {
                   "full_referrer": "direct",
@@ -744,7 +744,7 @@
           "data": [
             {
               "full_referrer": "direct",
-              "count": 30
+              "count": 31
             },
             {
               "full_referrer": "blog.perfectwin.ai",
@@ -1042,6 +1042,6 @@
   },
   "slack": {
     "sent": false,
-    "timestamp": "2026-05-15T01:26:10.908Z"
+    "timestamp": "2026-05-15T01:49:07.143Z"
   }
 }
