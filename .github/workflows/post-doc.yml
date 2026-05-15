@@ -1,0 +1,40 @@
+name: 모니터링 문서 Slack 게시 (수동)
+
+on:
+  workflow_dispatch:
+    inputs:
+      doc_path:
+        description: "게시할 마크다운 파일 경로 (repo 루트 기준)"
+        required: true
+        default: "monitoring/docs/metrics-overview.md"
+      title:
+        description: "Slack 메시지 제목 (비우면 마크다운 H1 사용)"
+        required: false
+        default: ""
+
+jobs:
+  post-doc:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: Slack 발송
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
+        run: |
+          if [ -z "${{ github.event.inputs.title }}" ]; then
+            node monitoring/post-doc.js "${{ github.event.inputs.doc_path }}"
+          else
+            node monitoring/post-doc.js "${{ github.event.inputs.doc_path }}" "${{ github.event.inputs.title }}"
+          fi
