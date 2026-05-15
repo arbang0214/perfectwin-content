@@ -12,9 +12,31 @@ const path = require("path");
 const { aggregateAnnual } = require("./annual-aggregator");
 const { callClaude } = require("../scripts/lib/claude-api");
 const { sendUnifiedDailyToSlack } = require("./utils/slack-sender");
+const { enrichInplace } = require("./utils/blog-title-enricher");
 
 const PROMPTS_DIR = path.join(__dirname, "prompts");
 const REPORTS_DIR = path.join(__dirname, "..", "data", "monitoring", "reports");
+const DATA_DIR = path.join(__dirname, "..", "data", "monitoring");
+
+/**
+ * 지정 기간 내에서 가장 최근의 영문 블로그 slug→title 매핑을 찾는다.
+ * (모든 일자가 같은 매핑을 갖고 있을 가능성이 높지만, 가장 최근 것이 가장 완전함)
+ */
+function loadLatestSlugToTitle(from, to) {
+  const start = new Date(from);
+  const end = new Date(to);
+  for (let d = new Date(end); d >= start; d.setDate(d.getDate() - 1)) {
+    const dateStr = d.toISOString().split("T")[0];
+    const file = path.join(DATA_DIR, `${dateStr}.json`);
+    if (!fs.existsSync(file)) continue;
+    try {
+      const snap = JSON.parse(fs.readFileSync(file, "utf-8"));
+      const map = snap.inblog?.blogs?.find((b) => b.label === "blog-en")?.slugToTitle;
+      if (map && Object.keys(map).length > 0) return map;
+    } catch { /* 다음 날짜 시도 */ }
+  }
+  return {};
+}
 
 function loadPromptFile(filename) {
   return fs.readFileSync(path.join(PROMPTS_DIR, filename), "utf-8");
@@ -60,6 +82,15 @@ async function generateUnifiedWeekly(targetFriday) {
     console.log(`  [통합 주간] 이번 주 데이터 없음 — 건너뜀`);
     return null;
   }
+
+  // 영문 블로그 slug → title 매핑으로 GSC blog topPages·demoFunnel byLandingPage를 enrich
+  const slugToTitle = loadLatestSlugToTitle(thisWeek.from, thisWeek.to);
+  const thisWeekGscBlog = thisWeekData.annual.gsc?.["blog.perfectwin.ai"] || null;
+  enrichInplace({
+    gscBlogSite: thisWeekGscBlog,
+    demoFunnel: thisWeekData.annual.demoFunnel,
+    slugToTitle,
+  });
 
   const crossRules = loadPromptFile("cross-analysis-rules.md");
   const systemPrompt = loadPromptFile("unified-weekly-system.md") + "\n\n" + crossRules;

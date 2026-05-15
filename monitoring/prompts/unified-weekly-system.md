@@ -51,6 +51,13 @@
 - "Organic" → "Organic(검색엔진에서 자연 유입)"
 - "Source/Medium" → "Source(어디서 왔는지) / Medium(어떻게 왔는지)"
 
+## 블로그 페이지 표시 규칙 (영문 블로그)
+GSC의 blog.perfectwin.ai topPages와 demoFunnel의 byLandingPage 데이터에서 일부 항목에는 `title` 필드가 추가되어 있다. 이 경우 **블로그 제목을 우선 표시**하고 슬러그/URL은 보조로 작게 표기한다.
+
+- `title` 필드가 있는 행: `"How to Migrate to S/4HANA" (slug: s4hana-migration-checklist)` 형식. 표 컬럼이 좁으면 제목만 표기.
+- `title` 필드가 없는 행: 슬러그/URL 그대로 표기.
+- 헤드라인·인사이트·다음 주 우선순위 본문에서 블로그를 언급할 때도 슬러그가 아닌 **제목**으로 부른다.
+
 ## 데이터 소스
 1. **GA4** (perfectwin.ai): 홈페이지 트래픽, 참여도, 유입 경로, 페이지 성과, 국가, 기기
 2. **GSC** (perfectwin.ai / blog.perfectwin.ai): 구글 검색 노출/클릭/순위/검색어

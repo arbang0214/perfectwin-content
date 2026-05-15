@@ -63,24 +63,31 @@ function apiRequest(path, apiKey) {
 }
 
 /**
- * 포스트 목록을 가져와 post_id → title 매핑을 만든다.
+ * 포스트 목록을 가져와 메타 매핑을 만든다.
+ *  - byId:    post_id → { title, slug }
+ *  - bySlug:  slug    → title  (GSC/Bing/demoFunnel 어트리뷰션 enrich용)
  * /api/v1/posts 엔드포인트는 페이지당 최대 100개를 반환한다.
  */
-async function fetchPostTitleMap(apiKey) {
-  const titleMap = {};
+async function fetchPostMetaMap(apiKey) {
+  const byId = {};
+  const bySlug = {};
   let page = 1;
   const limit = 100;
   while (true) {
     const res = await apiRequest(`/posts?limit=${limit}&page=${page}`, apiKey);
     if (res.status !== 200 || !res.body?.data) break;
     for (const post of res.body.data) {
-      titleMap[Number(post.id)] = post.attributes?.title || null;
+      const id = Number(post.id);
+      const title = post.attributes?.title || null;
+      const slug = post.attributes?.slug || null;
+      byId[id] = { title, slug };
+      if (slug && title) bySlug[slug] = title;
     }
     const totalPages = res.body.meta?.totalPages || 1;
     if (page >= totalPages) break;
     page++;
   }
-  return titleMap;
+  return { byId, bySlug };
 }
 
 /**
@@ -113,12 +120,14 @@ async function collectSingleBlog(config, targetDate) {
     let posts = postsRes.status === 200 ? postsRes.body : null;
     const sources = sourcesRes.status === 200 ? sourcesRes.body : null;
 
-    // 4. 포스트 제목 매핑 + 포스트별 LinkedIn 유입 추적
+    // 4. 포스트 제목·슬러그 매핑 (전체 포스트 1회 fetch) + LinkedIn 유입 추적
+    const metaMap = await fetchPostMetaMap(apiKey);
     if (posts?.data?.length) {
-      const titleMap = await fetchPostTitleMap(apiKey);
       for (const p of posts.data) {
-        if (p.post_id != null && titleMap[p.post_id]) {
-          p.title = titleMap[p.post_id];
+        const meta = p.post_id != null ? metaMap.byId[p.post_id] : null;
+        if (meta) {
+          p.title = meta.title;
+          p.slug = meta.slug;
         } else if (p.post_id == null) {
           p.title = "(비포스트 페이지)";
         }
@@ -162,6 +171,7 @@ async function collectSingleBlog(config, targetDate) {
       posts,
       sources,
       linkedinTotal,
+      slugToTitle: metaMap.bySlug, // GSC/Bing/demoFunnel 슬러그 → 제목 매핑용
     };
   } catch (err) {
     console.error(`  [inblog:${label}] 수집 실패: ${err.message}`);

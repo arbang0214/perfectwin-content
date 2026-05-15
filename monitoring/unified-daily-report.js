@@ -12,6 +12,7 @@ const fs = require("fs");
 const path = require("path");
 const { callClaude } = require("../scripts/lib/claude-api");
 const { sendUnifiedDailyToSlack } = require("./utils/slack-sender");
+const { enrichInplace } = require("./utils/blog-title-enricher");
 
 const PROMPTS_DIR = path.join(__dirname, "prompts");
 const REPORTS_DIR = path.join(__dirname, "..", "data", "monitoring", "reports");
@@ -114,6 +115,10 @@ async function generateUnifiedDaily(targetDate) {
   const todayBingKoBlog = todayData.bing?.sites?.find((s) => s.label === "ko.blog.perfectwin.ai") || null;
   const yesterdayGscSite = yesterdayData?.gsc?.sites?.find((s) => s.label === "perfectwin.ai") || null;
   const yesterdayGscBlog = yesterdayData?.gsc?.sites?.find((s) => s.label === "blog.perfectwin.ai") || null;
+
+  // 영문 블로그 slug → title 매핑으로 GSC/demoFunnel 슬러그를 제목으로 enrich
+  const slugToTitle = todayData.inblog?.blogs?.find((b) => b.label === "blog-en")?.slugToTitle || {};
+  enrichInplace({ gscBlogSite: todayGscBlog, demoFunnel: todayData.demoFunnel, slugToTitle });
 
   const crossRules = loadPromptFile("cross-analysis-rules.md");
   const systemPrompt = loadPromptFile("unified-daily-system.md") + "\n\n" + crossRules;
