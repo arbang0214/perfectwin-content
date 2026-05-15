@@ -4,6 +4,9 @@ on:
   schedule:
     # 매일 오전 8:43 KST = 23:43 UTC (전날) — 정시 큐 폭주 회피
     - cron: '43 23 * * *'
+    # 백업: UTC 자정 윈도우 밖 — KST 11:17 (첫 cron이 GH Actions에서 skip된 경우 대비)
+    # --skip-if-exists로 첫 cron 성공 시 자동 종료, 실패 시에만 발송됨
+    - cron: '17 2 * * *'
   workflow_dispatch: # 수동 실행 가능
 
 permissions:
@@ -47,7 +50,13 @@ jobs:
           GMAIL_USER: ${{ secrets.GMAIL_USER }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           REPORT_EMAIL_TO: ${{ secrets.REPORT_EMAIL_TO }}
-        run: npx playwright install chromium --with-deps && node monitoring/daily-report.js
+        run: |
+          npx playwright install chromium --with-deps
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            node monitoring/daily-report.js --skip-if-exists
+          else
+            node monitoring/daily-report.js
+          fi
 
       - name: 데이터 커밋 (스냅샷 + 리포트)
         run: |

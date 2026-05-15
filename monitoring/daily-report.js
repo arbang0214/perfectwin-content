@@ -99,6 +99,17 @@ async function main() {
   console.log(`\n🚀 PerfecTwin 일간 리포트 — 대상 날짜: ${targetDate}`);
   console.log(`   실행 시각: ${new Date().toLocaleString("ko-KR")}\n`);
 
+  // backup cron 대응: 같은 날짜의 통합 리포트가 이미 발행됐으면 조기 종료.
+  // schedule에서만 --skip-if-exists를 붙이고, workflow_dispatch는 안 붙여서 항상 재발행 가능.
+  if (process.argv.includes("--skip-if-exists")) {
+    const reportPath = path.join(DATA_DIR, "reports", `unified-daily-${targetDate}.md`);
+    if (fs.existsSync(reportPath)) {
+      console.log(`[skip] 오늘 리포트 이미 존재 — 워크플로 조기 종료 (${path.basename(reportPath)})`);
+      return;
+    }
+    console.log(`[skip-check] 오늘 리포트 없음 — 정상 실행 진행\n`);
+  }
+
   let ga4Data = null;
   let gscData = null;
   let inblogData = null;
