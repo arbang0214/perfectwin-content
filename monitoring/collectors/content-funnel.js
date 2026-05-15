@@ -15,8 +15,10 @@ const { BetaAnalyticsDataClient } = require("@google-analytics/data");
 const { KEY_FILE } = require("../utils/google-auth");
 
 const PROPERTY_ID = process.env.GA4_PROPERTY_ID || "494841765";
-const DEMO_PATH = "/contact-us/request-demo";
-const THANKYOU_PATH = "/contact-us/thankyou";
+
+// 데모 퍼널 신호 이벤트 (page_path가 외부 임포트 폼이라 부정확 → 이벤트 기반)
+const SUBMIT_EVENT = "데모신청완료";
+const INTENT_EVENT = "form_start";
 
 function createClient() {
   return new BetaAnalyticsDataClient({
@@ -82,8 +84,8 @@ async function getBehaviorByCampaign(client, date) {
   }));
 }
 
-/** 특정 page path 도달 세션 수를 캠페인별로 집계 (퍼널 진입·완료 카운트용) */
-async function getPagePathByCampaign(client, date, pagePath) {
+/** 특정 이벤트 발생 세션 수를 캠페인별로 집계 (퍼널 진입·완료 카운트용) */
+async function getEventByCampaign(client, date, eventName) {
   const res = await runReport(client, {
     dateRanges: [{ startDate: date, endDate: date }],
     dimensions: [
@@ -99,8 +101,8 @@ async function getPagePathByCampaign(client, date, pagePath) {
           utmTrafficFilter(),
           {
             filter: {
-              fieldName: "pagePath",
-              stringFilter: { matchType: "EXACT", value: pagePath },
+              fieldName: "eventName",
+              stringFilter: { matchType: "EXACT", value: eventName },
             },
           },
         ],
@@ -175,8 +177,8 @@ async function collectContentFunnel(targetDate) {
 
   const [behavior, demoIntent, demoComplete, topPagesByCampaign] = await Promise.all([
     getBehaviorByCampaign(client, targetDate),
-    getPagePathByCampaign(client, targetDate, DEMO_PATH),
-    getPagePathByCampaign(client, targetDate, THANKYOU_PATH),
+    getEventByCampaign(client, targetDate, INTENT_EVENT),
+    getEventByCampaign(client, targetDate, SUBMIT_EVENT),
     getTopPagesByCampaign(client, targetDate),
   ]);
 
