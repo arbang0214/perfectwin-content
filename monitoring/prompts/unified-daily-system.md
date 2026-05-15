@@ -119,7 +119,38 @@ GSC의 blog.perfectwin.ai·ko.blog.perfectwin.ai topPages와 demoFunnel의 byLan
 
 ---
 
-## 2️⃣ 홈페이지 (perfectwin.ai)
+## 2️⃣ 캠페인별 행동 퍼널 (UTM 박힌 콘텐츠 클릭의 후속 행동)
+
+> 📘 이 섹션은 contentFunnel 데이터를 사용한다. 데모 신청 외 페이지(예: pricing, features)로 보낸 CTA의 효과까지 본다.
+> contentFunnel 데이터가 없거나 campaigns가 비었으면 "오늘 UTM 박힌 트래픽 없음" 1줄로 종료.
+
+### 캠페인 핵심 지표 (오늘 누적)
+| 지표 | 오늘 | 의미 |
+|---|---:|---|
+| 활성 캠페인 수 | summary.campaignCount | UTM 박혀 들어온 고유 source/medium/campaign/content 조합 수 |
+| 캠페인 트래픽 총 세션 | summary.totalSessions | UTM 박힌 클릭으로 들어온 전체 세션 |
+| 데모 페이지 도달 | summary.totalDemoIntent (overallDemoIntentRate%) | 클릭이 데모 의향까지 이어진 비율 |
+| 데모 신청 완료 | summary.totalDemoComplete (overallDemoCompleteRate%) | 클릭이 실제 리드 발생까지 간 비율 |
+
+### 캠페인별 행동·전환 (campaigns Top 10)
+campaigns 배열에서 sessions 기준 Top 10. 각 행:
+| 캠페인 (source/medium/campaign/content) | 세션 | 페이지/세션 | 평균 체류 | 참여율 | 데모 도달 | 데모 완료 | 해석 |
+
+- "캠페인" 컬럼: `source/medium · campaign · content` 형태로 한 셀에 표기 (예: `blog-en/cta · s4hana-migration-checklist · inline`)
+- 페이지/세션 1.5+ → 탐색 의향, 평균 체류 2분+ → 양질 트래픽
+- 데모 도달률 5%+ → 강한 CTA, 데모 완료율 1%+ → 매우 좋은 콘텐츠
+- 해석 한 줄: "이 콘텐츠는 트래픽 양은 적지만 데모 전환은 높음" 등 정성 평가
+
+### 캠페인별 행동 경로 (Top Pages)
+가장 강한 캠페인(세션 Top 3) 각각에 대해 topPages 표시:
+- 그 캠페인 클릭자가 첫 진입 후 가장 많이 본 페이지 Top 5
+- "랜딩 외에 어디 둘러봤나" 분석. 데모 페이지가 topPages에 있으면 "퍼널 진행 중", pricing이 있으면 "가격 점검 중" 등 해석
+
+**→ 콘텐츠 신호:** "어느 캠페인이 데모로 가장 잘 보냈고, 어느 캠페인이 트래픽만 가져왔는지" 1~2문장.
+
+---
+
+## 3️⃣ 홈페이지 (perfectwin.ai)
 
 > 📘 이 섹션은 "홈페이지가 사람을 잘 잡고 있나"를 본다.
 
@@ -137,7 +168,7 @@ GSC의 blog.perfectwin.ai·ko.blog.perfectwin.ai topPages와 demoFunnel의 byLan
 
 ---
 
-## 3️⃣ 블로그 (blog.perfectwin.ai + ko.blog.perfectwin.ai)
+## 4️⃣ 블로그 (blog.perfectwin.ai + ko.blog.perfectwin.ai)
 
 > 📘 이 섹션은 "블로그가 트래픽과 CTA 클릭을 만들고 있나"를 본다.
 
@@ -155,9 +186,9 @@ GSC의 blog.perfectwin.ai·ko.blog.perfectwin.ai topPages와 demoFunnel의 byLan
 
 ---
 
-## 4️⃣ 오늘의 종합 인사이트
+## 5️⃣ 오늘의 종합 인사이트
 
-3~5개. **첫 인사이트는 반드시 데모 퍼널(섹션 1)에서 출발한다.** 그 다음은 비즈니스 임팩트 순.
+3~5개. **첫 인사이트는 반드시 데모 퍼널(섹션 1) 또는 캠페인 퍼널(섹션 2)에서 출발한다.** 그 다음은 비즈니스 임팩트 순.
 
 각 인사이트는 아래 4개 항목을 모두 포함:
 - **현상**: 어떤 수치가 어떻게 변했는지. 구체적 숫자 + 전일/7일 평균 대비. **수치 옆에 그 지표가 무엇인지·정상 범위가 어떤지를 자연스럽게 풀어쓴다** (예: "CTR(노출 대비 클릭 비율) 4.72% — 업계 평균 2~3% 대비 2배 가까이 높음").

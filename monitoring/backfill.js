@@ -15,6 +15,7 @@ const { collectGA4 } = require("./collectors/ga4");
 const { collectGSC } = require("./collectors/gsc");
 const { collectInblog } = require("./collectors/inblog");
 const { collectDemoFunnel } = require("./collectors/demo-funnel");
+const { collectContentFunnel } = require("./collectors/content-funnel");
 
 const DATA_DIR = path.join(__dirname, "..", "data", "monitoring");
 
@@ -27,10 +28,10 @@ function parseArgs() {
     if (args[i] === "--from" && args[i + 1]) parsed.from = args[++i];
     if (args[i] === "--to" && args[i + 1]) parsed.to = args[++i];
     if (args[i] === "--skip-existing") parsed.skipExisting = true;
-    if (args[i] === "--source") parsed.source = args[++i]; // ga4, gsc, inblog, demo, all
+    if (args[i] === "--source") parsed.source = args[++i]; // ga4, gsc, inblog, demo, content, all
   }
   if (!parsed.from) {
-    console.error("Usage: node monitoring/backfill.js --from YYYY-MM-DD [--to YYYY-MM-DD] [--skip-existing] [--source ga4|gsc|inblog|demo|all]");
+    console.error("Usage: node monitoring/backfill.js --from YYYY-MM-DD [--to YYYY-MM-DD] [--skip-existing] [--source ga4|gsc|inblog|demo|content|all]");
     process.exit(1);
   }
   if (!parsed.to) {
@@ -83,6 +84,7 @@ async function main() {
   const doGSC = args.source === "all" || args.source === "gsc";
   const doInblog = args.source === "all" || args.source === "inblog";
   const doDemo = args.source === "all" || args.source === "demo";
+  const doContent = args.source === "all" || args.source === "content";
 
   let success = 0;
   let skipped = 0;
@@ -100,7 +102,8 @@ async function main() {
       const hasGSC = !doGSC || existing.gsc;
       const hasInblog = !doInblog || existing.inblog;
       const hasDemo = !doDemo || existing.demoFunnel;
-      if (hasGA4 && hasGSC && hasInblog && hasDemo) {
+      const hasContent = !doContent || existing.contentFunnel;
+      if (hasGA4 && hasGSC && hasInblog && hasDemo && hasContent) {
         skipped++;
         if (i % 30 === 0) console.log(`${progress} ${date} — 건너뜀 (기존 데이터 있음)`);
         continue;
@@ -114,6 +117,7 @@ async function main() {
       gsc: null,
       inblog: null,
       demoFunnel: null,
+      contentFunnel: null,
       slack: { sent: false, timestamp: null },
     };
 
@@ -178,6 +182,23 @@ async function main() {
       }
     }
 
+    // content funnel (GA4 — UTM 박힌 트래픽 행동·전환)
+    if (doContent) {
+      try {
+        snapshot.contentFunnel = await collectContentFunnel(date);
+        collected = true;
+      } catch (err) {
+        if (err.message?.includes("429") || err.message?.includes("RESOURCE_EXHAUSTED")) {
+          console.log(`${progress} ${date} — Content Funnel 속도 제한, 30초 대기...`);
+          await delay(30000);
+          try {
+            snapshot.contentFunnel = await collectContentFunnel(date);
+            collected = true;
+          } catch { /* 재시도 실패 */ }
+        }
+      }
+    }
+
     if (collected) {
       snapshot.collectedAt = new Date().toISOString();
       saveSnapshot(date, snapshot);
@@ -196,7 +217,7 @@ async function main() {
     }
 
     // API 속도 제한 대응: 요청 간 간격
-    if (doGA4 || doGSC || doDemo) await delay(500);
+    if (doGA4 || doGSC || doDemo || doContent) await delay(500);
   }
 
   console.log(`\n✅ 백필 완료!`);

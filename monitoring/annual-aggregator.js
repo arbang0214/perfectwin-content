@@ -372,6 +372,87 @@ function aggregateDemoFunnelMonthly(monthSnapshots) {
 }
 
 /**
+ * Content Funnel 월별 집계 — UTM 캠페인별 행동·전환 합산
+ * 같은 source/medium/campaign/content 키로 합산하되,
+ * 메트릭 중 가중평균이 필요한 것(체류·페이지/세션·참여율)은 세션 가중평균.
+ */
+function aggregateContentFunnelMonthly(monthSnapshots) {
+  const days = monthSnapshots.filter((s) => s.contentFunnel?.campaigns?.length);
+  if (days.length === 0) return null;
+
+  const map = {};
+  for (const snap of days) {
+    for (const c of snap.contentFunnel.campaigns) {
+      const key = `${c.source}|${c.medium}|${c.campaign}|${c.content}`;
+      if (!map[key]) {
+        map[key] = {
+          source: c.source, medium: c.medium, campaign: c.campaign, content: c.content,
+          sessions: 0, users: 0, pageViews: 0,
+          weightedDurationSum: 0, weightedEngagementSum: 0, weightedPvpsSum: 0,
+          demoIntentSessions: 0, demoCompleteSessions: 0,
+          topPageMap: {},
+        };
+      }
+      const m = map[key];
+      m.sessions += c.sessions;
+      m.users += c.users;
+      m.pageViews += c.pageViews;
+      m.weightedDurationSum += (c.avgSessionDuration || 0) * c.sessions;
+      m.weightedEngagementSum += (c.engagementRate || 0) * c.sessions;
+      m.weightedPvpsSum += (c.pageViewsPerSession || 0) * c.sessions;
+      m.demoIntentSessions += c.demoIntentSessions || 0;
+      m.demoCompleteSessions += c.demoCompleteSessions || 0;
+      for (const p of (c.topPages || [])) {
+        m.topPageMap[p.page] = (m.topPageMap[p.page] || 0) + p.views;
+      }
+    }
+  }
+
+  const campaigns = Object.values(map).map((m) => {
+    const topPages = Object.entries(m.topPageMap)
+      .map(([page, views]) => ({ page, views }))
+      .sort((a, b) => b.views - a.views)
+      .slice(0, 5);
+    return {
+      source: m.source, medium: m.medium, campaign: m.campaign, content: m.content,
+      sessions: m.sessions, users: m.users, pageViews: m.pageViews,
+      avgSessionDuration: m.sessions > 0
+        ? Math.round((m.weightedDurationSum / m.sessions) * 10) / 10 : 0,
+      engagementRate: m.sessions > 0
+        ? Math.round((m.weightedEngagementSum / m.sessions) * 100) / 100 : 0,
+      pageViewsPerSession: m.sessions > 0
+        ? Math.round((m.weightedPvpsSum / m.sessions) * 100) / 100 : 0,
+      demoIntentSessions: m.demoIntentSessions,
+      demoCompleteSessions: m.demoCompleteSessions,
+      demoIntentRate: m.sessions > 0
+        ? Math.round((m.demoIntentSessions / m.sessions) * 10000) / 100 : 0,
+      demoCompleteRate: m.sessions > 0
+        ? Math.round((m.demoCompleteSessions / m.sessions) * 10000) / 100 : 0,
+      topPages,
+    };
+  }).sort((a, b) => b.sessions - a.sessions);
+
+  const totalSessions = campaigns.reduce((s, c) => s + c.sessions, 0);
+  const totalDemoIntent = campaigns.reduce((s, c) => s + c.demoIntentSessions, 0);
+  const totalDemoComplete = campaigns.reduce((s, c) => s + c.demoCompleteSessions, 0);
+
+  return {
+    daysWithData: days.length,
+    summary: {
+      campaignCount: campaigns.length,
+      totalSessions,
+      totalDemoIntent,
+      totalDemoComplete,
+      overallDemoIntentRate: totalSessions > 0
+        ? Math.round((totalDemoIntent / totalSessions) * 10000) / 100 : 0,
+      overallDemoCompleteRate: totalSessions > 0
+        ? Math.round((totalDemoComplete / totalSessions) * 10000) / 100 : 0,
+    },
+    campaigns,
+  };
+}
+
+/**
  * 요일별 패턴 분석
  */
 function analyzeDayOfWeekPattern(snapshots) {
@@ -424,6 +505,7 @@ function aggregateAnnual(from, to) {
       gsc: aggregateGSCMonthly(snaps),
       inblog: aggregateInblogMonthly(snaps),
       demoFunnel: aggregateDemoFunnelMonthly(snaps),
+      contentFunnel: aggregateContentFunnelMonthly(snaps),
     };
   }
 
@@ -432,6 +514,7 @@ function aggregateAnnual(from, to) {
   const annualGSC = aggregateGSCMonthly(snapshots);
   const annualInblog = aggregateInblogMonthly(snapshots);
   const annualDemoFunnel = aggregateDemoFunnelMonthly(snapshots);
+  const annualContentFunnel = aggregateContentFunnelMonthly(snapshots);
   const dayOfWeek = analyzeDayOfWeekPattern(snapshots);
 
   return {
@@ -444,6 +527,7 @@ function aggregateAnnual(from, to) {
       gsc: annualGSC,
       inblog: annualInblog,
       demoFunnel: annualDemoFunnel,
+      contentFunnel: annualContentFunnel,
       dayOfWeek,
     },
   };

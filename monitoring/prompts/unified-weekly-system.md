@@ -116,7 +116,36 @@ GSC의 blog.perfectwin.ai·ko.blog.perfectwin.ai topPages와 demoFunnel의 byLan
 
 ---
 
-## 2️⃣ 홈페이지 (perfectwin.ai)
+## 2️⃣ 캠페인별 행동 퍼널 (UTM 박힌 콘텐츠 클릭의 후속 행동 — 5일 누적)
+
+> 📘 contentFunnel 데이터를 사용. 데모 외 페이지(pricing, features 등)로 보낸 CTA의 효과까지 본다.
+> contentFunnel 데이터 없거나 campaigns가 비었으면 "이번 주 UTM 박힌 트래픽 없음" 1줄로 종료.
+
+### 캠페인 핵심 지표 (이번 주 누적)
+| 지표 | 이번 주 | 전주 대비 | 의미 |
+|---|---:|---:|---|
+| 활성 캠페인 수 | summary.campaignCount | (전주 대비) | UTM 박혀 들어온 고유 source/medium/campaign/content 조합 수 |
+| 캠페인 트래픽 총 세션 | summary.totalSessions | (전주 대비) | UTM 박힌 클릭으로 들어온 전체 세션 |
+| 데모 페이지 도달 | summary.totalDemoIntent (overallDemoIntentRate%) | — | 클릭이 데모 의향까지 이어진 비율 |
+| 데모 신청 완료 | summary.totalDemoComplete (overallDemoCompleteRate%) | — | 클릭이 실제 리드 발생까지 간 비율 |
+
+### 캠페인별 행동·전환 (campaigns Top 15)
+campaigns 배열에서 sessions 기준 Top 15.
+| 캠페인 (source/medium/campaign/content) | 세션 | 페이지/세션 | 평균 체류 | 참여율 | 데모 도달 | 데모 완료 | 해석 |
+
+- 페이지/세션 1.5+ → 탐색 의향, 평균 체류 2분+ → 양질 트래픽
+- 데모 도달률 5%+ → 강한 CTA, 데모 완료율 1%+ → 매우 좋은 콘텐츠
+- "콘텐츠 vs 인라인 비교": 같은 campaign 내 utm_content 값별로(예: inline vs button) 효과 비교 가능하면 1~2줄로 언급
+
+### 캠페인별 행동 경로 (가장 강한 Top 5 캠페인의 topPages)
+세션 Top 5 캠페인 각각의 topPages 표 또는 리스트.
+"랜딩 외에 어디 둘러봤나" 분석. 데모/pricing/features 중 어디로 흘러갔는지.
+
+**→ 다음 주 신호:** 어느 캠페인 패턴(채널·콘텐츠·인라인vs버튼)이 가장 효과적이었는지 1~2문장.
+
+---
+
+## 3️⃣ 홈페이지 (perfectwin.ai)
 
 > 📘 이 섹션은 "홈페이지가 사람을 잘 잡고 있나"를 본다. 전주 대비 변화 중심.
 
@@ -137,7 +166,7 @@ GSC의 blog.perfectwin.ai·ko.blog.perfectwin.ai topPages와 demoFunnel의 byLan
 
 ---
 
-## 3️⃣ 블로그 (blog.perfectwin.ai + ko.blog.perfectwin.ai)
+## 4️⃣ 블로그 (blog.perfectwin.ai + ko.blog.perfectwin.ai)
 
 > 📘 이 섹션은 "블로그가 트래픽·CTA를 만들고 있나"를 본다. 이번 주 가장 강력했던 포스트와 약한 포스트.
 
@@ -161,9 +190,9 @@ GSC의 blog.perfectwin.ai·ko.blog.perfectwin.ai topPages와 demoFunnel의 byLan
 
 ---
 
-## 4️⃣ 이번 주 종합 인사이트
+## 5️⃣ 이번 주 종합 인사이트
 
-4~6개. **첫 인사이트는 반드시 데모 퍼널(섹션 1)에서 출발한다.** 그 다음은 비즈니스 임팩트 순.
+4~6개. **첫 인사이트는 반드시 데모 퍼널(섹션 1) 또는 캠페인 퍼널(섹션 2)에서 출발한다.** 그 다음은 비즈니스 임팩트 순.
 
 각 인사이트는 아래 4개 항목 모두 포함:
 - **현상**: 어떤 수치가 어떻게 변했는지. 구체적 숫자 + 전주 대비. 수치 옆에 그 지표가 무엇인지·정상 범위를 자연스럽게 풀어쓴다.
@@ -173,7 +202,7 @@ GSC의 blog.perfectwin.ai·ko.blog.perfectwin.ai topPages와 demoFunnel의 byLan
 
 ---
 
-## 5️⃣ 다음 주 우선순위 (3~5개)
+## 6️⃣ 다음 주 우선순위 (3~5개)
 
 **ARUM이 다음 주 월요일에 즉시 실행할 수 있는 액션 목록**. 각 우선순위는:
 - **무엇을** (구체적 액션 — 블로그 1편 발행, 메타 N개 수정, CTA 변경 등)
