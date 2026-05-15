@@ -7,6 +7,7 @@ const sharp = require("sharp");
 const multer = require("multer");
 const { marked } = require("marked");
 const { listWeekFolders, getOutputDir } = require("../scripts/lib/file-manager");
+const { enrichBodyWithUtm } = require("../lib/utm");
 
 const OUTPUT_DIR = getOutputDir();
 
@@ -389,7 +390,16 @@ async function inblogPublish({ apiKey, subdomain, blogUrl, weekId, contentId, ti
     if (!fs.existsSync(thumbAbsPath)) thumbAbsPath = null;
   }
 
-  const contentHtml = markdownToHtml(contentMarkdown);
+  // UTM 자동 부착: 본문 내 데모 페이지 링크에 채널별 UTM을 박는다.
+  // 영문 블로그 → utm_source=blog-en, 한글 블로그 → utm_source=blog-ko
+  // utm_campaign에 slug를 넣어 어느 블로그가 데모로 보냈는지 결정적으로 추적.
+  const taggedMarkdown = enrichBodyWithUtm(contentMarkdown, {
+    utm_source: contentId,   // "blog-en" | "blog-ko"
+    utm_medium: "cta",
+    utm_campaign: slug || undefined,
+  });
+
+  const contentHtml = markdownToHtml(taggedMarkdown);
 
   let imageData = null;
   if (thumbAbsPath) {
