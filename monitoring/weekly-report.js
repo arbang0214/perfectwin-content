@@ -13,9 +13,11 @@ require("dotenv").config({ path: path.join(__dirname, "..", ".env") });
 const fs = require("fs");
 const { aggregateAnnual } = require("./annual-aggregator");
 const { callClaude } = require("../scripts/lib/claude-api");
-const { sendReportToSlack } = require("./utils/slack-sender");
-const { generatePDF } = require("./utils/pdf-generator");
-const { sendReportEmail } = require("./utils/email-sender");
+const { runUnifiedWeekly } = require("./unified-weekly-report");
+// Legacy: 통합 주간 리포트로 대체. 호출 안 함. 함수는 그대로 유지.
+// const { sendReportToSlack } = require("./utils/slack-sender");
+// const { generatePDF } = require("./utils/pdf-generator");
+// const { sendReportEmail } = require("./utils/email-sender");
 
 const REPORTS_DIR = path.join(__dirname, "..", "data", "monitoring", "reports");
 const PROMPTS_DIR = path.join(__dirname, "prompts");
@@ -183,87 +185,20 @@ demoFunnel.totals.submissions=0이면 "이번 주 데모 신청 없음" 1줄.
 async function main() {
   const targetFriday = parseArgs() || getKstToday();
   const thisWeek = getWeekRange(targetFriday);
-  const prevWeek = getPrevWeekRange(targetFriday);
   const weekNum = getWeekNumber(targetFriday);
 
-  console.log(`\n📊 주간 리포트 — Week ${weekNum} (${thisWeek.from} ~ ${thisWeek.to})\n`);
-
-  console.log("[1/5] 데이터 집계...");
-  let thisWeekData, prevWeekData;
-  try { thisWeekData = aggregateAnnual(thisWeek.from, thisWeek.to); } catch { thisWeekData = null; }
-  try { prevWeekData = aggregateAnnual(prevWeek.from, prevWeek.to); } catch { prevWeekData = null; }
-
-  if (!thisWeekData || thisWeekData.totalDays === 0) {
-    console.error("  이번 주 데이터 없음.");
-    return;
-  }
-  console.log(`  이번 주: ${thisWeekData.totalDays}일, 전주: ${prevWeekData?.totalDays || 0}일`);
+  console.log(`\n📊 주간 리포트 (통합) — Week ${weekNum} (${thisWeek.from} ~ ${thisWeek.to})\n`);
 
   ensureDir(REPORTS_DIR);
 
-  // 홈페이지 주간
-  console.log("[2/5] 홈페이지 주간 리포트 생성...");
-  let homepageReport = null;
+  console.log("[1/1] 통합 주간 리포트 생성 + Slack 발송...");
   try {
-    homepageReport = await generateHomepageWeekly(thisWeekData, prevWeekData, weekNum, thisWeek);
-    const hp = path.join(REPORTS_DIR, `homepage-weekly-${thisWeek.from}.md`);
-    fs.writeFileSync(hp, homepageReport, "utf-8");
-    console.log(`  ✅ ${hp}`);
-  } catch (err) { console.error(`  ❌ ${err.message}`); }
-
-  // 블로그 주간
-  console.log("[3/5] 블로그 주간 리포트 생성...");
-  let blogReport = null;
-  try {
-    blogReport = await generateBlogWeekly(thisWeekData, prevWeekData, weekNum, thisWeek);
-    const bp = path.join(REPORTS_DIR, `blog-weekly-${thisWeek.from}.md`);
-    fs.writeFileSync(bp, blogReport, "utf-8");
-    console.log(`  ✅ ${bp}`);
-  } catch (err) { console.error(`  ❌ ${err.message}`); }
-
-  // Slack 발송
-  console.log("[4/7] Slack 발송...");
-  if (homepageReport) await sendReportToSlack(homepageReport, "weekly", thisWeek.from);
-  if (blogReport) await sendReportToSlack(blogReport, "weekly", thisWeek.from);
-
-  // PDF 생성
-  console.log("[5/7] PDF 생성...");
-  const pdfs = {};
-  try {
-    if (homepageReport) {
-      pdfs.homepage = await generatePDF(homepageReport);
-      const hpPdf = path.join(REPORTS_DIR, `homepage-weekly-${thisWeek.from}.pdf`);
-      fs.writeFileSync(hpPdf, pdfs.homepage);
-      console.log(`  ✅ ${hpPdf}`);
-    }
-    if (blogReport) {
-      pdfs.blog = await generatePDF(blogReport);
-      const bpPdf = path.join(REPORTS_DIR, `blog-weekly-${thisWeek.from}.pdf`);
-      fs.writeFileSync(bpPdf, pdfs.blog);
-      console.log(`  ✅ ${bpPdf}`);
-    }
-  } catch (err) { console.error(`  ❌ PDF 생성 실패: ${err.message}`); }
-
-  // 이메일 발송 (PDF 첨부)
-  console.log("[6/7] 이메일 발송...");
-  if (pdfs.homepage) {
-    await sendReportEmail(
-      pdfs.homepage,
-      `homepage-weekly-${thisWeek.from}.pdf`,
-      `📊 홈페이지 주간 리포트 — Week ${weekNum} (${thisWeek.from} ~ ${thisWeek.to})`,
-      `PerfecTwin 홈페이지 주간 리포트 (${thisWeek.from} ~ ${thisWeek.to})가 첨부되어 있습니다.`
-    );
+    await runUnifiedWeekly(targetFriday);
+    console.log("\n✅ 주간 리포트 완료!\n");
+  } catch (err) {
+    console.error(`  ❌ 통합 주간 리포트 실패: ${err.message}\n`);
+    process.exit(1);
   }
-  if (pdfs.blog) {
-    await sendReportEmail(
-      pdfs.blog,
-      `blog-weekly-${thisWeek.from}.pdf`,
-      `📝 블로그 주간 리포트 — Week ${weekNum} (${thisWeek.from} ~ ${thisWeek.to})`,
-      `PerfecTwin 블로그 주간 리포트 (${thisWeek.from} ~ ${thisWeek.to})가 첨부되어 있습니다.`
-    );
-  }
-
-  console.log("\n✅ 주간 리포트 완료!\n");
 }
 
 main().catch((err) => { console.error("치명적 오류:", err); process.exit(1); });
