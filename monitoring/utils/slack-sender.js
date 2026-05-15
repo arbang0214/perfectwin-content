@@ -471,78 +471,82 @@ function saveFallback(text) {
 }
 
 /**
- * 통합 일간 리포트 — 헤드라인 메시지 + thread reply로 상세 발송.
- * BOT_TOKEN+CHANNEL_ID 있으면 진짜 thread, 없으면 webhook 2개 메시지 순차.
+ * 통합 일간 리포트 — 단일 메시지로 발송.
+ * 전체 마크다운(헤드라인 포함)을 한 메시지의 multiple blocks로 묶어서 전송.
+ * BOT_TOKEN+CHANNEL_ID 우선, webhook fallback.
  * @param {Object} args
- * @param {string} args.title     리포트 제목
- * @param {string} args.headline  헤드라인 (요약, mrkdwn)
- * @param {string} args.detail    상세 본문 (마크다운 전체)
+ * @param {string} args.title  메시지 제목 (header block)
+ * @param {string} args.body   리포트 본문 전체 (마크다운)
  * @returns {boolean}
  */
-async function sendUnifiedDailyToSlack({ title, headline, detail }) {
-  const headlineMrkdwn = convertToSlackMrkdwn(headline);
-  const detailMrkdwn = convertToSlackMrkdwn(detail);
+async function sendUnifiedDailyToSlack({ title, body }) {
+  const bodyMrkdwn = convertToSlackMrkdwn(body);
 
   if (BOT_TOKEN && CHANNEL_ID) {
-    const ok = await sendBotThreaded(title, headlineMrkdwn, detailMrkdwn);
+    const ok = await sendSingleViaBot(title, bodyMrkdwn);
     if (ok) return true;
     if (WEBHOOK_URL) {
-      console.log("[Slack] Bot thread 실패 — webhook으로 fallback");
+      console.log("[Slack] Bot 단일 메시지 실패 — webhook으로 fallback");
     }
     // fall through to webhook
   }
   if (WEBHOOK_URL) {
-    return await sendFullViaWebhook(title, headlineMrkdwn, detailMrkdwn);
+    return await sendSingleViaWebhook(title, bodyMrkdwn);
   }
 
   console.log("[Slack] 전송 수단 없음 — 콘솔 출력으로 대체");
   console.log(title);
-  console.log(headline);
-  console.log(detail);
+  console.log(body);
   return false;
 }
 
 /**
- * Bot Token으로 헤드라인 + thread reply 발송.
+ * 단일 메시지의 blocks 배열을 구성한다.
+ * Slack section 블록은 mrkdwn 3000자 제한 → 청크 분할.
+ * blocks 배열 최대 50개 → 48개 청크까지 안전 마진.
  */
-async function sendBotThreaded(title, headlineMrkdwn, detailMrkdwn) {
-  try {
-    // 1. 헤드라인 메시지
-    const headlineBlocks = [
-      { type: "header", text: { type: "plain_text", text: title, emoji: true } },
-      { type: "section", text: { type: "mrkdwn", text: headlineMrkdwn } },
-      { type: "context", elements: [{ type: "mrkdwn", text: "📎 상세 리포트는 thread를 확인하세요" }] },
-    ];
+function buildSingleMessageBlocks(title, bodyMrkdwn) {
+  const chunks = splitIntoChunks(bodyMrkdwn, 2900);
+  return [
+    { type: "header", text: { type: "plain_text", text: title, emoji: true } },
+    ...chunks.slice(0, 48).map((chunk) => ({
+      type: "section",
+      text: { type: "mrkdwn", text: chunk },
+    })),
+  ];
+}
 
-    const headlineRes = await fetch("https://slack.com/api/chat.postMessage", {
+async function sendSingleViaBot(title, bodyMrkdwn) {
+  try {
+    const blocks = buildSingleMessageBlocks(title, bodyMrkdwn);
+    const res = await fetch("https://slack.com/api/chat.postMessage", {
       method: "POST",
       headers: { Authorization: `Bearer ${BOT_TOKEN}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ channel: CHANNEL_ID, text: title, blocks: headlineBlocks, mrkdwn: true }),
+      body: JSON.stringify({ channel: CHANNEL_ID, text: title, blocks, mrkdwn: true }),
     });
-    const headlineData = await headlineRes.json();
-    if (!headlineData.ok) throw new Error(`헤드라인: ${headlineData.error}`);
-
-    // 2. Thread reply — 3000자 제한으로 분할
-    const chunks = splitIntoChunks(detailMrkdwn, 2900);
-    for (const chunk of chunks) {
-      const replyRes = await fetch("https://slack.com/api/chat.postMessage", {
-        method: "POST",
-        headers: { Authorization: `Bearer ${BOT_TOKEN}`, "Content-Type": "application/json" },
-        body: JSON.stringify({
-          channel: CHANNEL_ID,
-          thread_ts: headlineData.ts,
-          text: chunk,
-          mrkdwn: true,
-        }),
-      });
-      const replyData = await replyRes.json();
-      if (!replyData.ok) console.warn(`[Slack] thread reply 실패: ${replyData.error}`);
-    }
-
-    console.log(`[Slack] 통합 리포트 전송 성공 (헤드라인 + thread ${chunks.length}개)`);
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error);
+    console.log(`[Slack] 통합 리포트 단일 메시지 전송 성공 (${blocks.length - 1}개 섹션)`);
     return true;
   } catch (err) {
-    console.error(`[Slack] Bot thread 전송 실패: ${err.message}`);
+    console.error(`[Slack] Bot 단일 메시지 전송 실패: ${err.message}`);
+    return false;
+  }
+}
+
+async function sendSingleViaWebhook(title, bodyMrkdwn) {
+  try {
+    const blocks = buildSingleMessageBlocks(title, bodyMrkdwn);
+    const res = await fetch(WEBHOOK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ blocks }),
+    });
+    if (!res.ok) throw new Error(`전송 실패: ${res.status}`);
+    console.log(`[Slack] 통합 리포트 단일 메시지 전송 성공 (${blocks.length - 1}개 섹션)`);
+    return true;
+  } catch (err) {
+    console.error(`[Slack] Webhook 단일 메시지 전송 실패: ${err.message}`);
     return false;
   }
 }
