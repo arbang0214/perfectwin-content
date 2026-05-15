@@ -8,7 +8,7 @@
 
 ## ⚡ 한 줄 요약
 
-블로그 → 홈페이지 클릭이 데모 신청까지 이어지는지 추적하기 위해 UTM 파일럿 4개 포스트 적용 + 일간 리포트에 "데모 퍼널" / "콘텐츠 행동 퍼널" 섹션 신설. 8개 세션 테스트로 검증 데이터 만듦. 내일 자동 리포트에서 결과 확인 예정.
+블로그 → 홈페이지 클릭이 데모 신청까지 이어지는지 추적하기 위해 UTM 파일럿 4개 포스트 적용 + 일간 리포트에 "데모 퍼널" / "콘텐츠 행동 퍼널" 섹션 신설. 8개 직접 클릭 세션 + 2개 LinkedIn 경유 세션 = 총 10개 테스트로 검증 데이터 만듦. 내일 자동 리포트에서 결과 확인 + GA4 attribution 동작 함께 검증 예정.
 
 ---
 
@@ -61,7 +61,9 @@ utm_content  = link | button       (본문 인라인 / CTA 버튼 구분)
 **환경**: 모바일 데이터 (내부 IP 필터링 회피)
 **세션 분리**: 매번 시크릿 창 새로 열어 8개 독립 세션 발생
 
-### 의도된 행동 패턴
+### 의도된 행동 패턴 (총 10개 세션)
+
+**Part A — UTM 직접 클릭 (8 세션)**: UTM URL을 시크릿 창에서 직접 입력 → 분리 세션으로 발생
 
 | # | 캠페인 | utm_content | 도착 | 의도된 행동 |
 |---:|---|---|---|---|
@@ -74,10 +76,18 @@ utm_content  = link | button       (본문 인라인 / CTA 버튼 구분)
 | 7 | 한글 S/4HANA | link | /contact-us/request-demo | 10초 즉시 이탈 |
 | 8 | 한글 S/4HANA | button | /why-perfectwin | 2분 깊게 둘러보고 /product/erp 추가 탐색 |
 
+**Part B — LinkedIn 경유 (2 세션)**: LinkedIn에서 블로그 링크 클릭 → 블로그 내 UTM CTA 클릭 → 데모 완료
+
+| # | 경로 | 의도된 행동 |
+|---:|---|---|
+| 9 | LinkedIn → 영어 Cloud ALM 블로그 → button CTA → /contact-us/request-demo | 데모 완료 ③ |
+| 10 | LinkedIn → 한글 블로그 → link CTA → /contact-us/request-demo | 데모 완료 ④ |
+
 ### 테스트 디자인 핵심
-- **link vs button 효과 차이**가 자연스럽게 발생하도록 행동 패턴 분기
+- **link vs button 효과 차이**가 자연스럽게 발생하도록 행동 패턴 분기 (1~8)
 - 같은 도착 페이지(/contact-us/request-demo)에서도 link/button별 행동 차이 시뮬레이션
-- 4 캠페인 × 2 콘텐츠 타입 = 8개 행이 모든 자리에서 분리 표시되는지 검증
+- **GA4 attribution 동작 검증** (9, 10): 한 세션 안에서 LinkedIn referrer + internal UTM 클릭이 동시 발생할 때 GA4가 어떻게 어트리뷰션하는지 직접 확인
+- 4 캠페인 × 2 콘텐츠 타입 = 8개 행 + LinkedIn 경유 2건 → 총 10개 세션이 모든 자리에서 분리·합산 표시되는지 검증
 
 ---
 
@@ -96,29 +106,40 @@ utm_content  = link | button       (본문 인라인 / CTA 버튼 구분)
 #### 1️⃣ 데모 퍼널 섹션
 | 지표 | 예상 값 |
 |---|---:|
-| 데모 페이지 도달 | 4 |
-| 데모 신청 완료 | 2 |
-| 전환율 | 50% |
+| 데모 페이지 도달 | 6 |
+| 데모 신청 완료 | 4 (Session 2, 6, 9, 10) |
+| 전환율 | ~67% |
 
-- submit.bySourceMedium: `blog/blog_cta`, `ko_blog/blog_cta` 둘 다 등장
-- submit.byCampaign(본문 풀이): "Cloud ALM" 1건, "자산/부채" 1건
-- submit.byLandingPage: `/contact-us/request-demo` (button 직행자)
+- submit.bySourceMedium: `blog/blog_cta`, `ko_blog/blog_cta`, `linkedin.com/referral` 모두 등장 가능
+- submit.byCampaign: "Cloud ALM", "자산/부채" 슬러그. Session 9·10이 `(not set)`로 떨어질지 슬러그로 잡힐지는 GA4 동작에 달림
+- submit.byLandingPage: `/contact-us/request-demo` (직행 button 클릭자) + 블로그 URL (Session 9·10의 첫 진입)
+- submit.byFirstUserSource: LinkedIn이 별도 표기될 가능성 (Session 9·10)
+
+#### 🔍 GA4 Attribution 동작 두 케이스 (Session 9·10 결과로 판가름)
+
+**케이스 (a) — LinkedIn referrer 우세 (예상 우세)**: Session 9·10이 submit.bySourceMedium = `linkedin.com/referral`, submit.byCampaign = `(not set)`로 잡힘. 다만 submit.byLandingPage에 블로그 URL이 잡혀 "어느 블로그를 거쳤다"는 추론 가능.
+
+**케이스 (b) — UTM 덮어쓰기**: Session 9·10이 깔끔하게 캠페인 슬러그로 잡혀 영어 Cloud ALM 데모 2건, 한글 데모 2건으로 합산. LinkedIn 정보는 byFirstUserSource로만 보존.
+
+→ 결과에 따라 향후 LinkedIn 콘텐츠 어트리뷰션 전략 결정.
 
 #### 2️⃣ 콘텐츠 퍼널 섹션
-| 지표 | 예상 값 |
+| 지표 | 예상 값 (케이스 a 기준) |
 |---|---:|
 | 활성 캠페인 수 | 8 (4×2) |
-| 총 세션 | 8 |
+| 총 세션 | 8 (LinkedIn 경유 세션은 sessionCampaignName=(not set)이라 제외) |
 | 데모 페이지 도달 비율 | 50% (4/8) |
 | 데모 신청 완료 비율 | 25% (2/8) |
 
 - 8개 캠페인 행이 모두 표시되고 link vs button 분리
 - 각 캠페인별 페이지/세션 · 체류 · 데모 도달률 비교 가능
 - Top Pages에 `/why-perfectwin`, `/product/erp`, `/contact-us/thankyou` 모두 등장
+- (케이스 b면 LinkedIn 경유 세션도 포함되어 총 10 세션 + 완료율 40%)
 
 #### 5️⃣ 종합 인사이트 섹션
 - 첫 인사이트: link vs button 효과 비교 (Cloud ALM의 button이 데모 완료 만듦)
 - ko_blog 캠페인의 행동 패턴 차이 분석
+- **LinkedIn 경유 데모 어트리뷰션 동작 검증 결과** (a/b 어느 쪽인지)
 
 ---
 
