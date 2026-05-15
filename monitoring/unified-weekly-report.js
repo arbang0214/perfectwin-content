@@ -19,23 +19,26 @@ const REPORTS_DIR = path.join(__dirname, "..", "data", "monitoring", "reports");
 const DATA_DIR = path.join(__dirname, "..", "data", "monitoring");
 
 /**
- * 지정 기간 내에서 가장 최근의 영문 블로그 slug→title 매핑을 찾는다.
- * (모든 일자가 같은 매핑을 갖고 있을 가능성이 높지만, 가장 최근 것이 가장 완전함)
+ * 지정 기간 내에서 가장 최근의 영문+한글 slug→title 통합 매핑을 찾는다.
+ * 영문/한글 별도로 가장 최근 것을 찾아 합친다. (충돌 시 영문 우선)
  */
 function loadLatestSlugToTitle(from, to) {
   const start = new Date(from);
   const end = new Date(to);
-  for (let d = new Date(end); d >= start; d.setDate(d.getDate() - 1)) {
-    const dateStr = d.toISOString().split("T")[0];
-    const file = path.join(DATA_DIR, `${dateStr}.json`);
-    if (!fs.existsSync(file)) continue;
-    try {
-      const snap = JSON.parse(fs.readFileSync(file, "utf-8"));
-      const map = snap.inblog?.blogs?.find((b) => b.label === "blog-en")?.slugToTitle;
-      if (map && Object.keys(map).length > 0) return map;
-    } catch { /* 다음 날짜 시도 */ }
-  }
-  return {};
+  const findByLabel = (label) => {
+    for (let d = new Date(end); d >= start; d.setDate(d.getDate() - 1)) {
+      const dateStr = d.toISOString().split("T")[0];
+      const file = path.join(DATA_DIR, `${dateStr}.json`);
+      if (!fs.existsSync(file)) continue;
+      try {
+        const snap = JSON.parse(fs.readFileSync(file, "utf-8"));
+        const map = snap.inblog?.blogs?.find((b) => b.label === label)?.slugToTitle;
+        if (map && Object.keys(map).length > 0) return map;
+      } catch { /* 다음 날짜 시도 */ }
+    }
+    return {};
+  };
+  return { ...findByLabel("blog-ko"), ...findByLabel("blog-en") };
 }
 
 function loadPromptFile(filename) {
@@ -83,11 +86,12 @@ async function generateUnifiedWeekly(targetFriday) {
     return null;
   }
 
-  // 영문 블로그 slug → title 매핑으로 GSC blog topPages·demoFunnel byLandingPage를 enrich
+  // 영문+한글 통합 slug→title 매핑으로 GSC blog topPages·demoFunnel byLandingPage를 enrich
   const slugToTitle = loadLatestSlugToTitle(thisWeek.from, thisWeek.to);
   const thisWeekGscBlog = thisWeekData.annual.gsc?.["blog.perfectwin.ai"] || null;
+  const thisWeekGscKoBlog = thisWeekData.annual.gsc?.["ko.blog.perfectwin.ai"] || null;
   enrichInplace({
-    gscBlogSite: thisWeekGscBlog,
+    gscBlogSites: [thisWeekGscBlog, thisWeekGscKoBlog].filter(Boolean),
     demoFunnel: thisWeekData.annual.demoFunnel,
     slugToTitle,
   });

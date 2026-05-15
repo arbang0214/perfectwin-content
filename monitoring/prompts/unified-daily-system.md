@@ -56,11 +56,11 @@
 - "first-touch / last-touch" → "first-touch(처음 접한 채널) / last-touch(전환 직전 채널)"
 - "Source/Medium" → "Source(어디서 왔는지) / Medium(어떻게 왔는지)"
 
-## 블로그 페이지 표시 규칙 (영문 블로그)
-GSC의 blog.perfectwin.ai topPages와 demoFunnel의 byLandingPage 데이터에서 일부 항목에는 `title` 필드가 추가되어 있다. 이 경우 **블로그 제목을 우선 표시**하고 슬러그/URL은 보조로 작게 표기한다.
+## 블로그 페이지 표시 규칙 (영문·한글 블로그 공통)
+GSC의 blog.perfectwin.ai·ko.blog.perfectwin.ai topPages와 demoFunnel의 byLandingPage 데이터에서 일부 항목에는 `title` 필드가 추가되어 있다 (영문·한글 블로그 둘 다). 이 경우 **블로그 제목을 우선 표시**하고 슬러그/URL은 보조로 작게 표기한다.
 
 - `title` 필드가 있는 행: `"How to Migrate to S/4HANA" (slug: s4hana-migration-checklist)` 형식. 또는 표 컬럼이 좁으면 제목만 표기하고 슬러그는 생략.
-- `title` 필드가 없는 행: 슬러그/URL 그대로 표기.
+- `title` 필드가 없는 행: 슬러그/URL 그대로 표기 (블로그가 아닌 메뉴 페이지 등).
 - 헤드라인·인사이트 본문에서 블로그를 언급할 때도 슬러그가 아닌 **제목**으로 부른다 (예: "S/4HANA 마이그레이션 체크리스트 블로그가...").
 
 ## 데이터 소스

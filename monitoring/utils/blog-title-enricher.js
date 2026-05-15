@@ -38,15 +38,15 @@ function lookupTitle(slugToTitle, urlOrPath) {
 
 /**
  * 통합 데이터의 슬러그가 등장하는 모든 위치를 in-place enrich.
- *  - GSC blog.perfectwin.ai topPages[].page → title 추가
+ *  - GSC blog 사이트(들) topPages[].page → title 추가
  *  - demoFunnel submit/intent byLandingPage[].landingPagePlusQueryString → title 추가
  *
  * @param {Object} args
- * @param {Object} [args.gscBlogSite]   GSC blog 사이트 객체 (topPages 포함)
- * @param {Object} [args.demoFunnel]    데모 퍼널 객체 (submit, intent 포함)
- * @param {Object} args.slugToTitle     영문 블로그 slug → title 매핑
+ * @param {Object[]} [args.gscBlogSites] GSC blog 사이트 객체 배열 (영문·한글 등)
+ * @param {Object}   [args.demoFunnel]   데모 퍼널 객체 (submit, intent 포함)
+ * @param {Object}   args.slugToTitle    slug → title 매핑 (영문+한글 합친 통합 맵)
  */
-function enrichInplace({ gscBlogSite, demoFunnel, slugToTitle }) {
+function enrichInplace({ gscBlogSites = [], demoFunnel, slugToTitle }) {
   if (!slugToTitle || Object.keys(slugToTitle).length === 0) return;
 
   const tagRow = (row, urlField) => {
@@ -55,8 +55,10 @@ function enrichInplace({ gscBlogSite, demoFunnel, slugToTitle }) {
     if (title) row.title = title;
   };
 
-  if (Array.isArray(gscBlogSite?.topPages)) {
-    gscBlogSite.topPages.forEach((p) => tagRow(p, "page"));
+  for (const site of gscBlogSites) {
+    if (Array.isArray(site?.topPages)) {
+      site.topPages.forEach((p) => tagRow(p, "page"));
+    }
   }
   if (Array.isArray(demoFunnel?.submit?.byLandingPage)) {
     demoFunnel.submit.byLandingPage.forEach((r) => tagRow(r, "landingPagePlusQueryString"));

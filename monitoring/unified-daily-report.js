@@ -116,9 +116,18 @@ async function generateUnifiedDaily(targetDate) {
   const yesterdayGscSite = yesterdayData?.gsc?.sites?.find((s) => s.label === "perfectwin.ai") || null;
   const yesterdayGscBlog = yesterdayData?.gsc?.sites?.find((s) => s.label === "blog.perfectwin.ai") || null;
 
-  // 영문 블로그 slug → title 매핑으로 GSC/demoFunnel 슬러그를 제목으로 enrich
-  const slugToTitle = todayData.inblog?.blogs?.find((b) => b.label === "blog-en")?.slugToTitle || {};
-  enrichInplace({ gscBlogSite: todayGscBlog, demoFunnel: todayData.demoFunnel, slugToTitle });
+  // 영문+한글 블로그 slug→title 매핑을 합쳐서 GSC/demoFunnel 슬러그를 제목으로 enrich
+  // (영문/한글이 같은 슬러그를 쓸 가능성은 거의 없지만 충돌 시 영문이 우선되도록 영문을 뒤에 spread)
+  const todayGscKoBlog = todayData.gsc?.sites?.find((s) => s.label === "ko.blog.perfectwin.ai") || null;
+  const slugToTitle = {
+    ...(todayData.inblog?.blogs?.find((b) => b.label === "blog-ko")?.slugToTitle || {}),
+    ...(todayData.inblog?.blogs?.find((b) => b.label === "blog-en")?.slugToTitle || {}),
+  };
+  enrichInplace({
+    gscBlogSites: [todayGscBlog, todayGscKoBlog].filter(Boolean),
+    demoFunnel: todayData.demoFunnel,
+    slugToTitle,
+  });
 
   const crossRules = loadPromptFile("cross-analysis-rules.md");
   const systemPrompt = loadPromptFile("unified-daily-system.md") + "\n\n" + crossRules;
