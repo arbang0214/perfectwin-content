@@ -1,0 +1,968 @@
+{
+  "date": "2026-05-17",
+  "collectedAt": "2026-05-18T01:50:50.867Z",
+  "ga4": {
+    "date": "2026-05-17",
+    "summary": {
+      "activeUsers": 13,
+      "newUsers": 15,
+      "returningUsers": -2,
+      "sessions": 13,
+      "engagedSessions": 2,
+      "pageViews": 15,
+      "bounceRate": 84.62,
+      "engagementRate": 15.38,
+      "avgSessionDuration": 4.2,
+      "pageViewsPerSession": 1.15,
+      "totalEngagementTime": 6,
+      "eventCount": 48
+    },
+    "topPages": [
+      {
+        "pagePath": "/",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 14,
+        "users": 12,
+        "avgDuration": 4.5,
+        "bounceRate": 83.33
+      },
+      {
+        "pagePath": "/resources",
+        "pageTitle": "PerfecTwin | SAP Testing Automation Platform",
+        "pageViews": 1,
+        "users": 1,
+        "avgDuration": 0,
+        "bounceRate": 100
+      }
+    ],
+    "channels": [
+      {
+        "channel": "Direct",
+        "sessions": 13,
+        "users": 13,
+        "engagementRate": 15.38
+      }
+    ],
+    "sourceMedium": [
+      {
+        "source": "(direct)",
+        "medium": "(none)",
+        "sessions": 13,
+        "users": 13,
+        "engagementRate": 15.38,
+        "avgDuration": 4.2
+      }
+    ],
+    "devices": [
+      {
+        "device": "desktop",
+        "sessions": 13,
+        "users": 13,
+        "pageViews": 15,
+        "engagementRate": 15.38,
+        "avgDuration": 4.2
+      }
+    ],
+    "countries": [
+      {
+        "country": "United States",
+        "sessions": 7,
+        "users": 7,
+        "engagementRate": 0
+      },
+      {
+        "country": "Canada",
+        "sessions": 3,
+        "users": 3,
+        "engagementRate": 0
+      },
+      {
+        "country": "Germany",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      },
+      {
+        "country": "Poland",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 0
+      },
+      {
+        "country": "United Kingdom",
+        "sessions": 1,
+        "users": 1,
+        "engagementRate": 100
+      }
+    ],
+    "landingPages": [
+      {
+        "landingPage": "/",
+        "sessions": 12,
+        "users": 12,
+        "bounceRate": 83.33,
+        "avgDuration": 4.5,
+        "pagesPerSession": 1.17
+      },
+      {
+        "landingPage": "/resources",
+        "sessions": 1,
+        "users": 1,
+        "bounceRate": 100,
+        "avgDuration": 0,
+        "pagesPerSession": 1
+      }
+    ],
+    "utmCampaigns": []
+  },
+  "gsc": {
+    "date": "2026-05-17",
+    "sites": [
+      {
+        "siteUrl": "https://perfectwin.ai/",
+        "label": "perfectwin.ai",
+        "date": "2026-05-17",
+        "actualDate": "2026-05-15",
+        "totals": {
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        "topQueries": [],
+        "topPages": [],
+        "devices": [],
+        "countries": []
+      },
+      {
+        "siteUrl": "https://blog.perfectwin.ai/",
+        "label": "blog.perfectwin.ai",
+        "date": "2026-05-17",
+        "actualDate": "2026-05-15",
+        "totals": {
+          "clicks": 0,
+          "impressions": 309,
+          "ctr": 0,
+          "position": 22.7
+        },
+        "topQueries": [
+          {
+            "query": "alm test management tool",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 71
+          },
+          {
+            "query": "alm testing",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 76
+          },
+          {
+            "query": "automated testing sap",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 48.5
+          },
+          {
+            "query": "automation testsap23",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 11
+          },
+          {
+            "query": "compare integration ecosystems of sap operations platforms",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 13.5
+          },
+          {
+            "query": "conversion testing strategy",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 15
+          },
+          {
+            "query": "difference between sap rise and grow",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 59
+          },
+          {
+            "query": "how to prioritize test cases for automation",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 38
+          },
+          {
+            "query": "how to select automation tools that reduce sap operational effort?",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 4
+          },
+          {
+            "query": "rise with sap migration",
+            "clicks": 0,
+            "impressions": 5,
+            "ctr": 0,
+            "position": 64.6
+          }
+        ],
+        "topPages": [
+          {
+            "page": "https://blog.perfectwin.ai/",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 4.5
+          },
+          {
+            "page": "https://blog.perfectwin.ai/backend-logic-test-automation",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 31
+          },
+          {
+            "page": "https://blog.perfectwin.ai/category/sap-regression-testing",
+            "clicks": 0,
+            "impressions": 5,
+            "ctr": 0,
+            "position": 48
+          },
+          {
+            "page": "https://blog.perfectwin.ai/category/sap-testing-automation",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 2
+          },
+          {
+            "page": "https://blog.perfectwin.ai/category/sap-upgrade-testing",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 45.5
+          },
+          {
+            "page": "https://blog.perfectwin.ai/global-ev-battery-sap-s4hana-migration",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 6
+          },
+          {
+            "page": "https://blog.perfectwin.ai/real-transaction-data-testing-sap-migration",
+            "clicks": 0,
+            "impressions": 4,
+            "ctr": 0,
+            "position": 10.3
+          },
+          {
+            "page": "https://blog.perfectwin.ai/rise-with-sap-migration-testing-strategy",
+            "clicks": 0,
+            "impressions": 13,
+            "ctr": 0,
+            "position": 14.2
+          },
+          {
+            "page": "https://blog.perfectwin.ai/sap-automation-tips",
+            "clicks": 0,
+            "impressions": 5,
+            "ctr": 0,
+            "position": 3.2
+          },
+          {
+            "page": "https://blog.perfectwin.ai/sap-cloud-alm-test-management-strengths-gaps-automation-criteria",
+            "clicks": 0,
+            "impressions": 42,
+            "ctr": 0,
+            "position": 12.3
+          }
+        ],
+        "devices": [
+          {
+            "device": "DESKTOP",
+            "clicks": 0,
+            "impressions": 287,
+            "ctr": 0,
+            "position": 22.5
+          },
+          {
+            "device": "MOBILE",
+            "clicks": 0,
+            "impressions": 22,
+            "ctr": 0,
+            "position": 26
+          }
+        ],
+        "countries": [
+          {
+            "country": "are",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 7
+          },
+          {
+            "country": "aus",
+            "clicks": 0,
+            "impressions": 7,
+            "ctr": 0,
+            "position": 18.6
+          },
+          {
+            "country": "aut",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 25
+          },
+          {
+            "country": "bel",
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 13
+          },
+          {
+            "country": "blr",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 32
+          },
+          {
+            "country": "bra",
+            "clicks": 0,
+            "impressions": 7,
+            "ctr": 0,
+            "position": 12.1
+          },
+          {
+            "country": "can",
+            "clicks": 0,
+            "impressions": 5,
+            "ctr": 0,
+            "position": 6.6
+          },
+          {
+            "country": "che",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 3
+          },
+          {
+            "country": "chn",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 15
+          },
+          {
+            "country": "civ",
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 23
+          }
+        ]
+      }
+    ]
+  },
+  "bing": {
+    "date": "2026-05-17",
+    "sites": [
+      {
+        "label": "perfectwin.ai",
+        "siteUrl": "https://perfectwin.ai/",
+        "actualDate": "2026-05-17",
+        "totals": {
+          "clicks": 0,
+          "impressions": 0,
+          "avgClickPosition": 0,
+          "avgImpressionPosition": 0,
+          "ctr": 0
+        },
+        "topQueries": []
+      },
+      {
+        "label": "blog.perfectwin.ai",
+        "siteUrl": "https://blog.perfectwin.ai/",
+        "actualDate": "2026-05-17",
+        "totals": {
+          "clicks": 0,
+          "impressions": 0,
+          "avgClickPosition": 0,
+          "avgImpressionPosition": 0,
+          "ctr": 0
+        },
+        "topQueries": []
+      },
+      {
+        "label": "ko.blog.perfectwin.ai",
+        "siteUrl": "https://ko.blog.perfectwin.ai/",
+        "actualDate": "2026-05-17",
+        "totals": {
+          "clicks": 0,
+          "impressions": 0,
+          "avgClickPosition": 0,
+          "avgImpressionPosition": 0,
+          "ctr": 0
+        },
+        "topQueries": []
+      }
+    ]
+  },
+  "inblog": {
+    "date": "2026-05-17",
+    "blogs": [
+      {
+        "label": "blog-en",
+        "name": "영문 블로그",
+        "blogUrl": "https://blog.perfectwin.ai",
+        "date": "2026-05-17",
+        "traffic": {
+          "data": [
+            {
+              "date": "2026-05-17",
+              "visits": 36,
+              "clicks": 0,
+              "organic": 0,
+              "home": 5,
+              "post": 44,
+              "category": 1,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-05-17",
+            "end_date": "2026-05-17",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": null,
+              "visits": 6,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "(비포스트 페이지)"
+            },
+            {
+              "post_id": 45949,
+              "visits": 5,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "Successful Test Automation in SAP S/4HANA Migration: Case Study of a Leading CPG Manufacturer",
+              "slug": "successful-sap-s4hana-test-automation",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 5
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
+              "post_id": 58365,
+              "visits": 5,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Test Automation Prioritization: Which Business Scenarios to Automate First",
+              "slug": "test-automation-prioritization-strategy",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 5
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
+              "post_id": 70120,
+              "visits": 5,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Testing Checklist: 5 Steps Before S/4HANA Go-Live",
+              "slug": "sap-testing-checklist-guide",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 5
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
+              "post_id": 46820,
+              "visits": 4,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "How a Global EV Battery Manufacturer Automated Testing for Millions of Data Points in Its SAP S/4HANA Migration",
+              "slug": "global-ev-battery-sap-s4hana-migration",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 4
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
+              "post_id": 87010,
+              "visits": 4,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Test Case Design: Scenario-Based E2E Testing Guide",
+              "slug": "sap-test-case-design-e2e-testing",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 4
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
+              "post_id": 155158,
+              "visits": 4,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "RISE with SAP Migration Testing: 5 Practical Challenges and How to Solve Them",
+              "slug": "rise-with-sap-migration-testing-strategy",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 4
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
+              "post_id": 77338,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP S/4HANA Migration Testing: 4 Data Conversion Strategies That Prevent Go-Live Failures",
+              "slug": "sap-migration-data-conversion-testing-strategy",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 1
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
+              "post_id": 149800,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Cloud ALM Test Management: Strengths, Gaps, and What to Look for in Automation Tools",
+              "slug": "sap-cloud-alm-test-management-strengths-gaps-automation-criteria",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 1
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
+              "post_id": 168459,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "Beyond Self-Healing: What AI Should Really Fix in SAP Testing",
+              "slug": "sap-test-ai-autonomous-recovery",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 1
+                }
+              ],
+              "linkedinVisits": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-05-17",
+            "end_date": "2026-05-17",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 35
+            },
+            {
+              "full_referrer": "inblog.ai",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2026-05-17",
+            "end_date": "2026-05-17"
+          }
+        },
+        "linkedinTotal": 0,
+        "slugToTitle": {
+          "sap-test-automation-asset-or-liability": "SAP Test Automation: Asset or Liability After Go-live?",
+          "sap-pre-vs-post-golive-validation": "What to Catch Before Go-live vs What Only Surfaces After",
+          "sap-test-ai-autonomous-recovery": "Beyond Self-Healing: What AI Should Really Fix in SAP Testing",
+          "sap-clean-core-testing-strategy": "Why Testing Matters More in the SAP Clean Core Era",
+          "sap-regression-testing-hypercare-bottlenecks": "Why Does SAP Hypercare Drag On? 5 Regression Cycle Bottlenecks",
+          "sap-hypercare-testing-strategy": "SAP Hypercare Testing Strategy: How to Cut Your Stabilization Period in Half",
+          "sap-test-automation-why-fail-how-to-succeed": "SAP Test Automation: Why It Fails and How to Get It Right",
+          "sap-test-automation-tools-comparison-2026-guide": "SAP Test Automation Tools Compared: A Practical Selection Guide for 2026",
+          "rise-with-sap-migration-testing-strategy": "RISE with SAP Migration Testing: 5 Practical Challenges and How to Solve Them",
+          "sap-test-automation-how-to-start": "Can Your Company Start SAP Test Automation? A Practical Path Forward",
+          "sap-cloud-alm-test-automation-practical-guide": "How to Build SAP Test Automation on Cloud ALM: A Practical Guide",
+          "sap-cloud-alm-test-management-strengths-gaps-automation-criteria": "SAP Cloud ALM Test Management: Strengths, Gaps, and What to Look for in Automation Tools",
+          "sap-cloud-alm-testing-strategy-redesign": "Why You Need to Redesign Your SAP Testing Strategy for the Cloud ALM Era",
+          "sap-automation-tips": "2026 SAP Strategy: Addressing Challenges & Automation Tips for 80% Efficiency Gain",
+          "sap-test-case-design-e2e-testing": "SAP Test Case Design: Scenario-Based E2E Testing Guide",
+          "sap-erp-test-trends": "SAP S/4HANA Testing Strategy: 4 Trends Reshaping How Enterprises Test in 2026",
+          "sap-s4hana-upgrade-testing-strategy": "SAP S/4HANA Upgrade Testing: 3 Proven Strategies (2026)",
+          "sap-migration-data-conversion-testing-strategy": "SAP S/4HANA Migration Testing: 4 Data Conversion Strategies That Prevent Go-Live Failures",
+          "sap-testing-checklist-guide": "SAP Testing Checklist: 5 Steps Before S/4HANA Go-Live",
+          "sap-grow-upgrade-testing-guide": "SAP GROW Upgrade: Complete Testing Guide",
+          "sap-cloud-transition-rise-grow-guide": "RISE with SAP vs GROW with SAP: Key Differences and How to Choose (2026)",
+          "sap-erp-card-transaction-testing-complexity-automation": "What SAP Finance Teams Need to Know About Document Posting Complexity and Test Automation",
+          "sap-o2c-process-testing-automation": "SAP Order-to-Cash Test Automation: Complete Guide (2026)",
+          "test-automation-tool-selection-strategy": "SAP Test Automation Tool Selection: A Framework for Choosing the Right Solution",
+          "test-automation-prioritization-strategy": "SAP Test Automation Prioritization: Which Business Scenarios to Automate First",
+          "backend-logic-test-automation": "SAP Backend Test Automation: Why UI Replay Falls Short for ERP Testing",
+          "test-automation-necessity-manual-testing-limits": "Why SAP Enterprises Are Shifting to Test Automation — And What's Driving the Change",
+          "sap-test-automation-retail-enterprises": "Why SAP Test Automation is Critical for Retail Enterprises",
+          "real-transaction-data-testing-sap-migration": "Why Real Transaction Data Testing is Essential for SAP ERP Migration",
+          "global-ev-battery-sap-s4hana-migration": "How a Global EV Battery Manufacturer Automated Testing for Millions of Data Points in Its SAP S/4HANA Migration",
+          "successful-sap-s4hana-test-automation": "Successful Test Automation in SAP S/4HANA Migration: Case Study of a Leading CPG Manufacturer"
+        }
+      },
+      {
+        "label": "blog-ko",
+        "name": "한글 블로그",
+        "blogUrl": "https://ko.blog.perfectwin.ai",
+        "date": "2026-05-17",
+        "traffic": {
+          "data": [
+            {
+              "date": "2026-05-17",
+              "visits": 20,
+              "clicks": 0,
+              "organic": 1,
+              "home": 3,
+              "post": 32,
+              "category": 0,
+              "author": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-05-17",
+            "end_date": "2026-05-17",
+            "interval": "day",
+            "type": "all"
+          }
+        },
+        "posts": {
+          "data": [
+            {
+              "post_id": 151636,
+              "visits": 5,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "Cloud ALM 시대, SAP 테스트 자동화 구축 실전 가이드",
+              "slug": "sap-cloud-alm-test-automation-implementation-guide",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 5
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
+              "post_id": 55527,
+              "visits": 4,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "글로벌 전기차 배터리 제조사의 SAP S/4HANA 전환: 수백만 데이터 테스트 자동화 성공사례",
+              "slug": "global-ev-battery-sap-s4hana-migration",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 4
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
+              "post_id": null,
+              "visits": 3,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "(비포스트 페이지)"
+            },
+            {
+              "post_id": 59993,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP 재경 담당자가 알아야 할 전표 처리 복잡성과 테스트 자동화",
+              "slug": "sap-erp-card-transaction-testing-complexity-automation",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 2
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
+              "post_id": 63322,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 1,
+              "cvr": 0,
+              "title": "SAP S/4HANA Cloud 구축 방식: Public, Private, On-Premise 살펴보기",
+              "slug": "sap-s4hana-cloud-deployment-options-comparison-public-private-onpremise",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 1
+                },
+                {
+                  "full_referrer": "www.google.com",
+                  "count": 1
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
+              "post_id": 55520,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP S/4HANA 마이그레이션을 위한 성공적인 테스트 자동화: 선도적 CPG 제조사 사례",
+              "slug": "successful-sap-s4hana-test-automation",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 1
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
+              "post_id": 65989,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP GROW 업그레이드: 테스트 완벽 가이드",
+              "slug": "sap-grow-upgrade-test-guide",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 1
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
+              "post_id": 69123,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP 테스팅 사전 준비 가이드: 실패하지 않는 5단계 체크리스트",
+              "slug": "sap-testing-checklist-guide",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 1
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
+              "post_id": 166523,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP Clean Core 시대, 테스트가 더 중요해지는 이유",
+              "slug": "sap-clean-core-testing-strategy",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 1
+                }
+              ],
+              "linkedinVisits": 0
+            }
+          ],
+          "meta": {
+            "start_date": "2026-05-17",
+            "end_date": "2026-05-17",
+            "sort": "visits",
+            "order": "desc",
+            "limit": 10
+          }
+        },
+        "sources": {
+          "data": [
+            {
+              "full_referrer": "direct",
+              "count": 19
+            },
+            {
+              "full_referrer": "www.google.com",
+              "count": 1
+            }
+          ],
+          "meta": {
+            "start_date": "2026-05-17",
+            "end_date": "2026-05-17"
+          }
+        },
+        "linkedinTotal": 0,
+        "slugToTitle": {
+          "sap-test-automation-real-problem-asset-or-liability": "SAP 테스트 자동화의 진짜 문제 — 시간이 지나도 자산으로 남는가",
+          "sap-pre-vs-post-golive-validation": "SAP Go-live 전에 잡아야 할 것 vs Go-live 후에야 보이는 것",
+          "sap-test-ai-autonomous-recovery": "SAP 테스트 자동화, AI가 실패 복구까지 해야 진짜 자동화다",
+          "sap-clean-core-testing-strategy": "SAP Clean Core 시대, 테스트가 더 중요해지는 이유",
+          "sap-regression-testing-hypercare-bottlenecks": "SAP Hypercare를 길게 만드는 회귀 테스트 사이클: 5가지 구조적 병목과 해법",
+          "sap-hypercare-testing-strategy": "SAP Hypercare 테스트 전략: 안정화 기간을 절반으로 줄이는 법",
+          "sap-test-automation-why-fail-how-to-succeed": "SAP 테스트 자동화, 왜 실패하고 어떻게 성공하는가",
+          "rise-with-sap-migration-testing-strategy": "RISE with SAP 마이그레이션 테스트, 실무에서 부딪히는 5가지 문제와 해법",
+          "sap-test-automation-tools-comparison-2026-guide": "SAP 테스트 자동화 도구 비교: 실무 기준으로 본 2026년 선택 가이드",
+          "sap-test-automation-how-to-start": "SAP 테스트 자동화, 우리 회사도 시작할 수 있을까",
+          "sap-cloud-alm-test-automation-implementation-guide": "Cloud ALM 시대, SAP 테스트 자동화 구축 실전 가이드",
+          "sap-cloud-alm-test-management-strengths-and-gaps": "SAP Cloud ALM 테스트 관리, 어디까지 되고 무엇이 부족한가",
+          "sap-cloud-alm-test-strategy-why-now": "SAP Cloud ALM 전환 시대, 테스트 전략을 다시 설계해야 하는 이유",
+          "sap-automation-tips": "[실전 가이드] 2026 SAP 3대 과제와 테스트 공수 80% 절감을 위한 자동화 실전 팁",
+          "sap-test-case-design-e2e-testing": "SAP 테스트 케이스 설계: 시나리오 기반 E2E 테스트 가이드",
+          "sap-erp-test-trends": "SAP S/4HANA 전환 시대, 테스트 전략은 어떻게 달라져야 할까",
+          "sap-s4hana-upgrade-testing-strategy": "SAP 테스트 전략 (2) S/4HANA Upgrade",
+          "sap-migration-data-conversion-testing-strategy": "SAP 테스트 전략 (1) ECC to S/4HANA Migration",
+          "sap-testing-checklist-guide": "SAP 테스팅 사전 준비 가이드: 실패하지 않는 5단계 체크리스트",
+          "sap-grow-upgrade-test-guide": "SAP GROW 업그레이드: 테스트 완벽 가이드",
+          "sap-cloud-transition-rise-grow-guide": "SAP 클라우드 전환: RISE vs GROW",
+          "sap-s4hana-cloud-deployment-options-comparison-public-private-onpremise": "SAP S/4HANA Cloud 구축 방식: Public, Private, On-Premise 살펴보기",
+          "sap-cloud-ecosystem-guide": "SAP Cloud 생태계 완전 정복하기",
+          "sap-erp-card-transaction-testing-complexity-automation": "SAP 재경 담당자가 알아야 할 전표 처리 복잡성과 테스트 자동화",
+          "sap-o2c-process-testing-automation": "SAP O2C 프로세스의 다양성과 테스트 자동화 필요성",
+          "test-automation-tool-selection-strategy": "테스트 자동화 전략 (2) 자동화 도구 선정 전략",
+          "test-automation-prioritization-strategy": "테스트 자동화 전략 (1) 자동화 범위 선정 전략",
+          "backend-logic-test-automation": "UI를 넘어서: 백엔드 로직 기반 테스트 자동화",
+          "test-automation-necessity-manual-testing-limits": "테스트 자동화의 시대: 기업들이 주목하는 이유",
+          "global-ev-battery-sap-s4hana-migration": "글로벌 전기차 배터리 제조사의 SAP S/4HANA 전환: 수백만 데이터 테스트 자동화 성공사례",
+          "successful-sap-s4hana-test-automation": "SAP S/4HANA 마이그레이션을 위한 성공적인 테스트 자동화: 선도적 CPG 제조사 사례",
+          "sap-test-automation-retail-enterprises": "유통 기업에 SAP 테스트 자동화가 중요한 이유",
+          "real-transaction-data-testing-sap-migration": "SAP ERP 전환, 왜 실거래 데이터 기반 테스트가 필수인가?"
+        }
+      }
+    ]
+  },
+  "demoFunnel": {
+    "date": "2026-05-17",
+    "events": {
+      "intent": "form_start",
+      "submit": "데모신청완료"
+    },
+    "summary": {
+      "demoPageSessions": 0,
+      "demoPageEventCount": 0,
+      "demoPageUsers": 0,
+      "submissions": 0,
+      "submissionEventCount": 0,
+      "submissionUsers": 0,
+      "conversionRate": null
+    },
+    "submit": {
+      "bySourceMedium": [],
+      "byCampaign": [],
+      "byLandingPage": [],
+      "byFirstUserSource": []
+    },
+    "intent": {
+      "byLandingPage": []
+    }
+  },
+  "contentFunnel": {
+    "date": "2026-05-17",
+    "summary": {
+      "campaignCount": 1,
+      "totalSessions": 13,
+      "totalDemoIntent": 0,
+      "totalDemoComplete": 0,
+      "overallDemoIntentRate": 0,
+      "overallDemoCompleteRate": 0
+    },
+    "campaigns": [
+      {
+        "source": "(direct)",
+        "medium": "(none)",
+        "campaign": "(direct)",
+        "content": "(not set)",
+        "sessions": 13,
+        "users": 13,
+        "pageViews": 15,
+        "pageViewsPerSession": 1.15,
+        "avgSessionDuration": 4.2,
+        "engagementRate": 15.38,
+        "demoIntentSessions": 0,
+        "demoCompleteSessions": 0,
+        "demoIntentRate": 0,
+        "demoCompleteRate": 0,
+        "topPages": [
+          {
+            "page": "/",
+            "views": 14
+          },
+          {
+            "page": "/resources",
+            "views": 1
+          }
+        ]
+      }
+    ]
+  },
+  "slack": {
+    "sent": false,
+    "timestamp": "2026-05-18T01:50:50.867Z"
+  }
+}
