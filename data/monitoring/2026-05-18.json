@@ -1,6 +1,6 @@
 {
   "date": "2026-05-18",
-  "collectedAt": "2026-05-19T01:36:13.338Z",
+  "collectedAt": "2026-05-19T05:02:56.511Z",
   "ga4": {
     "date": "2026-05-18",
     "summary": {
@@ -500,11 +500,11 @@
           "data": [
             {
               "date": "2026-05-18",
-              "visits": 15,
+              "visits": 17,
               "clicks": 0,
               "organic": 4,
-              "home": 0,
-              "post": 28,
+              "home": 1,
+              "post": 27,
               "category": 0,
               "author": 0
             }
@@ -555,6 +555,22 @@
               "linkedinVisits": 0
             },
             {
+              "post_id": 55299,
+              "visits": 2,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "Why SAP Test Automation is Critical for Retail Enterprises",
+              "slug": "sap-test-automation-retail-enterprises",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 2
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
               "post_id": 70120,
               "visits": 2,
               "clicks": 0,
@@ -595,22 +611,6 @@
               "linkedinVisits": 0
             },
             {
-              "post_id": 55299,
-              "visits": 1,
-              "clicks": 0,
-              "organic": 0,
-              "cvr": 0,
-              "title": "Why SAP Test Automation is Critical for Retail Enterprises",
-              "slug": "sap-test-automation-retail-enterprises",
-              "sources": [
-                {
-                  "full_referrer": "direct",
-                  "count": 1
-                }
-              ],
-              "linkedinVisits": 0
-            },
-            {
               "post_id": 58365,
               "visits": 1,
               "clicks": 0,
@@ -641,6 +641,14 @@
                 }
               ],
               "linkedinVisits": 0
+            },
+            {
+              "post_id": null,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "(비포스트 페이지)"
             }
           ],
           "meta": {
@@ -655,7 +663,7 @@
           "data": [
             {
               "full_referrer": "direct",
-              "count": 10
+              "count": 11
             },
             {
               "full_referrer": "www.google.com",
@@ -663,7 +671,7 @@
             },
             {
               "full_referrer": "blog.perfectwin.ai",
-              "count": 1
+              "count": 2
             }
           ],
           "meta": {
@@ -832,6 +840,7 @@
         },
         "linkedinTotal": 0,
         "slugToTitle": {
+          "sap-month-end-closing-testing": "SAP 월말 마감 테스트: 매달 반복하는데 매달 불안한 이유",
           "sap-test-automation-real-problem-asset-or-liability": "SAP 테스트 자동화의 진짜 문제 — 시간이 지나도 자산으로 남는가",
           "sap-pre-vs-post-golive-validation": "SAP Go-live 전에 잡아야 할 것 vs Go-live 후에야 보이는 것",
           "sap-test-ai-autonomous-recovery": "SAP 테스트 자동화, AI가 실패 복구까지 해야 진짜 자동화다",
@@ -1027,6 +1036,6 @@
   },
   "slack": {
     "sent": false,
-    "timestamp": "2026-05-19T01:36:13.338Z"
+    "timestamp": "2026-05-19T05:02:56.511Z"
   }
 }
