@@ -34,14 +34,33 @@ async function runReport(client, opts) {
   return response;
 }
 
-/** UTM 박힌 세션만 추출하는 필터 (sessionCampaignName이 "(not set)"이 아닌 것) */
+/**
+ * UTM 박힌 세션만 추출하는 필터.
+ *   - sessionCampaignName이 "(not set)"이 아닌 세션
+ *   - sessionSource에 "framer"가 포함된 세션은 제외
+ *     (framer.com 에디터, *.framer.website 미리보기 등 관리자 클릭 트래픽 제거)
+ */
 function utmTrafficFilter() {
   return {
-    notExpression: {
-      filter: {
-        fieldName: "sessionCampaignName",
-        stringFilter: { matchType: "EXACT", value: "(not set)" },
-      },
+    andGroup: {
+      expressions: [
+        {
+          notExpression: {
+            filter: {
+              fieldName: "sessionCampaignName",
+              stringFilter: { matchType: "EXACT", value: "(not set)" },
+            },
+          },
+        },
+        {
+          notExpression: {
+            filter: {
+              fieldName: "sessionSource",
+              stringFilter: { matchType: "CONTAINS", value: "framer", caseSensitive: false },
+            },
+          },
+        },
+      ],
     },
   };
 }
