@@ -1,6 +1,6 @@
 {
   "date": "2026-05-18",
-  "collectedAt": "2026-05-19T05:02:56.511Z",
+  "collectedAt": "2026-05-19T05:14:34.857Z",
   "ga4": {
     "date": "2026-05-18",
     "summary": {
@@ -681,6 +681,7 @@
         },
         "linkedinTotal": 0,
         "slugToTitle": {
+          "sap-month-end-closing-testing": "SAP Month-End Close Testing: 4 Ways to Stop the Pile-Up",
           "sap-test-automation-asset-or-liability": "SAP Test Automation: Asset or Liability After Go-live?",
           "sap-pre-vs-post-golive-validation": "What to Catch Before Go-live vs What Only Surfaces After",
           "sap-test-ai-autonomous-recovery": "Beyond Self-Healing: What AI Should Really Fix in SAP Testing",
@@ -906,8 +907,8 @@
   "contentFunnel": {
     "date": "2026-05-18",
     "summary": {
-      "campaignCount": 5,
-      "totalSessions": 7,
+      "campaignCount": 4,
+      "totalSessions": 5,
       "totalDemoIntent": 0,
       "totalDemoComplete": 0,
       "overallDemoIntentRate": 0,
@@ -933,36 +934,6 @@
           {
             "page": "/",
             "views": 2
-          }
-        ]
-      },
-      {
-        "source": "hanbijegarl.framer.website",
-        "medium": "referral",
-        "campaign": "(referral)",
-        "content": "(not set)",
-        "sessions": 2,
-        "users": 1,
-        "pageViews": 3,
-        "pageViewsPerSession": 1.5,
-        "avgSessionDuration": 7.8,
-        "engagementRate": 50,
-        "demoIntentSessions": 0,
-        "demoCompleteSessions": 0,
-        "demoIntentRate": 0,
-        "demoCompleteRate": 0,
-        "topPages": [
-          {
-            "page": "/",
-            "views": 1
-          },
-          {
-            "page": "/solutions",
-            "views": 1
-          },
-          {
-            "page": "/solutions/migration",
-            "views": 1
           }
         ]
       },
@@ -1036,6 +1007,6 @@
   },
   "slack": {
     "sent": false,
-    "timestamp": "2026-05-19T05:02:56.511Z"
+    "timestamp": "2026-05-19T05:14:34.857Z"
   }
 }
