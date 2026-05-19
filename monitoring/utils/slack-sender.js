@@ -520,11 +520,17 @@ function tableToBullets(headers, rows) {
 }
 
 function tableToAlignedCode(headers, rows) {
-  const colCount = headers.length;
+  // 마지막 컬럼이 "해석/의미/설명"이면 표에서 빼고 행 번호로 매핑된 부속 줄로 출력
+  const lastHeader = headers[headers.length - 1] || "";
+  const hasMeaning = /의미|해석|설명/.test(lastHeader) && headers.length >= 3;
+
+  const tableHeaders = hasMeaning ? headers.slice(0, -1) : headers;
+  const colCount = tableHeaders.length;
   const MAX_COL = colCount >= 6 ? 16 : 22;
+
   const colWidths = [];
   for (let c = 0; c < colCount; c++) {
-    let max = visualWidth(headers[c] || "");
+    let max = visualWidth(tableHeaders[c] || "");
     for (const r of rows) {
       const w = visualWidth(r[c] || "");
       if (w > max) max = w;
@@ -532,18 +538,29 @@ function tableToAlignedCode(headers, rows) {
     colWidths.push(Math.min(max, MAX_COL));
   }
 
-  const formatRow = (row) =>
-    row
+  const formatRow = (cells) =>
+    cells
+      .slice(0, colCount)
       .map((cell, i) => padVisual(truncateVisual(cell || "", colWidths[i]), colWidths[i]))
       .join("  ");
 
   let out = "```\n";
-  out += formatRow(headers) + "\n";
+  out += formatRow(tableHeaders) + "\n";
   out += colWidths.map((w) => "─".repeat(w)).join("──") + "\n";
   rows.forEach((row) => {
     out += formatRow(row) + "\n";
   });
   out += "```\n";
+
+  if (hasMeaning) {
+    rows.forEach((row, idx) => {
+      const meaning = row[row.length - 1];
+      if (meaning && meaning !== "—") {
+        out += `↳ *${idx + 1}.* ${meaning}\n`;
+      }
+    });
+    out += "\n";
+  }
   return out;
 }
 
