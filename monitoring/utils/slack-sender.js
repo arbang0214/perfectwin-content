@@ -528,6 +528,8 @@ function tableToAlignedCode(headers, rows) {
   const colCount = tableHeaders.length;
   const MAX_COL = colCount >= 6 ? 16 : 22;
 
+  // 첫 컬럼(키워드·캠페인·페이지 등 식별자)은 truncate하지 않고 데이터 max 그대로.
+  // 나머지 컬럼은 MAX_COL로 cap.
   const colWidths = [];
   for (let c = 0; c < colCount; c++) {
     let max = visualWidth(tableHeaders[c] || "");
@@ -535,7 +537,7 @@ function tableToAlignedCode(headers, rows) {
       const w = visualWidth(r[c] || "");
       if (w > max) max = w;
     }
-    colWidths.push(Math.min(max, MAX_COL));
+    colWidths.push(c === 0 ? max : Math.min(max, MAX_COL));
   }
 
   const formatRow = (cells) =>
