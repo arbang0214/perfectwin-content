@@ -394,6 +394,160 @@ function getDayOfWeek(dateStr) {
 }
 
 /**
+ * 문자열의 시각적 너비 계산 (CJK·이모지는 2칸).
+ */
+function visualWidth(s) {
+  let w = 0;
+  for (const ch of s) {
+    const code = ch.codePointAt(0);
+    if (code < 0x80) {
+      w += 1;
+    } else if (
+      (code >= 0x1100 && code <= 0x115F) ||
+      (code >= 0x2E80 && code <= 0x9FFF) ||
+      (code >= 0xA000 && code <= 0xA4CF) ||
+      (code >= 0xAC00 && code <= 0xD7A3) ||
+      (code >= 0xF900 && code <= 0xFAFF) ||
+      (code >= 0xFE30 && code <= 0xFE4F) ||
+      (code >= 0xFF00 && code <= 0xFF60) ||
+      (code >= 0xFFE0 && code <= 0xFFE6) ||
+      code >= 0x1F000
+    ) {
+      w += 2;
+    } else {
+      w += 1;
+    }
+  }
+  return w;
+}
+
+function padVisual(s, width) {
+  const w = visualWidth(s);
+  if (w >= width) return s;
+  return s + " ".repeat(width - w);
+}
+
+function truncateVisual(s, maxWidth) {
+  if (visualWidth(s) <= maxWidth) return s;
+  let w = 0;
+  let out = "";
+  for (const ch of s) {
+    const code = ch.codePointAt(0);
+    const cw =
+      code < 0x80
+        ? 1
+        : (code >= 0x1100 && code <= 0x115F) ||
+          (code >= 0x2E80 && code <= 0x9FFF) ||
+          (code >= 0xAC00 && code <= 0xD7A3) ||
+          code >= 0x1F000
+          ? 2
+          : 1;
+    if (w + cw > maxWidth - 1) {
+      out += "…";
+      break;
+    }
+    out += ch;
+    w += cw;
+  }
+  return out;
+}
+
+/**
+ * 마크다운 표를 슬랙 친화 포맷으로 변환.
+ *   - 컬럼 ≤4: 키-값 불릿 (마지막 컬럼이 의미/해석이면 ↳ 부속 줄)
+ *   - 컬럼 ≥5: CJK 인식 컬럼 패딩 + 코드 블록
+ */
+function renderTable(header, body) {
+  const splitRow = (s) => {
+    const parts = s.split("|");
+    if (parts.length && parts[0].trim() === "") parts.shift();
+    if (parts.length && parts[parts.length - 1].trim() === "") parts.pop();
+    return parts.map((c) => c.trim());
+  };
+  const cleanCell = (s) =>
+    s
+      .replace(/\*\*(.+?)\*\*/g, "$1")
+      .replace(/\*(.+?)\*/g, "$1")
+      .replace(/```/g, "");
+
+  const headers = splitRow(header).map(cleanCell);
+  const rows = body
+    .trim()
+    .split("\n")
+    .map((line) => splitRow(line).map(cleanCell))
+    .filter((row) => row.length > 0 && row.some(Boolean));
+
+  if (headers.length === 0 || rows.length === 0) return "";
+
+  if (headers.length <= 4) return tableToBullets(headers, rows);
+  return tableToAlignedCode(headers, rows);
+}
+
+function tableToBullets(headers, rows) {
+  const lastHeader = headers[headers.length - 1] || "";
+  const isLastMeaning = /의미|해석|설명/.test(lastHeader);
+  const firstIsNumber = /^(#|번호)$/.test(headers[0] || "");
+  const GENERIC = /^(오늘|값|어제|전일|이번주|지난주)$/;
+
+  let out = "";
+  rows.forEach((row, idx) => {
+    const keyIdx = firstIsNumber ? 1 : 0;
+    const valStart = keyIdx + 1;
+    const valEnd = isLastMeaning ? row.length - 1 : row.length;
+
+    const key = row[keyIdx] || "";
+    const valueCells = [];
+    for (let i = valStart; i < valEnd; i++) {
+      const v = row[i];
+      const h = headers[i] || "";
+      if (!v) continue;
+      if (h && !GENERIC.test(h) && visualWidth(h) <= 14) {
+        valueCells.push(`${h} ${v}`);
+      } else {
+        valueCells.push(v);
+      }
+    }
+    const meta = isLastMeaning ? row[row.length - 1] || "" : "";
+
+    const prefix = firstIsNumber ? `${idx + 1}.` : "•";
+    let line = `${prefix} *${key}*`;
+    if (valueCells.length === 1) line += `: ${valueCells[0]}`;
+    else if (valueCells.length > 1) line += ` — ${valueCells.join(" · ")}`;
+    out += line + "\n";
+    if (meta && meta !== "—") out += `  ↳ ${meta}\n`;
+  });
+  return out + "\n";
+}
+
+function tableToAlignedCode(headers, rows) {
+  const colCount = headers.length;
+  const MAX_COL = colCount >= 6 ? 16 : 22;
+  const colWidths = [];
+  for (let c = 0; c < colCount; c++) {
+    let max = visualWidth(headers[c] || "");
+    for (const r of rows) {
+      const w = visualWidth(r[c] || "");
+      if (w > max) max = w;
+    }
+    colWidths.push(Math.min(max, MAX_COL));
+  }
+
+  const formatRow = (row) =>
+    row
+      .map((cell, i) => padVisual(truncateVisual(cell || "", colWidths[i]), colWidths[i]))
+      .join("  ");
+
+  let out = "```\n";
+  out += formatRow(headers) + "\n";
+  out += colWidths.map((w) => "─".repeat(w)).join("──") + "\n";
+  rows.forEach((row) => {
+    out += formatRow(row) + "\n";
+  });
+  out += "```\n";
+  return out;
+}
+
+/**
  * Markdown을 Slack mrkdwn 형식으로 변환한다.
  */
 function convertToSlackMrkdwn(md) {
@@ -408,22 +562,10 @@ function convertToSlackMrkdwn(md) {
   // Markdown **bold** → Slack *bold* (헤더 변환 후에 처리)
   text = text.replace(/\*\*(.+?)\*\*/g, "*$1*");
 
-  // 테이블을 정렬된 텍스트로 변환 (Slack은 테이블 미지원)
-  text = text.replace(/\|(.+)\|\n\|[-| :]+\|\n((?:\|.+\|\n?)*)/g, (_, header, body) => {
-    const headers = header.split("|").map((h) => h.trim()).filter(Boolean);
-    const rows = body.trim().split("\n").map((row) =>
-      row.split("|").map((c) => c.trim()).filter(Boolean)
-    );
-
-    let result = "```\n";
-    result += headers.join(" │ ") + "\n";
-    result += headers.map((h) => "─".repeat(Math.max(h.length, 4))).join("─┼─") + "\n";
-    rows.forEach((row) => {
-      result += row.join(" │ ") + "\n";
-    });
-    result += "```\n";
-    return result;
-  });
+  // 테이블을 슬랙 친화 포맷으로 변환 (컬럼 수에 따라 불릿/정렬 코드블록)
+  text = text.replace(/\|(.+)\|\n\|[-| :]+\|\n((?:\|.+\|\n?)*)/g, (_, header, body) =>
+    renderTable(header, body)
+  );
 
   // 리스트
   text = text.replace(/^- \*\*(.+?)\*\*: (.+)$/gm, "• *$1*: $2");
