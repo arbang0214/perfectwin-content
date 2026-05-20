@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-20T06:05:31.487Z",
+  "generatedAt": "2026-05-20T06:24:05.623Z",
   "range": {
     "from": "2025-03-27",
     "to": "2026-05-19",
@@ -4852,49 +4852,45 @@
     ],
     "topPosts": [
       {
-        "postId": null,
-        "blog": "blog-en",
-        "visits": 1618,
-        "clicks": 0,
-        "organic": 47
-      },
-      {
-        "postId": null,
-        "blog": "blog-ko",
-        "visits": 776,
-        "clicks": 0,
-        "organic": 40
-      },
-      {
         "postId": 46820,
+        "slug": "global-ev-battery-sap-s4hana-migration",
+        "title": "How a Global EV Battery Manufacturer Automated Testing for Millions of Data Points in Its SAP S/4HANA Migration",
         "blog": "blog-en",
-        "visits": 247,
+        "visits": 256,
         "clicks": 3,
         "organic": 7
       },
       {
         "postId": 45949,
+        "slug": "successful-sap-s4hana-test-automation",
+        "title": "Successful Test Automation in SAP S/4HANA Migration: Case Study of a Leading CPG Manufacturer",
         "blog": "blog-en",
-        "visits": 181,
+        "visits": 186,
         "clicks": 0,
         "organic": 6
       },
       {
-        "postId": 77338,
+        "postId": 70120,
+        "slug": "sap-testing-checklist-guide",
+        "title": "SAP Testing Preparation Guide: 5-Step Checklist",
         "blog": "blog-en",
-        "visits": 161,
+        "visits": 172,
+        "clicks": 3,
+        "organic": 39
+      },
+      {
+        "postId": 77338,
+        "slug": "sap-migration-data-conversion-testing-strategy",
+        "title": "SAP S/4HANA Migration Testing: 4 Data Conversion Strategies That Prevent Go-Live Failures",
+        "blog": "blog-en",
+        "visits": 166,
         "clicks": 1,
         "organic": 29
       },
       {
-        "postId": 70120,
-        "blog": "blog-en",
-        "visits": 159,
-        "clicks": 1,
-        "organic": 38
-      },
-      {
         "postId": 79267,
+        "slug": null,
+        "title": "SAP S/4HANA Upgrade Testing: 3 Strategies for Quarterly Release Verification",
         "blog": "blog-en",
         "visits": 142,
         "clicks": 0,
@@ -4902,24 +4898,48 @@
       },
       {
         "postId": 63322,
+        "slug": "sap-s4hana-cloud-deployment-options-comparison-public-private-onpremise",
+        "title": "SAP S/4HANA Cloud 구축 방식: Public, Private, On-Premise 살펴보기",
         "blog": "blog-ko",
-        "visits": 124,
-        "clicks": 0,
-        "organic": 68
+        "visits": 131,
+        "clicks": 1,
+        "organic": 70
       },
       {
         "postId": 58365,
+        "slug": "test-automation-prioritization-strategy",
+        "title": "SAP Test Automation Prioritization: Which Business Scenarios to Automate First",
         "blog": "blog-en",
-        "visits": 121,
+        "visits": 127,
         "clicks": 2,
         "organic": 13
       },
       {
         "postId": 55299,
+        "slug": "sap-test-automation-retail-enterprises",
+        "title": "Why SAP Test Automation is Critical for Retail Enterprises",
         "blog": "blog-en",
-        "visits": 104,
+        "visits": 107,
         "clicks": 0,
         "organic": 6
+      },
+      {
+        "postId": 86299,
+        "slug": "sap-test-case-design-e2e-testing",
+        "title": "SAP 테스트 케이스 설계: 시나리오 기반 E2E 테스트 가이드",
+        "blog": "blog-ko",
+        "visits": 106,
+        "clicks": 0,
+        "organic": 25
+      },
+      {
+        "postId": 65690,
+        "slug": "sap-cloud-transition-rise-grow-guide",
+        "title": "RISE with SAP vs GROW with SAP: Key Differences and How to Choose (2026)",
+        "blog": "blog-en",
+        "visits": 104,
+        "clicks": 4,
+        "organic": 7
       }
     ]
   }
