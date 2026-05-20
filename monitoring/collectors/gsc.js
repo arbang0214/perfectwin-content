@@ -353,4 +353,4 @@ async function collectGSC(targetDate) {
   return { date: targetDate, sites: results };
 }
 
-module.exports = { collectGSC };
+module.exports = { collectGSC, interpretSearch };

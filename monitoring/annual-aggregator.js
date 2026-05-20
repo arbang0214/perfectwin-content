@@ -5,6 +5,7 @@
 
 const fs = require("fs");
 const path = require("path");
+const { interpretSearch } = require("./collectors/gsc");
 
 const DATA_DIR = path.join(__dirname, "..", "data", "monitoring");
 
@@ -157,7 +158,11 @@ function aggregateGSCMonthly(monthSnapshots) {
     for (const site of snap.gsc.sites) {
       if (!site.totals) continue;
       if (!siteMap[site.label]) {
-        siteMap[site.label] = { clicks: 0, impressions: 0, positionSum: 0, positionCount: 0, daysWithData: 0, queryMap: {}, pageMap: {} };
+        siteMap[site.label] = {
+          clicks: 0, impressions: 0, positionSum: 0, positionCount: 0, daysWithData: 0,
+          queryMap: {}, pageMap: {}, pairMap: {},
+          latestActualDate: null, maxLagDays: 0,
+        };
       }
       const s = siteMap[site.label];
       s.clicks += site.totals.clicks;
@@ -165,6 +170,14 @@ function aggregateGSCMonthly(monthSnapshots) {
       s.positionSum += site.totals.position;
       s.positionCount++;
       s.daysWithData++;
+
+      // 가장 늦은 actualDate + 가장 큰 lag 보존 (주간 단위 라벨링용)
+      if (site.actualDate && (!s.latestActualDate || site.actualDate > s.latestActualDate)) {
+        s.latestActualDate = site.actualDate;
+      }
+      if (typeof site.lagDays === "number" && site.lagDays > s.maxLagDays) {
+        s.maxLagDays = site.lagDays;
+      }
 
       // 검색어 집계
       for (const q of (site.topQueries || [])) {
@@ -183,6 +196,18 @@ function aggregateGSCMonthly(monthSnapshots) {
         s.pageMap[p.page].positionSum += p.position;
         s.pageMap[p.page].count++;
       }
+
+      // 검색어×페이지 페어 집계 (key: "query|page")
+      for (const pr of (site.queryPagePairs || [])) {
+        const key = `${pr.query}|${pr.page}`;
+        if (!s.pairMap[key]) {
+          s.pairMap[key] = { query: pr.query, page: pr.page, clicks: 0, impressions: 0, positionSum: 0, count: 0 };
+        }
+        s.pairMap[key].clicks += pr.clicks;
+        s.pairMap[key].impressions += pr.impressions;
+        s.pairMap[key].positionSum += pr.position;
+        s.pairMap[key].count++;
+      }
     }
   }
 
@@ -191,27 +216,37 @@ function aggregateGSCMonthly(monthSnapshots) {
     const avgPosition = data.positionCount ? Math.round((data.positionSum / data.positionCount) * 10) / 10 : null;
     const ctr = data.impressions ? Math.round((data.clicks / data.impressions) * 10000) / 100 : 0;
 
+    // 집계된 메트릭으로 interpretation 재생성 (개별 일자가 아닌 누적 기준)
+    const buildRow = (extra, qd) => {
+      const position = Math.round((qd.positionSum / qd.count) * 10) / 10;
+      const row = { ...extra, clicks: qd.clicks, impressions: qd.impressions, position, avgPosition: position };
+      row.interpretation = interpretSearch({ clicks: row.clicks, impressions: row.impressions, position: row.position });
+      return row;
+    };
+
     const topQueries = Object.entries(data.queryMap)
-      .map(([query, qd]) => ({
-        query, clicks: qd.clicks, impressions: qd.impressions,
-        avgPosition: Math.round((qd.positionSum / qd.count) * 10) / 10,
-      }))
+      .map(([query, qd]) => buildRow({ query }, qd))
       .sort((a, b) => b.impressions - a.impressions)
       .slice(0, 15);
 
     const topPages = Object.entries(data.pageMap)
-      .map(([page, pd]) => ({
-        page, clicks: pd.clicks, impressions: pd.impressions,
-        avgPosition: Math.round((pd.positionSum / pd.count) * 10) / 10,
-      }))
+      .map(([page, pd]) => buildRow({ page }, pd))
       .sort((a, b) => b.impressions - a.impressions)
       .slice(0, 15);
 
+    const queryPagePairs = Object.values(data.pairMap)
+      .map((pr) => buildRow({ query: pr.query, page: pr.page }, pr))
+      .sort((a, b) => (b.clicks - a.clicks) || (b.impressions - a.impressions))
+      .slice(0, 30);
+
     result[label] = {
       daysWithData: data.daysWithData,
+      actualDate: data.latestActualDate,
+      lagDays: data.maxLagDays,
       totals: { clicks: data.clicks, impressions: data.impressions, ctr, avgPosition },
       topQueries,
       topPages,
+      queryPagePairs,
     };
   }
   return result;
