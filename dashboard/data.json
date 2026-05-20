@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-20T05:57:51.719Z",
+  "generatedAt": "2026-05-20T06:05:31.487Z",
   "range": {
     "from": "2025-03-27",
     "to": "2026-05-19",
@@ -9,7 +9,7 @@
     "totalSubmissions": 6,
     "avgRecentHomeTraffic": 16.6,
     "avgRecentBlogTraffic": 49.9,
-    "trackedPosts": 0
+    "trackedPosts": 10
   },
   "charts": {
     "demo": [
@@ -4850,6 +4850,77 @@
         "avgPosition": 19.4
       }
     ],
-    "topPosts": []
+    "topPosts": [
+      {
+        "postId": null,
+        "blog": "blog-en",
+        "visits": 1618,
+        "clicks": 0,
+        "organic": 47
+      },
+      {
+        "postId": null,
+        "blog": "blog-ko",
+        "visits": 776,
+        "clicks": 0,
+        "organic": 40
+      },
+      {
+        "postId": 46820,
+        "blog": "blog-en",
+        "visits": 247,
+        "clicks": 3,
+        "organic": 7
+      },
+      {
+        "postId": 45949,
+        "blog": "blog-en",
+        "visits": 181,
+        "clicks": 0,
+        "organic": 6
+      },
+      {
+        "postId": 77338,
+        "blog": "blog-en",
+        "visits": 161,
+        "clicks": 1,
+        "organic": 29
+      },
+      {
+        "postId": 70120,
+        "blog": "blog-en",
+        "visits": 159,
+        "clicks": 1,
+        "organic": 38
+      },
+      {
+        "postId": 79267,
+        "blog": "blog-en",
+        "visits": 142,
+        "clicks": 0,
+        "organic": 27
+      },
+      {
+        "postId": 63322,
+        "blog": "blog-ko",
+        "visits": 124,
+        "clicks": 0,
+        "organic": 68
+      },
+      {
+        "postId": 58365,
+        "blog": "blog-en",
+        "visits": 121,
+        "clicks": 2,
+        "organic": 13
+      },
+      {
+        "postId": 55299,
+        "blog": "blog-en",
+        "visits": 104,
+        "clicks": 0,
+        "organic": 6
+      }
+    ]
   }
 }
