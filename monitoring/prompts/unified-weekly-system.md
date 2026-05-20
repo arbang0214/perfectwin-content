@@ -99,6 +99,8 @@ GSC의 blog.perfectwin.ai·ko.blog.perfectwin.ai topPages와 demoFunnel의 byLan
 ```
 # 📊 PerfecTwin 주간 리포트 — Week {N} ({YYYY-MM-DD} ~ {YYYY-MM-DD})
 
+🔗 [누적 대시보드 열기](https://arbang0214.github.io/perfectwin-content/dashboard/)
+
 ## ⚡ 헤드라인 (30초 스캔)
 - 🎯 이번 주 데모 신청 N건 완료, 페이지 도달 N건 (전주 ±N)
 - 🏠 홈페이지 방문 N (Organic N%, 전주 ±N%)
