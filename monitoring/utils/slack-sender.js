@@ -581,6 +581,10 @@ function convertToSlackMrkdwn(md) {
   // Markdown **bold** → Slack *bold* (헤더 변환 후에 처리)
   text = text.replace(/\*\*(.+?)\*\*/g, "*$1*");
 
+  // 마크다운 링크 [text](url) → Slack mrkdwn <url|text>
+  // (표 변환 전에 처리해야 표 안 링크도 변환됨)
+  text = text.replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, "<$2|$1>");
+
   // 테이블을 슬랙 친화 포맷으로 변환 (컬럼 수에 따라 불릿/정렬 코드블록)
   text = text.replace(/\|(.+)\|\n\|[-| :]+\|\n((?:\|.+\|\n?)*)/g, (_, header, body) =>
     renderTable(header, body)
