@@ -1,6 +1,6 @@
 {
   "date": "2026-05-19",
-  "collectedAt": "2026-05-20T01:58:16.244Z",
+  "collectedAt": "2026-05-20T05:55:57.184Z",
   "ga4": {
     "date": "2026-05-19",
     "summary": {
@@ -185,7 +185,7 @@
         "engagementRate": 66.67
       },
       {
-        "country": "",
+        "country": "(not set)",
         "sessions": 1,
         "users": 1,
         "engagementRate": 0
@@ -215,7 +215,7 @@
         "pagesPerSession": 1
       },
       {
-        "landingPage": "",
+        "landingPage": "(not set)",
         "sessions": 2,
         "users": 1,
         "bounceRate": 100,
@@ -849,10 +849,10 @@
           "data": [
             {
               "date": "2026-05-19",
-              "visits": 23,
+              "visits": 28,
               "clicks": 0,
               "organic": 4,
-              "home": 11,
+              "home": 14,
               "post": 28,
               "category": 3,
               "author": 0
@@ -869,11 +869,27 @@
           "data": [
             {
               "post_id": null,
-              "visits": 14,
+              "visits": 17,
               "clicks": 0,
               "organic": 4,
               "cvr": 0,
               "title": "(비포스트 페이지)"
+            },
+            {
+              "post_id": 86636,
+              "visits": 3,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP S/4HANA Testing Strategy: 4 Trends Reshaping How Enterprises Test in 2026",
+              "slug": "sap-erp-test-trends",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 3
+                }
+              ],
+              "linkedinVisits": 0
             },
             {
               "post_id": 160801,
@@ -940,22 +956,6 @@
               "linkedinVisits": 0
             },
             {
-              "post_id": 86636,
-              "visits": 1,
-              "clicks": 0,
-              "organic": 0,
-              "cvr": 0,
-              "title": "SAP S/4HANA Testing Strategy: 4 Trends Reshaping How Enterprises Test in 2026",
-              "slug": "sap-erp-test-trends",
-              "sources": [
-                {
-                  "full_referrer": "direct",
-                  "count": 1
-                }
-              ],
-              "linkedinVisits": 0
-            },
-            {
               "post_id": 166538,
               "visits": 1,
               "clicks": 0,
@@ -1000,15 +1000,15 @@
           "data": [
             {
               "full_referrer": "direct",
-              "count": 15
+              "count": 17
+            },
+            {
+              "full_referrer": "blog.perfectwin.ai",
+              "count": 6
             },
             {
               "full_referrer": "www.google.com",
               "count": 4
-            },
-            {
-              "full_referrer": "blog.perfectwin.ai",
-              "count": 3
             },
             {
               "full_referrer": "inblog.ai",
@@ -1452,6 +1452,6 @@
   },
   "slack": {
     "sent": false,
-    "timestamp": "2026-05-20T01:58:16.244Z"
+    "timestamp": "2026-05-20T05:55:57.184Z"
   }
 }
