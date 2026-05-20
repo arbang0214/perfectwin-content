@@ -101,7 +101,8 @@ function buildTopPosts(snapshots) {
     for (const blogLabel of ["blog-en", "blog-ko"]) {
       const blog = getInblog(s, blogLabel);
       if (!blog) continue;
-      const posts = blog.traffic?.data?.[0]?.posts || [];
+      // inblog 콜렉터 구조: blog.posts.data[] (각 행이 post_id·visits·title·slug 등 포함)
+      const posts = blog.posts?.data || [];
       for (const p of posts) {
         const key = `${blogLabel}|${p.slug || p.post_id}`;
         if (!postMap[key]) {
