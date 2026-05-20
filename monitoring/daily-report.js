@@ -23,6 +23,7 @@ const { collectContentFunnel } = require("./collectors/content-funnel");
 const { formatDailyReport } = require("./formatters/slack-message");
 const { sendToSlack } = require("./utils/slack-sender");
 const { runUnifiedDaily } = require("./unified-daily-report");
+const { main: buildDashboard } = require("./build-dashboard");
 // Legacy: 통합 리포트로 대체. 호출 안 함. 함수는 export 상태로 유지.
 // const { generateDailyReports } = require("./report-generator");
 // const { generatePDF } = require("./utils/pdf-generator");
@@ -215,6 +216,13 @@ async function main() {
     }
   } else if (skipReport) {
     console.log("[8/8] 리포트 생성 건너뜀 (--no-report)");
+  }
+
+  // 누적 대시보드 데이터 빌드 (dashboard/data.json) — GH Pages가 자동 서빙
+  try {
+    buildDashboard();
+  } catch (err) {
+    console.error(`  [dashboard] 빌드 실패: ${err.message}`);
   }
 
   console.log("\n✅ 일간 리포트 완료!\n");

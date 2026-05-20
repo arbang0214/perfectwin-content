@@ -62,7 +62,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/monitoring/
+          git add data/monitoring/ dashboard/data.json
           if git diff --cached --quiet; then
             echo "변경 사항 없음 — 커밋 생략"
           else

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PerfecTwin 누적 대시보드</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="dashboard-header">
+    <div class="header-content">
+      <h1>📊 PerfecTwin 누적 대시보드</h1>
+      <div class="meta">
+        <span id="dateRange"></span>
+        <span class="dot">·</span>
+        <span id="lastUpdated"></span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">누적 데모 신청</div>
+        <div class="kpi-value" id="kpiSubmissions">—</div>
+        <div class="kpi-sub">전체 기간 합계</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">최근 7일 평균 홈페이지 방문자</div>
+        <div class="kpi-value" id="kpiHomeTraffic">—</div>
+        <div class="kpi-sub">일평균 activeUsers</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">최근 7일 평균 블로그 방문</div>
+        <div class="kpi-value" id="kpiBlogTraffic">—</div>
+        <div class="kpi-sub">영문+한글 합산 일평균</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">추적 중인 포스트</div>
+        <div class="kpi-value" id="kpiPosts">—</div>
+        <div class="kpi-sub">누적 visits 기록된 포스트</div>
+      </div>
+    </section>
+
+    <section class="chart-grid">
+      <div class="chart-card">
+        <h2>🎯 데모 신청 추세</h2>
+        <p class="chart-sub">막대 = 일별 신청 · 라인 = 누적</p>
+        <div class="chart-wrap"><canvas id="demoChart"></canvas></div>
+      </div>
+
+      <div class="chart-card">
+        <h2>📈 일별 트래픽</h2>
+        <p class="chart-sub">홈페이지 activeUsers · 블로그 visits</p>
+        <div class="chart-wrap"><canvas id="trafficChart"></canvas></div>
+      </div>
+
+      <div class="chart-card">
+        <h2>🔎 GSC 검색 추세 (blog.perfectwin.ai)</h2>
+        <p class="chart-sub">x축은 actualDate 기준 · 평균 순위는 작을수록 위쪽</p>
+        <div class="chart-wrap"><canvas id="gscChart"></canvas></div>
+      </div>
+
+      <div class="chart-card">
+        <h2>📝 Top 10 포스트 (누적 visits)</h2>
+        <p class="chart-sub">영문+한글 합산</p>
+        <div class="chart-wrap"><canvas id="postsChart"></canvas></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>데이터 소스: GA4 · GSC · inblog · GA4 demoFunnel · contentFunnel · Bing Webmaster</p>
+    <p>매일 KST 08:43 자동 빌드 · GitHub Actions로 누적</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
