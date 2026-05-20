@@ -101,20 +101,30 @@ function buildTopPosts(snapshots) {
     for (const blogLabel of ["blog-en", "blog-ko"]) {
       const blog = getInblog(s, blogLabel);
       if (!blog) continue;
-      // inblog 콜렉터 구조: blog.posts.data[] (각 행이 post_id·visits·title·slug 등 포함)
+      // inblog 콜렉터 구조: blog.posts.data[]
       const posts = blog.posts?.data || [];
       for (const p of posts) {
-        const key = `${blogLabel}|${p.slug || p.post_id}`;
+        // 비포스트 페이지(블로그 홈·태그·카테고리 등 post_id 없는 트래픽) 제외 —
+        // inblog 콜렉터가 이런 row에 "(비포스트 페이지)" 라벨을 붙임.
+        if (p.post_id == null) continue;
+
+        const key = `${blogLabel}|${p.post_id}`;
         if (!postMap[key]) {
           postMap[key] = {
-            slug: p.slug,
             postId: p.post_id,
-            title: p.title || p.slug,
+            slug: p.slug || null,
+            title: p.title || p.slug || `포스트 ${p.post_id}`,
             blog: blogLabel,
             visits: 0,
             clicks: 0,
             organic: 0,
           };
+        } else {
+          // 다른 일자에서 title·slug가 더 늦게 부착됐을 수 있어 업데이트
+          if (p.title && (!postMap[key].title || postMap[key].title.startsWith("포스트 "))) {
+            postMap[key].title = p.title;
+          }
+          if (p.slug && !postMap[key].slug) postMap[key].slug = p.slug;
         }
         postMap[key].visits += p.visits || 0;
         postMap[key].clicks += p.clicks || 0;
