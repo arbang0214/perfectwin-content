@@ -112,6 +112,50 @@ async function getSiteTotals(searchconsole, site, date) {
 }
 
 /**
+ * 검색 지표(clicks·impressions·position)를 한 줄 자연어 해석으로 변환.
+ *
+ * 룰:
+ *   1) 순위 구간 — 첫 페이지(≤10) · 둘째 페이지(11~20) · 셋째 페이지 이하(21+)
+ *   2) 노출/클릭 평가
+ *      - imp = 0 → 노출 없음
+ *      - imp < 3 & clk = 0 → 표본 부족
+ *      - clk = 0 → 위치별 진단 (메타 최적화 기회 / 순위 보강 / 미노출)
+ *      - clk ≥ 1 → CTR + 위치별 라벨 ("의미 있는 트래픽" 등)
+ */
+function interpretSearch({ clicks, impressions, position }) {
+  const imp = impressions || 0;
+  const clk = clicks || 0;
+  const pos = position || 0;
+
+  let pageLabel;
+  if (pos > 0 && pos <= 10) pageLabel = "첫 페이지";
+  else if (pos <= 20) pageLabel = "둘째 페이지";
+  else pageLabel = "셋째 페이지 이하";
+
+  if (imp === 0) return `${pageLabel}. 노출 없음`;
+  if (imp < 3 && clk === 0) return `${pageLabel}. ${imp}번 노출 — 표본 부족`;
+
+  if (clk === 0) {
+    if (pos > 0 && pos <= 10) {
+      return `${pageLabel}. ${imp}번 노출, 클릭 0 — 메타·제목 최적화 기회`;
+    }
+    if (pos <= 20) {
+      return `${pageLabel}. ${imp}번 노출, 클릭 0 — 순위 올리면 클릭 시작`;
+    }
+    return `${pageLabel}. ${imp}번 노출, 클릭 0 — 사실상 미노출`;
+  }
+
+  const ctr = Math.round((clk / imp) * 1000) / 10;
+  if (pos > 0 && pos <= 10) {
+    return `${pageLabel}. ${imp}번 중 ${clk}번 클릭 (CTR ${ctr}%) — 의미 있는 트래픽`;
+  }
+  if (pos <= 20) {
+    return `${pageLabel}. ${imp}번 중 ${clk}번 클릭 (CTR ${ctr}%) — 순위 올리면 더 증가`;
+  }
+  return `${pageLabel}. ${imp}번 중 ${clk}번 클릭 (CTR ${ctr}%)`;
+}
+
+/**
  * 상위 검색어 Top N
  */
 async function getTopQueries(searchconsole, site, date, limit = 10) {
@@ -123,13 +167,17 @@ async function getTopQueries(searchconsole, site, date, limit = 10) {
     ),
   });
   if (!res.data.rows) return [];
-  return res.data.rows.map((row) => ({
-    query: row.keys[0],
-    clicks: row.clicks,
-    impressions: row.impressions,
-    ctr: Math.round(row.ctr * 10000) / 100,
-    position: Math.round(row.position * 10) / 10,
-  }));
+  return res.data.rows.map((row) => {
+    const r = {
+      query: row.keys[0],
+      clicks: row.clicks,
+      impressions: row.impressions,
+      ctr: Math.round(row.ctr * 10000) / 100,
+      position: Math.round(row.position * 10) / 10,
+    };
+    r.interpretation = interpretSearch(r);
+    return r;
+  });
 }
 
 /**
@@ -144,13 +192,44 @@ async function getTopPages(searchconsole, site, date, limit = 10) {
     ),
   });
   if (!res.data.rows) return [];
-  return res.data.rows.map((row) => ({
-    page: row.keys[0],
-    clicks: row.clicks,
-    impressions: row.impressions,
-    ctr: Math.round(row.ctr * 10000) / 100,
-    position: Math.round(row.position * 10) / 10,
-  }));
+  return res.data.rows.map((row) => {
+    const r = {
+      page: row.keys[0],
+      clicks: row.clicks,
+      impressions: row.impressions,
+      ctr: Math.round(row.ctr * 10000) / 100,
+      position: Math.round(row.position * 10) / 10,
+    };
+    r.interpretation = interpretSearch(r);
+    return r;
+  });
+}
+
+/**
+ * 검색어×페이지 페어 Top N — "어떤 검색어로 어떤 포스트가 클릭됐는지" 매핑.
+ * GSC API는 dimensions를 여러 개 동시에 받을 수 있다.
+ */
+async function getQueryPagePairs(searchconsole, site, date, limit = 30) {
+  const res = await searchconsole.searchanalytics.query({
+    siteUrl: site.siteUrl,
+    requestBody: withPageFilter(
+      { startDate: date, endDate: date, dimensions: ["query", "page"], rowLimit: limit },
+      site.pageFilter,
+    ),
+  });
+  if (!res.data.rows) return [];
+  return res.data.rows.map((row) => {
+    const r = {
+      query: row.keys[0],
+      page: row.keys[1],
+      clicks: row.clicks,
+      impressions: row.impressions,
+      ctr: Math.round(row.ctr * 10000) / 100,
+      position: Math.round(row.position * 10) / 10,
+    };
+    r.interpretation = interpretSearch(r);
+    return r;
+  });
 }
 
 /**
@@ -236,15 +315,16 @@ async function collectSingleSite(searchconsole, site, targetDate) {
     }
   }
 
-  const [topQueries, topPages, devices, countries] = await Promise.all([
+  const [topQueries, topPages, queryPagePairs, devices, countries] = await Promise.all([
     getTopQueries(searchconsole, site, actualDate),
     getTopPages(searchconsole, site, actualDate),
+    getQueryPagePairs(searchconsole, site, actualDate),
     getDeviceBreakdown(searchconsole, site, actualDate),
     getCountryBreakdown(searchconsole, site, actualDate),
   ]);
   console.log(`  [GSC:${label}] 클릭 ${totals.clicks}, 노출 ${totals.impressions}`);
 
-  return { siteUrl: site.siteUrl, label, date: targetDate, actualDate, totals, topQueries, topPages, devices, countries };
+  return { siteUrl: site.siteUrl, label, date: targetDate, actualDate, totals, topQueries, topPages, queryPagePairs, devices, countries };
 }
 
 /**

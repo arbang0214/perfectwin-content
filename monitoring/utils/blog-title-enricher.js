@@ -59,6 +59,9 @@ function enrichInplace({ gscBlogSites = [], demoFunnel, slugToTitle }) {
     if (Array.isArray(site?.topPages)) {
       site.topPages.forEach((p) => tagRow(p, "page"));
     }
+    if (Array.isArray(site?.queryPagePairs)) {
+      site.queryPagePairs.forEach((p) => tagRow(p, "page"));
+    }
   }
   if (Array.isArray(demoFunnel?.submit?.byLandingPage)) {
     demoFunnel.submit.byLandingPage.forEach((r) => tagRow(r, "landingPagePlusQueryString"));
