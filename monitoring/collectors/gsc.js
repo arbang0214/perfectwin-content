@@ -324,7 +324,12 @@ async function collectSingleSite(searchconsole, site, targetDate) {
   ]);
   console.log(`  [GSC:${label}] 클릭 ${totals.clicks}, 노출 ${totals.impressions}`);
 
-  return { siteUrl: site.siteUrl, label, date: targetDate, actualDate, totals, topQueries, topPages, queryPagePairs, devices, countries };
+  // 요청 일자와 실제 데이터 일자의 lag(일 단위) — fallback 발생 시 양수
+  const lagDays = Math.round(
+    (new Date(targetDate) - new Date(actualDate)) / (1000 * 60 * 60 * 24),
+  );
+
+  return { siteUrl: site.siteUrl, label, date: targetDate, actualDate, lagDays, totals, topQueries, topPages, queryPagePairs, devices, countries };
 }
 
 /**

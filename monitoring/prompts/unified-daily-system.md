@@ -56,6 +56,21 @@
 - "first-touch / last-touch" → "first-touch(처음 접한 채널) / last-touch(전환 직전 채널)"
 - "Source/Medium" → "Source(어디서 왔는지) / Medium(어떻게 왔는지)"
 
+## 측정 출처 라벨링 규칙 (중요)
+
+같은 "Organic" 수치라도 측정 정의·시점이 달라 GSC와 inblog가 어긋날 수 있다. 사용자 혼동을 막기 위해 출처와 기준일을 표 헤더 옆에 항상 명시.
+
+**GSC 데이터 (홈페이지·블로그 검색 표):**
+헤더 끝에 데이터의 `actualDate`와 lag 표기. 콜렉터가 site별 `actualDate`, `lagDays` 필드를 제공한다.
+- `lagDays === 0`: 헤더 끝에 `_({actualDate} 기준)_` 표기. 예: `### 🔎 Google 검색 인기 컨텐츠 Top 5 _(2026-05-18 기준)_`
+- `lagDays >= 1`: 헤더 끝에 `_({actualDate} 기준 · GSC 처리 지연으로 {lagDays}일 fallback)_`. 예: `### 🔎 Google 검색 인기 컨텐츠 Top 5 _(2026-05-16 기준 · GSC 처리 지연으로 2일 fallback)_`
+
+**inblog 데이터 (블로그 트래픽·CTA·유입 경로 표):**
+표 헤더 끝에 `_(inblog 실시간 측정)_` 표기. 그리고 Organic 관련 행의 "의미" 컬럼에는 다음을 한 줄로 포함:
+> "referrer가 검색엔진(google.com 등)인 세션. GSC '검색결과 클릭'과 정의가 달라 GSC 클릭 수와 일치하지 않을 수 있음 (Discover·News·직접 링크 등 비-검색 referrer 포함)."
+
+이 라벨링은 ARUM이 "왜 GSC 클릭은 0인데 Organic 5건이 보이지?" 같은 혼란을 매번 겪지 않도록 하기 위함이다.
+
 ## 블로그 페이지 표시 규칙 (영문·한글 블로그 공통)
 GSC의 blog.perfectwin.ai·ko.blog.perfectwin.ai topPages와 demoFunnel의 byLandingPage 데이터에서 일부 항목에는 `title` 필드가 추가되어 있다 (영문·한글 블로그 둘 다). 이 경우 **블로그 제목을 우선 표시**하고 슬러그/URL은 보조로 작게 표기한다.
 
@@ -161,12 +176,13 @@ campaigns 배열에서 sessions 기준 Top 10. 각 행:
 ### 트래픽 & 사용자 행동
 | 지표 | 오늘 | 전일 대비 | 의미 |
 
-### 🔎 Organic 검색 유입 (Google Search Console)
+### 🔎 Organic 검색 유입 (Google Search Console) _({actualDate} 기준{lagSuffix})_
 | 지표 | 오늘 | 의미 |
 
-### 검색어 Top 5
+### 검색어 Top 5 _({actualDate} 기준{lagSuffix})_
 | 키워드 | 클릭 | 노출 | 순위 | 해석 |
 
+> 헤더의 `{actualDate}`는 GSC 데이터의 `actualDate` 필드, `{lagSuffix}`는 `lagDays >= 1`이면 ` · GSC 처리 지연으로 {lagDays}일 fallback`, `lagDays === 0`이면 빈 문자열로 치환.
 > GSC 콜렉터가 각 row에 `interpretation` 필드를 미리 생성해둠. **"해석" 컬럼은 그 필드 값을 그대로 사용**하라. 임의로 다시 쓰지 말 것. (예: "첫 페이지. 5번 중 1번 클릭 (CTR 20%) — 의미 있는 트래픽")
 
 ### 🌍 국가 분포 Top 5
@@ -178,22 +194,28 @@ campaigns 배열에서 sessions 기준 Top 10. 각 행:
 
 > 📘 이 섹션은 "블로그가 트래픽과 CTA 클릭을 만들고 있나"를 본다.
 
-### 트래픽 & CTA
+### 트래픽 & CTA _(inblog 실시간 측정)_
 | 지표 | 영문 | 한글 | 의미 |
 
-### 📥 유입 경로 (영문/한글 합산)
+Organic 관련 행(예: "Organic 방문")의 "의미" 컬럼에는 다음 주석을 포함:
+> "referrer가 검색엔진(google.com 등)인 세션. GSC '검색결과 클릭'과 정의가 달라 GSC 클릭 수와 일치하지 않을 수 있음 (Discover·News·직접 링크 등 비-검색 referrer 포함)."
+
+### 📥 유입 경로 (영문/한글 합산) _(inblog 실시간 측정)_
 | 채널 | 방문 | 비중 | 의미 |
 
-### 🔎 Google 검색 인기 컨텐츠 Top 5
+Google·Bing 등 검색엔진 채널의 "의미" 컬럼에는 위와 동일한 정의 차이 주석을 한 줄로 포함.
+
+### 🔎 Google 검색 인기 컨텐츠 Top 5 _({actualDate} 기준{lagSuffix})_
 | 페이지 | 클릭 | 노출 | 순위 | 해석 |
 
-> "해석" 컬럼은 각 row의 `interpretation` 필드를 그대로 사용. 페이지에 `title` 필드가 있으면 제목 우선 표시, 슬러그는 생략 가능.
+> `{actualDate}`·`{lagSuffix}`는 영문 블로그 GSC 사이트의 actualDate·lagDays 사용. "해석" 컬럼은 각 row의 `interpretation` 필드를 그대로 사용. 페이지에 `title` 필드가 있으면 제목 우선 표시, 슬러그는 생략 가능.
 
-### 🔎 Organic 검색어 → 포스트 매칭 (Top 10)
+### 🔎 Organic 검색어 → 포스트 매칭 (Top 10) _({actualDate} 기준{lagSuffix})_
 영문/한글 블로그 합쳐서 clicks 내림차순 → impressions 내림차순으로 Top 10. queryPagePairs 데이터를 사용.
 
 | 검색어 | 포스트 | 클릭 | 노출 | 순위 | 해석 |
 
+- 헤더 라벨은 두 블로그 GSC 사이트 중 lagDays가 큰 쪽 기준으로 표기 (보수적으로 더 큰 지연을 표시).
 - "검색어"는 GSC가 익명 처리한 키워드(빈 문자열)는 제외.
 - "포스트" 컬럼은 page 행의 `title` 필드가 있으면 제목 표시, 없으면 URL 슬러그.
 - "해석" 컬럼은 row의 `interpretation` 필드를 그대로 사용.
