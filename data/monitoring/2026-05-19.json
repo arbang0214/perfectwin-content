@@ -1,6 +1,6 @@
 {
   "date": "2026-05-19",
-  "collectedAt": "2026-05-20T01:21:18.942Z",
+  "collectedAt": "2026-05-20T01:58:16.244Z",
   "ga4": {
     "date": "2026-05-19",
     "summary": {
@@ -241,6 +241,7 @@
         "label": "perfectwin.ai",
         "date": "2026-05-19",
         "actualDate": "2026-05-17",
+        "lagDays": 2,
         "totals": {
           "clicks": 0,
           "impressions": 0,
@@ -258,6 +259,7 @@
         "label": "blog.perfectwin.ai",
         "date": "2026-05-19",
         "actualDate": "2026-05-17",
+        "lagDays": 2,
         "totals": {
           "clicks": 0,
           "impressions": 203,
@@ -847,10 +849,10 @@
           "data": [
             {
               "date": "2026-05-19",
-              "visits": 21,
+              "visits": 23,
               "clicks": 0,
               "organic": 4,
-              "home": 10,
+              "home": 11,
               "post": 28,
               "category": 3,
               "author": 0
@@ -867,7 +869,7 @@
           "data": [
             {
               "post_id": null,
-              "visits": 13,
+              "visits": 14,
               "clicks": 0,
               "organic": 4,
               "cvr": 0,
@@ -938,6 +940,22 @@
               "linkedinVisits": 0
             },
             {
+              "post_id": 86636,
+              "visits": 1,
+              "clicks": 0,
+              "organic": 0,
+              "cvr": 0,
+              "title": "SAP S/4HANA Testing Strategy: 4 Trends Reshaping How Enterprises Test in 2026",
+              "slug": "sap-erp-test-trends",
+              "sources": [
+                {
+                  "full_referrer": "direct",
+                  "count": 1
+                }
+              ],
+              "linkedinVisits": 0
+            },
+            {
               "post_id": 166538,
               "visits": 1,
               "clicks": 0,
@@ -982,7 +1000,7 @@
           "data": [
             {
               "full_referrer": "direct",
-              "count": 14
+              "count": 15
             },
             {
               "full_referrer": "www.google.com",
@@ -991,6 +1009,10 @@
             {
               "full_referrer": "blog.perfectwin.ai",
               "count": 3
+            },
+            {
+              "full_referrer": "inblog.ai",
+              "count": 1
             }
           ],
           "meta": {
@@ -1430,6 +1452,6 @@
   },
   "slack": {
     "sent": false,
-    "timestamp": "2026-05-20T01:21:18.942Z"
+    "timestamp": "2026-05-20T01:58:16.244Z"
   }
 }
