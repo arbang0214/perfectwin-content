@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-05-20T06:24:05.623Z",
+  "generatedAt": "2026-05-21T01:37:23.503Z",
   "range": {
     "from": "2025-03-27",
-    "to": "2026-05-19",
-    "days": 418
+    "to": "2026-05-20",
+    "days": 419
   },
   "kpi": {
     "totalSubmissions": 6,
-    "avgRecentHomeTraffic": 16.6,
-    "avgRecentBlogTraffic": 49.9,
+    "avgRecentHomeTraffic": 13.3,
+    "avgRecentBlogTraffic": 49.4,
     "trackedPosts": 10
   },
   "charts": {
@@ -2100,6 +2100,11 @@
       },
       {
         "date": "2026-05-19",
+        "daily": 0,
+        "cumulative": 6
+      },
+      {
+        "date": "2026-05-20",
         "daily": 0,
         "cumulative": 6
       }
@@ -4612,6 +4617,12 @@
         "home": 10,
         "blogEn": 28,
         "blogKo": 31
+      },
+      {
+        "date": "2026-05-20",
+        "home": 11,
+        "blogEn": 17,
+        "blogKo": 7
       }
     ],
     "gsc": [
@@ -4848,6 +4859,12 @@
         "clicks": 0,
         "impressions": 203,
         "avgPosition": 19.4
+      },
+      {
+        "date": "2026-05-18",
+        "clicks": 2,
+        "impressions": 289,
+        "avgPosition": 19.3
       }
     ],
     "topPosts": [
@@ -4874,7 +4891,7 @@
         "slug": "sap-testing-checklist-guide",
         "title": "SAP Testing Preparation Guide: 5-Step Checklist",
         "blog": "blog-en",
-        "visits": 172,
+        "visits": 174,
         "clicks": 3,
         "organic": 39
       },
@@ -4919,7 +4936,7 @@
         "slug": "sap-test-automation-retail-enterprises",
         "title": "Why SAP Test Automation is Critical for Retail Enterprises",
         "blog": "blog-en",
-        "visits": 107,
+        "visits": 108,
         "clicks": 0,
         "organic": 6
       },
