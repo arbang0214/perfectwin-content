@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-05-22T01:16:21.841Z",
+  "generatedAt": "2026-05-23T01:29:31.911Z",
   "range": {
     "from": "2025-03-27",
-    "to": "2026-05-21",
-    "days": 420
+    "to": "2026-05-22",
+    "days": 421
   },
   "kpi": {
     "totalSubmissions": 6,
-    "avgRecentHomeTraffic": 14.1,
-    "avgRecentBlogTraffic": 47.4,
+    "avgRecentHomeTraffic": 13,
+    "avgRecentBlogTraffic": 38.1,
     "trackedPosts": 10
   },
   "charts": {
@@ -2110,6 +2110,11 @@
       },
       {
         "date": "2026-05-21",
+        "daily": 0,
+        "cumulative": 6
+      },
+      {
+        "date": "2026-05-22",
         "daily": 0,
         "cumulative": 6
       }
@@ -4634,6 +4639,12 @@
         "home": 20,
         "blogEn": 35,
         "blogKo": 12
+      },
+      {
+        "date": "2026-05-22",
+        "home": 25,
+        "blogEn": 6,
+        "blogKo": 9
       }
     ],
     "gsc": [
@@ -4882,6 +4893,12 @@
         "clicks": 1,
         "impressions": 305,
         "avgPosition": 19.4
+      },
+      {
+        "date": "2026-05-20",
+        "clicks": 0,
+        "impressions": 270,
+        "avgPosition": 18.9
       }
     ],
     "topPosts": [
@@ -4926,18 +4943,18 @@
         "slug": "sap-s4hana-upgrade-testing-strategy",
         "title": "SAP S/4HANA Upgrade Testing: 3 Strategies for Quarterly Release Verification",
         "blog": "blog-en",
-        "visits": 145,
+        "visits": 147,
         "clicks": 0,
-        "organic": 29
+        "organic": 30
       },
       {
         "postId": 63322,
         "slug": "sap-s4hana-cloud-deployment-options-comparison-public-private-onpremise",
         "title": "SAP S/4HANA Cloud 구축 방식: Public, Private, On-Premise 살펴보기",
         "blog": "blog-ko",
-        "visits": 131,
+        "visits": 133,
         "clicks": 1,
-        "organic": 70
+        "organic": 71
       },
       {
         "postId": 58365,
