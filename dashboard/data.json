@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-05-23T01:29:31.911Z",
+  "generatedAt": "2026-05-24T01:49:48.333Z",
   "range": {
     "from": "2025-03-27",
-    "to": "2026-05-22",
-    "days": 421
+    "to": "2026-05-23",
+    "days": 422
   },
   "kpi": {
     "totalSubmissions": 6,
-    "avgRecentHomeTraffic": 13,
-    "avgRecentBlogTraffic": 38.1,
+    "avgRecentHomeTraffic": 13.3,
+    "avgRecentBlogTraffic": 36.6,
     "trackedPosts": 10
   },
   "charts": {
@@ -2115,6 +2115,11 @@
       },
       {
         "date": "2026-05-22",
+        "daily": 0,
+        "cumulative": 6
+      },
+      {
+        "date": "2026-05-23",
         "daily": 0,
         "cumulative": 6
       }
@@ -4645,6 +4650,12 @@
         "home": 25,
         "blogEn": 6,
         "blogKo": 9
+      },
+      {
+        "date": "2026-05-23",
+        "home": 10,
+        "blogEn": 26,
+        "blogKo": 1
       }
     ],
     "gsc": [
@@ -4899,6 +4910,12 @@
         "clicks": 0,
         "impressions": 270,
         "avgPosition": 18.9
+      },
+      {
+        "date": "2026-05-21",
+        "clicks": 4,
+        "impressions": 307,
+        "avgPosition": 18.9
       }
     ],
     "topPosts": [
@@ -4907,7 +4924,7 @@
         "slug": "global-ev-battery-sap-s4hana-migration",
         "title": "How a Global EV Battery Manufacturer Automated Testing for Millions of Data Points in Its SAP S/4HANA Migration",
         "blog": "blog-en",
-        "visits": 256,
+        "visits": 258,
         "clicks": 3,
         "organic": 7
       },
@@ -4952,9 +4969,9 @@
         "slug": "sap-s4hana-cloud-deployment-options-comparison-public-private-onpremise",
         "title": "SAP S/4HANA Cloud 구축 방식: Public, Private, On-Premise 살펴보기",
         "blog": "blog-ko",
-        "visits": 133,
+        "visits": 134,
         "clicks": 1,
-        "organic": 71
+        "organic": 72
       },
       {
         "postId": 58365,
@@ -4970,7 +4987,7 @@
         "slug": "sap-test-automation-retail-enterprises",
         "title": "Why SAP Test Automation is Critical for Retail Enterprises",
         "blog": "blog-en",
-        "visits": 108,
+        "visits": 109,
         "clicks": 0,
         "organic": 6
       },
