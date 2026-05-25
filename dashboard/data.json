@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-05-24T01:49:48.333Z",
+  "generatedAt": "2026-05-25T01:54:58.556Z",
   "range": {
     "from": "2025-03-27",
-    "to": "2026-05-23",
-    "days": 422
+    "to": "2026-05-24",
+    "days": 423
   },
   "kpi": {
     "totalSubmissions": 6,
-    "avgRecentHomeTraffic": 13.3,
-    "avgRecentBlogTraffic": 36.6,
+    "avgRecentHomeTraffic": 11.6,
+    "avgRecentBlogTraffic": 29.6,
     "trackedPosts": 10
   },
   "charts": {
@@ -2120,6 +2120,11 @@
       },
       {
         "date": "2026-05-23",
+        "daily": 0,
+        "cumulative": 6
+      },
+      {
+        "date": "2026-05-24",
         "daily": 0,
         "cumulative": 6
       }
@@ -4656,6 +4661,12 @@
         "home": 10,
         "blogEn": 26,
         "blogKo": 1
+      },
+      {
+        "date": "2026-05-24",
+        "home": 1,
+        "blogEn": 6,
+        "blogKo": 1
       }
     ],
     "gsc": [
@@ -4916,6 +4927,12 @@
         "clicks": 4,
         "impressions": 307,
         "avgPosition": 18.9
+      },
+      {
+        "date": "2026-05-22",
+        "clicks": 0,
+        "impressions": 243,
+        "avgPosition": 19.1
       }
     ],
     "topPosts": [
@@ -4987,7 +5004,7 @@
         "slug": "sap-test-automation-retail-enterprises",
         "title": "Why SAP Test Automation is Critical for Retail Enterprises",
         "blog": "blog-en",
-        "visits": 109,
+        "visits": 111,
         "clicks": 0,
         "organic": 6
       },
@@ -5005,7 +5022,7 @@
         "slug": "backend-logic-test-automation",
         "title": "SAP Backend Test Automation: Why UI Replay Falls Short for ERP Testing",
         "blog": "blog-en",
-        "visits": 104,
+        "visits": 105,
         "clicks": 1,
         "organic": 1
       }
