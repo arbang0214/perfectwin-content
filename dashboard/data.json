@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-05-25T01:54:58.556Z",
+  "generatedAt": "2026-05-26T01:33:06.398Z",
   "range": {
     "from": "2025-03-27",
-    "to": "2026-05-24",
-    "days": 423
+    "to": "2026-05-25",
+    "days": 424
   },
   "kpi": {
     "totalSubmissions": 6,
-    "avgRecentHomeTraffic": 11.6,
-    "avgRecentBlogTraffic": 29.6,
+    "avgRecentHomeTraffic": 12,
+    "avgRecentBlogTraffic": 26.7,
     "trackedPosts": 10
   },
   "charts": {
@@ -2125,6 +2125,11 @@
       },
       {
         "date": "2026-05-24",
+        "daily": 0,
+        "cumulative": 6
+      },
+      {
+        "date": "2026-05-25",
         "daily": 0,
         "cumulative": 6
       }
@@ -4667,6 +4672,12 @@
         "home": 1,
         "blogEn": 6,
         "blogKo": 1
+      },
+      {
+        "date": "2026-05-25",
+        "home": 7,
+        "blogEn": 7,
+        "blogKo": 1
       }
     ],
     "gsc": [
@@ -4933,6 +4944,12 @@
         "clicks": 0,
         "impressions": 243,
         "avgPosition": 19.1
+      },
+      {
+        "date": "2026-05-23",
+        "clicks": 1,
+        "impressions": 141,
+        "avgPosition": 22.9
       }
     ],
     "topPosts": [
@@ -4941,7 +4958,7 @@
         "slug": "global-ev-battery-sap-s4hana-migration",
         "title": "How a Global EV Battery Manufacturer Automated Testing for Millions of Data Points in Its SAP S/4HANA Migration",
         "blog": "blog-en",
-        "visits": 258,
+        "visits": 259,
         "clicks": 3,
         "organic": 7
       },
@@ -4959,7 +4976,7 @@
         "slug": "sap-testing-checklist-guide",
         "title": "SAP Testing Preparation Guide: 5-Step Checklist",
         "blog": "blog-en",
-        "visits": 176,
+        "visits": 177,
         "clicks": 3,
         "organic": 40
       },
@@ -4968,7 +4985,7 @@
         "slug": "sap-migration-data-conversion-testing-strategy",
         "title": "SAP S/4HANA Migration Testing: 4 Data Conversion Strategies That Prevent Go-Live Failures",
         "blog": "blog-en",
-        "visits": 170,
+        "visits": 171,
         "clicks": 1,
         "organic": 29
       },
@@ -5004,7 +5021,7 @@
         "slug": "sap-test-automation-retail-enterprises",
         "title": "Why SAP Test Automation is Critical for Retail Enterprises",
         "blog": "blog-en",
-        "visits": 111,
+        "visits": 112,
         "clicks": 0,
         "organic": 6
       },
