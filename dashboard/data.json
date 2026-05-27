@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-05-26T01:33:06.398Z",
+  "generatedAt": "2026-05-27T01:54:49.759Z",
   "range": {
     "from": "2025-03-27",
-    "to": "2026-05-25",
-    "days": 424
+    "to": "2026-05-26",
+    "days": 425
   },
   "kpi": {
     "totalSubmissions": 6,
-    "avgRecentHomeTraffic": 12,
-    "avgRecentBlogTraffic": 26.7,
+    "avgRecentHomeTraffic": 11.1,
+    "avgRecentBlogTraffic": 24.1,
     "trackedPosts": 10
   },
   "charts": {
@@ -2130,6 +2130,11 @@
       },
       {
         "date": "2026-05-25",
+        "daily": 0,
+        "cumulative": 6
+      },
+      {
+        "date": "2026-05-26",
         "daily": 0,
         "cumulative": 6
       }
@@ -4678,6 +4683,12 @@
         "home": 7,
         "blogEn": 7,
         "blogKo": 1
+      },
+      {
+        "date": "2026-05-26",
+        "home": 4,
+        "blogEn": 26,
+        "blogKo": 15
       }
     ],
     "gsc": [
@@ -4950,6 +4961,12 @@
         "clicks": 1,
         "impressions": 141,
         "avgPosition": 22.9
+      },
+      {
+        "date": "2026-05-24",
+        "clicks": 0,
+        "impressions": 175,
+        "avgPosition": 20.2
       }
     ],
     "topPosts": [
@@ -4976,7 +4993,7 @@
         "slug": "sap-testing-checklist-guide",
         "title": "SAP Testing Preparation Guide: 5-Step Checklist",
         "blog": "blog-en",
-        "visits": 177,
+        "visits": 178,
         "clicks": 3,
         "organic": 40
       },
@@ -5003,9 +5020,9 @@
         "slug": "sap-s4hana-cloud-deployment-options-comparison-public-private-onpremise",
         "title": "SAP S/4HANA Cloud 구축 방식: Public, Private, On-Premise 살펴보기",
         "blog": "blog-ko",
-        "visits": 134,
+        "visits": 136,
         "clicks": 1,
-        "organic": 72
+        "organic": 74
       },
       {
         "postId": 58365,
@@ -5030,7 +5047,7 @@
         "slug": "sap-test-case-design-e2e-testing",
         "title": "SAP 테스트 케이스 설계: 시나리오 기반 E2E 테스트 가이드",
         "blog": "blog-ko",
-        "visits": 107,
+        "visits": 108,
         "clicks": 0,
         "organic": 26
       },
