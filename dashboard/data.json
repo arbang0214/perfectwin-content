@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-05-27T01:54:49.759Z",
+  "generatedAt": "2026-05-28T06:36:23.830Z",
   "range": {
     "from": "2025-03-27",
-    "to": "2026-05-26",
-    "days": 425
+    "to": "2026-05-27",
+    "days": 426
   },
   "kpi": {
     "totalSubmissions": 6,
-    "avgRecentHomeTraffic": 11.1,
-    "avgRecentBlogTraffic": 24.1,
+    "avgRecentHomeTraffic": 12.4,
+    "avgRecentBlogTraffic": 21.6,
     "trackedPosts": 10
   },
   "charts": {
@@ -2135,6 +2135,11 @@
       },
       {
         "date": "2026-05-26",
+        "daily": 0,
+        "cumulative": 6
+      },
+      {
+        "date": "2026-05-27",
         "daily": 0,
         "cumulative": 6
       }
@@ -4689,6 +4694,12 @@
         "home": 4,
         "blogEn": 26,
         "blogKo": 15
+      },
+      {
+        "date": "2026-05-27",
+        "home": 20,
+        "blogEn": 5,
+        "blogKo": 1
       }
     ],
     "gsc": [
@@ -4967,6 +4978,12 @@
         "clicks": 0,
         "impressions": 175,
         "avgPosition": 20.2
+      },
+      {
+        "date": "2026-05-25",
+        "clicks": 0,
+        "impressions": 221,
+        "avgPosition": 17.3
       }
     ],
     "topPosts": [
@@ -4984,7 +5001,7 @@
         "slug": "successful-sap-s4hana-test-automation",
         "title": "Successful Test Automation in SAP S/4HANA Migration: Case Study of a Leading CPG Manufacturer",
         "blog": "blog-en",
-        "visits": 188,
+        "visits": 189,
         "clicks": 0,
         "organic": 6
       },
@@ -5020,9 +5037,9 @@
         "slug": "sap-s4hana-cloud-deployment-options-comparison-public-private-onpremise",
         "title": "SAP S/4HANA Cloud 구축 방식: Public, Private, On-Premise 살펴보기",
         "blog": "blog-ko",
-        "visits": 136,
+        "visits": 137,
         "clicks": 1,
-        "organic": 74
+        "organic": 75
       },
       {
         "postId": 58365,
