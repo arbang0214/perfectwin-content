@@ -207,6 +207,11 @@ async function runUnifiedDaily(targetDate) {
   console.log("  [통합 리포트] Slack 발송...");
   await sendUnifiedDailyToSlack({ title, body: report });
 
+  // Slack 발송 성공 sidecar — 다음 cron의 --skip-if-exists는 이 파일을 기준으로 판단.
+  // .md만 있고 sidecar 없으면 백업 cron이 재시도해서 슬랙 무음 실패를 자동 복구한다.
+  const sidecarPath = path.join(REPORTS_DIR, `unified-daily-${targetDate}.slack.ok`);
+  fs.writeFileSync(sidecarPath, new Date().toISOString(), "utf-8");
+
   return report;
 }
 

@@ -656,13 +656,12 @@ async function sendUnifiedDailyToSlack({ title, body }) {
     // fall through to webhook
   }
   if (WEBHOOK_URL) {
-    return await sendSingleViaWebhook(title, bodyMrkdwn);
+    const ok = await sendSingleViaWebhook(title, bodyMrkdwn);
+    if (ok) return true;
   }
 
-  console.log("[Slack] 전송 수단 없음 — 콘솔 출력으로 대체");
-  console.log(title);
-  console.log(body);
-  return false;
+  // 무음 실패 차단: 발송 수단이 없거나 전부 실패 → 워크플로 fail로 노출
+  throw new Error("Slack 발송 실패 — Bot/Webhook 모두 실패 또는 미설정");
 }
 
 /**

@@ -102,15 +102,16 @@ async function main() {
   console.log(`\n🚀 PerfecTwin 일간 리포트 — 대상 날짜: ${targetDate}`);
   console.log(`   실행 시각: ${new Date().toLocaleString("ko-KR")}\n`);
 
-  // backup cron 대응: 같은 날짜의 통합 리포트가 이미 발행됐으면 조기 종료.
-  // schedule에서만 --skip-if-exists를 붙이고, workflow_dispatch는 안 붙여서 항상 재발행 가능.
+  // backup cron 대응: 같은 날짜의 통합 리포트 Slack 발송이 이미 성공했으면 조기 종료.
+  // .md 파일이 아니라 .slack.ok sidecar로 판단해서, 첫 cron이 .md만 쓰고 Slack에서 실패한
+  // 케이스에 백업 cron이 자동 재시도하도록 한다.
   if (process.argv.includes("--skip-if-exists")) {
-    const reportPath = path.join(DATA_DIR, "reports", `unified-daily-${targetDate}.md`);
-    if (fs.existsSync(reportPath)) {
-      console.log(`[skip] 오늘 리포트 이미 존재 — 워크플로 조기 종료 (${path.basename(reportPath)})`);
+    const sidecarPath = path.join(DATA_DIR, "reports", `unified-daily-${targetDate}.slack.ok`);
+    if (fs.existsSync(sidecarPath)) {
+      console.log(`[skip] Slack 발송 sidecar 존재 — 워크플로 조기 종료 (${path.basename(sidecarPath)})`);
       return;
     }
-    console.log(`[skip-check] 오늘 리포트 없음 — 정상 실행 진행\n`);
+    console.log(`[skip-check] Slack sidecar 없음 — 정상 실행 진행\n`);
   }
 
   let ga4Data = null;
@@ -204,25 +205,24 @@ async function main() {
   console.log(reportText);
   saveSnapshot(targetDate, { ga4: ga4Data, gsc: gscData, bing: bingData, inblog: inblogData, demoFunnel: demoFunnelData, contentFunnel: contentFunnelData, slackSent: false });
 
-  // 7. 통합 일간 리포트 생성 + Slack 발송 (헤드라인 + thread)
-  const skipReport = process.argv.includes("--no-report");
-  if (!skipReport && process.env.ANTHROPIC_API_KEY) {
-    console.log("[8/8] 통합 일간 리포트 생성 + Slack 발송...");
-    try {
-      await runUnifiedDaily(targetDate);
-      console.log("  ✅ 통합 리포트 발송 완료");
-    } catch (err) {
-      console.error(`  ❌ 통합 리포트 실패: ${err.message}`);
-    }
-  } else if (skipReport) {
-    console.log("[8/8] 리포트 생성 건너뜀 (--no-report)");
-  }
-
-  // 누적 대시보드 데이터 빌드 (dashboard/data.json) — GH Pages가 자동 서빙
+  // 7. 누적 대시보드 데이터 빌드 (dashboard/data.json) — Slack 발송과 독립.
+  // Slack이 실패해도 스냅샷·대시보드는 갱신돼야 하므로 Slack보다 먼저 돌린다.
   try {
     buildDashboard();
   } catch (err) {
     console.error(`  [dashboard] 빌드 실패: ${err.message}`);
+  }
+
+  // 8. 통합 일간 리포트 생성 + Slack 발송 — 실패 시 throw해서 워크플로 fail로 노출.
+  // 데이터 커밋 step은 if: always()로 돌아서 스냅샷·.md는 보존되고, sidecar(.slack.ok)가
+  // 없으면 백업 cron이 재시도한다.
+  const skipReport = process.argv.includes("--no-report");
+  if (!skipReport && process.env.ANTHROPIC_API_KEY) {
+    console.log("[8/8] 통합 일간 리포트 생성 + Slack 발송...");
+    await runUnifiedDaily(targetDate);
+    console.log("  ✅ 통합 리포트 발송 완료");
+  } else if (skipReport) {
+    console.log("[8/8] 리포트 생성 건너뜀 (--no-report)");
   }
 
   console.log("\n✅ 일간 리포트 완료!\n");
