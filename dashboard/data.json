@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-05-28T06:36:23.830Z",
+  "generatedAt": "2026-06-02T03:08:19.111Z",
   "range": {
     "from": "2025-03-27",
-    "to": "2026-05-27",
-    "days": 426
+    "to": "2026-06-01",
+    "days": 427
   },
   "kpi": {
     "totalSubmissions": 6,
-    "avgRecentHomeTraffic": 12.4,
-    "avgRecentBlogTraffic": 21.6,
+    "avgRecentHomeTraffic": 10.4,
+    "avgRecentBlogTraffic": 16.3,
     "trackedPosts": 10
   },
   "charts": {
@@ -2140,6 +2140,11 @@
       },
       {
         "date": "2026-05-27",
+        "daily": 0,
+        "cumulative": 6
+      },
+      {
+        "date": "2026-06-01",
         "daily": 0,
         "cumulative": 6
       }
@@ -4700,6 +4705,12 @@
         "home": 20,
         "blogEn": 5,
         "blogKo": 1
+      },
+      {
+        "date": "2026-06-01",
+        "home": 6,
+        "blogEn": 5,
+        "blogKo": 5
       }
     ],
     "gsc": [
@@ -4984,6 +4995,12 @@
         "clicks": 0,
         "impressions": 221,
         "avgPosition": 17.3
+      },
+      {
+        "date": "2026-05-30",
+        "clicks": 0,
+        "impressions": 167,
+        "avgPosition": 17.7
       }
     ],
     "topPosts": [
@@ -5019,7 +5036,7 @@
         "slug": "sap-migration-data-conversion-testing-strategy",
         "title": "SAP S/4HANA Migration Testing: 4 Data Conversion Strategies That Prevent Go-Live Failures",
         "blog": "blog-en",
-        "visits": 171,
+        "visits": 172,
         "clicks": 1,
         "organic": 29
       },
@@ -5028,7 +5045,7 @@
         "slug": "sap-s4hana-upgrade-testing-strategy",
         "title": "SAP S/4HANA Upgrade Testing: 3 Strategies for Quarterly Release Verification",
         "blog": "blog-en",
-        "visits": 147,
+        "visits": 148,
         "clicks": 0,
         "organic": 30
       },
@@ -5037,9 +5054,9 @@
         "slug": "sap-s4hana-cloud-deployment-options-comparison-public-private-onpremise",
         "title": "SAP S/4HANA Cloud 구축 방식: Public, Private, On-Premise 살펴보기",
         "blog": "blog-ko",
-        "visits": 137,
+        "visits": 138,
         "clicks": 1,
-        "organic": 75
+        "organic": 76
       },
       {
         "postId": 58365,
