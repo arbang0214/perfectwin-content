@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-06-03T02:13:02.030Z",
+  "generatedAt": "2026-06-04T02:10:54.269Z",
   "range": {
     "from": "2025-03-27",
-    "to": "2026-06-02",
-    "days": 428
+    "to": "2026-06-03",
+    "days": 429
   },
   "kpi": {
     "totalSubmissions": 6,
-    "avgRecentHomeTraffic": 10.9,
-    "avgRecentBlogTraffic": 17,
+    "avgRecentHomeTraffic": 11.4,
+    "avgRecentBlogTraffic": 14.7,
     "trackedPosts": 10
   },
   "charts": {
@@ -2150,6 +2150,11 @@
       },
       {
         "date": "2026-06-02",
+        "daily": 0,
+        "cumulative": 6
+      },
+      {
+        "date": "2026-06-03",
         "daily": 0,
         "cumulative": 6
       }
@@ -4722,6 +4727,12 @@
         "home": 28,
         "blogEn": 5,
         "blogKo": 15
+      },
+      {
+        "date": "2026-06-03",
+        "home": 14,
+        "blogEn": 10,
+        "blogKo": 1
       }
     ],
     "gsc": [
@@ -5018,6 +5029,12 @@
         "clicks": 0,
         "impressions": 169,
         "avgPosition": 17.6
+      },
+      {
+        "date": "2026-06-01",
+        "clicks": 1,
+        "impressions": 265,
+        "avgPosition": 13.4
       }
     ],
     "topPosts": [
@@ -5053,7 +5070,7 @@
         "slug": "sap-migration-data-conversion-testing-strategy",
         "title": "SAP S/4HANA Migration Testing: 4 Data Conversion Strategies That Prevent Go-Live Failures",
         "blog": "blog-en",
-        "visits": 172,
+        "visits": 173,
         "clicks": 1,
         "organic": 29
       },
