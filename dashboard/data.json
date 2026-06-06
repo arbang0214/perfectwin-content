@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-06-05T01:53:45.390Z",
+  "generatedAt": "2026-06-06T01:34:24.869Z",
   "range": {
     "from": "2025-03-27",
-    "to": "2026-06-04",
-    "days": 430
+    "to": "2026-06-05",
+    "days": 431
   },
   "kpi": {
     "totalSubmissions": 6,
-    "avgRecentHomeTraffic": 13.6,
-    "avgRecentBlogTraffic": 15,
+    "avgRecentHomeTraffic": 15.1,
+    "avgRecentBlogTraffic": 14.6,
     "trackedPosts": 10
   },
   "charts": {
@@ -2160,6 +2160,11 @@
       },
       {
         "date": "2026-06-04",
+        "daily": 0,
+        "cumulative": 6
+      },
+      {
+        "date": "2026-06-05",
         "daily": 0,
         "cumulative": 6
       }
@@ -4744,6 +4749,12 @@
         "home": 16,
         "blogEn": 8,
         "blogKo": 1
+      },
+      {
+        "date": "2026-06-05",
+        "home": 18,
+        "blogEn": 3,
+        "blogKo": 2
       }
     ],
     "gsc": [
@@ -5043,8 +5054,8 @@
       },
       {
         "date": "2026-06-01",
-        "clicks": 2,
-        "impressions": 530,
+        "clicks": 3,
+        "impressions": 795,
         "avgPosition": 13.4
       }
     ],
@@ -5099,16 +5110,16 @@
         "slug": "sap-s4hana-cloud-deployment-options-comparison-public-private-onpremise",
         "title": "SAP S/4HANA Cloud 구축 방식: Public, Private, On-Premise 살펴보기",
         "blog": "blog-ko",
-        "visits": 139,
+        "visits": 140,
         "clicks": 1,
-        "organic": 76
+        "organic": 77
       },
       {
         "postId": 58365,
         "slug": "test-automation-prioritization-strategy",
         "title": "SAP Test Automation Prioritization: Which Business Scenarios to Automate First",
         "blog": "blog-en",
-        "visits": 130,
+        "visits": 131,
         "clicks": 2,
         "organic": 13
       },
