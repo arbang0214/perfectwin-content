@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-06-06T01:34:24.869Z",
+  "generatedAt": "2026-06-07T01:56:14.246Z",
   "range": {
     "from": "2025-03-27",
-    "to": "2026-06-05",
-    "days": 431
+    "to": "2026-06-06",
+    "days": 432
   },
   "kpi": {
     "totalSubmissions": 6,
-    "avgRecentHomeTraffic": 15.1,
-    "avgRecentBlogTraffic": 14.6,
+    "avgRecentHomeTraffic": 17.3,
+    "avgRecentBlogTraffic": 9.4,
     "trackedPosts": 10
   },
   "charts": {
@@ -2165,6 +2165,11 @@
       },
       {
         "date": "2026-06-05",
+        "daily": 0,
+        "cumulative": 6
+      },
+      {
+        "date": "2026-06-06",
         "daily": 0,
         "cumulative": 6
       }
@@ -4755,6 +4760,12 @@
         "home": 18,
         "blogEn": 3,
         "blogKo": 2
+      },
+      {
+        "date": "2026-06-06",
+        "home": 19,
+        "blogEn": 1,
+        "blogKo": 4
       }
     ],
     "gsc": [
@@ -5057,6 +5068,12 @@
         "clicks": 3,
         "impressions": 795,
         "avgPosition": 13.4
+      },
+      {
+        "date": "2026-06-03",
+        "clicks": 2,
+        "impressions": 316,
+        "avgPosition": 14.4
       }
     ],
     "topPosts": [
@@ -5092,9 +5109,9 @@
         "slug": "sap-migration-data-conversion-testing-strategy",
         "title": "SAP S/4HANA Migration Testing: 4 Data Conversion Strategies That Prevent Go-Live Failures",
         "blog": "blog-en",
-        "visits": 174,
+        "visits": 175,
         "clicks": 1,
-        "organic": 30
+        "organic": 31
       },
       {
         "postId": 79267,
@@ -5110,7 +5127,7 @@
         "slug": "sap-s4hana-cloud-deployment-options-comparison-public-private-onpremise",
         "title": "SAP S/4HANA Cloud 구축 방식: Public, Private, On-Premise 살펴보기",
         "blog": "blog-ko",
-        "visits": 140,
+        "visits": 142,
         "clicks": 1,
         "organic": 77
       },
