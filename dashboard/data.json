@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-06-08T02:01:31.980Z",
+  "generatedAt": "2026-06-09T01:31:30.096Z",
   "range": {
     "from": "2025-03-27",
-    "to": "2026-06-07",
-    "days": 433
+    "to": "2026-06-08",
+    "days": 434
   },
   "kpi": {
     "totalSubmissions": 6,
-    "avgRecentHomeTraffic": 14.6,
-    "avgRecentBlogTraffic": 10.1,
+    "avgRecentHomeTraffic": 15.4,
+    "avgRecentBlogTraffic": 10.6,
     "trackedPosts": 10
   },
   "charts": {
@@ -2175,6 +2175,11 @@
       },
       {
         "date": "2026-06-07",
+        "daily": 0,
+        "cumulative": 6
+      },
+      {
+        "date": "2026-06-08",
         "daily": 0,
         "cumulative": 6
       }
@@ -4777,6 +4782,12 @@
         "home": 1,
         "blogEn": 11,
         "blogKo": 0
+      },
+      {
+        "date": "2026-06-08",
+        "home": 12,
+        "blogEn": 10,
+        "blogKo": 3
       }
     ],
     "gsc": [
@@ -5091,6 +5102,12 @@
         "clicks": 0,
         "impressions": 277,
         "avgPosition": 12.6
+      },
+      {
+        "date": "2026-06-06",
+        "clicks": 1,
+        "impressions": 142,
+        "avgPosition": 16.6
       }
     ],
     "topPosts": [
@@ -5113,6 +5130,15 @@
         "organic": 6
       },
       {
+        "postId": 77338,
+        "slug": "sap-migration-data-conversion-testing-strategy",
+        "title": "SAP S/4HANA Migration Testing: 4 Data Conversion Strategies That Prevent Go-Live Failures",
+        "blog": "blog-en",
+        "visits": 180,
+        "clicks": 1,
+        "organic": 31
+      },
+      {
         "postId": 70120,
         "slug": "sap-testing-checklist-guide",
         "title": "SAP Testing Preparation Guide: 5-Step Checklist",
@@ -5122,22 +5148,13 @@
         "organic": 40
       },
       {
-        "postId": 77338,
-        "slug": "sap-migration-data-conversion-testing-strategy",
-        "title": "SAP S/4HANA Migration Testing: 4 Data Conversion Strategies That Prevent Go-Live Failures",
-        "blog": "blog-en",
-        "visits": 176,
-        "clicks": 1,
-        "organic": 31
-      },
-      {
         "postId": 79267,
         "slug": "sap-s4hana-upgrade-testing-strategy",
         "title": "SAP S/4HANA Upgrade Testing: 3 Strategies for Quarterly Release Verification",
         "blog": "blog-en",
-        "visits": 151,
+        "visits": 154,
         "clicks": 0,
-        "organic": 32
+        "organic": 35
       },
       {
         "postId": 63322,
@@ -5180,9 +5197,9 @@
         "slug": "backend-logic-test-automation",
         "title": "SAP Backend Test Automation: Why UI Replay Falls Short for ERP Testing",
         "blog": "blog-en",
-        "visits": 105,
+        "visits": 106,
         "clicks": 1,
-        "organic": 1
+        "organic": 2
       }
     ]
   }
