@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-06-09T01:31:30.096Z",
+  "generatedAt": "2026-06-10T01:53:33.052Z",
   "range": {
     "from": "2025-03-27",
-    "to": "2026-06-08",
-    "days": 434
+    "to": "2026-06-09",
+    "days": 435
   },
   "kpi": {
     "totalSubmissions": 6,
-    "avgRecentHomeTraffic": 15.4,
-    "avgRecentBlogTraffic": 10.6,
+    "avgRecentHomeTraffic": 49.4,
+    "avgRecentBlogTraffic": 11,
     "trackedPosts": 10
   },
   "charts": {
@@ -2180,6 +2180,11 @@
       },
       {
         "date": "2026-06-08",
+        "daily": 0,
+        "cumulative": 6
+      },
+      {
+        "date": "2026-06-09",
         "daily": 0,
         "cumulative": 6
       }
@@ -4788,6 +4793,12 @@
         "home": 12,
         "blogEn": 10,
         "blogKo": 3
+      },
+      {
+        "date": "2026-06-09",
+        "home": 266,
+        "blogEn": 14,
+        "blogKo": 9
       }
     ],
     "gsc": [
@@ -5108,6 +5119,12 @@
         "clicks": 1,
         "impressions": 142,
         "avgPosition": 16.6
+      },
+      {
+        "date": "2026-06-07",
+        "clicks": 3,
+        "impressions": 199,
+        "avgPosition": 13.8
       }
     ],
     "topPosts": [
@@ -5161,9 +5178,9 @@
         "slug": "sap-s4hana-cloud-deployment-options-comparison-public-private-onpremise",
         "title": "SAP S/4HANA Cloud 구축 방식: Public, Private, On-Premise 살펴보기",
         "blog": "blog-ko",
-        "visits": 142,
+        "visits": 143,
         "clicks": 1,
-        "organic": 77
+        "organic": 78
       },
       {
         "postId": 58365,
@@ -5188,18 +5205,18 @@
         "slug": "sap-test-case-design-e2e-testing",
         "title": "SAP 테스트 케이스 설계: 시나리오 기반 E2E 테스트 가이드",
         "blog": "blog-ko",
-        "visits": 109,
+        "visits": 110,
         "clicks": 0,
         "organic": 27
       },
       {
-        "postId": 56958,
-        "slug": "backend-logic-test-automation",
-        "title": "SAP Backend Test Automation: Why UI Replay Falls Short for ERP Testing",
+        "postId": 59866,
+        "slug": "sap-o2c-process-testing-automation",
+        "title": "SAP Order-to-Cash Testing Automation: A Complete Guide (2026)",
         "blog": "blog-en",
-        "visits": 106,
+        "visits": 108,
         "clicks": 1,
-        "organic": 2
+        "organic": 36
       }
     ]
   }
