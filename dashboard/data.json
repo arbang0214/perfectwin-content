@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-06-10T01:53:33.052Z",
+  "generatedAt": "2026-06-11T02:04:24.855Z",
   "range": {
     "from": "2025-03-27",
-    "to": "2026-06-09",
-    "days": 435
+    "to": "2026-06-10",
+    "days": 436
   },
   "kpi": {
     "totalSubmissions": 6,
-    "avgRecentHomeTraffic": 49.4,
-    "avgRecentBlogTraffic": 11,
+    "avgRecentHomeTraffic": 123.6,
+    "avgRecentBlogTraffic": 13,
     "trackedPosts": 10
   },
   "charts": {
@@ -2185,6 +2185,11 @@
       },
       {
         "date": "2026-06-09",
+        "daily": 0,
+        "cumulative": 6
+      },
+      {
+        "date": "2026-06-10",
         "daily": 0,
         "cumulative": 6
       }
@@ -4799,6 +4804,12 @@
         "home": 266,
         "blogEn": 14,
         "blogKo": 9
+      },
+      {
+        "date": "2026-06-10",
+        "home": 533,
+        "blogEn": 16,
+        "blogKo": 9
       }
     ],
     "gsc": [
@@ -5125,6 +5136,12 @@
         "clicks": 3,
         "impressions": 199,
         "avgPosition": 13.8
+      },
+      {
+        "date": "2026-06-08",
+        "clicks": 4,
+        "impressions": 323,
+        "avgPosition": 10.9
       }
     ],
     "topPosts": [
@@ -5133,7 +5150,7 @@
         "slug": "global-ev-battery-sap-s4hana-migration",
         "title": "How a Global EV Battery Manufacturer Automated Testing for Millions of Data Points in Its SAP S/4HANA Migration",
         "blog": "blog-en",
-        "visits": 259,
+        "visits": 260,
         "clicks": 3,
         "organic": 7
       },
@@ -5142,9 +5159,18 @@
         "slug": "successful-sap-s4hana-test-automation",
         "title": "Successful Test Automation in SAP S/4HANA Migration: Case Study of a Leading CPG Manufacturer",
         "blog": "blog-en",
-        "visits": 189,
+        "visits": 190,
         "clicks": 0,
         "organic": 6
+      },
+      {
+        "postId": 70120,
+        "slug": "sap-testing-checklist-guide",
+        "title": "SAP Testing Preparation Guide: 5-Step Checklist",
+        "blog": "blog-en",
+        "visits": 180,
+        "clicks": 3,
+        "organic": 41
       },
       {
         "postId": 77338,
@@ -5154,15 +5180,6 @@
         "visits": 180,
         "clicks": 1,
         "organic": 31
-      },
-      {
-        "postId": 70120,
-        "slug": "sap-testing-checklist-guide",
-        "title": "SAP Testing Preparation Guide: 5-Step Checklist",
-        "blog": "blog-en",
-        "visits": 179,
-        "clicks": 3,
-        "organic": 40
       },
       {
         "postId": 79267,
@@ -5178,9 +5195,9 @@
         "slug": "sap-s4hana-cloud-deployment-options-comparison-public-private-onpremise",
         "title": "SAP S/4HANA Cloud 구축 방식: Public, Private, On-Premise 살펴보기",
         "blog": "blog-ko",
-        "visits": 143,
+        "visits": 144,
         "clicks": 1,
-        "organic": 78
+        "organic": 79
       },
       {
         "postId": 58365,
@@ -5196,7 +5213,7 @@
         "slug": "sap-test-automation-retail-enterprises",
         "title": "Why SAP Test Automation is Critical for Retail Enterprises",
         "blog": "blog-en",
-        "visits": 112,
+        "visits": 113,
         "clicks": 0,
         "organic": 6
       },
@@ -5205,9 +5222,9 @@
         "slug": "sap-test-case-design-e2e-testing",
         "title": "SAP 테스트 케이스 설계: 시나리오 기반 E2E 테스트 가이드",
         "blog": "blog-ko",
-        "visits": 110,
+        "visits": 112,
         "clicks": 0,
-        "organic": 27
+        "organic": 29
       },
       {
         "postId": 59866,
