@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-06-12T02:00:16.349Z",
+  "generatedAt": "2026-06-13T01:53:09.958Z",
   "range": {
     "from": "2025-03-27",
-    "to": "2026-06-11",
-    "days": 437
+    "to": "2026-06-12",
+    "days": 438
   },
   "kpi": {
     "totalSubmissions": 6,
-    "avgRecentHomeTraffic": 124,
-    "avgRecentBlogTraffic": 15.4,
+    "avgRecentHomeTraffic": 124.4,
+    "avgRecentBlogTraffic": 19.1,
     "trackedPosts": 10
   },
   "charts": {
@@ -2195,6 +2195,11 @@
       },
       {
         "date": "2026-06-11",
+        "daily": 0,
+        "cumulative": 6
+      },
+      {
+        "date": "2026-06-12",
         "daily": 0,
         "cumulative": 6
       }
@@ -4821,6 +4826,12 @@
         "home": 19,
         "blogEn": 18,
         "blogKo": 8
+      },
+      {
+        "date": "2026-06-12",
+        "home": 21,
+        "blogEn": 21,
+        "blogKo": 10
       }
     ],
     "gsc": [
@@ -5159,6 +5170,12 @@
         "clicks": 2,
         "impressions": 438,
         "avgPosition": 12.5
+      },
+      {
+        "date": "2026-06-10",
+        "clicks": 4,
+        "impressions": 453,
+        "avgPosition": 12.1
       }
     ],
     "topPosts": [
@@ -5167,7 +5184,7 @@
         "slug": "global-ev-battery-sap-s4hana-migration",
         "title": "How a Global EV Battery Manufacturer Automated Testing for Millions of Data Points in Its SAP S/4HANA Migration",
         "blog": "blog-en",
-        "visits": 261,
+        "visits": 262,
         "clicks": 3,
         "organic": 7
       },
@@ -5181,6 +5198,15 @@
         "organic": 6
       },
       {
+        "postId": 77338,
+        "slug": "sap-migration-data-conversion-testing-strategy",
+        "title": "SAP S/4HANA Migration Testing: 4 Data Conversion Strategies That Prevent Go-Live Failures",
+        "blog": "blog-en",
+        "visits": 182,
+        "clicks": 1,
+        "organic": 32
+      },
+      {
         "postId": 70120,
         "slug": "sap-testing-checklist-guide",
         "title": "SAP Testing Preparation Guide: 5-Step Checklist",
@@ -5188,15 +5214,6 @@
         "visits": 180,
         "clicks": 3,
         "organic": 41
-      },
-      {
-        "postId": 77338,
-        "slug": "sap-migration-data-conversion-testing-strategy",
-        "title": "SAP S/4HANA Migration Testing: 4 Data Conversion Strategies That Prevent Go-Live Failures",
-        "blog": "blog-en",
-        "visits": 180,
-        "clicks": 1,
-        "organic": 31
       },
       {
         "postId": 79267,
@@ -5221,7 +5238,7 @@
         "slug": "test-automation-prioritization-strategy",
         "title": "SAP Test Automation Prioritization: Which Business Scenarios to Automate First",
         "blog": "blog-en",
-        "visits": 132,
+        "visits": 133,
         "clicks": 2,
         "organic": 13
       },
@@ -5230,7 +5247,7 @@
         "slug": "sap-test-automation-retail-enterprises",
         "title": "Why SAP Test Automation is Critical for Retail Enterprises",
         "blog": "blog-en",
-        "visits": 114,
+        "visits": 115,
         "clicks": 0,
         "organic": 6
       },
@@ -5244,13 +5261,13 @@
         "organic": 29
       },
       {
-        "postId": 56958,
-        "slug": "backend-logic-test-automation",
-        "title": "SAP Backend Test Automation: Why UI Replay Falls Short for ERP Testing",
+        "postId": 59866,
+        "slug": "sap-o2c-process-testing-automation",
+        "title": "SAP Order-to-Cash Testing Automation: A Complete Guide (2026)",
         "blog": "blog-en",
-        "visits": 108,
+        "visits": 109,
         "clicks": 1,
-        "organic": 3
+        "organic": 36
       }
     ]
   }
