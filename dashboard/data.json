@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-06-13T01:53:09.958Z",
+  "generatedAt": "2026-06-14T02:01:07.072Z",
   "range": {
     "from": "2025-03-27",
-    "to": "2026-06-12",
-    "days": 438
+    "to": "2026-06-13",
+    "days": 439
   },
   "kpi": {
     "totalSubmissions": 6,
-    "avgRecentHomeTraffic": 124.4,
-    "avgRecentBlogTraffic": 19.1,
+    "avgRecentHomeTraffic": 122.6,
+    "avgRecentBlogTraffic": 20.9,
     "trackedPosts": 10
   },
   "charts": {
@@ -2200,6 +2200,11 @@
       },
       {
         "date": "2026-06-12",
+        "daily": 0,
+        "cumulative": 6
+      },
+      {
+        "date": "2026-06-13",
         "daily": 0,
         "cumulative": 6
       }
@@ -4832,6 +4837,12 @@
         "home": 21,
         "blogEn": 21,
         "blogKo": 10
+      },
+      {
+        "date": "2026-06-13",
+        "home": 6,
+        "blogEn": 14,
+        "blogKo": 3
       }
     ],
     "gsc": [
@@ -5176,6 +5187,12 @@
         "clicks": 4,
         "impressions": 453,
         "avgPosition": 12.1
+      },
+      {
+        "date": "2026-06-11",
+        "clicks": 2,
+        "impressions": 340,
+        "avgPosition": 11.3
       }
     ],
     "topPosts": [
@@ -5193,7 +5210,7 @@
         "slug": "successful-sap-s4hana-test-automation",
         "title": "Successful Test Automation in SAP S/4HANA Migration: Case Study of a Leading CPG Manufacturer",
         "blog": "blog-en",
-        "visits": 191,
+        "visits": 192,
         "clicks": 0,
         "organic": 6
       },
@@ -5202,7 +5219,7 @@
         "slug": "sap-migration-data-conversion-testing-strategy",
         "title": "SAP S/4HANA Migration Testing: 4 Data Conversion Strategies That Prevent Go-Live Failures",
         "blog": "blog-en",
-        "visits": 182,
+        "visits": 183,
         "clicks": 1,
         "organic": 32
       },
@@ -5220,7 +5237,7 @@
         "slug": "sap-s4hana-upgrade-testing-strategy",
         "title": "SAP S/4HANA Upgrade Testing: 3 Strategies for Quarterly Release Verification",
         "blog": "blog-en",
-        "visits": 154,
+        "visits": 155,
         "clicks": 0,
         "organic": 35
       },
@@ -5256,7 +5273,7 @@
         "slug": "sap-test-case-design-e2e-testing",
         "title": "SAP 테스트 케이스 설계: 시나리오 기반 E2E 테스트 가이드",
         "blog": "blog-ko",
-        "visits": 112,
+        "visits": 113,
         "clicks": 0,
         "organic": 29
       },
