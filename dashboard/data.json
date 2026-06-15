@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-06-14T02:01:07.072Z",
+  "generatedAt": "2026-06-15T02:05:48.380Z",
   "range": {
     "from": "2025-03-27",
-    "to": "2026-06-13",
-    "days": 439
+    "to": "2026-06-14",
+    "days": 440
   },
   "kpi": {
     "totalSubmissions": 6,
-    "avgRecentHomeTraffic": 122.6,
-    "avgRecentBlogTraffic": 20.9,
+    "avgRecentHomeTraffic": 122.7,
+    "avgRecentBlogTraffic": 21.3,
     "trackedPosts": 10
   },
   "charts": {
@@ -2205,6 +2205,11 @@
       },
       {
         "date": "2026-06-13",
+        "daily": 0,
+        "cumulative": 6
+      },
+      {
+        "date": "2026-06-14",
         "daily": 0,
         "cumulative": 6
       }
@@ -4843,6 +4848,12 @@
         "home": 6,
         "blogEn": 14,
         "blogKo": 3
+      },
+      {
+        "date": "2026-06-14",
+        "home": 2,
+        "blogEn": 13,
+        "blogKo": 1
       }
     ],
     "gsc": [
@@ -5193,6 +5204,12 @@
         "clicks": 2,
         "impressions": 340,
         "avgPosition": 11.3
+      },
+      {
+        "date": "2026-06-12",
+        "clicks": 2,
+        "impressions": 332,
+        "avgPosition": 15.7
       }
     ],
     "topPosts": [
@@ -5282,7 +5299,7 @@
         "slug": "sap-o2c-process-testing-automation",
         "title": "SAP Order-to-Cash Testing Automation: A Complete Guide (2026)",
         "blog": "blog-en",
-        "visits": 109,
+        "visits": 110,
         "clicks": 1,
         "organic": 36
       }
