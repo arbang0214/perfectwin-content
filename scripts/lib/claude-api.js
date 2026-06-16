@@ -13,7 +13,7 @@ async function callClaude(systemPrompt, userMessage, options = {}) {
   while (attempt < maxRetries) {
     try {
       const response = await client.messages.create({
-        model: "claude-sonnet-4-20250514",
+        model: "claude-sonnet-4-6",
         max_tokens: options.maxTokens || 8192,
         messages: [{ role: "user", content: userMessage }],
         system: systemPrompt,
