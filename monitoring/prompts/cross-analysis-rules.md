@@ -81,7 +81,7 @@
 |---|---|---|
 | 채널 sessions 많다 → "효과적 채널" | + engagementRate 낮 + avgDuration 짧 | **양만 많고 질 나쁜 채널.** 이 채널 트래픽은 전환에 기여 안 함 |
 | Organic Search sessions 증가 → "SEO 효과" | + GSC clicks 변화 없음 + (direct) 세션도 동시 증가 | **다크 소셜 가능성.** 카카오톡·슬랙 등 메신저 공유 시 리퍼러 미분류 → GA4가 Organic 또는 Direct로 오분류 |
-| Organic Search sessions 증가 → "SEO 효과" | + GSC clicks 변화 없음 + (direct) 변화 없음 | **Bing 등 비Google 검색엔진 유입** 가능성. GSC는 Google만 집계하므로 불일치 발생 |
+| Organic Search sessions 증가 → "SEO 효과" | + GSC clicks 변화 없음 + (direct) 변화 없음 | **비Google 검색엔진 유입** 가능성. GSC는 Google만 집계하므로 불일치 발생 |
 | Referral 많다 → "외부에서 관심" | + source/medium 확인 시 특정 도메인 1개 집중 | 다양한 관심이 아니라 **한 곳에서만 유입.** 그 소스 끊기면 트래픽 급감 |
 
 > **💡 다크 소셜 판별법:** GA4에서 `sessionSource = (direct)` 중 `landingPage ≠ /` (메인이 아닌 특정 블로그 포스트)인 비중이 높으면 → 메신저/이메일 공유에서 온 다크 소셜일 가능성 높음. 직접 URL을 타이핑해서 블로그 포스트로 들어오는 사람은 거의 없기 때문.
@@ -125,7 +125,7 @@
 
 | 단일 해석 | 교차 확인 | 실제 의미 |
 |---|---|---|
-| GA4 Organic 증가 → "검색 유입 성장" | GSC clicks 정체 + (direct) 동시 증가 여부 확인 | **(direct) 동시 증가 시:** 다크 소셜 오분류 (섹션 5 참고). **(direct) 변화 없음:** Bing 등 비Google 검색엔진 유입 가능성 |
+| GA4 Organic 증가 → "검색 유입 성장" | GSC clicks 정체 + (direct) 동시 증가 여부 확인 | **(direct) 동시 증가 시:** 다크 소셜 오분류 (섹션 5 참고). **(direct) 변화 없음:** 비Google 검색엔진 유입 가능성 |
 | GSC blog page clicks 높 → "이 포스트 검색에서 인기" | inblog 해당 포스트 visits 낮 | **GSC 집계일과 inblog 집계일 차이** (GSC는 2-3일 딜레이). 같은 날 비교 시 주의 |
 | 홈페이지 Referral에 blog.perfectwin.ai → "블로그가 홈페이지로 유도" | + 해당 referral sessions의 engagementRate | 유도는 되는데 engagementRate 낮으면 **블로그→홈 동선이 매끄럽지 않은 것** |
 

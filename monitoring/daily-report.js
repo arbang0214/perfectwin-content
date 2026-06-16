@@ -17,7 +17,6 @@ const fs = require("fs");
 const { collectGA4 } = require("./collectors/ga4");
 const { collectGSC } = require("./collectors/gsc");
 const { collectInblog } = require("./collectors/inblog");
-const { collectBing } = require("./collectors/bing");
 const { collectDemoFunnel } = require("./collectors/demo-funnel");
 const { collectContentFunnel } = require("./collectors/content-funnel");
 const { formatDailyReport } = require("./formatters/slack-message");
@@ -84,7 +83,6 @@ function saveSnapshot(targetDate, data) {
     collectedAt: new Date().toISOString(),
     ga4: data.ga4 || null,
     gsc: data.gsc || null,
-    bing: data.bing || null,
     inblog: data.inblog || null,
     demoFunnel: data.demoFunnel || null,
     contentFunnel: data.contentFunnel || null,
@@ -117,12 +115,11 @@ async function main() {
   let ga4Data = null;
   let gscData = null;
   let inblogData = null;
-  let bingData = null;
   let demoFunnelData = null;
   let contentFunnelData = null;
 
   // 1. GA4 데이터 수집
-  console.log("[1/8] GA4 데이터 수집...");
+  console.log("[1/7] GA4 데이터 수집...");
   try {
     ga4Data = await collectGA4(targetDate);
     console.log("  ✅ GA4 수집 완료");
@@ -131,7 +128,7 @@ async function main() {
   }
 
   // 2. GSC 데이터 수집
-  console.log("[2/8] GSC 데이터 수집...");
+  console.log("[2/7] GSC 데이터 수집...");
   try {
     gscData = await collectGSC(targetDate);
     console.log("  ✅ GSC 수집 완료");
@@ -139,19 +136,8 @@ async function main() {
     console.error(`  ❌ GSC 수집 실패: ${err.message}`);
   }
 
-  // 3. Bing 데이터 수집
-  console.log("[3/8] Bing 데이터 수집...");
-  try {
-    bingData = await collectBing(targetDate);
-    if (bingData) {
-      console.log("  ✅ Bing 수집 완료");
-    }
-  } catch (err) {
-    console.error(`  ❌ Bing 수집 실패: ${err.message}`);
-  }
-
-  // 4. inblog 데이터 수집
-  console.log("[4/8] inblog 데이터 수집...");
+  // 3. inblog 데이터 수집
+  console.log("[3/7] inblog 데이터 수집...");
   try {
     inblogData = await collectInblog(targetDate);
     if (inblogData) {
@@ -161,8 +147,8 @@ async function main() {
     console.error(`  ❌ inblog 수집 실패: ${err.message}`);
   }
 
-  // 5. Demo Funnel (GA4 기반 데모 신청 어트리뷰션)
-  console.log("[5/8] Demo Funnel 데이터 수집...");
+  // 4. Demo Funnel (GA4 기반 데모 신청 어트리뷰션)
+  console.log("[4/7] Demo Funnel 데이터 수집...");
   try {
     demoFunnelData = await collectDemoFunnel(targetDate);
     const submits = demoFunnelData?.summary?.submissions ?? 0;
@@ -172,8 +158,8 @@ async function main() {
     console.error(`  ❌ Demo Funnel 수집 실패: ${err.message}`);
   }
 
-  // 6. Content Funnel (UTM 박힌 트래픽의 캠페인별 행동·전환)
-  console.log("[6/8] Content Funnel 데이터 수집...");
+  // 5. Content Funnel (UTM 박힌 트래픽의 캠페인별 행동·전환)
+  console.log("[5/7] Content Funnel 데이터 수집...");
   try {
     contentFunnelData = await collectContentFunnel(targetDate);
     const n = contentFunnelData?.summary?.campaignCount ?? 0;
@@ -192,7 +178,7 @@ async function main() {
   }
 
   // 6. 콘솔 1차 출력 (디버깅·로컬 확인용)
-  console.log("[7/8] 콘솔 1차 출력 + 스냅샷 저장...");
+  console.log("[6/7] 콘솔 1차 출력 + 스냅샷 저장...");
   const prevData = loadPreviousData(targetDate);
   if (prevData) {
     console.log(`  전일 데이터 로드: ${prevData.date}`);
@@ -203,7 +189,7 @@ async function main() {
   const reportData = { date: targetDate, ga4: ga4Data, gsc: gscData, inblog: inblogData, demoFunnel: demoFunnelData, contentFunnel: contentFunnelData };
   const reportText = formatDailyReport(reportData, prevData);
   console.log(reportText);
-  saveSnapshot(targetDate, { ga4: ga4Data, gsc: gscData, bing: bingData, inblog: inblogData, demoFunnel: demoFunnelData, contentFunnel: contentFunnelData, slackSent: false });
+  saveSnapshot(targetDate, { ga4: ga4Data, gsc: gscData, inblog: inblogData, demoFunnel: demoFunnelData, contentFunnel: contentFunnelData, slackSent: false });
 
   // 7. 누적 대시보드 데이터 빌드 (dashboard/data.json) — Slack 발송과 독립.
   // Slack이 실패해도 스냅샷·대시보드는 갱신돼야 하므로 Slack보다 먼저 돌린다.
@@ -218,11 +204,11 @@ async function main() {
   // 없으면 백업 cron이 재시도한다.
   const skipReport = process.argv.includes("--no-report");
   if (!skipReport && process.env.ANTHROPIC_API_KEY) {
-    console.log("[8/8] 통합 일간 리포트 생성 + Slack 발송...");
+    console.log("[7/7] 통합 일간 리포트 생성 + Slack 발송...");
     await runUnifiedDaily(targetDate);
     console.log("  ✅ 통합 리포트 발송 완료");
   } else if (skipReport) {
-    console.log("[8/8] 리포트 생성 건너뜀 (--no-report)");
+    console.log("[7/7] 리포트 생성 건너뜀 (--no-report)");
   }
 
   console.log("\n✅ 일간 리포트 완료!\n");

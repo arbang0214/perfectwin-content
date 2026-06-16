@@ -65,7 +65,7 @@ function apiRequest(path, apiKey) {
 /**
  * 포스트 목록을 가져와 메타 매핑을 만든다.
  *  - byId:    post_id → { title, slug }
- *  - bySlug:  slug    → title  (GSC/Bing/demoFunnel 어트리뷰션 enrich용)
+ *  - bySlug:  slug    → title  (GSC/demoFunnel 어트리뷰션 enrich용)
  * /api/v1/posts 엔드포인트는 페이지당 최대 100개를 반환한다.
  */
 async function fetchPostMetaMap(apiKey) {
@@ -171,7 +171,7 @@ async function collectSingleBlog(config, targetDate) {
       posts,
       sources,
       linkedinTotal,
-      slugToTitle: metaMap.bySlug, // GSC/Bing/demoFunnel 슬러그 → 제목 매핑용
+      slugToTitle: metaMap.bySlug, // GSC/demoFunnel 슬러그 → 제목 매핑용
     };
   } catch (err) {
     console.error(`  [inblog:${label}] 수집 실패: ${err.message}`);

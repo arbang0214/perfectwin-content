@@ -1,7 +1,7 @@
 /**
  * 통합 주간 리포트 생성기
  *
- * 모든 데이터 소스(GA4, GSC, Bing, inblog, demoFunnel) 5일치 집계를 한 번에
+ * 모든 데이터 소스(GA4, GSC, inblog, demoFunnel) 5일치 집계를 한 번에
  * Claude에 넘겨 단일 마크다운 리포트를 생성하고 Slack 단일 메시지로 발송한다.
  *
  * 기존 generateHomepageWeekly / generateBlogWeekly 를 대체.

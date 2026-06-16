@@ -42,20 +42,7 @@
 
 ---
 
-## 3️⃣ Bing Webmaster Tools — Bing 검색
-
-**대상**: perfectwin.ai · blog.perfectwin.ai · ko.blog.perfectwin.ai
-**출처**: Bing Webmaster Tools API
-
-수집 지표:
-- 클릭, 노출, CTR, 평균 순위 (GSC와 동일 개념)
-- Bing 검색어 Top 10
-
-> 페이지별 검색 성과는 GSC만 수집 중 (Bing은 검색어만).
-
----
-
-## 4️⃣ inblog — 블로그 자체 통계
+## 3️⃣ inblog — 블로그 자체 통계
 
 **대상**: blog.perfectwin.ai (영문) · ko.blog.perfectwin.ai (한글)
 **출처**: 인블로그 플랫폼 자체 Analytics API
@@ -72,7 +59,7 @@
 
 ---
 
-## 5️⃣ Demo Funnel — 데모 신청 어트리뷰션 (콘텐츠 의사결정의 핵심)
+## 4️⃣ Demo Funnel — 데모 신청 어트리뷰션 (콘텐츠 의사결정의 핵심)
 
 **대상**: perfectwin.ai 도메인 안의 데모 신청 페이지
 **출처**: GA4 (페이지 경로 필터링)
@@ -94,7 +81,7 @@
 ```
 매일 KST 08:43 cron
   ↓
-[수집] GA4 · GSC · Bing · inblog · Demo Funnel
+[수집] GA4 · GSC · inblog · Demo Funnel
   ↓
 [저장] data/monitoring/{날짜}.json (스냅샷, git에 commit됨)
   ↓

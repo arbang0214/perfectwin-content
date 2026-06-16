@@ -1,7 +1,7 @@
 /**
  * 통합 일간 리포트 생성기
  *
- * 모든 데이터 소스(GA4, GSC, Bing, inblog, demoFunnel)를 한 번에 Claude에 넘겨
+ * 모든 데이터 소스(GA4, GSC, inblog, demoFunnel)를 한 번에 Claude에 넘겨
  * 단일 마크다운 리포트를 생성한다.
  * → Slack 헤드라인 + thread reply로 발송.
  *
@@ -110,9 +110,6 @@ async function generateUnifiedDaily(targetDate) {
   // 사이트별 데이터 추출
   const todayGscSite = todayData.gsc?.sites?.find((s) => s.label === "perfectwin.ai") || null;
   const todayGscBlog = todayData.gsc?.sites?.find((s) => s.label === "blog.perfectwin.ai") || null;
-  const todayBingSite = todayData.bing?.sites?.find((s) => s.label === "perfectwin.ai") || null;
-  const todayBingBlog = todayData.bing?.sites?.find((s) => s.label === "blog.perfectwin.ai") || null;
-  const todayBingKoBlog = todayData.bing?.sites?.find((s) => s.label === "ko.blog.perfectwin.ai") || null;
   const yesterdayGscSite = yesterdayData?.gsc?.sites?.find((s) => s.label === "perfectwin.ai") || null;
   const yesterdayGscBlog = yesterdayData?.gsc?.sites?.find((s) => s.label === "blog.perfectwin.ai") || null;
 
@@ -146,15 +143,6 @@ ${JSON.stringify(todayGscBlog, null, 2)}
 
 ## 오늘 inblog (블로그)
 ${JSON.stringify(todayData.inblog, null, 2)}
-
-## 오늘 Bing — perfectwin.ai
-${todayBingSite ? JSON.stringify(todayBingSite, null, 2) : "Bing 데이터 없음"}
-
-## 오늘 Bing — blog.perfectwin.ai
-${todayBingBlog ? JSON.stringify(todayBingBlog, null, 2) : "Bing 데이터 없음"}
-
-## 오늘 Bing — ko.blog.perfectwin.ai
-${todayBingKoBlog ? JSON.stringify(todayBingKoBlog, null, 2) : "Bing 데이터 없음"}
 
 ## 오늘 Demo Funnel (데모 신청 어트리뷰션 — 핵심 데이터)
 ${todayData.demoFunnel ? JSON.stringify(todayData.demoFunnel, null, 2) : "데모 퍼널 데이터 없음"}

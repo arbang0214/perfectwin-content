@@ -46,7 +46,6 @@ jobs:
           INBLOG_KO_API_KEY: ${{ secrets.INBLOG_KO_API_KEY }}
           INBLOG_KO_BLOG_SUBDOMAIN: ${{ secrets.INBLOG_KO_BLOG_SUBDOMAIN }}
           INBLOG_KO_BLOG_URL: ${{ secrets.INBLOG_KO_BLOG_URL }}
-          BING_WEBMASTER_API_KEY: ${{ secrets.BING_WEBMASTER_API_KEY }}
           GMAIL_USER: ${{ secrets.GMAIL_USER }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           REPORT_EMAIL_TO: ${{ secrets.REPORT_EMAIL_TO }}
