@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-16T02:12:27.005Z",
+  "generatedAt": "2026-06-16T06:23:47.523Z",
   "range": {
     "from": "2025-03-27",
     "to": "2026-06-15",
@@ -8,7 +8,7 @@
   "kpi": {
     "totalSubmissions": 6,
     "avgRecentHomeTraffic": 123,
-    "avgRecentBlogTraffic": 23.4,
+    "avgRecentBlogTraffic": 23.6,
     "trackedPosts": 10
   },
   "charts": {
@@ -4863,7 +4863,7 @@
       {
         "date": "2026-06-15",
         "home": 14,
-        "blogEn": 13,
+        "blogEn": 14,
         "blogKo": 15
       }
     ],
@@ -5223,10 +5223,10 @@
         "avgPosition": 15.7
       },
       {
-        "date": "2026-06-13",
+        "date": "2026-06-14",
         "clicks": 1,
-        "impressions": 141,
-        "avgPosition": 14.9
+        "impressions": 196,
+        "avgPosition": 14
       }
     ],
     "topPosts": [
@@ -5298,7 +5298,7 @@
         "slug": "sap-test-automation-retail-enterprises",
         "title": "Why SAP Test Automation is Critical for Retail Enterprises",
         "blog": "blog-en",
-        "visits": 115,
+        "visits": 116,
         "clicks": 0,
         "organic": 6
       },
