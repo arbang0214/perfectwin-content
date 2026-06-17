@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-06-16T06:23:47.523Z",
+  "generatedAt": "2026-06-17T02:05:58.355Z",
   "range": {
     "from": "2025-03-27",
-    "to": "2026-06-15",
-    "days": 441
+    "to": "2026-06-16",
+    "days": 442
   },
   "kpi": {
     "totalSubmissions": 6,
-    "avgRecentHomeTraffic": 123,
-    "avgRecentBlogTraffic": 23.6,
+    "avgRecentHomeTraffic": 89.4,
+    "avgRecentBlogTraffic": 23,
     "trackedPosts": 10
   },
   "charts": {
@@ -2215,6 +2215,11 @@
       },
       {
         "date": "2026-06-15",
+        "daily": 0,
+        "cumulative": 6
+      },
+      {
+        "date": "2026-06-16",
         "daily": 0,
         "cumulative": 6
       }
@@ -4865,6 +4870,12 @@
         "home": 14,
         "blogEn": 14,
         "blogKo": 15
+      },
+      {
+        "date": "2026-06-16",
+        "home": 31,
+        "blogEn": 16,
+        "blogKo": 3
       }
     ],
     "gsc": [
@@ -5224,8 +5235,8 @@
       },
       {
         "date": "2026-06-14",
-        "clicks": 1,
-        "impressions": 196,
+        "clicks": 2,
+        "impressions": 392,
         "avgPosition": 14
       }
     ],
@@ -5253,7 +5264,7 @@
         "slug": "sap-migration-data-conversion-testing-strategy",
         "title": "SAP S/4HANA Migration Testing: 4 Data Conversion Strategies That Prevent Go-Live Failures",
         "blog": "blog-en",
-        "visits": 183,
+        "visits": 184,
         "clicks": 1,
         "organic": 32
       },
@@ -5271,9 +5282,9 @@
         "slug": "sap-s4hana-upgrade-testing-strategy",
         "title": "SAP S/4HANA Upgrade Testing: 3 Strategies for Quarterly Release Verification",
         "blog": "blog-en",
-        "visits": 155,
+        "visits": 156,
         "clicks": 0,
-        "organic": 35
+        "organic": 36
       },
       {
         "postId": 63322,
@@ -5289,7 +5300,7 @@
         "slug": "test-automation-prioritization-strategy",
         "title": "SAP Test Automation Prioritization: Which Business Scenarios to Automate First",
         "blog": "blog-en",
-        "visits": 133,
+        "visits": 134,
         "clicks": 2,
         "organic": 13
       },
